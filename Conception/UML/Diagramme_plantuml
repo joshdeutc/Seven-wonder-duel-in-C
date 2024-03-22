@@ -1,22 +1,22 @@
 @startuml
-
 class Carte{
 {field} #nom:string
 cout_piece:int
 cout_prod:ressource
+en_jeu:bool
 {method}prix_final(joueur):int
 }
 class Batiment{
-Age:{1,2,3}
-enjeu:bool
+age:{1,2,3}
 accessible:bool
 }
 class Merveille{
-Production:Ressource
-Points:int
-Argent_Apporté:int
-Affecte:Ressource
+production:Ressource
+points:int
+argent_apporté:int
+affecte:Ressource
 tirage_jeton:int
+construite:bool
 }
 
 
@@ -72,9 +72,10 @@ prix_fixe(ressource):bool
 get_couleur(couleur1,couleur2):int
 get_couleur(couleur):int
 action():void
-defosser():void
+defausser():void
 construire_batiment():void
 construire_merveille():void
+choisir_merveille():void
 }
 
 class Jeton{
@@ -108,8 +109,10 @@ age:{1,2,3}
 merveille_construite:int
 tour:{1,2}
 disposition:Batiment tab[][]
-{method}choix_batiment():void
-choix_jeton_progres():void
+{method}mise_en_jeu_batiments():void
+mise_en_jeu_jeton_progres():void
+mise_en_jeu_merveilles():void
+tour_suivant():void
 fin_age():bool
 accessibilite(Batiment):void
 victoire_scientifique(Joueur):void
@@ -133,5 +136,4 @@ Joueur "0...1" -- "0..5" Jeton_progres : possede
 Joueur "1" -- "*" Partie : vainqueur
 Joueur "1" -- "*" Partie : perdant
 Jeton_progres "5" -- "*" Partie : mis_en_jeu
-
 @enduml
