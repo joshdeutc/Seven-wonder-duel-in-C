@@ -1,0 +1,77 @@
+@startuml
+class Carte{
+{field} #nom:string
+cout_piece:int
+cout_prod:ressource
+{method}get_prix_final(joueur j):int
+}
+class Batiment{
+Age:{1,2,3}
+enjeu:bool
+}
+class Merveille{
+Production:Ressource
+Points:int
+Argent_Apporté:int
+Affecte:Ressource
+tirage_jeton:int
+}
+
+
+Carte <|-- Batiment
+Carte <|-- Merveille
+
+class Matière_Première{
+Type:Ressource
+}
+class Matière_Facture{
+Type:Ressource
+}
+class Bat_civil{
+Points:int
+}
+class Bat_scientifique{
+Points:int
+Symbole:{roue,plume,bol,telescope}
+}
+class Commerce{
+Production:Ressource
+Points:int
+Argent_Apporté:int
+Affecte:Ressource
+}
+class Guilde{
+Piece:bool
+Points:int
+---
+}
+class Civil{
+bouclier:int
+}
+
+Batiment <|-- Matière_Première
+Batiment <|-- Matière_Facture
+Batiment <|-- Bat_civil
+Batiment <|-- Bat_scientifique
+Batiment <|-- Commerce
+Batiment <|-- Guilde
+Batiment <|-- Civil
+
+class Joueur{
+{field}Type:{h,IA}
+Points:int
+Argent:int
+Ressource:Ressource*
+{method}nb_symboles:int
+double_symbole:bool
+possde_chainage:bool
+prixfixe(ressource):bool
+get_ressource_adversaire:ressources
+get_couleur(couleur1,couleur2):int
+get_couleur(couleur):int
+Defosser():void
+Construire_bat():void
+Construire_merveille():void
+
+}
+@enduml
