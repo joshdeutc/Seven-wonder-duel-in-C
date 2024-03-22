@@ -74,4 +74,59 @@ Construire_bat():void
 Construire_merveille():void
 
 }
+
+class Jeton{
+#nom:string
+en_jeu:bool
+}
+
+class Jeton_militaire{
+argent:int
+}
+class Jeton_progres{
+{method} architecture():void
+Architecture():void
+Economie():void
+loi():void
+maçonnerie():void
+mathematique():void
+Philosophie():void
+Strategie():void
+Theologie():void
+Urbanisme():void
+}
+
+Jeton <|-- Jeton_militaire
+Jeton <|-- Jeton_progres
+
+class Partie{
+{field}solde_militaire:signed int
+nb_tour:int
+Age:{1,2,3}
+merveille_construite:int
+tour:{1,2}
+disposition:Batiment tab[][]
+{method}choix_batiment():void
+choix_jeton_progres():void
+fin_age():bool
+}
+enum ressource{
+bois
+argile
+Pierre
+Verre
+Papyrus
+}
+
+Batiment "1" -- "1" Batiment : chainage
+Joueur "1" -- "*" Carte : possede
+Batiment "20" -- "*" Partie : en_jeu_A1
+Batiment "20" -- "*" Partie : en_jeu_A2
+Batiment "20" -- "*" Partie : en_jeu_A3
+Merveille "8" -- "*" Partie : en_jeu
+Joueur "0...1" -- "0..5" Jeton_progres : possede
+Joueur "1" -- "*" Partie : vainqueur
+Joueur "1" -- "*" Partie : perdant
+Jeton_progres "5" -- "*" Partie : mis_en_jeu
+
 @enduml
