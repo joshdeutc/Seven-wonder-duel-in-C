@@ -9,13 +9,15 @@ en_jeu:bool
 class Batiment{
 age:{1,2,3}
 accessible:bool
+face_visible:bool
+statut:string {'defausse','joueur1','joueur2','centre','merveille'}
 }
 class Merveille{
 production:Ressource
 points:int
 argent_apporté:int
 affecte:Ressource
-tirage_jeton:int
+tirage_trois_jetons:bool
 construite:bool
 }
 
@@ -116,6 +118,7 @@ tour_suivant():void
 fin_age():bool
 accessibilite(Batiment):void
 victoire_scientifique(Joueur):void
+change_solde_militaire(Joueur,nb_boucliers):void
 victoire_militaire():void
 }
 enum Ressource{
