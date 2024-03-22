@@ -4,11 +4,12 @@ class Carte{
 {field} #nom:string
 cout_piece:int
 cout_prod:ressource
-{method}get_prix_final(joueur j):int
+{method}prix_final(joueur):int
 }
 class Batiment{
 Age:{1,2,3}
 enjeu:bool
+accessible:bool
 }
 class Merveille{
 Production:Ressource
@@ -62,19 +63,18 @@ class Joueur{
 {field}type:{h,IA}
 #id:string
 points:int
-argent:int
+solde:int
 ressources:Ressource
-{method}action():void
-defosser():void
-construire_batiment():void
-construire_merveille():void
-nb_symboles:int
-double_symbole:bool
+{method}nb_symboles():int
+double_symbole(Scientifique):bool
 possede_chainage:bool
 prix_fixe(ressource):bool
 get_couleur(couleur1,couleur2):int
 get_couleur(couleur):int
-
+action():void
+defosser():void
+construire_batiment():void
+construire_merveille():void
 }
 
 class Jeton{
@@ -111,6 +111,9 @@ disposition:Batiment tab[][]
 {method}choix_batiment():void
 choix_jeton_progres():void
 fin_age():bool
+accessibilite(Batiment):void
+victoire_scientifique(Joueur):void
+victoire_militaire():void
 }
 enum Ressource{
 bois
