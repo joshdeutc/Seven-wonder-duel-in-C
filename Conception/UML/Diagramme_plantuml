@@ -1,4 +1,5 @@
 @startuml
+
 class Carte{
 {field} #nom:string
 cout_piece:int
@@ -24,54 +25,55 @@ Carte <|-- Merveille
 class Matière_Première{
 Type:Ressource
 }
-class Matière_Facture{
+class Matière_Manufacture{
 Type:Ressource
 }
-class Bat_civil{
+class Civil{
 Points:int
 }
-class Bat_scientifique{
+class Scientifique{
 Points:int
 Symbole:{roue,plume,bol,telescope}
 }
 class Commerce{
-Production:Ressource
-Points:int
-Argent_Apporté:int
-Affecte:Ressource
+production:Ressource
+points:int
+argent_apporté:int
+affecte:Ressource
 }
 class Guilde{
-Piece:bool
-Points:int
+piece:bool
+points:int
 ---
 }
-class Civil{
+class Militaire{
 bouclier:int
 }
 
 Batiment <|-- Matière_Première
-Batiment <|-- Matière_Facture
-Batiment <|-- Bat_civil
-Batiment <|-- Bat_scientifique
+Batiment <|-- Matière_Manufacture
+Batiment <|-- Civil
+Batiment <|-- Scientifique
 Batiment <|-- Commerce
 Batiment <|-- Guilde
-Batiment <|-- Civil
+Batiment <|-- Militaire
 
 class Joueur{
-{field}Type:{h,IA}
-Points:int
-Argent:int
-Ressource:Ressource*
-{method}nb_symboles:int
+{field}type:{h,IA}
+#id:string
+points:int
+argent:int
+ressources:Ressource
+{method}action():void
+defosser():void
+construire_batiment():void
+construire_merveille():void
+nb_symboles:int
 double_symbole:bool
-possde_chainage:bool
-prixfixe(ressource):bool
-get_ressource_adversaire:ressources
+possede_chainage:bool
+prix_fixe(ressource):bool
 get_couleur(couleur1,couleur2):int
 get_couleur(couleur):int
-Defosser():void
-Construire_bat():void
-Construire_merveille():void
 
 }
 
@@ -85,15 +87,15 @@ argent:int
 }
 class Jeton_progres{
 {method} architecture():void
-Architecture():void
-Economie():void
+agriculture():void
+economie():void
 loi():void
-maçonnerie():void
+maconnerie():void
 mathematique():void
-Philosophie():void
-Strategie():void
-Theologie():void
-Urbanisme():void
+philosophie():void
+strategie():void
+theologie():void
+urbanisme():void
 }
 
 Jeton <|-- Jeton_militaire
@@ -102,7 +104,7 @@ Jeton <|-- Jeton_progres
 class Partie{
 {field}solde_militaire:signed int
 nb_tour:int
-Age:{1,2,3}
+age:{1,2,3}
 merveille_construite:int
 tour:{1,2}
 disposition:Batiment tab[][]
@@ -110,12 +112,12 @@ disposition:Batiment tab[][]
 choix_jeton_progres():void
 fin_age():bool
 }
-enum ressource{
+enum Ressource{
 bois
 argile
-Pierre
-Verre
-Papyrus
+pierre
+verre
+papyrus
 }
 
 Batiment "1" -- "1" Batiment : chainage
