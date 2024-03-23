@@ -2,7 +2,7 @@
 class Carte{
 {field} #nom:string
 cout_piece:int
-cout_prod:ressource
+cout_prod:Ressource
 en_jeu:bool
 {method}prix_final(joueur):int
 }
@@ -26,22 +26,22 @@ Carte <|-- Batiment
 Carte <|-- Merveille
 
 class Matière_Première{
-Type:Ressource
+type:Ressource
 }
 class Matière_Manufacture{
-Type:Ressource
+type:Ressource
 }
 class Civil{
-Points:int
+points:int
 }
 class Scientifique{
-Points:int
-Symbole:{roue,plume,bol,telescope}
+points:int
+symbole:{roue,plume,globe,bol,horloge,A}
 }
 class Commerce{
 production:Ressource
 points:int
-argent_apporté:int
+solde_apporté:int
 affecte:Ressource
 }
 class Guilde{
@@ -66,10 +66,11 @@ class Joueur{
 #id:string
 points:int
 solde:int
-ressources:Ressource
+ressources_prod:Ressource
+ressources_non_prod:Ressource
 {method}nb_symboles():int
 double_symbole(Scientifique):bool
-possede_chainage:bool
+tirage_jetons(en_jeu):bool
 prix_fixe(ressource):bool
 get_couleur(couleur1,couleur2):int
 get_couleur(couleur):int
@@ -77,6 +78,7 @@ action():void
 defausser():void
 construire_batiment():void
 construire_merveille():void
+possede_chainage(Nom):bool
 choisir_merveille():void
 }
 
@@ -86,19 +88,19 @@ en_jeu:bool
 }
 
 class Jeton_militaire{
-argent:int
+pieces:int
 }
 class Jeton_progres{
-{method} architecture():void
-agriculture():void
-economie():void
-loi():void
-maconnerie():void
-mathematique():void
-philosophie():void
-strategie():void
-theologie():void
-urbanisme():void
+{method} architecture(Joueur):void
+agriculture(Joueur):void
+economie(Joueur):void
+loi(Joueur):void
+maconnerie(Joueur):void
+mathematique(Joueur):void
+philosophie(Joueur):void
+strategie(Joueur):void
+theologie(Joueur):void
+urbanisme(Joueur):void
 }
 
 Jeton <|-- Jeton_militaire
