@@ -11,5 +11,4 @@ add_executable(projet_lo21
         Code/joueur.h
         Code/main.cpp
         Code/partie.h
-        Code/projet.cpp
-        Code/projet.h)
+        Code/carte.cpp)
