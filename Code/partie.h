@@ -2,4 +2,10 @@
 #define PARTIE_H
 
 
+
+
 #include "carte.h"
+
+
+
+#endif
