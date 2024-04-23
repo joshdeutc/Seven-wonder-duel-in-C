@@ -19,9 +19,9 @@ class Carte{
         int tab_ressource[5];
         bool en_jeu;
     public:
-        /*prix_final(Joueur& j){ // problème au niveau de la conception pour
-        connâitre le nombre de ressources.
-        };*/
+        prix_final(Joueur& j){
+            
+        };
         Carte(const string& n,const int& ca,const Ressource& cp,const bool& v);
         /* l'attribut ressource est à revoir car il nous faut ici une liste des ressources que l'on possède */
 
