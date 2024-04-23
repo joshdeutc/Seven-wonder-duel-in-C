@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#define NB_SYMB 6;
+
+#include "carte.h"
+
 enum Ressource{bois,argile,verre,pierre,papyrus};
 enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
 

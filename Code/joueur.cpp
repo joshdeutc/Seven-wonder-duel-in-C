@@ -1,17 +1,16 @@
 #include "joueur.h"
-#define NB_SYMB 6;
 
 int Joueur::nb_symboles() const{
     int nb=0;
-    for(int i=0;i<NB_SYMB;i++)
+    for(int i=0; i<NB_SYMB; i++)
         if (symboles[i]>1) nb++;
     return nb;
 }
 
-//Voir avec la personne qui a fait les classes Batiment comment fonctionne l'héritage
+// Voir avec la personne qui a fait les classes Batiment comment fonctionne l'héritage
 // Par exemple; dans la fonction ci dessous est ce que je peux parler de l'attribut symbole sur batiment
 // sachant que tous les batiments n'ont pas vraiment l'attribut symbole?
-//Il faut ajouter un attribut string type pour pouvoir vérifier le type d'un batiment
+// Il faut ajouter un attribut string type pour pouvoir vérifier le type d'un batiment
 
 // À REGARDER QUAND MÊME
 
