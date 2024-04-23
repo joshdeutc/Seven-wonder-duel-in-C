@@ -3,11 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include "carte.h"
 
 using namespace std;
 
-enum Ressource{bois,argile,verre,pierre,papyrus};
-enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
 
 class Joueur{
     string type;

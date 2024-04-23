@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-enum Ressource {bois,argile,pierre,verre,papyrus};
-enum statut{defausse,joueur1,joueur2,centre};
-enum symbole {roue,plume,globe,bol,horloge,A};
+#include "variable.h"
 
 
 class Carte{
