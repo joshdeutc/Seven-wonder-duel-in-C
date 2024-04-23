@@ -51,6 +51,7 @@ protected:
     statut st;
 public:
     const Batiment& chainage(const Batiment& b2);
+    void setStatut(statut s) {st = s;};
 };
 
 class Matiere_Premiere : public Batiment{

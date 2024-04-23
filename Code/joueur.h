@@ -32,7 +32,7 @@ public:
     bool tirage_jetons(bool en_jeu);
     void action();
     bool prix_fixe(Ressource r);
-    void defausser();
+    void defausser(Batiment& bat);
     void construire_batiment();
     bool possede_chainage(string Nom_Chaine);
     void construire_merveille();
