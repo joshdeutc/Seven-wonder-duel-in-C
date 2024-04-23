@@ -1,5 +1,5 @@
 #include "joueur.h"
-#define NB_SYMB = 6;
+#define NB_SYMB 6;
 
 int Joueur::nb_symboles() const{
     int nb=0;
