@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#include "carte.h"
+
 enum Ressource{bois,argile,verre,pierre,papyrus};
 enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
 
