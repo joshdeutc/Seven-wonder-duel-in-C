@@ -5,6 +5,8 @@
 using namespace std;
 
 #include "joueur.h"
+#include "pioche.h"
+#include "partie.h"
 
 enum Ressource{
     bois,
@@ -27,11 +29,16 @@ enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
 class Carte{
     protected:
         string nom;
-        int cout_piece;
-        bool en_jeu;
+        unsigned int cout_piece;
+        unsigned int cout_bois;
+        unsigned int cout_argile;
+        unsigned int cout_pierre;
+        unsigned int cout_verre;
+        unsigned int cout_papyrus;
+        Partie* p = nullptr;        
     public:
         int prix_final(Joueur& j);
-        Carte(const string& n,const int& ca,const Ressource& cp,const bool& v);
+        Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
         /* l'attribut ressource est à revoir car il nous faut ici une liste des ressources que l'on possède */
 
 };
@@ -111,7 +118,7 @@ private:
     unsigned int nb_pierre = 0;
     unsigned int nb_verre = 0;
     unsigned int nb_papyrus = 0;
-    
+
     int points;
     int argent_app;
     Ressource affecte;
