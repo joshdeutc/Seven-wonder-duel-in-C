@@ -7,6 +7,7 @@
 using namespace std;
 
 #include "carte.h"
+#include "partie.h"
 
 class Pioche
 {
@@ -14,7 +15,7 @@ private:
     const Carte** cartes = nullptr;
     size_t nb = 0;
 public:
-    Pioche(/* args */);
+    Pioche(Partie& p);
     ~Pioche();
 };
 
