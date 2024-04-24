@@ -13,8 +13,6 @@ class Joueur{
     string id;
     int points;
     int solde;
-    Ressource ressources_prod;
-    Ressource ressources_non_prod;
     int symboles[7]; //On se servira de l'enum pour acceder aux symboles par leur nom
     Batiment** batiments;
     int nb_bat = 0;
@@ -31,7 +29,7 @@ public:
     void construire_batiment();
     bool possede_chainage(string Nom_Chaine);
     void construire_merveille();
-    int get_couleur(couleur1,couleur2);
+    /*int get_couleur(couleur1,couleur2);*/
     void choisir_merveille();
 };
 
