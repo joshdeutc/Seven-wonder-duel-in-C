@@ -25,7 +25,6 @@ enum statut{
 
 enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
 
-
 class Carte{
     protected:
         string nom;
@@ -63,6 +62,12 @@ private:
     unsigned int nb_pierre = 0;
     unsigned int nb_verre = 0;
     unsigned int nb_papyrus = 0;
+public:
+    int get_nb_bois() const{return nb_bois;}
+    int get_nb_argile() const{return nb_argile;}
+    int get_nb_pierre() const{return nb_pierre;}
+    int get_nb_verre() const{return nb_verre;}
+    int get_nb_papyrus() const{return nb_papyrus;}
 };
 
 class Matiere_Manufacture : public Batiment{
@@ -74,7 +79,14 @@ private :
     unsigned int nb_pierre = 0;
     unsigned int nb_verre = 0;
     unsigned int nb_papyrus = 0;
+public:
+    int get_nb_bois() const{return nb_bois;}
+    int get_nb_argile() const{return nb_argile;}
+    int get_nb_pierre() const{return nb_pierre;}
+    int get_nb_verre() const{return nb_verre;}
+    int get_nb_papyrus() const{return nb_papyrus;}
 };
+
 
 class Civil : public Batiment{
 private:
@@ -100,6 +112,12 @@ private:
     int points;
     int solde_apporte;
     Ressource affecte;
+public:
+    int get_nb_bois() const{return nb_bois;}
+    int get_nb_argile() const{return nb_argile;}
+    int get_nb_pierre() const{return nb_pierre;}
+    int get_nb_verre() const{return nb_verre;}
+    int get_nb_papyrus() const{return nb_papyrus;}
 };
 
 class Guilde : public Batiment{
@@ -127,5 +145,11 @@ private:
     Ressource affecte;
     bool tirage_trois_jetons;
     bool construite;
+public:
+    int get_nb_bois() const{return nb_bois;}
+    int get_nb_argile() const{return nb_argile;}
+    int get_nb_pierre() const{return nb_pierre;}
+    int get_nb_verre() const{return nb_verre;}
+    int get_nb_papyrus() const{return nb_papyrus;}
 };
 #endif
