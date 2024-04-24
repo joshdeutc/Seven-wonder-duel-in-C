@@ -66,7 +66,7 @@ private:
 class Scientifique : public Batiment{
 private:
     int point;
-    symbole sym;// dans joueur il serais bien de faire une liste de liste de symbole
+    SymboleScientifique sym;// dans joueur il serais bien de faire une liste de liste de symbole
 };
 
 class Commerce : public Batiment{
