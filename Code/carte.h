@@ -28,9 +28,6 @@ class Carte{
     protected:
         string nom;
         int cout_piece;
-        int nb_pierre=0;
-        int nb_argile=0;
-        int nb_
         bool en_jeu;
     public:
         int prix_final(Joueur& j);
@@ -52,12 +49,22 @@ public:
 
 class Matiere_Premiere : public Batiment{
 private:
-    Ressource type;
+    // Ressources
+    unsigned int nb_bois = 0;
+    unsigned int nb_argile = 0;
+    unsigned int nb_pierre = 0;
+    unsigned int nb_verre = 0;
+    unsigned int nb_papyrus = 0;
 };
 
 class Matiere_Manufacture : public Batiment{
 private :
-    Ressource type;
+    // Ressources
+    unsigned int nb_bois = 0;
+    unsigned int nb_argile = 0;
+    unsigned int nb_pierre = 0;
+    unsigned int nb_verre = 0;
+    unsigned int nb_papyrus = 0;
 };
 
 class Civil : public Batiment{
@@ -73,7 +80,13 @@ private:
 
 class Commerce : public Batiment{
 private:
-    Ressource production;
+    // Ressources
+    unsigned int nb_bois = 0;
+    unsigned int nb_argile = 0;
+    unsigned int nb_pierre = 0;
+    unsigned int nb_verre = 0;
+    unsigned int nb_papyrus = 0;
+
     int points;
     int solde_apporte;
     Ressource affecte;
@@ -92,7 +105,13 @@ private:
 
 class Merveille : public Carte{
 private:
-    Ressource production;
+    // Ressources
+    unsigned int nb_bois = 0;
+    unsigned int nb_argile = 0;
+    unsigned int nb_pierre = 0;
+    unsigned int nb_verre = 0;
+    unsigned int nb_papyrus = 0;
+    
     int points;
     int argent_app;
     Ressource affecte;
