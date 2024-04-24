@@ -57,13 +57,13 @@ bool Joueur::prix_fixe(Ressource r){
 //Vaut il mieux rendre la classe Joueur amie de la classe Batiment, ou ajouter plein d'accesseurs à la classe
 //batiment pour que les méthodes de Joueur puissent en modifier les attributs?
 
-void Joueur::defausser(const Batiment& bat){
+void Joueur::defausser(Batiment& bat){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
     
     //Appelle la méthode supprimer(bat) de la classe Partie
     //Est ce qu'il y a besoin de l'instance de l'objet Partie pour ça
     
-    bat.setStatut("defausse");
+    bat.setStatut(defausse);
     
     int gain=2;
     for(int i=0;i<nb_bat;i++)
