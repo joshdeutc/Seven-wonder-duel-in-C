@@ -15,8 +15,14 @@ private:
     const Carte** cartes = nullptr;
     size_t nb = 0;
 public:
-    Pioche(Partie& p);
+    explicit Pioche(const Partie& j);
+    bool estVide() const { return nb == 0; }
+    size_t getNbCartes() const { return nb; }
+    const Carte& piocher();
+    Pioche() {};
     ~Pioche();
+    Pioche(const Pioche& p) = delete;
+    Pioche& operator=(const Pioche& p) = delete;
 };
 
 Pioche::Pioche(/* args */)

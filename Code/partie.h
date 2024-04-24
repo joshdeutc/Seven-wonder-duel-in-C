@@ -6,13 +6,14 @@
 class Partie
 {
 private:
-            signed int solde_militaire;
-            int age; // {1,2,3}
-            int merveille_construite;
-            int tour; // {1,2} : Au tour de joueur 1 ou 2
-            int nb_tour;
+            signed int solde_militaire = 0;
+            int age = 1; // {1,2,3}
+            int merveille_construite = 0;
+            int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
+            int nb_tour = 0;
+            Carte** cartes = nullptr;
         public:
-            Partie(/* args */);
+            Partie(/* args */){};
             ~Partie();
             void mise_en_jeu_batiments();
             void mise_en_jeu_jeton_progres();
@@ -28,6 +29,7 @@ private:
 
 Partie::Partie(/* args */)
 {
+    cartes[0] = new Carte("Caravanserail", ,bois,false);
 }
 
 Partie::~Partie()
