@@ -57,6 +57,7 @@ public:
 class Matiere_Premiere : public Batiment{
 private:
     // Ressources
+    string type="Matiere_Premiere";
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
@@ -66,6 +67,7 @@ private:
 
 class Matiere_Manufacture : public Batiment{
 private :
+    string type="Matiere_Manufacture";
     // Ressources
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
@@ -87,6 +89,7 @@ private:
 
 class Commerce : public Batiment{
 private:
+    string type="Commerce";
     // Ressources
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
