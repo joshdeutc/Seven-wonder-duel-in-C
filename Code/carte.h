@@ -28,7 +28,9 @@ class Carte{
     protected:
         string nom;
         int cout_piece;
-        int tab_ressource[5];
+        int nb_pierre=0;
+        int nb_argile=0;
+        int nb_
         bool en_jeu;
     public:
         int prix_final(Joueur& j);
