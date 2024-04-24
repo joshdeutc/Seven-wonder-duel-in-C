@@ -1,6 +1,7 @@
+#ifndef CARTE_H
+#define CARTE_H
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 #include "joueur.h"
@@ -96,3 +97,4 @@ private:
     bool tirage_trois_jetons;
     bool construite;
 };
+#endif
