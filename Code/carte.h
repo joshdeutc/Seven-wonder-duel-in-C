@@ -1,6 +1,7 @@
+#ifndef CARTE_H
+#define CARTE_H
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 #include "joueur.h"
@@ -20,15 +21,8 @@ enum statut{
     centre
 };
 
-enum symbole{
-    roue,
-    plume,
-    globe,
-    bol,
-    horloge,
-    A,
-    balance
-};
+enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
+
 
 class Carte{
     protected:
@@ -103,3 +97,4 @@ private:
     bool tirage_trois_jetons;
     bool construite;
 };
+#endif

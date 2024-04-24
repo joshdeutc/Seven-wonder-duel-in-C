@@ -1,17 +1,12 @@
-#ifndef classes_hpp
-#define classes_hpp
-
+#ifndef JOUEUR_H
+#define JOUEUR_H
 #include <iostream>
 #include <string>
+#include "carte.h"
 
 using namespace std;
 
 #define NB_SYMB 6;
-
-#include "carte.h"
-
-enum Ressource{bois,argile,verre,pierre,papyrus};
-enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
 
 class Joueur{
     string type;
@@ -25,7 +20,7 @@ class Joueur{
     int nb_bat = 0;
     Merveille** merveilles;
     int nb_mer = 0;
-    Jeton_progres** jetons;
+  /*  Jeton_progres** jetons;*/
 public:
     int nb_symboles() const;
     bool double_symbole(string s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
@@ -43,4 +38,4 @@ public:
 
 
 
-#endif /* classes_hpp */
+#endif
