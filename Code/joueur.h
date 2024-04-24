@@ -10,7 +10,7 @@ using namespace std;
 
 #include "carte.h"
 
-enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
+
 
 class Joueur{
     string type;

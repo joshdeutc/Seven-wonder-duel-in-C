@@ -20,6 +20,8 @@ enum statut{
     centre
 };
 
+enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
+
 
 class Carte{
     protected:
