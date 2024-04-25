@@ -54,6 +54,15 @@ protected:
     bool face_visible;
     bool accesible;
     statut st;
+public:
+    const Batiment& chainage(const Batiment& b2);
+    void setStatut(statut s) {st = s;};
+};
+
+class Matiere_Premiere : public Batiment {
+private:
+    // Ressources
+    string type = "Matiere_Premiere";
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
@@ -65,24 +74,45 @@ public:
     int get_nb_pierre() const{return nb_pierre;}
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
-
-public:
-    const Batiment& chainage(const Batiment& b2);
-    void setStatut(statut s) {st = s;};
-};
-
-class Matiere_Premiere : public Batiment {
-private:
-    // Ressources
-    string type = "Matiere_Premiere";
 };
 
 class Matiere_Manufacture : public Batiment{
 private :
     string type="Matiere_Manufacture";
     // Ressources
+    unsigned int nb_bois = 0;
+    unsigned int nb_argile = 0;
+    unsigned int nb_pierre = 0;
+    unsigned int nb_verre = 0;
+    unsigned int nb_papyrus = 0;
+public:
+    int get_nb_bois() const{return nb_bois;}
+    int get_nb_argile() const{return nb_argile;}
+    int get_nb_pierre() const{return nb_pierre;}
+    int get_nb_verre() const{return nb_verre;}
+    int get_nb_papyrus() const{return nb_papyrus;}
 };
+class Commerce : public Batiment{
+private:
+    string type="Commerce";
+    // Ressources
+    int points;
+    int solde_apporte;
+    unsigned int nb_bois = 0;
+    unsigned int nb_argile = 0;
+    unsigned int nb_pierre = 0;
+    unsigned int nb_verre = 0;
+    unsigned int nb_papyrus = 0;
+public:
+    int get_nb_bois() const{return nb_bois;}
+    int get_nb_argile() const{return nb_argile;}
+    int get_nb_pierre() const{return nb_pierre;}
+    int get_nb_verre() const{return nb_verre;}
+    int get_nb_papyrus() const{return nb_papyrus;}
+    int getPoints() const {return points;}
+    int getSolde() const {return solde_apporte;}
 
+};
 
 class Civil : public Batiment{
 private:
@@ -93,26 +123,24 @@ class Scientifique : public Batiment{
 private:
     int point;
     SymboleScientifique sym;// dans joueur il serais bien de faire une liste de liste de symbole
+
 };
 
-class Commerce : public Batiment{
-private:
-    string type="Commerce";
-    // Ressources
-    int points;
-    int solde_apporte;
-    Ressource affecte;
-};
 
 class Guilde : public Batiment{
 private:
     bool piece;
     int points;
+public:
+    bool getPiece() const {return piece;}
+    int getPoints() const {return points;}
 };
 
 class Militaire : public Batiment{
 private:
     int bouclier;
+public:
+    int getBouclier() const {return bouclier;}
 };
 
 class Merveille : public Carte{
