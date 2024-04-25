@@ -45,6 +45,7 @@ class Carte{
         Partie* p = nullptr;        
     public:
         int prix_final_j1(const Joueur& j1,const Joueur& j2);
+        int prix_final_j2(const Joueur& j1,const Joueur& j2);
         Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
 };
 
@@ -54,9 +55,13 @@ protected:
     bool face_visible;
     bool accesible;
     statut st;
+    string chainage;
 public:
-    const Batiment& chainage(const Batiment& b2);
     void setStatut(statut s) {st = s;};
+    statut getStatut() const {return st;};
+    void setChainage(const string& c) {chainage = c;};
+    const string& getChainage() const {return chainage;};
+
 };
 
 class Matiere_Premiere : public Batiment {

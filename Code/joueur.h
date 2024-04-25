@@ -14,8 +14,15 @@ class Joueur{
     int points;
     int solde;
     int symboles[7]; //On se servira de l'enum pour acceder aux symboles par leur nom
+    // ******** proposition josh ******** //
     Commerce ** tab_commerce;
-
+    Matiere_Premiere ** tab_matiere;
+    Matiere_Manufacture ** tab_manufacture;
+    Civil ** tab_civil;
+    Scientifique ** tab_scientifique;
+    Guilde ** tab_guilde;
+    Militaire ** tab_militaire;
+    // ********************************* //
     int nb_bat = 0;
     Merveille** tab_merveille;
     int nb_mer = 0;
@@ -32,6 +39,7 @@ public:
     void construire_merveille();
     /*int get_couleur(couleur1,couleur2);*/
     void choisir_merveille();
+
 };
 
 
