@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define NB_SYMB 6;
+#define NB_SYMB 6
 
 class Joueur{
     string type;
