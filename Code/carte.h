@@ -62,7 +62,7 @@ public:
 class Matiere_Premiere : public Batiment {
 private:
     // Ressources
-    string type = "Matiere_Premiere";
+    /*string type = "Matiere_Premiere";*/
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
@@ -78,7 +78,7 @@ public:
 
 class Matiere_Manufacture : public Batiment{
 private :
-    string type="Matiere_Manufacture";
+//    string type="Matiere_Manufacture";
     // Ressources
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
@@ -94,7 +94,7 @@ public:
 };
 class Commerce : public Batiment{
 private:
-    string type="Commerce";
+//    string type="Commerce";
     // Ressources
     int points;
     int solde_apporte;
@@ -117,12 +117,17 @@ public:
 class Civil : public Batiment{
 private:
     int point;
+public:
+    int getPoint() const {return point;}
 };
 
 class Scientifique : public Batiment{
 private:
     int point;
-    SymboleScientifique sym;// dans joueur il serais bien de faire une liste de liste de symbole
+    SymboleScientifique sym;
+public:
+    int getPoint() const {return point;}
+    SymboleScientifique getSym() const {return sym;}
 
 };
 

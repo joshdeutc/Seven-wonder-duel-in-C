@@ -14,6 +14,7 @@ class Joueur{
     int points;
     int solde;
     int symboles[7]; //On se servira de l'enum pour acceder aux symboles par leur nom
+    Commerce ** tab_commerce;
 
     int nb_bat = 0;
     Merveille** tab_merveille;
