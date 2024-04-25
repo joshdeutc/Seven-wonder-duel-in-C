@@ -38,8 +38,6 @@ class Carte{
     public:
         int prix_final_j1(const Joueur& j1,const Joueur& j2);
         Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
-        /* l'attribut ressource est à revoir car il nous faut ici une liste des ressources que l'on possède */
-
 };
 
 class Batiment : public Carte{
