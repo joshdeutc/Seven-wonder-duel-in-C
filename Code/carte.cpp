@@ -81,19 +81,19 @@ int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
     }
     // on verifie si le joueur j1 a assez de ressources pour construire la carte
     if(tab_tot_j1[0]<cout_bois){
-        res+=2+tab_tot_j2[0];
+        res+=(2+tab_tot_j2[0])*cout_bois-tab_tot_j1[0];
     }
     if(tab_tot_j1[1]<cout_argile){
-        res+=2+tab_tot_j2[1];
+        res+=(2+tab_tot_j2[1])*cout_argile-tab_tot_j1[1];
     }
     if(tab_tot_j1[2]<cout_pierre){
-        res+=2+tab_tot_j2[2];
+        res+=(2+tab_tot_j2[2])*cout_pierre-tab_tot_j1[2];
     }
     if(tab_tot_j1[3]<cout_verre){
-        res+=2+tab_tot_j2[3];
+        res+=(2+tab_tot_j2[3])*cout_verre-tab_tot_j1[3];
     }
     if(tab_tot_j1[4]<cout_papyrus){
-        res+=2+tab_tot_j2[4];
+        res+=(2+tab_tot_j2[4])*cout_papyrus-tab_tot_j1[4];
     }
     return res+=cout_piece;
 }
@@ -128,19 +128,19 @@ int Carte::prix_final_j2(const Joueur &j1,const Joueur& j2) {
     }
     // on verifie si le joueur j2 a assez de ressources pour construire la carte
     if (tab_tot_j2[0] < cout_bois) {
-        res += 2 + tab_tot_j1[0];
+        res += (2 + tab_tot_j1[0])*cout_bois - tab_tot_j2[0];
     }
     if (tab_tot_j2[1] < cout_argile) {
-        res += 2 + tab_tot_j1[1];
+        res += (2 + tab_tot_j1[1])*cout_argile - tab_tot_j2[1];
     }
     if (tab_tot_j2[2] < cout_pierre) {
-        res += 2 + tab_tot_j1[2];
+        res += (2 + tab_tot_j1[2])*cout_pierre - tab_tot_j2[2];
     }
     if (tab_tot_j2[3] < cout_verre) {
-        res += 2 + tab_tot_j1[3];
+        res += (2 + tab_tot_j1[3])*cout_verre - tab_tot_j2[3];
     }
     if (tab_tot_j2[4] < cout_papyrus) {
-        res += 2 + tab_tot_j1[4];
+        res += (2 + tab_tot_j1[4])*cout_papyrus - tab_tot_j2[4];
     }
     return res += cout_piece;
 }
