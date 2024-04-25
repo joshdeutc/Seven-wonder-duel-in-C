@@ -1,6 +1,15 @@
 #include "carte.h"
 
-
+bool Batiment::est_chainée(const Joueur &j) {
+    int i = 0;
+    while (j.get_tab_batiment()[i] && j.get_tab_batiment()[i]->get_nom() == j.get_tab_batiment()[i]->getChainage) {
+        i++;
+    }
+    if (j.get_tab_batiment()[i]->get_nom() == j.get_tab_batiment()[i]->getChainage) {
+        return true;
+    }
+    return false;
+}
 int* compter_ressource_merveille(const Merveille** t1){
     int tab[5];
     int j=0;
@@ -52,11 +61,7 @@ int* compter_ressource_matiere_manufact(const Matiere_Manufacture** t1){
     return tab;
 }
 int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
-    int i=0;
-    while(j1.get_tab_batiment()[i] && j1.get_tab_batiment()[i]->get_nom()==j1.get_tab_batiment()[i]->getChainage){
-        i++;
-    }
-    if(j1.get_tab_batiment()[i]->get_nom()==j1.get_tab_batiment()[i]->getChainage){
+    if(est_chainée(j1)){
         return 0;
     }
     int res,j;
@@ -99,11 +104,7 @@ int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
 }
 
 int Carte::prix_final_j2(const Joueur &j1,const Joueur& j2) {
-    int i = 0;
-    while (j2.get_tab_batiment()[i] && j2.get_tab_batiment()[i]->get_nom() == j2.get_tab_batiment()[i]->getChainage) {
-        i++;
-    }
-    if (j2.get_tab_batiment()[i]->get_nom() == j2.get_tab_batiment()[i]->getChainage) {
+    if(est_chainée(j2)){
         return 0;
     }
     int res, j;

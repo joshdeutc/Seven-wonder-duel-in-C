@@ -1,5 +1,5 @@
-#ifndef CARTE_H
-#define CARTE_H
+#ifndef CARTE_BATIMENT_MERVEILLE_H
+#define CARTE_BATIMENT_MERVEILLE_H
 #include <iostream>
 #include <string>
 using namespace std;
@@ -62,7 +62,7 @@ public:
     statut getStatut() const {return st;};
     void setChainage(const string& c) {chainage = c;};
     const string& getChainage() const {return chainage;};
-
+    bool est_chainée(const Joueur&j);
 };
 
 class Matiere_Premiere : public Batiment {

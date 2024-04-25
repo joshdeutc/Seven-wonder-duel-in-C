@@ -14,4 +14,5 @@ add_executable(projet_lo21
         Code/carte.cpp
         Code/plateau.cpp
         Code/plateau.h
+        Code/pioche.cpp
 )
