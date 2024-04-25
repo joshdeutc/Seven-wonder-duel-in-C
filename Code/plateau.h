@@ -28,7 +28,7 @@ Plateau::~Plateau()
 class PlateauAge : public Plateau
 {
 private:
-    Batiment** cartes;
+    Batiment** cartes = nullptr;
 public:
     PlateauAge(/* args */);
     ~PlateauAge();
@@ -45,25 +45,18 @@ PlateauAge::~PlateauAge()
 class PlateauMerveille : public Plateau
 {
 private:
-    Merveille** cartes;
+    Merveille** cartesPremierPhase = nullptr;
+    Merveille** cartesDeuxiemePhase = nullptr;
 public:
     PlateauMerveille(/* args */);
     ~PlateauMerveille();
 };
 
-PlateauMerveille::PlateauMerveille(/* args */)
-{
-}
-
-PlateauMerveille::~PlateauMerveille()
-{
-}
-
 class PlateauJetonMilit : public Plateau
 {
 private:
-    JetonMilitaire** JetonsMilitaires;
-    JetonScientifique** JetonScientifiques;
+    JetonMilitaire** JetonsMilitaires = nullptr;
+    JetonScientifique** JetonScientifiques = nullptr;
 public:
     PlateauJetonMilit(/* args */);
     ~PlateauJetonMilit();
