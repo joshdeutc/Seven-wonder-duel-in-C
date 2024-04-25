@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#include "carte.h"
+
 class Plateau
 {
 private:
@@ -26,7 +28,7 @@ Plateau::~Plateau()
 class PlateauAge : public Plateau
 {
 private:
-    /* data */
+    Batiment** cartes;
 public:
     PlateauAge(/* args */);
     ~PlateauAge();
@@ -43,7 +45,7 @@ PlateauAge::~PlateauAge()
 class PlateauMerveille : public Plateau
 {
 private:
-    /* data */
+    Merveille** cartes;
 public:
     PlateauMerveille(/* args */);
     ~PlateauMerveille();
@@ -60,7 +62,8 @@ PlateauMerveille::~PlateauMerveille()
 class PlateauJetonMilit : public Plateau
 {
 private:
-    /* data */
+    JetonMilitaire** JetonsMilitaires;
+    JetonScientifique** JetonScientifiques;
 public:
     PlateauJetonMilit(/* args */);
     ~PlateauJetonMilit();

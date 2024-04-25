@@ -23,7 +23,15 @@ enum statut{
     centre
 };
 
-enum SymboleScientifique{roue,plume,globe,bol,horloge,A,balance};
+enum SymboleScientifique{
+    roue,
+    plume,
+    globe,
+    bol,
+    horloge,
+    A,
+    balance
+};
 
 class Carte{
     protected:
@@ -127,4 +135,59 @@ public:
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
 };
+
+class Jeton : public Carte
+{
+private:
+    /* data */
+public:
+    Jeton(/* args */);
+    ~Jeton();
+};
+
+Jeton::Jeton(/* args */)
+{
+}
+
+Jeton::~Jeton()
+{
+}
+
+class JetonMilitaire : public Jeton
+{
+private:
+    unsigned int montantSaccage;
+public:
+    JetonMilitaire(/* args */);
+    ~JetonMilitaire();
+    int getMontantSaccage() const {return montantSaccage;}
+};
+
+JetonMilitaire::JetonMilitaire(/* args */)
+{
+}
+
+JetonMilitaire::~JetonMilitaire()
+{
+}
+
+class JetonScientifique : public Jeton
+{
+private:
+    string nom;
+public:
+    JetonScientifique(/* args */);
+    ~JetonScientifique();
+    const string& getNom() const {return nom;}
+};
+
+JetonScientifique::JetonScientifique(/* args */)
+{
+}
+
+JetonScientifique::~JetonScientifique()
+{
+}
+
+
 #endif
