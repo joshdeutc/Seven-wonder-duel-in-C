@@ -36,7 +36,7 @@ class Carte{
         unsigned int cout_papyrus;
         Partie* p = nullptr;        
     public:
-        int prix_final(Joueur& j);
+        int prix_final_j1(const Joueur& j1,const Joueur& j2);
         Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
         /* l'attribut ressource est à revoir car il nous faut ici une liste des ressources que l'on possède */
 
@@ -48,15 +48,6 @@ protected:
     bool face_visible;
     bool accesible;
     statut st;
-public:
-    const Batiment& chainage(const Batiment& b2);
-    void setStatut(statut s) {st = s;};
-};
-
-class Matiere_Premiere : public Batiment{
-private:
-    // Ressources
-    string type="Matiere_Premiere";
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
@@ -68,23 +59,22 @@ public:
     int get_nb_pierre() const{return nb_pierre;}
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
+
+public:
+    const Batiment& chainage(const Batiment& b2);
+    void setStatut(statut s) {st = s;};
+};
+
+class Matiere_Premiere : public Batiment {
+private:
+    // Ressources
+    string type = "Matiere_Premiere";
 };
 
 class Matiere_Manufacture : public Batiment{
 private :
     string type="Matiere_Manufacture";
     // Ressources
-    unsigned int nb_bois = 0;
-    unsigned int nb_argile = 0;
-    unsigned int nb_pierre = 0;
-    unsigned int nb_verre = 0;
-    unsigned int nb_papyrus = 0;
-public:
-    int get_nb_bois() const{return nb_bois;}
-    int get_nb_argile() const{return nb_argile;}
-    int get_nb_pierre() const{return nb_pierre;}
-    int get_nb_verre() const{return nb_verre;}
-    int get_nb_papyrus() const{return nb_papyrus;}
 };
 
 
@@ -103,21 +93,9 @@ class Commerce : public Batiment{
 private:
     string type="Commerce";
     // Ressources
-    unsigned int nb_bois = 0;
-    unsigned int nb_argile = 0;
-    unsigned int nb_pierre = 0;
-    unsigned int nb_verre = 0;
-    unsigned int nb_papyrus = 0;
-
     int points;
     int solde_apporte;
     Ressource affecte;
-public:
-    int get_nb_bois() const{return nb_bois;}
-    int get_nb_argile() const{return nb_argile;}
-    int get_nb_pierre() const{return nb_pierre;}
-    int get_nb_verre() const{return nb_verre;}
-    int get_nb_papyrus() const{return nb_papyrus;}
 };
 
 class Guilde : public Batiment{
@@ -139,7 +117,6 @@ private:
     unsigned int nb_pierre = 0;
     unsigned int nb_verre = 0;
     unsigned int nb_papyrus = 0;
-
     int points;
     int argent_app;
     Ressource affecte;
