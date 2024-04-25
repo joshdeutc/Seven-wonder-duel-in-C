@@ -52,6 +52,13 @@ int* compter_ressource_matiere_manufact(const Matiere_Manufacture** t1){
     return tab;
 }
 int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
+    int i=0;
+    while(j1.get_tab_batiment()[i] && j1.get_tab_batiment()[i]->get_nom()==j1.get_tab_batiment()[i]->getChainage){
+        i++;
+    }
+    if(j1.get_tab_batiment()[i]->get_nom()==j1.get_tab_batiment()[i]->getChainage)
+        return 0;
+    }
     int res,j;
     res=0;
     int tab_tot_j1[5];
@@ -88,4 +95,5 @@ int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
     if(tab_tot_j1[4]<cout_papyrus){
         res+=2+tab_tot_j2[4];
     }
+    return res+=cout_piece;
 }

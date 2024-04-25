@@ -25,6 +25,7 @@ class Joueur{
     // ********************************* //
     int nb_bat = 0;
     Merveille** tab_merveille;
+    Batiment** tab_batiment;
     int nb_mer = 0;
   /*  Jeton_progres** jetons;*/
 public:

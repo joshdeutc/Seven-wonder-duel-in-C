@@ -34,19 +34,20 @@ enum SymboleScientifique{
 };
 
 class Carte{
-    protected:
-        string nom;
-        unsigned int cout_piece;
-        unsigned int cout_bois;
-        unsigned int cout_argile;
-        unsigned int cout_pierre;
-        unsigned int cout_verre;
-        unsigned int cout_papyrus;
-        Partie* p = nullptr;        
-    public:
-        int prix_final_j1(const Joueur& j1,const Joueur& j2);
-        int prix_final_j2(const Joueur& j1,const Joueur& j2);
-        Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
+protected:
+    string nom;
+    unsigned int cout_piece;
+    unsigned int cout_bois;
+    unsigned int cout_argile;
+    unsigned int cout_pierre;
+    unsigned int cout_verre;
+    unsigned int cout_papyrus;
+    Partie* p = nullptr;
+public:
+    int prix_final_j1(const Joueur& j1,const Joueur& j2);
+    int prix_final_j2(const Joueur& j1,const Joueur& j2);
+    Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
+    string get_nom() const {return nom;}
 };
 
 class Batiment : public Carte{
