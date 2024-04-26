@@ -1,15 +1,16 @@
 #include "jeu.h"
 #include "carte.h"
 
+
 Jeu::Jeu()
 {
-    Carte** tabCartesAge1 = new Carte*;
-    Carte** tabCartesAge2 = new Carte*;
-    Carte** tabCartesAge3 = new Carte*;
-    Carte** tabCartesGuilde = new Carte*;
-    Carte** tabCartesMerveille = new Carte*;
-    Carte** tabJetonMilitaire = new Carte*;
-    Carte** tabJetonScientifique = new Carte*;
+    tabCartesAge1 = new Batiment*;
+    tabCartesAge2 = new Batiment*;
+    tabCartesAge3 = new Batiment*;
+    tabCartesGuilde = new Guilde*;
+    tabCartesMerveille = new Merveille*;
+    tabJetonMilitaire = new JetonMilitaire*;
+    tabJetonProgres = new JetonProgres*;
 
     // Il faudra initialiser toutes les cartes ici
     
@@ -23,7 +24,7 @@ Jeu::~Jeu()
     delete[] tabCartesGuilde;
     delete[] tabCartesMerveille;
     delete[] tabJetonMilitaire;
-    delete[] tabJetonScientifique;
+    delete[] tabJetonProgres;
 }
 
 Jeu* Jeu::getInstance(){

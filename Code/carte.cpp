@@ -10,6 +10,7 @@ bool Batiment::est_chainée(const Joueur &j) {
     }
     return false;
 }
+
 int* compter_ressource_merveille(const Merveille** t1){
     int tab[5];
     int j=0;
@@ -61,7 +62,7 @@ int* compter_ressource_matiere_manufact(const Matiere_Manufacture** t1){
     return tab;
 }
 int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
-    if(est_chainée(j1)){
+    if(Batiment::est_chainée(j1)){
         return 0;
     }
     int res,j;
@@ -104,7 +105,7 @@ int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
 }
 
 int Carte::prix_final_j2(const Joueur &j1,const Joueur& j2) {
-    if(est_chainée(j2)){
+    if(Batiment::est_chainée(j2)){
         return 0;
     }
     int res, j;
