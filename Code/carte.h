@@ -42,7 +42,6 @@ protected:
     unsigned int cout_pierre;
     unsigned int cout_verre;
     unsigned int cout_papyrus;
-    Partie* p = nullptr;
 public:
     int prix_final_j1(const Joueur& j1,const Joueur& j2);
     int prix_final_j2(const Joueur& j1,const Joueur& j2);
@@ -62,7 +61,7 @@ public:
     statut getStatut() const {return st;};
     void setChainage(const string& c) {chainage = c;};
     const string& getChainage() const {return chainage;};
-    bool est_chainée(const Joueur&j);
+    static bool est_chainée(const Joueur&j);
 };
 
 class Matiere_Premiere : public Batiment {
