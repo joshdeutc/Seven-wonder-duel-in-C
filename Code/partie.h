@@ -22,7 +22,7 @@ private:
             void fin_age();
             void accessibilite(Batiment);
             void victoire_scientifique(Joueur);
-            void change_solde_militaire(Joueur,nb_boucliers);
+            void change_solde_militaire(Joueur,int nb_boucliers);
             void victoire_militaire();
             void victoire_civile();
 };
