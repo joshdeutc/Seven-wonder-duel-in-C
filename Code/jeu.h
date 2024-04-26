@@ -10,20 +10,20 @@ using namespace std;
 
 class Jeu { // Singleton Jeu
 private:
-
+    friend class PlateauAge;
     static Jeu* instance;
     Jeu();
     Jeu(Jeu &other) = delete;
     virtual ~Jeu();
     void operator=(const Jeu &) = delete;
 
-    Carte** tabCartesAge1;
-    Carte** tabCartesAge2;
-    Carte** tabCartesAge3;
-    Carte** tabCartesGuilde;
-    Carte** tabCartesMerveille;
-    Carte** tabJetonMilitaire;
-    Carte** tabJetonScientifique;
+    Batiment** tabCartesAge1;
+    Batiment** tabCartesAge2;
+    Batiment** tabCartesAge3;
+    Guilde** tabCartesGuilde;
+    Merveille** tabCartesMerveille;
+    JetonMilitaire** tabJetonMilitaire;
+    JetonProgres** tabJetonProgres;
 
 public:
     static Jeu* getInstance();
