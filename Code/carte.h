@@ -209,21 +209,21 @@ JetonMilitaire::~JetonMilitaire()
 {
 }
 
-class JetonScientifique : public Jeton
+class JetonProgres : public Jeton
 {
 private:
     string nom;
 public:
-    JetonScientifique(/* args */);
-    ~JetonScientifique();
+    JetonProgres(/* args */);
+    ~JetonProgres();
     const string& getNom() const {return nom;}
 };
 
-JetonScientifique::JetonScientifique(/* args */)
+JetonProgres::JetonProgres(/* args */)
 {
 }
 
-JetonScientifique::~JetonScientifique()
+JetonProgres::~JetonProgres()
 {
 }
 
