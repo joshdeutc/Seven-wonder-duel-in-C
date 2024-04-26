@@ -11,10 +11,11 @@ using namespace std;
 class Plateau
 {
 private:
-    /* data */
+    //
 public:
     Plateau(/* args */);
     ~Plateau();
+    friend class Jeu;
 };
 
 Plateau::Plateau(/* args */)
@@ -30,17 +31,11 @@ class PlateauAge : public Plateau
 private:
     Batiment** cartes = nullptr;
 public:
-    PlateauAge(/* args */);
+    PlateauAge(int Age);
     ~PlateauAge();
 };
 
-PlateauAge::PlateauAge(/* args */)
-{
-}
 
-PlateauAge::~PlateauAge()
-{
-}
 
 class PlateauMerveille : public Plateau
 {
@@ -56,7 +51,7 @@ class PlateauJetonMilit : public Plateau
 {
 private:
     JetonMilitaire** JetonsMilitaires = nullptr;
-    JetonScientifique** JetonScientifiques = nullptr;
+    JetonProgres** JetonProgres = nullptr;
 public:
     PlateauJetonMilit(/* args */);
     ~PlateauJetonMilit();
