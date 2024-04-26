@@ -139,7 +139,7 @@ PlateauAge::PlateauAge(int Age)
                     ++indiceAge3;
                 } else if (indiceGuilde < 3) {
                     // Si c'est une carte Guilde et il reste des cartes Guilde non sélectionnées
-                    cartes[i] = Jeu::getInstance()->tabCartesGuilde[indicesSelectionnesGuilde[indiceGuilde] + 20]; // L'indice des cartes Guilde commence à partir de 20
+                    cartes[i] = Jeu::getInstance()->tabCartesGuilde[indicesSelectionnesGuilde[indiceGuilde]]; 
                     ++indiceGuilde;
                 } else {
                     // Si on a épuisé les cartes Guilde disponibles, distribuer les cartes de l'Âge 3 restantes
