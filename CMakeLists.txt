@@ -15,4 +15,6 @@ add_executable(projet_lo21
         Code/plateau.cpp
         Code/plateau.h
         Code/pioche.cpp
+        Code/batiment.cpp
+        Code/batiment.cpp
 )

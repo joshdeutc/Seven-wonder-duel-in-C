@@ -45,11 +45,11 @@ protected:
 public:
     int prix_final_j1(const Joueur& j1,const Joueur& j2);
     int prix_final_j2(const Joueur& j1,const Joueur& j2);
- Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-       const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus)
-: nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
- cout_verre(cout_verre), cout_papyrus(cout_papyrus) {}
-    string get_nom() const {return nom;}
+     Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus)
+    : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
+     cout_verre(cout_verre), cout_papyrus(cout_papyrus) {}
+        string get_nom() const {return nom;}
 };
 
 class Batiment : public Carte{
