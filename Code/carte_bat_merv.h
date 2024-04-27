@@ -5,7 +5,6 @@
 using namespace std;
 
 #include "joueur.h"
-#include "pioche.h"
 #include "partie.h"
 
 enum Ressource{
@@ -117,7 +116,7 @@ public:
 };
 class Commerce : public Batiment{
 private:
-    // Ressources
+// Ressources
     int points;
     int solde_apporte;
     Ressource affecte;
@@ -134,7 +133,9 @@ public:
     int get_nb_papyrus() const{return nb_papyrus;}
     int getPoints() const {return points;}
     int getSolde() const {return solde_apporte;}
-
+    Commerce(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+             const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+             const bool &ac, const statut &s, const string &c, const int &p, const int &solde, const Ressource &affecte);
 };
 
 class Civil : public Batiment{
