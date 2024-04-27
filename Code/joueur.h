@@ -40,6 +40,14 @@ public:
     void construire_merveille();
     /*int get_couleur(couleur1,couleur2);*/
     void choisir_merveille();
+    Commerce** get_tab_commerce() const {return tab_commerce;}
+    Matiere_Premiere** get_tab_matiere() const {return tab_matiere;}
+    Matiere_Manufacture** get_tab_manufacture() const {return tab_manufacture;}
+    Civil** get_tab_civil() const {return tab_civil;}
+    Scientifique** get_tab_scientifique() const {return tab_scientifique;}
+    Guilde** get_tab_guilde() const {return tab_guilde;}
+    Militaire** get_tab_militaire() const {return tab_militaire;}
+    Batiment** get_tab_batiment() const {return tab_batiment;}
 
 };
 
