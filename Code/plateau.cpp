@@ -1,5 +1,6 @@
 #include "plateau.h"
 #include "jeu.h"
+#include "utils.h"
 
 PlateauAge::PlateauAge(int Age)
 {
@@ -165,13 +166,19 @@ PlateauMerveille::PlateauMerveille()
 {
     Merveille** cartesPremierPhase = new Merveille*[4];
     Merveille** cartesDeuxiemePhase = new Merveille*[4];
-    for (unsigned int i = 0; i < 4; i++)
-    {
-        //cartesPremierPhase[i] =
+
+    // Génération d'un tableau de 8 entiers distincts aléatoires
+    std::vector<int> intVect = generateRandomDistinctIntegers(8, 0, 7);
+    for (int i = 0; i < 4; ++i) {
+        cartesPremierPhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i]];
+        cartesDeuxiemePhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i + 4]];
     }
     
 }
 
 PlateauMerveille::~PlateauMerveille()
 {
+    //On ne supprime pas les cartes elles mêmes, elles seront supprimees quand l'instance Jeu sera supprimée.
+    delete[] cartesPremierPhase;
+    delete[] cartesDeuxiemePhase;
 }

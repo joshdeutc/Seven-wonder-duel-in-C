@@ -43,7 +43,7 @@ private:
     Merveille** cartesPremierPhase = nullptr;
     Merveille** cartesDeuxiemePhase = nullptr;
 public:
-    PlateauMerveille(/* args */);
+    PlateauMerveille();
     ~PlateauMerveille();
 };
 

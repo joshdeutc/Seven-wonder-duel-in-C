@@ -28,6 +28,13 @@ private:
 public:
     static Jeu* getInstance();
     static void freeInstance();
+    Batiment** getTabCartesAge1() const { return tabCartesAge1; }
+    Batiment** getTabCartesAge2() const { return tabCartesAge2; }
+    Batiment** getTabCartesAge3() const { return tabCartesAge3; }
+    Guilde** getTabCartesGuilde() const { return tabCartesGuilde; }
+    Merveille** getTabCartesMerveille() const { return tabCartesMerveille; }
+    JetonMilitaire** getTabJetonMilitaire() const { return tabJetonMilitaire; }
+    JetonProgres** getTabJetonProgres() const { return tabJetonProgres; }
 };
 
 // Initialiser le pointeur à nullptr
