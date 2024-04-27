@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(Code)
 
 add_executable(projet_lo21
-        Code/carte.h
         Code/joueur.cpp
         Code/joueur.h
         Code/main.cpp
@@ -17,4 +16,6 @@ add_executable(projet_lo21
         Code/pioche.cpp
         Code/batiment.cpp
         Code/batiment.cpp
+        Code/utils.cpp
+        Code/carte_bat_merv.h
 )
