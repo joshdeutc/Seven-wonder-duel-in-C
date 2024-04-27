@@ -222,14 +222,6 @@ public:
     ~Jeton();
 };
 
-Jeton::Jeton(/* args */)
-{
-}
-
-Jeton::~Jeton()
-{
-}
-
 class JetonMilitaire : public Jeton
 {
 private:

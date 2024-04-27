@@ -53,17 +53,8 @@ private:
     JetonMilitaire** JetonsMilitaires = nullptr;
     JetonProgres** JetonProgres = nullptr;
 public:
-    PlateauJetonMilit(/* args */);
+    PlateauJetonMilit();
     ~PlateauJetonMilit();
 };
-
-PlateauJetonMilit::PlateauJetonMilit(/* args */)
-{
-}
-
-PlateauJetonMilit::~PlateauJetonMilit()
-{
-}
-
 
 #endif /* PLATEAU_H */

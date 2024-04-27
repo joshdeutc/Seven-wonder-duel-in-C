@@ -182,3 +182,20 @@ PlateauMerveille::~PlateauMerveille()
     delete[] cartesPremierPhase;
     delete[] cartesDeuxiemePhase;
 }
+
+PlateauJetonMilit::PlateauJetonMilit()
+{
+    JetonProgres** JetonProgres = new JetonProgres*[5];
+    // Génération d'un tableau de 5 entiers distincts aléatoires
+    std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
+    for (int i = 0; i < 5; ++i) {
+        JetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
+    }
+    
+    JetonMilitaire** JetonsMilitaires = new JetonMilitaire*[4];
+    for (unsigned int i = 0; i < 4; i++)
+    {
+        JetonsMilitaires[i] = Jeu::getInstance()->getTabJetonMilitaire()[i];
+    }
+    
+}
