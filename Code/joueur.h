@@ -14,7 +14,7 @@ class Joueur{
     int points;
     int solde;
     int symboles[7]; //On se servira de l'enum pour acceder aux symboles par leur nom
-    // ******** proposition josh ******** //
+    // ******** utilisation d'un tableau par type de batiment, qu'on souhaite remplacer par un seul tableau Batiment** par la suite ******** //
     Commerce ** tab_commerce;
     Matiere_Premiere ** tab_matiere;
     Matiere_Manufacture ** tab_manufacture;
