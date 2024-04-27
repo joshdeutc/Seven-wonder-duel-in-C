@@ -1,4 +1,4 @@
-#include "carte.h"
+#include "carte_bat_merv.h"
 
 bool Batiment::est_chainée(const Joueur &j) {
     int i = 0;

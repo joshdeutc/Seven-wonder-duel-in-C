@@ -1,7 +1,7 @@
 #ifndef PARTIE_H
 #define PARTIE_H
 
-#include "carte.h"
+#include "carte_bat_merv.h"
 
 class Partie
 {

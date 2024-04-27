@@ -2,7 +2,7 @@
 #define JOUEUR_H
 #include <iostream>
 #include <string>
-#include "carte.h"
+#include "carte_bat_merv.h"
 
 using namespace std;
 

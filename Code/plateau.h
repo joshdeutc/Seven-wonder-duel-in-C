@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#include "carte.h"
+#include "carte_bat_merv.h"
 
 class Plateau
 {

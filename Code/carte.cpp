@@ -1,4 +1,4 @@
-#include "carte.h"
+#include "carte_bat_merv.h"
 #include "joueur.h"
 
 int* compter_ressource_merveille(const Merveille** t1){
