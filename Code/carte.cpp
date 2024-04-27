@@ -61,16 +61,16 @@ int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
     int tab_tot_j2[5];
     // on compte du joueur j1
     int* tab1 = compter_ressource_merveille(j1.get_tab_merveille());
-    int* tab2 = compter_ressource_matiere_premiere(j1.get_tab_matier_manufacture());
-    int* tab3 = compter_ressource_matiere_manufact(j1.get_tab_matier_premiere());
+    int* tab2 = compter_ressource_matiere_premiere(j1.get_tab_manufacture());
+    int* tab3 = compter_ressource_matiere_manufact(j1.get_tab_premiere());
     int* tab4 = compter_ressource_commerce(j1.get_tab_commerce());
     // on fait la somme totales des ressources de j1
     for(j=0;j<5;j++){
         tab_tot_j1[j]=tab1[j]+tab2[j]+tab3[j]+tab4[j];
     }
     // on compte les ressources produites par m. manufacture et m. premiere pour j2
-    int* tab5 = compter_ressource_matiere_manufact(j2.get_tab_matier_manufacture());
-    int* tab6 = compter_ressource_matiere_premiere(j2.get_tab_matier_premiere());
+    int* tab5 = compter_ressource_matiere_manufact(j2.get_tab_manufacture());
+    int* tab6 = compter_ressource_matiere_premiere(j2.get_tab_premiere());
     // on fait la somme totales des ressources de j2
     for(j=0;j<5;j++){
         tab_tot_j2[j]=tab5[j]+tab6[j];
@@ -104,16 +104,16 @@ int Carte::prix_final_j2(const Joueur &j1,const Joueur& j2) {
     int tab_tot_j2[5];
     // on compte les ressources du joueur j2
     int *tab1 = compter_ressource_merveille(j2.get_tab_merveille());
-    int *tab2 = compter_ressource_matiere_premiere(j2.get_tab_matier_manufacture());
-    int *tab3 = compter_ressource_matiere_manufact(j2.get_tab_matier_premiere());
+    int *tab2 = compter_ressource_matiere_premiere(j2.get_tab_manufacture());
+    int *tab3 = compter_ressource_matiere_manufact(j2.get_tab_premiere());
     int *tab4 = compter_ressource_commerce(j2.get_tab_commerce());
     // on fait la somme totales des ressources de j2
     for (j = 0; j < 5; j++) {
         tab_tot_j2[j] = tab1[j] + tab2[j] + tab3[j] + tab4[j];
     }
     // on compte les ressources produites par m. manufacture et m. premiere pour j1
-    int *tab5 = compter_ressource_matiere_manufact(j1.get_tab_matier_manufacture());
-    int *tab6 = compter_ressource_matiere_premiere(j1.get_tab_matier_premiere());
+    int *tab5 = compter_ressource_matiere_manufact(j1.get_tab_manufacture());
+    int *tab6 = compter_ressource_matiere_premiere(j1.get_tab_premiere());
     // on fait la somme totales des ressources de j1
     for (j = 0; j < 5; j++) {
         tab_tot_j1[j] = tab5[j] + tab6[j];
