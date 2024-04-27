@@ -45,7 +45,10 @@ protected:
 public:
     int prix_final_j1(const Joueur& j1,const Joueur& j2);
     int prix_final_j2(const Joueur& j1,const Joueur& j2);
-    Carte(const string& n,const unsigned int cout_piece, const unsigned int cout_bois, const unsigned int cout_argile, const unsigned int cout_pierre, const unsigned int cout_verre, const unsigned int cout_papyrus);
+ Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+       const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus)
+: nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
+ cout_verre(cout_verre), cout_papyrus(cout_papyrus) {}
     string get_nom() const {return nom;}
 };
 
@@ -62,12 +65,15 @@ public:
     void setChainage(const string& c) {chainage = c;};
     const string& getChainage() const {return chainage;};
     static bool est_chainée(const Joueur&j);
+    Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+             const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+             const bool &ac, const statut &s, const string &c)
+             : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus) , age(a), face_visible(f),
+             accesible(ac), st(s), chainage(c) {}
 };
 
 class Matiere_Premiere : public Batiment {
 private:
-    // Ressources
-    /*string type = "Matiere_Premiere";*/
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
@@ -79,6 +85,12 @@ public:
     int get_nb_pierre() const{return nb_pierre;}
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
+    Matiere_Premiere(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+                     const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+                     const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
+                     const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus)
+                     : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c),
+                     nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
 };
 
 class Matiere_Manufacture : public Batiment{
@@ -96,6 +108,12 @@ public:
     int get_nb_pierre() const{return nb_pierre;}
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
+    Matiere_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+                        const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+                        const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
+                        const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus)
+                        : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c),
+                        nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
 };
 class Commerce : public Batiment{
 private:
