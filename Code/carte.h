@@ -117,10 +117,10 @@ public:
 };
 class Commerce : public Batiment{
 private:
-//    string type="Commerce";
     // Ressources
     int points;
     int solde_apporte;
+    Ressource affecte;
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
@@ -142,6 +142,10 @@ private:
     int point;
 public:
     int getPoint() const {return point;}
+    Civil(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+          const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+          const bool &ac, const statut &s, const string &c, const int &p)
+          : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c), point(p) {}
 };
 
 class Scientifique : public Batiment{
@@ -151,6 +155,10 @@ private:
 public:
     int getPoint() const {return point;}
     SymboleScientifique getSym() const {return sym;}
+    Scientifique(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+                 const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+                 const bool &ac, const statut &s, const string &c, const int &p, const SymboleScientifique &sym)
+                 : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c), point(p), sym(sym) {}
 
 };
 
@@ -162,6 +170,10 @@ private:
 public:
     bool getPiece() const {return piece;}
     int getPoints() const {return points;}
+    Guilde(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+           const bool &ac, const statut &s, const string &c, const bool &p, const int &po)
+           : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c), piece(p), points(po) {}
 };
 
 class Militaire : public Batiment{
@@ -169,6 +181,10 @@ private:
     int bouclier;
 public:
     int getBouclier() const {return bouclier;}
+    Militaire(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+              const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
+              const bool &ac, const statut &s, const string &c, const int &b)
+              : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c), bouclier(b) {}
 };
 
 class Merveille : public Carte{
@@ -190,6 +206,11 @@ public:
     int get_nb_pierre() const{return nb_pierre;}
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
+    int getPoints() const {return points;}
+    int getArgent() const {return argent_app;}
+    bool getTirage() const {return tirage_trois_jetons;}
+    bool getConstruite() const {return construite;}
+
 };
 
 class Jeton : public Carte
