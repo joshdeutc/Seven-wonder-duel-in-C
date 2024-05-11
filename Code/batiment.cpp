@@ -26,8 +26,52 @@ Commerce::Commerce(const string &n, const unsigned int &cout_piece,
                                         cout_papyrus, a, f, ac, s, c,t),
                                         points(p), solde_apporte(solde),
                                         affecte(aff){
-                                        nb_
+                                        int taille_rand=0;
+                                        int ressource_rand[5];
+                                        if(nb_bois>0){
+                                            taille_rand++;
+                                            ressource_rand[0]=nb_bois;
+                                        }
+                                        if(nb_argile>0){
+                                            taille_rand++;
+                                            ressource_rand[1]=nb_argile;
+                                        }
+                                        if(nb_pierre>0){
+                                            taille_rand++;
+                                            ressource_rand[2]=nb_pierre;
+                                        }
+                                        if(nb_verre>0){
+                                            taille_rand++;
+                                            ressource_rand[3]=nb_verre;
+                                        }
+                                        if(nb_papyrus>0){
+                                            taille_rand++;
+                                            ressource_rand[4]=nb_papyrus;
+                                        }
+                                        int x=rand()%taille_rand + 1;
+                                        if(taille_rand){
+                                            switch (x){
+                                                case 1:
+                                                    nb_bois=ressource_rand[0];
+                                                    break;
+                                                case 2:
+                                                    nb_argile=ressource_rand[1];
+                                                    break;
+                                                case 3:
+                                                    nb_pierre=ressource_rand[2];
+                                                    break;
+                                                case 4:
+                                                    nb_verre=ressource_rand[3];
+                                                    break;
+                                                case 5:
+                                                    nb_papyrus=ressource_rand[4];
+                                                    break;
+                                            }
+                                        }
+
 }
+
+
 
 Merveille::Merveille(const string& n, const unsigned int &cout_piece,
                      const unsigned int &cout_bois, const unsigned int &cout_argile,
