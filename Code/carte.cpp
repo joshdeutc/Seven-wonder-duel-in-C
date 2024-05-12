@@ -51,6 +51,31 @@ int* compter_ressource_matiere_manufact(const Matiere_Manufacture** t1){
     }
     return tab;
 }
+
+int* verifier_ressource(const Joueur &j1){
+    int tab_verif_aff[5];
+    while(j1.get_tab_commerce()){
+        if(j1.get_tab_commerce()->get_aff()==bois){
+            tab_verif_aff[0]=1;
+        }
+        if(j1.get_tab_commerce()->get_aff()==argile){
+            tab_verif_aff[1]=1;
+        }
+        if(j1.get_tab_commerce()->get_aff()==pierre){
+            tab_verif_aff[2]=1;
+        }
+        if(j1.get_tab_commerce()->get_aff()==verre){
+            tab_verif_aff[3]=1;
+        }
+        if(j1.get_tab_commerce()->get_aff()==papyrus){
+            tab_verif_aff[4]=1;
+        }
+    }
+    return tab_verif_aff;
+}
+
+
+
 int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
     if(Batiment::est_chainée(j1)){
         return 0;
@@ -75,21 +100,48 @@ int Carte::prix_final_j1(const Joueur &j1,const Joueur& j2){
     for(j=0;j<5;j++){
         tab_tot_j2[j]=tab5[j]+tab6[j];
     }
+    // verifie si le joueur j1 possède une ou plusieurs affectations de ressource
+    int *tab_verif_aff=verifier_ressource(j1);
     // on verifie si le joueur j1 a assez de ressources pour construire la carte
     if(tab_tot_j1[0]<cout_bois){
-        res+=(2+tab_tot_j2[0])*cout_bois-tab_tot_j1[0];
+        if(tab_verif_aff[0]==0){
+            res+=(2+tab_tot_j2[0])*cout_bois-tab_tot_j1[0];
+        }
+        else{
+            res+=1;
+        }
     }
     if(tab_tot_j1[1]<cout_argile){
-        res+=(2+tab_tot_j2[1])*cout_argile-tab_tot_j1[1];
+        if(tab_verif_aff[1]==0){
+            res+=(2+tab_tot_j2[1])*cout_argile-tab_tot_j1[1];
+        }
+        else {
+            res += 1;
+        }
     }
     if(tab_tot_j1[2]<cout_pierre){
-        res+=(2+tab_tot_j2[2])*cout_pierre-tab_tot_j1[2];
+        if(tab_verif_aff[2]==0){
+            res+=(2+tab_tot_j2[2])*cout_pierre-tab_tot_j1[2];
+        }
+        else {
+            res += 1;
+        }
     }
     if(tab_tot_j1[3]<cout_verre){
-        res+=(2+tab_tot_j2[3])*cout_verre-tab_tot_j1[3];
+        if(tab_verif_aff[3]==0){
+            res+=(2+tab_tot_j2[3])*cout_verre-tab_tot_j1[3];
+        }
+        else {
+            res += 1;
+        }
     }
     if(tab_tot_j1[4]<cout_papyrus){
-        res+=(2+tab_tot_j2[4])*cout_papyrus-tab_tot_j1[4];
+        if(tab_verif_aff[4]==0){
+            res+=(2+tab_tot_j2[4])*cout_papyrus-tab_tot_j1[4];
+        }
+        else {
+            res += 1;
+        }
     }
     return res+=cout_piece;
 }
@@ -118,21 +170,44 @@ int Carte::prix_final_j2(const Joueur &j1,const Joueur& j2) {
     for (j = 0; j < 5; j++) {
         tab_tot_j1[j] = tab5[j] + tab6[j];
     }
+    // on verifie si le joueur j2 possède une ou plusieurs affectations de ressource
+    int *tab_verif_aff = verifier_ressource(j2);
+
     // on verifie si le joueur j2 a assez de ressources pour construire la carte
     if (tab_tot_j2[0] < cout_bois) {
-        res += (2 + tab_tot_j1[0])*cout_bois - tab_tot_j2[0];
+        if (tab_verif_aff[0] == 0) {
+            res += (2 + tab_tot_j1[0]) * cout_bois - tab_tot_j2[0];
+        } else {
+            res += 1;
+        }
     }
     if (tab_tot_j2[1] < cout_argile) {
-        res += (2 + tab_tot_j1[1])*cout_argile - tab_tot_j2[1];
+        if (tab_verif_aff[1] == 0) {
+            res += (2 + tab_tot_j1[1]) * cout_argile - tab_tot_j2[1];
+        } else {
+            res += 1;
+        }
     }
     if (tab_tot_j2[2] < cout_pierre) {
-        res += (2 + tab_tot_j1[2])*cout_pierre - tab_tot_j2[2];
+        if (tab_verif_aff[2] == 0) {
+            res += (2 + tab_tot_j1[2]) * cout_pierre - tab_tot_j2[2];
+        } else {
+            res += 1;
+        }
     }
     if (tab_tot_j2[3] < cout_verre) {
-        res += (2 + tab_tot_j1[3])*cout_verre - tab_tot_j2[3];
+        if (tab_verif_aff[3] == 0) {
+            res += (2 + tab_tot_j1[3]) * cout_verre - tab_tot_j2[3];
+        } else {
+            res += 1;
+        }
     }
     if (tab_tot_j2[4] < cout_papyrus) {
-        res += (2 + tab_tot_j1[4])*cout_papyrus - tab_tot_j2[4];
+        if (tab_verif_aff[4] == 0) {
+            res += (2 + tab_tot_j1[4]) * cout_papyrus - tab_tot_j2[4];
+        } else {
+            res += 1;
+        }
     }
     return res += cout_piece;
 }

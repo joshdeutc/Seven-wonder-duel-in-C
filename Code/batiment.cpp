@@ -52,19 +52,19 @@ Commerce::Commerce(const string &n, const unsigned int &cout_piece,
                                         if(taille_rand){
                                             switch (x){
                                                 case 1:
-                                                    nb_bois=ressource_rand[0];
+                                                    this->nb_bois=ressource_rand[0];
                                                     break;
                                                 case 2:
-                                                    nb_argile=ressource_rand[1];
+                                                    this->nb_argile=ressource_rand[1];
                                                     break;
                                                 case 3:
-                                                    nb_pierre=ressource_rand[2];
+                                                    this->nb_pierre=ressource_rand[2];
                                                     break;
                                                 case 4:
-                                                    nb_verre=ressource_rand[3];
+                                                    this->nb_verre=ressource_rand[3];
                                                     break;
                                                 case 5:
-                                                    nb_papyrus=ressource_rand[4];
+                                                    this->nb_papyrus=ressource_rand[4];
                                                     break;
                                             }
                                         }
@@ -79,12 +79,58 @@ Merveille::Merveille(const string& n, const unsigned int &cout_piece,
                      const unsigned int &cout_papyrus, const unsigned int &nb_bois,
                      const unsigned int &nb_argile, const unsigned int &nb_pierre,
                      const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-                     const int &p, const Ressource &aff, const bool &t,
-                     const bool &c)
+                     const int &p, const bool &t, const bool &c)
+                     // on appelle le constructeur de la classe mère
                      :Carte::Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre,
                                    cout_verre, cout_papyrus), nb_bois(nb_bois), nb_argile(nb_argile),
                                    nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus),
-                                   points(p), affecte(aff), tirage_trois_jetons(t), construite(c) {}
+                                   points(p), tirage_trois_jetons(t), construite(c) {
+                                    // on regarde combien de ressources on a
+                                    int taille_rand=0;
+                                    int ressource_rand[5];
+                                    if(nb_bois>0){
+                                        taille_rand++;
+                                        ressource_rand[0]=nb_bois;
+                                    }
+                                    if(nb_argile>0){
+                                        taille_rand++;
+                                        ressource_rand[1]=nb_argile;
+                                    }
+                                    if(nb_pierre>0){
+                                        taille_rand++;
+                                        ressource_rand[2]=nb_pierre;
+                                    }
+                                    if(nb_verre>0){
+                                        taille_rand++;
+                                        ressource_rand[3]=nb_verre;
+                                    }
+                                    if(nb_papyrus>0){
+                                        taille_rand++;
+                                        ressource_rand[4]=nb_papyrus;
+                                    }
+                                    int x=rand()%taille_rand + 1;
+                                    // on vérifie que il y a des ressources
+                                    if(taille_rand){
+                                        // on attribue une ressource aléatoire
+                                        switch (x){
+                                            case 1:
+                                                this->nb_bois=ressource_rand[0];
+                                                break;
+                                            case 2:
+                                                this->nb_argile=ressource_rand[1];
+                                                break;
+                                            case 3:
+                                                this->nb_pierre=ressource_rand[2];
+                                                break;
+                                            case 4:
+                                                this->nb_verre=ressource_rand[3];
+                                                break;
+                                            case 5:
+                                                this->nb_papyrus=ressource_rand[4];
+                                                break;
+                                        }
+                                    }
+}
 
 
 
