@@ -213,7 +213,6 @@ private:
     unsigned int nb_papyrus = 0;
     int points;
     int argent_app;
-    Ressource affecte;
     bool tirage_trois_jetons;
     bool construite;
 public:
