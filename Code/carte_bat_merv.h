@@ -226,14 +226,14 @@ public:
     int getArgent() const {return argent_app;}
     bool getTirage() const {return tirage_trois_jetons;}
     bool getConstruite() const {return construite;}
-    Merveille(const string& n, const unsigned int &cout_piece,
-              const unsigned int &cout_bois, const unsigned int &cout_argile,
-              const unsigned int &cout_pierre, const unsigned int &cout_verre,
-              const unsigned int &cout_papyrus, const unsigned int &nb_bois,
-              const unsigned int &nb_argile, const unsigned int &nb_pierre,
-              const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-              const int &p, const Ressource &aff, const bool &t,
-              const bool &c);
+    Merveille(const string& nom, const unsigned int cout_piece,
+              const unsigned int cout_bois, const unsigned int cout_argile,
+              const unsigned int cout_pierre, const unsigned int cout_verre,
+              const unsigned int cout_papyrus, const unsigned int nb_bois,
+              const unsigned int nb_argile, const unsigned int nb_pierre,
+              const unsigned int nb_verre, const unsigned int nb_papyrus,
+              const int points, const Ressource affecte, const bool estTirage_trois_jetons,
+              const bool estConstruite);
 };
 
 class Jeton : public Carte
@@ -250,36 +250,19 @@ class JetonMilitaire : public Jeton
 private:
     unsigned int montantSaccage;
 public:
-    JetonMilitaire(/* args */);
-    ~JetonMilitaire();
+    JetonMilitaire(int montantAccapare) : montantSaccage(montantAccapare) {};
+    ~JetonMilitaire() = default;
     int getMontantSaccage() const {return montantSaccage;}
 };
-
-JetonMilitaire::JetonMilitaire(/* args */)
-{
-}
-
-JetonMilitaire::~JetonMilitaire()
-{
-}
 
 class JetonProgres : public Jeton
 {
 private:
     string nom;
 public:
-    JetonProgres(/* args */);
-    ~JetonProgres();
+    JetonProgres(string nomJeton) : nom(nomJeton) {};
+    ~JetonProgres() = default;
     const string& getNom() const {return nom;}
 };
-
-JetonProgres::JetonProgres(/* args */)
-{
-}
-
-JetonProgres::~JetonProgres()
-{
-}
-
 
 #endif
