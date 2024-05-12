@@ -211,8 +211,8 @@ private:
     unsigned int nb_pierre = 0;
     unsigned int nb_verre = 0;
     unsigned int nb_papyrus = 0;
-    int points;
-    int argent_app;
+    unsigned int points;
+    unsigned int argent_app;
     Ressource affecte;
     bool tirage_trois_jetons;
     bool construite;
@@ -226,14 +226,14 @@ public:
     int getArgent() const {return argent_app;}
     bool getTirage() const {return tirage_trois_jetons;}
     bool getConstruite() const {return construite;}
-    Merveille(const string& nom, const unsigned int cout_piece,
+    Merveille(const string nom, const unsigned int cout_piece,
               const unsigned int cout_bois, const unsigned int cout_argile,
               const unsigned int cout_pierre, const unsigned int cout_verre,
               const unsigned int cout_papyrus, const unsigned int nb_bois,
               const unsigned int nb_argile, const unsigned int nb_pierre,
               const unsigned int nb_verre, const unsigned int nb_papyrus,
-              const int points, const Ressource affecte, const bool estTirage_trois_jetons,
-              const bool estConstruite);
+              const unsigned int points, const Ressource affecte, const bool estTirage_trois_jetons,
+              const bool estConstruite) : Carte(nom, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus), nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus), points(points), affecte(affecte), tirage_trois_jetons(estTirage_trois_jetons), construite(estConstruite) {};
 };
 
 class Jeton : public Carte

@@ -40,4 +40,6 @@ public:
 // Initialiser le pointeur à nullptr
 Jeu* Jeu::instance = nullptr;
 
+
+
 #endif /* JEU_H */

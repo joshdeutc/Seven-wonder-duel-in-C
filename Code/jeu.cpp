@@ -50,16 +50,34 @@ Jeu::Jeu()
     tabJetonProgres[9] = jetonProgresUrbanisme;
 
     // Merveilles
-    // Merveille(const string& nom, const unsigned int cout_piece,
-    //         const unsigned int cout_bois, const unsigned int cout_argile,
-    //         const unsigned int cout_pierre, const unsigned int cout_verre,
-    //         const unsigned int cout_papyrus, const unsigned int nb_bois,
-    //         const unsigned int nb_argile, const unsigned int nb_pierre,
-    //         const unsigned int nb_verre, const unsigned int nb_papyrus,
-    //         const int points, const Ressource affecte, const bool estTirage_trois_jetons,
-    //         const bool estConstruite);
-    Merveille* merveillePyramides = new Merveille("Les Pyramides", 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 9, nullptr, false, false);
+    // ⚠️⚠️⚠️ Les variables non entières, exceptés les noms devront être modifiés pour correspondre au jeu 
+    Merveille* merveilleCircusMaximus = new Merveille("Circus Maximus", 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 5, papyrus, false, false);
+    Merveille* merveilleColosse = new Merveille("Le Colosse", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
+    Merveille* merveilleGrandPhare = new Merveille("Le Grand Phare", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, verre, false, false);
+    Merveille* merveilleJardinsSuspendus = new Merveille("Les Jardins Suspendus", 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 6, verre, false, false);
+    Merveille* merveilleGrandeBibliotheque = new Merveille("La Grande Bibliotheque", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, papyrus, false, false);
+    Merveille* merveilleMausolee = new Merveille("Le Mausolee", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
+    Merveille* merveillePiree = new Merveille("Le Pirée", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, bois, false, false);
+    Merveille* merveillePyramides = new Merveille("Les Pyramides", 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 9, papyrus, false, false);
+    Merveille* merveilleSphinx = new Merveille("Le Sphinx", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
+    Merveille* merveilleStatueDeZeus = new Merveille("La Statue de Zeus", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, bois, false, false);
+    Merveille* merveilleTempleDArtemis = new Merveille("Le Temple d’Artémis", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, papyrus, false, false);
+    Merveille* merveilleViaAppia = new Merveille("La Via Appia", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, verre, false, false);
+    tabCartesMerveille[0] = merveilleCircusMaximus;
+    tabCartesMerveille[1] = merveilleColosse;
+    tabCartesMerveille[2] = merveilleGrandPhare;
+    tabCartesMerveille[3] = merveilleJardinsSuspendus;
+    tabCartesMerveille[4] = merveilleGrandeBibliotheque;
+    tabCartesMerveille[5] = merveilleMausolee;
+    tabCartesMerveille[6] = merveillePiree;
+    tabCartesMerveille[7] = merveillePyramides;
+    tabCartesMerveille[8] = merveilleSphinx;
+    tabCartesMerveille[9] = merveilleStatueDeZeus;
+    tabCartesMerveille[10] = merveilleTempleDArtemis;
+    tabCartesMerveille[11] = merveilleViaAppia;
 }
+
+
 
 Jeu::~Jeu()
 {
