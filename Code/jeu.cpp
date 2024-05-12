@@ -13,8 +13,71 @@ Jeu::Jeu()
     tabJetonProgres = new JetonProgres*;
 
     // Il faudra initialiser toutes les cartes ici
-    
+
+    // Jetons Militaires
+        // Joueur 1
+    JetonMilitaire* jetonMilitaire2_1 = new JetonMilitaire(2);
+    JetonMilitaire* jetonMilitaire5_1 = new JetonMilitaire(5);
+    tabJetonMilitaire[0] = jetonMilitaire2_1;
+    tabJetonMilitaire[1] = jetonMilitaire5_1;
+
+        // Joueur 2
+    JetonMilitaire* jetonMilitaire2_2 = new JetonMilitaire(2);
+    JetonMilitaire* jetonMilitaire5_2 = new JetonMilitaire(5);
+    tabJetonMilitaire[2] = jetonMilitaire2_2;
+    tabJetonMilitaire[3] = jetonMilitaire5_2;
+
+    // Jetons Progrès
+    JetonProgres *jetonProgresAgriculture = new JetonProgres("Agriculture");
+    JetonProgres *jetonProgresArchitecture = new JetonProgres("Architecture");
+    JetonProgres *jetonProgresEconomie = new JetonProgres("Economie");
+    JetonProgres *jetonProgresLoi = new JetonProgres("Loi");
+    JetonProgres *jetonProgresMaçonnerie = new JetonProgres("Maçonnerie");
+    JetonProgres *jetonProgresMathematiques = new JetonProgres("Mathematiques");
+    JetonProgres *jetonProgresPhilosophie = new JetonProgres("Philosophie");
+    JetonProgres *jetonProgresStrategie = new JetonProgres("Strategie");
+    JetonProgres *jetonProgresTheologie = new JetonProgres("Theologie");
+    JetonProgres *jetonProgresUrbanisme = new JetonProgres("Urbanisme");
+    tabJetonProgres[0] = jetonProgresAgriculture;
+    tabJetonProgres[1] = jetonProgresArchitecture;
+    tabJetonProgres[2] = jetonProgresEconomie;
+    tabJetonProgres[3] = jetonProgresLoi;
+    tabJetonProgres[4] = jetonProgresMaçonnerie;
+    tabJetonProgres[5] = jetonProgresMathematiques;
+    tabJetonProgres[6] = jetonProgresPhilosophie;
+    tabJetonProgres[7] = jetonProgresStrategie;
+    tabJetonProgres[8] = jetonProgresTheologie;
+    tabJetonProgres[9] = jetonProgresUrbanisme;
+
+    // Merveilles
+    // ⚠️⚠️⚠️ Les variables non entières, exceptés les noms devront être modifiés pour correspondre au jeu 
+    Merveille* merveilleCircusMaximus = new Merveille("Circus Maximus", 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 5, papyrus, false, false);
+    Merveille* merveilleColosse = new Merveille("Le Colosse", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
+    Merveille* merveilleGrandPhare = new Merveille("Le Grand Phare", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, verre, false, false);
+    Merveille* merveilleJardinsSuspendus = new Merveille("Les Jardins Suspendus", 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 6, verre, false, false);
+    Merveille* merveilleGrandeBibliotheque = new Merveille("La Grande Bibliotheque", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, papyrus, false, false);
+    Merveille* merveilleMausolee = new Merveille("Le Mausolee", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
+    Merveille* merveillePiree = new Merveille("Le Pirée", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, bois, false, false);
+    Merveille* merveillePyramides = new Merveille("Les Pyramides", 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 9, papyrus, false, false);
+    Merveille* merveilleSphinx = new Merveille("Le Sphinx", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
+    Merveille* merveilleStatueDeZeus = new Merveille("La Statue de Zeus", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, bois, false, false);
+    Merveille* merveilleTempleDArtemis = new Merveille("Le Temple d’Artémis", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, papyrus, false, false);
+    Merveille* merveilleViaAppia = new Merveille("La Via Appia", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, verre, false, false);
+    tabCartesMerveille[0] = merveilleCircusMaximus;
+    tabCartesMerveille[1] = merveilleColosse;
+    tabCartesMerveille[2] = merveilleGrandPhare;
+    tabCartesMerveille[3] = merveilleJardinsSuspendus;
+    tabCartesMerveille[4] = merveilleGrandeBibliotheque;
+    tabCartesMerveille[5] = merveilleMausolee;
+    tabCartesMerveille[6] = merveillePiree;
+    tabCartesMerveille[7] = merveillePyramides;
+    tabCartesMerveille[8] = merveilleSphinx;
+    tabCartesMerveille[9] = merveilleStatueDeZeus;
+    tabCartesMerveille[10] = merveilleTempleDArtemis;
+    tabCartesMerveille[11] = merveilleViaAppia;
 }
+
+
 
 Jeu::~Jeu()
 {

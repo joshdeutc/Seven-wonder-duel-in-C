@@ -213,6 +213,7 @@ private:
     unsigned int nb_papyrus = 0;
     int points;
     int argent_app;
+    Ressource affecte;
     bool tirage_trois_jetons;
     bool construite;
 public:
@@ -231,7 +232,8 @@ public:
               const unsigned int &cout_papyrus, const unsigned int &nb_bois,
               const unsigned int &nb_argile, const unsigned int &nb_pierre,
               const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-              const int &p, const bool &t, const bool &c);
+              const int &p, const Ressource &aff, const bool &t,
+              const bool &c);
 };
 
 class Jeton : public Carte
