@@ -23,10 +23,18 @@ class Joueur{
     Guilde ** tab_guilde;
     Militaire ** tab_militaire;
     // ********************************* //
+    int nb_com = 0;
+    int nb_pre = 0;
+    int nb_manu = 0;
+    int nb_civ = 0;
+    int nb_sci = 0;
+    int nb_gui = 0;
+    int nb_mil = 0;
     int nb_bat = 0;
+    int nb_merveille = 0;
+    int nb_mer = 0;
     Merveille** tab_merveille;
     Batiment** tab_batiment;
-    int nb_mer = 0;
   /*  Jeton_progres** jetons;*/
 public:
     int nb_symboles() const;
@@ -49,7 +57,9 @@ public:
     Militaire** get_tab_militaire() const {return tab_militaire;}
     Batiment** get_tab_batiment() const {return tab_batiment;}
     Merveille** get_tab_merveille() const {return tab_merveille;}
-
+    int get_solde() const {return solde;}
+    void set_solde(int &s) { solde=s;}
+    void add_carte(const Carte& c);
 };
 
 

@@ -1,5 +1,61 @@
 #include "joueur.h"
 
+void Joueur::add_carte(const Carte& c){
+    if(c.get_type_carte()=="Batiment"){
+        tab_batiment[nb_bat]=&c;
+        /*Cela ne fonctionne pas car c est une référence à une Carte,
+         * et non à un Batiment. Même si Batiment est probablement une sous-classe
+         * de Carte, vous ne pouvez pas stocker une référence à une Carte dans
+         * un tableau de Batiment.  De plus, c est une référence constante,
+         * ce qui signifie que vous ne pouvez pas modifier c ou l'objet auquel
+         * il fait référence. Lorsque vous essayez d'assigner l'adresse de c à
+         * un élément de tab_batiment, vous essayez essentiellement de modifier c,
+         * ce qui n'est pas autorisé.  Pour résoudre ce problème, vous devez vous
+         * assurer que c est une référence à un Batiment (ou à une sous-classe de
+         * Batiment), et non à une Carte. De plus, c ne doit pas être constante
+         * si vous voulez modifier c ou l'objet auquel il fait référence.*/
+        nb_bat++;
+    }
+    else if(c.get_type_carte()=="Merveille"){
+        tab_merveille[nb_merveille]=&c;
+        nb_merveille++;
+    }
+    else if(c.get_type_carte()=="Matiere_Premiere"){
+        tab_matiere[nb_pre]=&c;
+        nb_pre++;
+    }
+    else if(c.get_type_carte()=="Matiere_Manufacture"){
+        tab_manufacture[nb_manu]=&c;
+        nb_manu++;
+    }
+    else if(c.get_type_carte()=="Commerce"){
+        tab_commerce[nb_com]=&c;
+        nb_com++;
+    }
+    else if(c.get_type_carte()=="Civil"){
+        tab_civil[nb_civ]=&c;
+        nb_civ++;
+    }
+    else if(c.get_type_carte()=="Scientifique"){
+        tab_scientifique[nb_sci]=&c;
+        nb_sci++;
+    }
+    else if(c.get_type_carte()=="Guilde"){
+        tab_guilde[nb_gui]=&c;
+        nb_gui++;
+    }
+    else if(c.get_type_carte()=="Militaire"){
+        tab_militaire[nb_mil]=&c;
+        nb_mil++;
+    }
+    else if(c.get_type_carte()=="Merveille"){
+        tab_merveille[nb_mer]=&c;
+        nb_mer++;
+    }
+    else{
+        cout << "Erreur: type de carte inconnu";
+    }
+}
 int Joueur::nb_symboles() const{
     int nb=0;
     for(int i=0; i<NB_SYMB; i++)

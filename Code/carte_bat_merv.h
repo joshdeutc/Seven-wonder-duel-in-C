@@ -41,14 +41,25 @@ protected:
     unsigned int cout_pierre;
     unsigned int cout_verre;
     unsigned int cout_papyrus;
+    string type_carte;
 public:
-    int prix_final_j1(const Joueur& j1,const Joueur& j2);
-    int prix_final_j2(const Joueur& j1,const Joueur& j2);
-     Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus)
+    int prix_final_j1 (const Joueur& j1,const Joueur& j2) const; // on met const pour
+                                                                    // que la méthode ne
+                                                                    // modifie pas les
+                                                                    // attributs
+    int prix_final_j2 (const Joueur& j1,const Joueur& j2) const;
+    Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const string &t)
             : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
-            cout_verre(cout_verre), cout_papyrus(cout_papyrus) {}
-     string get_nom() const {return nom;}
+            cout_verre(cout_verre), cout_papyrus(cout_papyrus), type_carte(t){}
+    string get_nom() const {return nom;}
+    unsigned int get_cout_piece() const {return cout_piece;}
+    unsigned int get_cout_bois() const {return cout_bois;}
+    unsigned int get_cout_argile() const {return cout_argile;}
+    unsigned int get_cout_pierre() const {return cout_pierre;}
+    unsigned int get_cout_verre() const {return cout_verre;}
+    unsigned int get_cout_papyrus() const {return cout_papyrus;}
+    string get_type_carte() const {return type_carte;}
      ~Carte() =default;
 };
 
@@ -59,7 +70,6 @@ protected:
     bool accesible;
     statut st;
     string chainage;
-    string type;
 public:
     void setStatut(statut s) {st = s;};
     statut getStatut() const {return st;};
@@ -68,9 +78,9 @@ public:
     static bool est_chainée(const Joueur&j);
     Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
              const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-             const bool &ac, const statut &s, const string &c, const string &t)
-             : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus) , age(a), face_visible(f),
-             accesible(ac), st(s), chainage(c),type(t) {}
+             const bool &ac, const statut &s, const string &c, const string &type)
+             : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type) , age(a), face_visible(f),
+             accesible(ac), st(s), chainage(c){}
     ~Batiment() =default;
 };
 

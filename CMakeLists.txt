@@ -19,4 +19,5 @@ add_executable(projet_lo21
         Code/carte_bat_merv.h
         Code/carte_bat_merv.h
         Code/jeu.cpp
+        Code/partie.cpp
 )

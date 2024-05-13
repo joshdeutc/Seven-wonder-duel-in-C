@@ -15,10 +15,12 @@ private:
         public:
             Partie(/* args */){};
             ~Partie();
-            void mise_en_jeu_batiments();
+            bool aquisition_carte(Joueur& j1,
+                                     const Joueur&j2,const Carte& c);
+            //void mise_en_jeu_batiments();
             void mise_en_jeu_jeton_progres();
-            void mise_en_jeu_merveilles(); // Added return type 'void'
-            void tour_suivant(); // Added semicolon at the end
+            void mise_en_jeu_merveilles();
+            void tour_suivant();
             void fin_age();
             void accessibilite(Batiment);
             void victoire_scientifique(Joueur);
