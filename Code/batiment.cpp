@@ -19,11 +19,11 @@ Commerce::Commerce(const string &n, const unsigned int &cout_piece,
                    const int &p, const int &solde,const Ressource &aff,
                    const unsigned int &nb_bois, const unsigned int &nb_argile,
                    const unsigned int &nb_pierre, const unsigned int &nb_verre,
-                   const unsigned int &nb_papyrus,const string& t)
+                   const unsigned int &nb_papyrus,const string& t,const int& age)
                    : Batiment::Batiment(n, cout_piece,
                                         cout_bois, cout_argile,
                                         cout_pierre, cout_verre,
-                                        cout_papyrus, a, f, ac, s, c,t),
+                                        cout_papyrus, a, f, ac, s, c,t,age),
                                         points(p), solde_apporte(solde),
                                         affecte(aff){
                                         int taille_rand=0;
@@ -79,10 +79,11 @@ Merveille::Merveille(const string& n, const unsigned int &cout_piece,
                      const unsigned int &cout_papyrus, const unsigned int &nb_bois,
                      const unsigned int &nb_argile, const unsigned int &nb_pierre,
                      const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-                     const int &p, const bool &t, const bool &c)
+                     const int &p, const bool &t, const bool &c,const string &type,
+                     const int& age)
                      // on appelle le constructeur de la classe mère
                      :Carte::Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre,
-                                   cout_verre, cout_papyrus), nb_bois(nb_bois), nb_argile(nb_argile),
+                                   cout_verre, cout_papyrus,type,age), nb_bois(nb_bois), nb_argile(nb_argile),
                                    nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus),
                                    points(p), tirage_trois_jetons(t), construite(c) {
                                     // on regarde combien de ressources on a

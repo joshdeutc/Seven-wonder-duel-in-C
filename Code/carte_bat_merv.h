@@ -42,6 +42,7 @@ protected:
     unsigned int cout_verre;
     unsigned int cout_papyrus;
     string type_carte;
+    int age; // peux pas depasser 3
 public:
     int prix_final_j1 (const Joueur& j1,const Joueur& j2) const; // on met const pour
                                                                     // que la méthode ne
@@ -49,9 +50,10 @@ public:
                                                                     // attributs
     int prix_final_j2 (const Joueur& j1,const Joueur& j2) const;
     Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const string &t)
+           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
+           const string &type, const int &age)
             : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
-            cout_verre(cout_verre), cout_papyrus(cout_papyrus), type_carte(t){}
+            cout_verre(cout_verre), cout_papyrus(cout_papyrus), type_carte(type),age(age){}
     string get_nom() const {return nom;}
     unsigned int get_cout_piece() const {return cout_piece;}
     unsigned int get_cout_bois() const {return cout_bois;}
@@ -78,8 +80,8 @@ public:
     static bool est_chainée(const Joueur&j);
     Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
              const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-             const bool &ac, const statut &s, const string &c, const string &type)
-             : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type) , age(a), face_visible(f),
+             const bool &ac, const statut &s, const string &c, const string &type,const int& age)
+             : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type,age) , age(a), face_visible(f),
              accesible(ac), st(s), chainage(c){}
     ~Batiment() =default;
 };
@@ -100,8 +102,9 @@ public:
     Matiere_Premiere(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                      const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
                      const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
-                     const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t)
-                     : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t),
+                     const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t,
+                     const int &age)
+                     : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
                      nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
     ~Matiere_Premiere()=default;
 };
@@ -124,8 +127,9 @@ public:
     Matiere_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                         const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
                         const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
-                        const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t)
-                        : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t),
+                        const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t,
+                        const int &age)
+                        : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
                         nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
     ~Matiere_Manufacture()=default;
 };
@@ -156,7 +160,7 @@ public:
              const bool &ac, const statut &s, const string &c, const int &p, const int &solde,
              const Ressource &aff, const unsigned int &nb_bois, const unsigned int &nb_argile,
              const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-             const string &t);
+             const string &t,const int &age);
     ~Commerce()=default;
 };
 
@@ -167,8 +171,8 @@ public:
     int getPoint() const {return point;}
     Civil(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-          const bool &ac, const statut &s, const string &c, const int &p, const string &t)
-          : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t), point(p) {}
+          const bool &ac, const statut &s, const string &c, const int &p, const string &t,const int& age)
+          : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age), point(p) {}
     ~Civil()=default;
 };
 
@@ -181,8 +185,9 @@ public:
     SymboleScientifique getSym() const {return sym;}
     Scientifique(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                  const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-                 const bool &ac, const statut &s, const string &c, const int &p, const SymboleScientifique &sym, const string &t)
-                 : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t), point(p), sym(sym) {}
+                 const bool &ac, const statut &s, const string &c, const int &p, const SymboleScientifique &sym, const string &t,
+                 const int& age)
+                 : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age), point(p), sym(sym) {}
     ~Scientifique()=default;
 };
 
@@ -196,8 +201,8 @@ public:
     int getPoints() const {return points;}
     Guilde(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
            const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-           const bool &ac, const statut &s, const string &c, const bool &p, const int &po, const string &t)
-           : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t), piece(p), points(po) {}
+           const bool &ac, const statut &s, const string &c, const bool &p, const int &po, const string &t,const int& age)
+           : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age), piece(p), points(po) {}
     ~Guilde()=default;
 };
 
@@ -208,8 +213,8 @@ public:
     int getBouclier() const {return bouclier;}
     Militaire(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
               const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-              const bool &ac, const statut &s, const string &c, const int &b, const string &t)
-              : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t), bouclier(b) {}
+              const bool &ac, const statut &s, const string &c, const int &b, const string &t,const int& age)
+              : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age), bouclier(b) {}
     ~Militaire()=default;
 };
 
@@ -241,8 +246,8 @@ public:
               const unsigned int &cout_papyrus, const unsigned int &nb_bois,
               const unsigned int &nb_argile, const unsigned int &nb_pierre,
               const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-              const int &p, const Ressource &aff, const bool &t,
-              const bool &c);
+              const int &p, const bool &t,const bool &c,const string& type,
+              const int& age);
 };
 
 class Jeton : public Carte
