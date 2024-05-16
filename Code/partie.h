@@ -1,42 +1,39 @@
 #ifndef PARTIE_H
 #define PARTIE_H
 
-#include "carte_bat_merv.h"
 
+#include "plateau.h"
+#include "jeu.h"
+#include "joueur.h"
+#include "carte_bat_merv.h"
 class Partie
 {
-private:
+    private:
             signed int solde_militaire = 0;
             int age = 1; // {1,2,3}
             int merveille_construite = 0;
             int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
             int nb_tour = 0;
             Carte** cartes = nullptr;
-        public:
-            Partie(/* args */){};
+            Joueur* vainqueur = nullptr;
+
+            Jeu* jeu;
+            PlateauAge platAge;
+            PlateauJetonMilit platMilitaire;
+            PlateauMerveille platMerveille;
+            PlateauJetonMilit platJeton;
+            Joueur* joueurs[2];
+    public:
+            Partie();
             ~Partie();
-            bool aquisition_carte(Joueur& j1,
-                                     const Joueur&j2,const Carte& c);
-            //void mise_en_jeu_batiments();
-            void mise_en_jeu_jeton_progres();
-            void mise_en_jeu_merveilles();
             void tour_suivant();
             void fin_age();
-            void accessibilite(Batiment);
-            void victoire_scientifique(Joueur);
-            void change_solde_militaire(Joueur,int nb_boucliers);
+            void accessibilite(Batiment* CarteCourante);
+            void victoire_scientifique(Joueur j);
+            void change_solde_militaire(signed int nb_boucliers);
             void victoire_militaire();
             void victoire_civile();
+            
 };
-
-Partie::Partie(/* args */)
-{
-    cartes[0] = new Carte("Caravanserail", ,bois,false);
-}
-
-Partie::~Partie()
-{
-}
-
 
 #endif
