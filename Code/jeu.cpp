@@ -77,6 +77,7 @@ Jeu::Jeu()
     tabCartesMerveille[11] = merveilleViaAppia;
 
     // Cartes Age 1
+        // Sans chainage
     Matiere_Premiere* matierePremiereChantier = new Matiere_Premiere("Chantier", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 1, 0, 0, 0, 0, "Batiment", 1);
     Matiere_Premiere* matierePremiereExploitation = new Matiere_Premiere("Exploitation", 0, 1, 0, 0, 0, 0, 1, false, false, statut, "", 1, 0, 0, 0, 0, "Batiment", 1);
     Matiere_Premiere* matierePremiereBassinArgileux = new Matiere_Premiere("Bassin Argileux", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, 0, 0, 0, "Batiment", 1);
@@ -85,7 +86,21 @@ Jeu::Jeu()
     Matiere_Premiere* matierePremiereMine = new Matiere_Premiere("Mine", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 1, 0, 0, "Batiment", 1);
     Produit_Manufacture* produitManufactureVerrerie = new Produit_Manufacture("Verrerie", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 0, 1, 0, "Batiment", 1);
     Produit_Manufacture* produitManufacturePresse = new Produit_Manufacture("Presse", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 0, 0, 1, "Batiment", 1);
-    Militaire* militaireTourDeGarde = new Militaire("Tour de Garde", 
+    Militaire* militaireTourDeGarde = new Militaire("Tour de garde", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 1, "Batiment", 1);
+    Scientifique* scientifiqueAtelier = new Scientifique("Atelier", 0 ,0 ,0 ,0, 0, 1, 1, false, false, statut, "", 1, A,"Batiment", 1));
+    Scientifique* scientifiqueAtelier = new Scientifique("Apothicaire", 0 ,0 ,0 ,0, 1, 0, 1, false, false, statut, "", 1, roue,"Batiment", 1));
+    Commerce* commerceDepotDePierre = new Commerce("Dépôt de pierre", 3, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, pierre, 0, 0, 0, 0, 0, "Batiment", 1);
+    Commerce* commerceDepotDArgile = new Commerce("Dépôt d'argile", 3, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, argile, 0, 0, 0, 0, 0, "Batiment", 1);
+    Commerce* commerceDepotDeBois = new Commerce("Dépôt de bois", 3, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, bois, 0, 0, 0, 0, 0, "Batiment", 1);
+
+        // Avec chainage
+    Militaire* militaireEcuries = new Militaire("Ecuries", 0, 1, 0, 0, 0, 0, 1, false, false, statut, "Haras", 1, "Militaire", 1); )
+    Militaire* militaireCaserne = new Militaire("Caserne", 0, 0, 1, 0, 0, 0, 1, false, false, statut, "Baraquements", 1, "Militaire", 1);
+    Militaire* militairePalissade = new Militaire("Palissade", 2, 0, 0, 0, 0, 0, 1, false, false, statut, "Fortifications", 1, "Militaire", 1);
+    Civil* civilTheatre = new Civil("Théâtre", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Statue", 3, "Civil", 1);
+    Civil* civilAutel = new Civil("Autel", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Temple", 3, "Civil", 1);
+    Civil* civilBains = new Civil("Bains", 0, 0, 0, 1, 0, 0, 1, false, false, statut, "Aqueduc", 3, "Civil", 1);
+    Commerce* commerceTaverne = new Commerce("Taverne", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Phare", 99, 4, 0, 0, 0, 0, 0, 0, "Commerce", 1); // Bizarre
 }
 
 
