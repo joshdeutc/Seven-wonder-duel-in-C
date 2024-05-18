@@ -111,6 +111,9 @@ Jeu::Jeu()
     Produit_Manufacture* matierePremiereSechoir = new Produit_Manufacture("Sechoir", 0, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 0, 0, 1, "Produit Manufacture", 2);
     Militaire* militaireMuraille = new Militaire("Muraille", 0, 0, 0, 2, 0, 0, 2, false, false, statut, "", 2, "Militaire", 2);
     Commerce* commerceForum = new Commerce("Forum", 3, 0, 1, 0, 0, 0, 2, false, false, statut, "", 0, 0, 
+    Commerce* commerceCaravanserail = new Commerce("Caravanserail", 2, 0, 0, 0, 1, 1, 2, false, false, statut, "", 0, 0, 0, 0, 0, "Commerce", 2);
+    Commerce* commerceDouanes = new Commerce("Douanes", 4, 0, 0, 0, 0, 0, 2, false, false, statut, "", ...);
+    Civil* civilTribunal = new Civil("Tribunal", 0, 2, 0, 0, 1, 0, 2, false, false, statut, "", 5, "Civil", 2);
 }
 
 
