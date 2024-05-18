@@ -114,6 +114,25 @@ Jeu::Jeu()
     Commerce* commerceCaravanserail = new Commerce("Caravanserail", 2, 0, 0, 0, 1, 1, 2, false, false, statut, "", 0, 0, 0, 0, 0, "Commerce", 2);
     Commerce* commerceDouanes = new Commerce("Douanes", 4, 0, 0, 0, 0, 0, 2, false, false, statut, "", ...);
     Civil* civilTribunal = new Civil("Tribunal", 0, 2, 0, 0, 1, 0, 2, false, false, statut, "", 5, "Civil", 2);
+
+        // Avec chainage
+    Militaire* militaireHaras = new Militaire("Haras", 0, 1, 1, 0, 0, 0, 2, false, false, statut, "Ecuries", 1, "Militaire", 2);
+    Militaire* militaireBaraquements = new Militaire("Baraquements", 0, 1, 1, 0, 0, 0, 2, false, false, statut, "Caserne", 1, "Militaire", 2);
+    Militaire* militaireChampsDeTir = new Militaire("Champs de Tir", 0, 1, 0, 1, 0, 1, 2, false, false, statut, "Atelier de siege", 2, "Militaire", 2);
+    Militaire* militairePlaceDArmes = new Militaire("Place d'Armes", 0, 0, 2, 0, 1, 0, 2, false, false, statut, "Cirque", 2, "Militaire", 2);
+    Civil* civilBibliotheque = new Civil("Bibliotheque", 0, 1, 0, 1, 1, 0, 2, false, false, statut, "Scriptorium", 2, "Civil", 2);
+    
+    // Age 3
+        // Sans chainage
+    Militaire* militaireArsenal = new Militaire("Arsenal", 0, 2, 3, 0, 0, 0, 3, false, false, statut, "", 3, "Militaire", 3);
+    Militaire* militairePretoire = new Militaire("Pretoire", 8, 0, 0, 0, 0, 0, 3, false, false, statut, "", 3, "Militaire", 3);
+    Scientifique* scientifiqueAcademie = new Scientifique("Academie", 0, 1, 0, 1, 2, 0, 3, false, false, statut, "", 3, horloge, "Scientifique", 3);
+    Scientifique* scientifiqueEtude = new Scientifique("Etude", 0, 2, 0, 0, 1, 1, 3, false, false, statut, "", 3, horloge, "Scientifique", 3);
+    
+    Civil* civilPalace = new Civil("Palace", 0, 1, 1, 1, 2, 0, 3, false, false, statut, "", 7, "Civil", 3);
+    Civil* civilHotelDeVille = new Civil("Hotel de Ville", 0, 2, 0, 3, 0, 0, 3, false, false, statut, "", 7, "Civil", 3);
+    Civil* civilObelisque = new Civil("Obelisque", 0, 0, 0, 2, 1, 0, 3, false, false, statut, "", 5, "Civil", 3);
+        // Avec chainage
 }
 
 
