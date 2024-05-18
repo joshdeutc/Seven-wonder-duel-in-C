@@ -1,121 +1,57 @@
-#include "joueur.h"
-#include "jeu.h"
-void Joueur::add_carte(const Carte& c){
-    int i=0;
-    if(c.get_type_carte()=="Merveille"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_merveille[nb_merveille]=&(Jeu.get_tab_carte()[i]);
-        nb_merveille++;
-    }
-    else if(c.get_type_carte()=="Matiere_Premiere"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_matiere[nb_pre]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_pre++;
-    }
-    else if(c.get_type_carte()=="Produit_Manufacture"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_manufacture[nb_manu]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_manu++;
-    }
-    else if(c.get_type_carte()=="Commerce"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_commerce[nb_com]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_com++;
-    }
-    else if(c.get_type_carte()=="Civil"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_civil[nb_civ]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_civ++;
-    }
-    else if(c.get_type_carte()=="Scientifique"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_scientifique[nb_sci]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_sci++;
-    }
-    else if(c.get_type_carte()=="Guilde"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_guilde[nb_gui]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_gui++;
-    }
-    else if(c.get_type_carte()=="Militaire"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_militaire[nb_mil]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_mil++;
-    }
-    else if(c.get_type_carte()=="Merveille"){
-        while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
-            i++;
-        tab_merveille[nb_mer]=&(Jeu.get_tab_carte()[i]);
-        tab_batiment[nb_bat]=&(Jeu.get_tab_carte()[i]);
-        nb_bat++;
-        nb_mer++;
-    }
-    else{
-        cout << "Erreur: type de carte inconnu";
-    }
+#include "joueur.hpp"
+#define NB_SYMB 6
+
+//Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
+//Des modifications devront être faites pour utiliser le polymorphisme pour un bon fonctionnement du code
+
+Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
+    type = type_joueur;
+    id = identifiant;
+    //points, solde et ressources sont deja initialisees
+    for(int i=0;i<nb_batMax;i++) batiments[i]=nullptr;
+    for(int i=0;i<7;i++) merveilles[i]=nullptr;
+    for(int i=0;i<NB_JETONS;i++) jetons[i] = nullptr;
 }
+
+Joueur::~Joueur(
+
 int Joueur::nb_symboles() const{
     int nb=0;
-    for(int i=0; i<NB_SYMB; i++)
+    for(int i=0; i<(NB_SYMB) ; i++){
         if (symboles[i]>1) nb++;
+    }
     return nb;
 }
 
-// Voir avec la personne qui a fait les classes Batiment comment fonctionne l'héritage
-// Par exemple; dans la fonction ci dessous est ce que je peux parler de l'attribut symbole sur batiment
-// sachant que tous les batiments n'ont pas vraiment l'attribut symbole?
-// Il faut ajouter un attribut string type pour pouvoir vérifier le type d'un batiment
-
-// À REGARDER QUAND MÊME
-
 bool Joueur::double_symbole(string s){
+    int nb = 0;
     for (int i=0;i<nb_bat;i++)
         if (batiments[i]->type == "Scientifique")
             if (batiments[i]->getSymbole() == s)
-                return true;
-    return false;
+                nb++;
+    return nb>1;
 }
 
-bool Joueur::tirage_jetons(bool en_jeu){
-    if (en_jeu)
-        //Menu d'interface graphique Qt, concernant uniquement les jetons en jeu
-        cout << "pass";
-    else
-        //Menu d'interface graphique Qt, concernant les jetons hors jeu. Appelé seulement par
-        cout << "pass";
-    //appelle la méthode de la classe Jeton_progres correspondante au jeton choisi
+//Cette méthode se charge d'effectuer les effets immédiats d'un jeton progrès.
+//Les autres effets seront gérés par d'autres classes au moment pertinent
+void Joueur::ajouter_jeton(JetonProgres* jeton){
+    if (jeton->nom=="Mathematiques")
+        points+=3;
+    else if (jeton->nom=="Philosophie")
+        points +=7;
+    else if (jeton->nom=="Agriculture"){
+        points += 4;
+        solde+=6;
+    }
+    else if (jeton->nom=="Loi")
+        symboles[balance] = 1;
+    else if (jeton->nom=="Urbanisme")
+        solde+=6;
+    
+    //ajout du jeton
+    jetons[nb_jetons++] = jeton;
 }
 
-void Joueur::action(){
-    /*Menu d'interface graphique.
-     Seuls les batiments accessibles sont disponibles pour le choix.
-    Change le statut de la carte choisie et appelle la méthode accessibilite() de la classe Partie
-    Appelle la methode prix final() de la classe Carte afin de seulement autoriser la construction du batiment et/ou de la merveille si le solde du joueur est assez eleve.
-     Selon le choix, appelle la methode defausser; construire_batiment ou construire_merveille en leur
-     donnant en argument la carte choisie par le joueur */
-}
 
 bool Joueur::prix_fixe(Ressource r){
     for(int i=0;i<nb_bat;i++)
@@ -133,13 +69,10 @@ bool Joueur::prix_fixe(Ressource r){
 //Vaut il mieux rendre la classe Joueur amie de la classe Batiment, ou ajouter plein d'accesseurs à la classe
 //batiment pour que les méthodes de Joueur puissent en modifier les attributs?
 
-void Joueur::defausser(Batiment& bat){
+void Joueur::defausser(Batiment* bat){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
     
-    //Appelle la méthode supprimer(bat) de la classe Partie
-    //Est ce qu'il y a besoin de l'instance de l'objet Partie pour ça
-    
-    bat.setStatut(defausse);
+    bat->st = defausse;
     
     int gain=2;
     for(int i=0;i<nb_bat;i++)
@@ -148,38 +81,51 @@ void Joueur::defausser(Batiment& bat){
     solde += gain;
 }
 
-//Ce serait peut etre plus pratique de faire une enumeration Symbole pour les symboles scientifiques?
-/*On cree un attribut de Joueur de type enum Symbole qui comptabilise les symboles de la meme maniere que
- les batiments comptabilisent les ressources, que l'on met a jour quand on construit un bat scientifique*/
 
-void ajouter_batiment(const Batiment& bat){
+void Joueur::ajouter_batiment(const Batiment* bat){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
+    if (bat == nullptr) return;
+    if (nb_bat == nb_batMax)
+        {
+        const Batiment** newtab = new const Batiment*[(nb_batMax + 1) * 2];
+        for (size_t i = 0; i < nb_bat; i++) newtab[i] = batiments[i];
+        auto old = batiments;       batiments = newtab;   delete[] old;
+        nb_batMax = (nb_batMax + 1) * 2;
+        }
+    batiments[nb_bat++] = bat;
 }
 
-void construire_batiment(const Batiment& bat){
+
+void Joueur::construire_batiment(const Batiment& bat){
     //Si cette methode est appelee, les conditions pour que le joueur construise ce batiment sont reunies,
-    // verification faite par la méthode action()
+    // verification faite par la méthode action() avec prix_final
     
     //Actions générales, communes à tous les bâtiments
     
     ajouter_batiment(bat);
     
-    string type = bat.getType();
-    //L'instruction switch permet de faire toutes les actions spécifiques aux différents types de cartes
-    switch (type) {
-        case "Scientifique":
-            symboles[bat.getSymbole()]+=1;
-            if (nb_symboles()>6) cout << "jsp";/*appeler victoire scientifique. Encore une fois, je ne sais pas comment faire sans l'instance de Partie.*/
-            break;
-        case "Commerce":
-            //Actions sur les ressources
-            cout << "pass";
-            break;
-        case "Civil":
-            points += bat.getPoints();
-            break;
-        case "Ressource"
+    //Faire toutes les actions spécifiques aux différents types de cartes:
+    
+    if (bat.type=="Scientifique"){
+        symboles[bat.getSymbole()]+=1;
+        //Il faudra tester dans la classe Partie :
+        // if (nb_symboles()>6) victoire_scientifique();
+    }else if (bat.type == "Commerce"){
+        //Actions sur les ressources
+        cout << "pass";
+    }else if (bat.type=="Civil"){
+        points += bat.points;
+    } else if (bat.type=="MatierePremiere" || bat.type=="MatiereManufacture"){
+        ressources_prod[bat.ressource] +=1;
+    } else if (bat.type == "Militaire"){
+        instance_de_partie.change_solde_militaire(this,bat.bouclier);
+        //Toujours la même question de comment trouver l'instance de la partie
+        //qu'on est en train de jouer.
+    } else if (type=="Guilde"){
+        //action des cardes Guilde
+        //compliqué
+        cout << "a faire";
     }
-    else if bat.getType()
 }
+
