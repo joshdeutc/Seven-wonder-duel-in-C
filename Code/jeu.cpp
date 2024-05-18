@@ -101,6 +101,16 @@ Jeu::Jeu()
     Civil* civilAutel = new Civil("Autel", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Temple", 3, "Civil", 1);
     Civil* civilBains = new Civil("Bains", 0, 0, 0, 1, 0, 0, 1, false, false, statut, "Aqueduc", 3, "Civil", 1);
     Commerce* commerceTaverne = new Commerce("Taverne", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Phare", 99, 4, 0, 0, 0, 0, 0, 0, "Commerce", 1); // Bizarre
+
+    // Age 2
+        // Sans chainage
+    Matiere_Premiere* matierePremiereScierie = new Matiere_Premiere("Scierie", 2, 0, 0, 0, 0, 0, 2, false, false, statut, "", 2, 0, 0, 0, 0, "Matiere Premiere", 2);
+    Matiere_Premiere* matierePremiereBriqueterie = new Matiere_Premiere("Briqueterie", 2, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 2, 0, 0, 0, "Matiere Premiere", 2);
+    Matiere_Premiere* matierePremiereCarriere = new Matiere_Premiere("Carriere", 2, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 2, 0, 0, "Matiere Premiere", 2);
+    Produit_Manufacture* matierePremiereSoufflerie = new Produit_Manufacture("Soufflerie", 0, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 0, 1, 0, "Produit Manufacture", 2);
+    Produit_Manufacture* matierePremiereSechoir = new Produit_Manufacture("Sechoir", 0, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 0, 0, 1, "Produit Manufacture", 2);
+    Militaire* militaireMuraille = new Militaire("Muraille", 0, 0, 0, 2, 0, 0, 2, false, false, statut, "", 2, "Militaire", 2);
+    Commerce* commerceForum = new Commerce("Forum", 3, 0, 1, 0, 0, 0, 2, false, false, statut, "", 0, 0, 
 }
 
 
