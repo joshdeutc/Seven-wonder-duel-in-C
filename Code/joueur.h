@@ -17,7 +17,7 @@ class Joueur{
     // ******** utilisation d'un tableau par type de batiment, qu'on souhaite remplacer par un seul tableau Batiment** par la suite ******** //
     Commerce ** tab_commerce;
     Matiere_Premiere ** tab_matiere;
-    Matiere_Manufacture ** tab_manufacture;
+    Produit_Manufacture ** tab_manufacture;
     Civil ** tab_civil;
     Scientifique ** tab_scientifique;
     Guilde ** tab_guilde;
@@ -50,7 +50,7 @@ public:
     void choisir_merveille();
     Commerce** get_tab_commerce() const {return tab_commerce;}
     Matiere_Premiere** get_tab_premiere() const {return tab_matiere;}
-    Matiere_Manufacture** get_tab_manufacture() const {return tab_manufacture;}
+    Produit_Manufacture** get_tab_manufacture() const {return tab_manufacture;}
     Civil** get_tab_civil() const {return tab_civil;}
     Scientifique** get_tab_scientifique() const {return tab_scientifique;}
     Guilde** get_tab_guilde() const {return tab_guilde;}

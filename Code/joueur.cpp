@@ -16,7 +16,7 @@ void Joueur::add_carte(const Carte& c){
         nb_bat++;
         nb_pre++;
     }
-    else if(c.get_type_carte()=="Matiere_Manufacture"){
+    else if(c.get_type_carte()=="Produit_Manufacture"){
         while(Jeu.get_tab_carte()[i] && Jeu.get_tab_carte()[i]->get_nom() != c.get_nom())
             i++;
         tab_manufacture[nb_manu]=&(Jeu.get_tab_carte()[i]);

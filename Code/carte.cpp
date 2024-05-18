@@ -39,7 +39,7 @@ int* compter_ressource_matiere_premiere(const Matiere_Premiere** t1){
     return tab;
 }
 
-int* compter_ressource_matiere_manufact(const Matiere_Manufacture** t1){
+int* compter_ressource_matiere_manufact(const Produit_Manufacture** t1){
     int tab[5];
     int j=0;
     while(t1[j]){

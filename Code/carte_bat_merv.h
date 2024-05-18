@@ -109,9 +109,9 @@ public:
     ~Matiere_Premiere()=default;
 };
 
-class Matiere_Manufacture : public Batiment{
+class Produit_Manufacture : public Batiment{
 private :
-//    string type="Matiere_Manufacture";
+//    string type="Produit_Manufacture";
     // Ressources
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
@@ -124,14 +124,14 @@ public:
     int get_nb_pierre() const{return nb_pierre;}
     int get_nb_verre() const{return nb_verre;}
     int get_nb_papyrus() const{return nb_papyrus;}
-    Matiere_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
+    Produit_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                         const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
                         const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
                         const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t,
                         const int &age)
                         : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
                         nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
-    ~Matiere_Manufacture()=default;
+    ~Produit_Manufacture()=default;
 };
 
 

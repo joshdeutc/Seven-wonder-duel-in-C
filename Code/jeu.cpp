@@ -75,6 +75,17 @@ Jeu::Jeu()
     tabCartesMerveille[9] = merveilleStatueDeZeus;
     tabCartesMerveille[10] = merveilleTempleDArtemis;
     tabCartesMerveille[11] = merveilleViaAppia;
+
+    // Cartes Age 1
+    Matiere_Premiere* matierePremiereChantier = new Matiere_Premiere("Chantier", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 1, 0, 0, 0, 0, "Batiment", 1);
+    Matiere_Premiere* matierePremiereExploitation = new Matiere_Premiere("Exploitation", 0, 1, 0, 0, 0, 0, 1, false, false, statut, "", 1, 0, 0, 0, 0, "Batiment", 1);
+    Matiere_Premiere* matierePremiereBassinArgileux = new Matiere_Premiere("Bassin Argileux", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, 0, 0, 0, "Batiment", 1);
+    Matiere_Premiere* matierePremiereCavite = new Matiere_Premiere("Cavité", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, 0, 0, 0, "Batiment", 1);
+    Matiere_Premiere* matierePremiereGisement = new Matiere_Premiere("Gisement", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 1, 0, 0, "Batiment", 1);
+    Matiere_Premiere* matierePremiereMine = new Matiere_Premiere("Mine", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 1, 0, 0, "Batiment", 1);
+    Produit_Manufacture* produitManufactureVerrerie = new Produit_Manufacture("Verrerie", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 0, 1, 0, "Batiment", 1);
+    Produit_Manufacture* produitManufacturePresse = new Produit_Manufacture("Presse", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 0, 0, 1, "Batiment", 1);
+    Militaire* militaireTourDeGarde = new Militaire("Tour de Garde", 
 }
 
 
