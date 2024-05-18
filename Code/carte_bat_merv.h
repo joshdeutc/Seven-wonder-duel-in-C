@@ -15,13 +15,17 @@ enum Ressource{
     papyrus
 };
 
+/* On peut surement supprimer le statut, car c'est seulement une répétition de ce qui est déjà complètement défini
+ par le fait que les cartes sont dans les attributs d'un des joueurs ou d'un plateau. il faut créer un plateau
+ défausse.
 enum statut{
     defausse,
     joueur1,
     joueur2,
     centre
 };
-
+*/
+ 
 enum SymboleScientifique{
     roue,
     plume,
@@ -81,24 +85,21 @@ public:
     Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
              const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
              const bool &ac, const statut &s, const string &c, const string &type,const int& age)
-             : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type,age) , age(a), face_visible(f),
-             accesible(ac), st(s), chainage(c){}
+    : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type,age) , age(a){}
+    
+    /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
+     mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
+     */
     ~Batiment() =default;
 };
 
 class Matiere_Premiere : public Batiment {
 private:
-    unsigned int nb_bois = 0;
-    unsigned int nb_argile = 0;
-    unsigned int nb_pierre = 0;
-    unsigned int nb_verre = 0;
-    unsigned int nb_papyrus = 0;
+    Ressource ressource;
+    unsigned int nb;
 public:
-    int get_nb_bois() const{return nb_bois;}
-    int get_nb_argile() const{return nb_argile;}
-    int get_nb_pierre() const{return nb_pierre;}
-    int get_nb_verre() const{return nb_verre;}
-    int get_nb_papyrus() const{return nb_papyrus;}
+    Ressource get_ressource() const{return ressource;}
+    int get_nb() const{return nb;}
     Matiere_Premiere(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                      const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
                      const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
@@ -106,6 +107,7 @@ public:
                      const int &age)
                      : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
                      nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
+    //Il faut également supprimer du constructeur les trucs inutiles qui seront faits par Plateau
     ~Matiere_Premiere()=default;
 };
 
@@ -113,17 +115,11 @@ class Produit_Manufacture : public Batiment{
 private :
 //    string type="Produit_Manufacture";
     // Ressources
-    unsigned int nb_bois = 0;
-    unsigned int nb_argile = 0;
-    unsigned int nb_pierre = 0;
-    unsigned int nb_verre = 0;
-    unsigned int nb_papyrus = 0;
+    Ressource ressource
+    unsigned int nb = 1; // Optionnel car un bat Produit manufacture ne peut produire qu'un seul truc
 public:
-    int get_nb_bois() const{return nb_bois;}
-    int get_nb_argile() const{return nb_argile;}
-    int get_nb_pierre() const{return nb_pierre;}
-    int get_nb_verre() const{return nb_verre;}
-    int get_nb_papyrus() const{return nb_papyrus;}
+    int get_ressource() const{return ressource;}
+    int get_nb() const{return nb;}
     Produit_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                         const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
                         const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
@@ -131,6 +127,7 @@ public:
                         const int &age)
                         : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
                         nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
+    //Il faut également supprimer du constructeur les trucs inutiles qui seront faits par Plateau
     ~Produit_Manufacture()=default;
 };
 
@@ -141,6 +138,8 @@ private:
     int points;
     int solde_apporte;
     Ressource affecte;
+    //faire les memes choses qu'avec Prod Manu et Mat Prem
+    //mais ici c'est mieux un tableau d'entiers pour mettre plusieurs ressources.
     unsigned int nb_bois = 0;
     unsigned int nb_argile = 0;
     unsigned int nb_pierre = 0;
