@@ -29,7 +29,10 @@ public:
     void fin_age();
     void choix_merveilles();
     void selection_action(Joueur* j); //Fonction que doit faire Joshua. C'est celle qui permet au joueur j de choisir
-    //ce qu'il veut faire (construire un batiment ou une merveille)
+    //ce qu'il veut faire (construire un batiment ou une merveille ou bien défausser.)
+    // Il faut penser à ne pas chercher à modifier les attributs de joueur, mais seulement à permettre au joueur de faire
+    // son choix en prenant bien en compte l'accessibilité des batiments sur le plateau, et aussi à la capacité du joueur
+    //à construire le batiment ou la merveille (avec prix_final)
     // IL EXISTE UNE FONCTION DOUBLE_SYMBOLE(STRING S) DANS LA CLASSE JOUEUR QUI PERMET DE VÉRIFIER SI LE SYMBOLE ENTRÉ
     // EN ARGUMENT EST DÉJÀ DANS LA CITÉ DU JOUEUR!! IL FAUT UTILISER CETTE FONCTION QD ON CONSTRUIT UN BATIMENT
     //SCIENTIFIQUE POUR SAVOIR SI LE JOUEUR PEUT CHOISIR UN JETON!!
