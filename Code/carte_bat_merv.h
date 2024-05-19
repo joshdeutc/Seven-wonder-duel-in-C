@@ -168,7 +168,10 @@ public:
              const unsigned int &cout_verre,const unsigned int &cout_papyrus, 
              const TypeCarte &t,const int &age
              const int &p, const int &solde,
-             const bool &fixe_le_prix, const bool &produit_ressource, bool affecte_ressource[5]);
+             const bool &fixe_le_prix, const bool &produit_ressource, bool affecte_ressource[5]):
+             Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,t,age),
+             points(p),solde_apporte(solde),
+             prix_fixe(fixe_le_prix),production(produit_ressource),affecte(affecte_ressource){}
     ~Commerce()=default;
 };
 
