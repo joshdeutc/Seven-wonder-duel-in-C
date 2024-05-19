@@ -36,6 +36,18 @@ enum SymboleScientifique{
     balance
 };
 
+enum TypeCarte{
+    merveille,
+    matierePremiere,
+    produitManufacture,
+    batimentCivil,
+    batimentScientifique,
+    batimentCommerce,
+    batimentMilitaire,
+    guilde,
+    jetonProgres
+};
+
 class Carte{
 protected:
     string nom;
@@ -45,7 +57,7 @@ protected:
     unsigned int cout_pierre;
     unsigned int cout_verre;
     unsigned int cout_papyrus;
-    string type_carte;
+    TypeCarte type_carte;
     int age; // peux pas depasser 3
 public:
     int prix_final_j1 (const Joueur& j1,const Joueur& j2) const; // on met const pour
@@ -55,9 +67,9 @@ public:
     int prix_final_j2 (const Joueur& j1,const Joueur& j2) const;
     Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
            const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
-           const string &type, const int &age)
+           const TypeCarte &type)
             : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
-            cout_verre(cout_verre), cout_papyrus(cout_papyrus), type_carte(type),age(age){}
+            cout_verre(cout_verre), cout_papyrus(cout_papyrus), type_carte(type){}
     string get_nom() const {return nom;}
     unsigned int get_cout_piece() const {return cout_piece;}
     unsigned int get_cout_bois() const {return cout_bois;}
@@ -83,9 +95,9 @@ public:
     const string& getChainage() const {return chainage;};
     static bool est_chainée(const Joueur&j);
     Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-             const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-             const bool &ac, const statut &s, const string &c, const string &type,const int& age)
-    : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type,age) , age(a){}
+             const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
+            const TypeCarte &type,const int& age)
+    : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,type) , age(a){}
     
     /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
@@ -101,13 +113,13 @@ public:
     Ressource get_ressource() const{return ressource;}
     int get_nb() const{return nb;}
     Matiere_Premiere(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-                     const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-                     const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
-                     const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t,
-                     const int &age)
-                     : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
-                     nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
-    //Il faut également supprimer du constructeur les trucs inutiles qui seront faits par Plateau
+                     const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
+                     const TypeCarte &t,
+                     const int &age,
+                     const Ressource &r, const unsigned int &nbr)
+                     : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,t,age),
+                     ressource(r),nb(nbr) {}
+    
     ~Matiere_Premiere()=default;
 };
 
@@ -121,12 +133,13 @@ public:
     int get_ressource() const{return ressource;}
     int get_nb() const{return nb;}
     Produit_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-                        const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,const int &a, const bool &f,
-                        const bool &ac, const statut &s, const string &c, const unsigned int &nb_bois, const unsigned int &nb_argile,
-                        const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus, const string &t,
-                        const int &age)
-                        : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, a, f, ac, s, c,t,age),
-                        nb_bois(nb_bois), nb_argile(nb_argile), nb_pierre(nb_pierre), nb_verre(nb_verre), nb_papyrus(nb_papyrus) {}
+                        const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
+                        const TypeCarte &t,
+                        const int &age,
+                        const Ressource &r,
+                        const unsigned int &nbr)
+                        : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,t,age),
+                        ressource(r),nb(nbr) {}
     //Il faut également supprimer du constructeur les trucs inutiles qui seront faits par Plateau
     ~Produit_Manufacture()=default;
 };
@@ -137,29 +150,25 @@ private:
 // Ressources
     int points;
     int solde_apporte;
-    Ressource affecte;
-    //faire les memes choses qu'avec Prod Manu et Mat Prem
-    //mais ici c'est mieux un tableau d'entiers pour mettre plusieurs ressources.
-    unsigned int nb_bois = 0;
-    unsigned int nb_argile = 0;
-    unsigned int nb_pierre = 0;
-    unsigned int nb_verre = 0;
-    unsigned int nb_papyrus = 0;
+    bool prix_fixe; //Indique si le batiment fixe le prix d'une ressource (Douane et Depots)
+    bool production; //Indique si le batiment produit une ressource (Forum et Caravanserail)
+    bool affecte[5]; //On pourra verifier si la ressource est affectée en testant affecte[nomRessourceDanslEnum]
 public:
-    int get_nb_bois() const{return nb_bois;}
-    int get_nb_argile() const{return nb_argile;}
-    int get_nb_pierre() const{return nb_pierre;}
-    int get_nb_verre() const{return nb_verre;}
-    int get_nb_papyrus() const{return nb_papyrus;}
+    bool affecte_bois() const{return affecte[bois];}
+    bool affecte_argile() const{return affecte[argile];}
+    bool affecte_pierre() const{return affecte[pierre];}
+    bool affecte_verre() const{return affecte[verre];}
+    bool affecte_papyrus() const{return affecte[papyrus];}
+    bool engendre_prix_fixe() const{return prix_fixe;}
+    bool engendre_production() const{return production;}
     int getPoints() const {return points;}
     int getSolde() const {return solde_apporte;}
     Commerce(const string &n, const unsigned int &cout_piece, const unsigned int &cout_bois,
              const unsigned int &cout_argile, const unsigned int &cout_pierre,
-             const unsigned int &cout_verre,const unsigned int &cout_papyrus, const int &a,const bool &f,
-             const bool &ac, const statut &s, const string &c, const int &p, const int &solde,
-             const Ressource &aff, const unsigned int &nb_bois, const unsigned int &nb_argile,
-             const unsigned int &nb_pierre, const unsigned int &nb_verre, const unsigned int &nb_papyrus,
-             const string &t,const int &age);
+             const unsigned int &cout_verre,const unsigned int &cout_papyrus, 
+             const TypeCarte &t,const int &age
+             const int &p, const int &solde,
+             const bool &fixe_le_prix, const bool &produit_ressource, bool affecte_ressource[5]);
     ~Commerce()=default;
 };
 
