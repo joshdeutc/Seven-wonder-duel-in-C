@@ -32,7 +32,10 @@ public:
     //ce qu'il veut faire (construire un batiment ou une merveille ou bien défausser.)
     // Il faut penser à ne pas chercher à modifier les attributs de joueur, mais seulement à permettre au joueur de faire
     // son choix en prenant bien en compte l'accessibilité des batiments sur le plateau, et aussi à la capacité du joueur
-    //à construire le batiment ou la merveille (avec prix_final)
+    //à construire le batiment ou la merveille (avec prix_final).
+    // Selon le choix qui est fait, il faut appeler la méthode de joueur qui permet de mettre à jour ses attributs (par ex
+    // il existe dans joueur la méthode construire_batiment).
+    // Il faut ensuite mettre à jour le plateau, et les autres attributs de Partie ou autre classe, selon nécessités.
     // IL EXISTE UNE FONCTION DOUBLE_SYMBOLE(STRING S) DANS LA CLASSE JOUEUR QUI PERMET DE VÉRIFIER SI LE SYMBOLE ENTRÉ
     // EN ARGUMENT EST DÉJÀ DANS LA CITÉ DU JOUEUR!! IL FAUT UTILISER CETTE FONCTION QD ON CONSTRUIT UN BATIMENT
     //SCIENTIFIQUE POUR SAVOIR SI LE JOUEUR PEUT CHOISIR UN JETON!!
