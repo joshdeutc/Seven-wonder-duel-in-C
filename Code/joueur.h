@@ -19,7 +19,7 @@ class Joueur{
     int points = 0;
     int solde = 0;
     int ressources_prod[5] = {0,0,0,0,0};
-    int ressources_non_prod[5] = {0,0,0,0,0};
+    int ressources_non_prod[5] = {0,0,0,0,0}; //Pour les cartes Forum et Caravanserail
     int symboles[7] = {0,0,0,0,0,0,0}; //On se servira de l'enum pour acceder aux symboles par leur nom
     int nb_batMax = 10; //Taille du tableau de pointeurs vers batiments
     Batiment* batiments[nb_batMax];
