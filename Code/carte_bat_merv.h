@@ -68,7 +68,7 @@ enum Chainage{
     temple,
     vase,
     tonneau
-}
+};
 
 class Carte{
 protected:
@@ -81,11 +81,12 @@ protected:
     unsigned int cout_papyrus;
     TypeCarte type_carte;
 public:
+    /*
     int prix_final_j1 (const Joueur& j1,const Joueur& j2) const; // on met const pour
                                                                     // que la méthode ne
                                                                     // modifie pas les
                                                                     // attributs
-    int prix_final_j2 (const Joueur& j1,const Joueur& j2) const;
+    int prix_final_j2 (const Joueur& j1,const Joueur& j2) const; */
     Carte(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
            const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus)
             : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
@@ -97,7 +98,7 @@ public:
     unsigned int get_cout_pierre() const {return cout_pierre;}
     unsigned int get_cout_verre() const {return cout_verre;}
     unsigned int get_cout_papyrus() const {return cout_papyrus;}
-    string get_type_carte() const {return type_carte;}
+    TypeCarte get_type_carte() const {return type_carte;}
      ~Carte() =default;
 };
 
@@ -109,15 +110,13 @@ protected:
     Chainage chainageSortant = aucun; //Cette carte permet de construire gratuitement un autre batiment avec le même chaînage
     Chainage chainageEntrant = aucun; //Condition pour construire cette carte gratuitement par chainage
 public:
-    void setStatut(statut s) {st = s;};
-    statut getStatut() const {return st;};
-    void setChainage(const string& c) {chainage = c;};
-    const string& getChainage() const {return chainage;};
-    bool est_chainee(return (chainageSortant!=aucun || chainageEntrant!=aucun););
+    const Chainage& getChainageEntrant() const {return chainageEntrant;};
+    const Chainage& getChainageSortant() const {return chainageSortant;};
+    bool est_chainee(){return (chainageSortant!=aucun || chainageEntrant!=aucun);}
     Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
              const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
-            const int& age, Chainage &chout = aucun, Chainage &chin = aucun)
-    : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus) , age(a),
+            const int& a, const Chainage &chout = aucun, const Chainage &chin = aucun)
+    : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre,cout_papyrus) , age(a),
     chainageSortant(chout),chainageEntrant(chin){}
     
     /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
@@ -137,30 +136,28 @@ public:
                      const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
                      const int &age,
                      const Ressource &r, const unsigned int &nbr,
-                     Chainage &chout = aucun, Chainage &chin = aucun)
+                     const Chainage &chout = aucun, const Chainage &chin = aucun)
                      : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age,chout, chin),
-                     ressource(r),nb(nbr),type(matierePremiere){}
+                     ressource(r),nb(nbr){type_carte=matierePremiere;}
     
     ~Matiere_Premiere()=default;
 };
 
 class Produit_Manufacture : public Batiment{
 private :
-//    string type="Produit_Manufacture";
-    // Ressources
-    Ressource ressource
+    Ressource ressource;
     unsigned int nb = 1; // Optionnel car un bat Produit manufacture ne peut produire qu'un seul truc
 public:
     int get_ressource() const{return ressource;}
     int get_nb() const{return nb;}
     Produit_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                 const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
-                const int &age, 
+                const int &age,
                 const Ressource &r,
                 const unsigned int &nbr,
-                Chainage &chout = aucun, Chainage &chin = aucun)
+                const Chainage &chout = aucun, const Chainage &chin = aucun)
                 : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age,chout,chin),
-                ressource(r),nb(nbr),type(produitManufacture) {}
+                ressource(r),nb(nbr) {type_carte=produitManufacture;}
     ~Produit_Manufacture()=default;
 };
 
@@ -185,18 +182,18 @@ public:
     int getSolde() const {return solde_apporte;}
     Commerce(const string &n, const unsigned int &cout_piece, const unsigned int &cout_bois,
              const unsigned int &cout_argile, const unsigned int &cout_pierre,
-             const unsigned int &cout_verre,const unsigned int &cout_papyrus, 
+             const unsigned int &cout_verre,const unsigned int &cout_papyrus,
              const int &age,
              const int &p, const int &solde,
              const bool &fixe_le_prix, const bool &produit_ressource,
-             const bool &affecte_bois, const bool &affecte_argile, const bool &affecte_pierre, 
+             const bool &affecte_bois, const bool &affecte_argile, const bool &affecte_pierre,
              const bool &affecte_verre, const bool &affecte_papyrus,
-             Chainage &chout = aucun, Chainage &chin = aucun):
+             const Chainage &chout = aucun, const Chainage &chin = aucun):
              Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age,chout,chin),
              points(p),solde_apporte(solde),
-             prix_fixe(fixe_le_prix),production(produit_ressource),
-             type(batimentCommerce)
+             prix_fixe(fixe_le_prix),production(produit_ressource)
              {
+                 type_carte = batimentCommerce;
                 affecte[bois] = affecte_bois;
                 affecte[argile] = affecte_argile;
                 affecte[pierre] = affecte_pierre;
@@ -213,9 +210,9 @@ public:
     int getPoints() const {return points;}
     Civil(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
-           const int& age, const int &p, Chainage &chout = aucun, Chainage &chin = aucun)
-          : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, age, chout,chin), 
-          points(p), type(batimentCivil) {}
+           const int& age, const int &p, const Chainage &chout = aucun, const Chainage &chin = aucun)
+          : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, age, chout,chin),
+           points(p) {type_carte = batimentCivil;}
     ~Civil()=default;
 };
 
@@ -229,9 +226,9 @@ public:
     Scientifique(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                  const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
                  const int& age,
-                  const int &p, const SymboleScientifique &sym,Chainage &chout = aucun, Chainage &chin = aucun)
-                 : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, age, chout,chin), 
-                 points(p), symbole(sym), type(batimentScientifique) {}
+                  const int &p, const SymboleScientifique &sym,const Chainage &chout = aucun, const Chainage &chin = aucun)
+                 : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, age, chout,chin),
+                points(p), symbole(sym) {type_carte=batimentScientifique;}
     ~Scientifique()=default;
 };
 
@@ -244,11 +241,11 @@ public:
     bool getPiece() const {return piece;}
     int getPoints() const {return points;}
     Guilde(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
-           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus, 
+           const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
            const int& age,
-            const bool &p, const int &po, Chainage &chout = aucun, Chainage &chin = aucun)
-           : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age, chout, chin), 
-           piece(p), points(po),type(Guilde) {}
+            const bool &p, const int &po, const Chainage &chout = aucun, const Chainage &chin = aucun)
+           : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age, chout, chin),
+            piece(p), points(po) {type_carte=guilde;}
     ~Guilde()=default;
 };
 
@@ -259,9 +256,9 @@ public:
     int getBouclier() const {return boucliers;}
     Militaire(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
               const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
-              const int& age, const int &b, Chainage &chout = aucun, Chainage &chin = aucun)
-              : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus, t,age, chout, chin), 
-              boucliers(b), type(batimentMilitaire) {}
+              const int& age, const int &b, const Chainage &chout = aucun, const Chainage &chin = aucun)
+              : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age, chout, chin),
+              boucliers(b) {type_carte = batimentMilitaire;}
     ~Militaire()=default;
 };
 
@@ -279,7 +276,7 @@ public:
     int get_nb_pierre() const{return ressources[pierre];}
     int get_nb_verre() const{return ressources[verre];}
     int get_nb_papyrus() const{return ressources[papyrus];}
-    unsigned int * getRessources() const{return ressources;} //Pas sûre que cette ligne fonctionne (conversion tableau en pointeur)
+    const unsigned int* getRessources() const { return ressources; }
     int getPoints() const {return points;}
     int getArgent() const {return argent_app;}
     bool getTirage() const {return tirage_trois_jetons;}
@@ -287,8 +284,8 @@ public:
     Merveille(const string& n, unsigned int cout_piece,
               unsigned int cout_bois, unsigned int cout_argile,
               unsigned int cout_pierre, unsigned int cout_verre,
-              unsigned int cout_papyrus, unsigned int prod_bois, 
-              unsigned int prod_argile, unsigned int prod_pierre, 
+              unsigned int cout_papyrus, unsigned int prod_bois,
+              unsigned int prod_argile, unsigned int prod_pierre,
               unsigned int prod_verre, unsigned int prod_papyrus,
               int pts, int argt, bool tirageJetons) :
         Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus),
@@ -321,14 +318,6 @@ public:
     int getMontantSaccage() const {return montantSaccage;}
 };
 
-JetonMilitaire::JetonMilitaire(/* args */)
-{
-}
-
-JetonMilitaire::~JetonMilitaire()
-{
-}
-
 class JetonProgres : public Jeton
 {
 private:
@@ -346,6 +335,4 @@ JetonProgres::JetonProgres(/* args */)
 JetonProgres::~JetonProgres()
 {
 }
-
-
 #endif
