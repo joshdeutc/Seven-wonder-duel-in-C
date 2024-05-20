@@ -267,7 +267,8 @@ private:
     // Ressources
     unsigned int ressources[NB_RESSOURCES]; // Ressources parmi lesquelles la merveille produit au joueur une unite a chaque tour
     int points;
-    int argent_app;
+    int solde_apporte;
+    int solde_retire_adversaire;
     bool tirage_trois_jetons;
     bool construite = false;
     bool rejouer;
@@ -285,7 +286,8 @@ public:
     int get_nb_papyrus() const{return ressources[papyrus];}
     const unsigned int* getRessources() const { return ressources; }
     int getPoints() const {return points;}
-    int getArgent() const {return argent_app;}
+    int getSoldeApporte() const {return solde_apporte;}
+    int getSoldeRetireAdversaire() const {return solde_retire_adversaire;}
     bool getTirage() const {return tirage_trois_jetons;}
     bool getConstruite() const {return construite;}
     bool getRejouter() const {return rejouer;}
@@ -298,10 +300,11 @@ public:
               unsigned int cout_papyrus, unsigned int prod_bois,
               unsigned int prod_argile, unsigned int prod_pierre,
               unsigned int prod_verre, unsigned int prod_papyrus,
-              int pts, int argt, bool tirageJetons, bool permet_de_rejouer, bool piocher_dans_defausse,
+              int pts, int argt_app, int argt_rtr_adv, bool tirageJetons, bool permet_de_rejouer, bool piocher_dans_defausse,
               bool permet_defausse_adversaire = false, TypeCarte carte_d_adversaire = merveille) :
         Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus),
-        points(pts), argent_app(argt), tirage_trois_jetons(tirageJetons), rejouer(permet_de_rejouer),
+        points(pts), solde_apporte(argt_app), solde_retire_adversaire(argt_rtr_adv),
+        tirage_trois_jetons(tirageJetons), rejouer(permet_de_rejouer),
         pioche_defausse(piocher_dans_defausse),
         defausse_adversaire(permet_defausse_adversaire), carte_defausse_adversaire(carte_d_adversaire)
     {
