@@ -271,6 +271,12 @@ private:
     bool tirage_trois_jetons;
     bool construite = false;
     bool rejouer;
+    bool pioche_defausse;
+    bool defausse_adversaire; // Pas besoin de renseigner ce champ à la construction d'une merveille qui ne permet pas
+                              // de defausser une des cartes de l'adversaire
+    TypeCarte carte_defausse_adversaire; // Cet attribut ne sera pas regarde si defausse_adversaire = false
+                                         // Dans le constructeur on mettra la valeur par défaut à merveille, ce qui n'a pas d'importance
+                                         // si defausse_adversaire est fausse.
 public:
     int get_nb_bois() const{return ressources[bois];}
     int get_nb_argile() const{return ressources[argile];}
@@ -283,15 +289,19 @@ public:
     bool getTirage() const {return tirage_trois_jetons;}
     bool getConstruite() const {return construite;}
     bool getRejouter() const {return rejouer;}
+    bool getPiocheDefausse() const {return pioche_defausse;}
     Merveille(const string& n, unsigned int cout_piece,
               unsigned int cout_bois, unsigned int cout_argile,
               unsigned int cout_pierre, unsigned int cout_verre,
               unsigned int cout_papyrus, unsigned int prod_bois,
               unsigned int prod_argile, unsigned int prod_pierre,
               unsigned int prod_verre, unsigned int prod_papyrus,
-              int pts, int argt, bool tirageJetons, bool permet_de_rejouer) :
+              int pts, int argt, bool tirageJetons, bool permet_de_rejouer, bool piocher_dans_defausse,
+              bool permet_defausse_adversaire = false, TypeCarte carte_d_adversaire = merveille) :
         Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus),
-        points(pts), argent_app(argt), tirage_trois_jetons(tirageJetons), rejouer(permet_de_rejouer)
+        points(pts), argent_app(argt), tirage_trois_jetons(tirageJetons), rejouer(permet_de_rejouer),
+        pioche_defausse(piocher_dans_defausse),
+        defausse_adversaire(permet_defausse_adversaire), carte_defausse_adversaire(carte_d_adversaire)
     {
         ressources[bois] = prod_bois;
         ressources[argile] = prod_argile;
