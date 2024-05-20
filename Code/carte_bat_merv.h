@@ -265,11 +265,12 @@ public:
 class Merveille : public Carte{
 private:
     // Ressources
-    unsigned int ressources[NB_RESSOURCES];
+    unsigned int ressources[NB_RESSOURCES]; // Ressources parmi lesquelles la merveille produit au joueur une unite a chaque tour
     int points;
     int argent_app;
     bool tirage_trois_jetons;
     bool construite = false;
+    bool rejouer;
 public:
     int get_nb_bois() const{return ressources[bois];}
     int get_nb_argile() const{return ressources[argile];}
@@ -281,15 +282,16 @@ public:
     int getArgent() const {return argent_app;}
     bool getTirage() const {return tirage_trois_jetons;}
     bool getConstruite() const {return construite;}
+    bool getRejouter() const {return rejouer;}
     Merveille(const string& n, unsigned int cout_piece,
               unsigned int cout_bois, unsigned int cout_argile,
               unsigned int cout_pierre, unsigned int cout_verre,
               unsigned int cout_papyrus, unsigned int prod_bois,
               unsigned int prod_argile, unsigned int prod_pierre,
               unsigned int prod_verre, unsigned int prod_papyrus,
-              int pts, int argt, bool tirageJetons) :
+              int pts, int argt, bool tirageJetons, bool permet_de_rejouer) :
         Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus),
-        points(pts), argent_app(argt), tirage_trois_jetons(tirageJetons)
+        points(pts), argent_app(argt), tirage_trois_jetons(tirageJetons), rejouer(permet_de_rejouer)
     {
         ressources[bois] = prod_bois;
         ressources[argile] = prod_argile;
