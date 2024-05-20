@@ -290,6 +290,8 @@ public:
     bool getConstruite() const {return construite;}
     bool getRejouter() const {return rejouer;}
     bool getPiocheDefausse() const {return pioche_defausse;}
+    bool getDefausseAdversaire() const {return defausse_adversaire;}
+    TypeCarte getCarteDefausseAdversaire() const {return carte_defausse_adversaire;}
     Merveille(const string& n, unsigned int cout_piece,
               unsigned int cout_bois, unsigned int cout_argile,
               unsigned int cout_pierre, unsigned int cout_verre,
