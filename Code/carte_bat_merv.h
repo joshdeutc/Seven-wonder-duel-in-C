@@ -92,15 +92,56 @@ public:
             : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
             cout_verre(cout_verre), cout_papyrus(cout_papyrus){}
     string get_nom() const {return nom;}
-    unsigned int get_cout_piece() const {return cout_piece;}
-    unsigned int get_cout_bois() const {return cout_bois;}
-    unsigned int get_cout_argile() const {return cout_argile;}
-    unsigned int get_cout_pierre() const {return cout_pierre;}
-    unsigned int get_cout_verre() const {return cout_verre;}
-    unsigned int get_cout_papyrus() const {return cout_papyrus;}
-    TypeCarte get_type_carte() const {return type_carte;}
+    unsigned int getCoutPiece() const {return cout_piece;}
+    unsigned int getCoutBois() const {return cout_bois;}
+    unsigned int getCoutArgile() const {return cout_argile;}
+    unsigned int getCoutPierre() const {return cout_pierre;}
+    unsigned int getCoutVerre() const {return cout_verre;}
+    unsigned int getCoutPapyrus() const {return cout_papyrus;}
+    TypeCarte getTypeCarte() const {return type_carte;}
      ~Carte() =default;
+    
+    
+    /* DECLARATIONS VIRTUELLES DES METHODES D'ACCES AUX ATTRIBUTS DES CLASSES FILLES DE BATIMENT
+            AFIN DE POUVOIR Y ACCEDER A PARTIR D'UN POINTEUR DE TYPE BATIMENT** OU CARTE**      */
+    
+    //Matiere_Premiere et Produit_Manufacture
+    virtual Ressource getRessource() const = 0;
+    virtual int getNb() const = 0;
+    //Commerce
+    virtual bool affecteBois() const = 0;
+    virtual bool affecteArgile() const = 0;
+    virtual bool affectePierre() const = 0;
+    virtual bool affecteVerre() const = 0;
+    virtual bool affectePapyrus() const = 0;
+    virtual bool engendrePrixFixe() const = 0;
+    virtual bool engendreProduction() const = 0;
+    virtual int getPoints() const = 0; //Sert aussi pour Civil, Scientifique, Guilde, Merveille
+    virtual int getSoldeApporte() const = 0; // Sert aussi pour Merveille
+    //Scientifique
+    virtual SymboleScientifique getSymbole() const = 0;
+    //Guilde
+    virtual bool getPiece() const = 0;
+    virtual TypeCarte getTypeCarteAffectee() const = 0;
+    //Militaire
+    virtual int getBoucliers() const = 0;
+    //Merveille
+    virtual const unsigned int* getRessources() const = 0;
+    virtual int getSoldeRetireAdversaire() const = 0;
+    virtual bool getTirage() const = 0;
+    virtual bool getConstruite() const = 0;
+    virtual bool getRejouter() const = 0;
+    virtual bool getPiocheDefausse() const = 0;
+    virtual bool getDefausseAdversaire() const = 0;
+    virtual TypeCarte getCarteDefausseAdversaire() const = 0;
+    
+    // Batiment
+    virtual const Chainage& getChainageEntrant() const = 0;
+    virtual const Chainage& getChainageSortant() const = 0;
+    virtual bool est_chainee() const = 0;
+    
 };
+
 
 class Batiment : public Carte{
 protected:
@@ -112,7 +153,7 @@ protected:
 public:
     const Chainage& getChainageEntrant() const {return chainageEntrant;};
     const Chainage& getChainageSortant() const {return chainageSortant;};
-    bool est_chainee(){return (chainageSortant!=aucun || chainageEntrant!=aucun);}
+    bool est_chainee() const {return (chainageSortant!=aucun || chainageEntrant!=aucun);}
     Batiment(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
              const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
             const int& a, const Chainage &chout = aucun, const Chainage &chin = aucun)
@@ -125,13 +166,15 @@ public:
     ~Batiment() =default;
 };
 
+// On pourra preciser le constructeur en verifiant que le type de ressource entre nest ni verre ni papyrus
 class Matiere_Premiere : public Batiment {
 private:
     Ressource ressource;
     unsigned int nb;
 public:
-    Ressource get_ressource() const{return ressource;}
-    int get_nb() const{return nb;}
+    Ressource getRessource() const{return ressource;}
+    int getNb() const{return nb;}
+    TypeCarte getTypeCarte() const {return type_carte;}
     Matiere_Premiere(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                      const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
                      const int &age,
@@ -148,8 +191,8 @@ private :
     Ressource ressource;
     unsigned int nb = 1; // Optionnel car un bat Produit manufacture ne peut produire qu'un seul truc
 public:
-    int get_ressource() const{return ressource;}
-    int get_nb() const{return nb;}
+    Ressource getRessource() const{return ressource;}
+    int getNb() const{return nb;}
     Produit_Manufacture(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
                 const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
                 const int &age,
@@ -171,15 +214,15 @@ private:
     bool production; //Indique si le batiment produit une ressource (Forum et Caravanserail)
     bool affecte[NB_RESSOURCES]; //On pourra verifier si la ressource est affectée en testant affecte[nomRessourceDanslEnum]
 public:
-    bool affecte_bois() const{return affecte[bois];}
-    bool affecte_argile() const{return affecte[argile];}
-    bool affecte_pierre() const{return affecte[pierre];}
-    bool affecte_verre() const{return affecte[verre];}
-    bool affecte_papyrus() const{return affecte[papyrus];}
-    bool engendre_prix_fixe() const{return prix_fixe;}
-    bool engendre_production() const{return production;}
+    bool affecteBois() const{return affecte[bois];}
+    bool affecteArgile() const{return affecte[argile];}
+    bool affectePierre() const{return affecte[pierre];}
+    bool affecteVerre() const{return affecte[verre];}
+    bool affectePapyrus() const{return affecte[papyrus];}
+    bool engendrePrixFixe() const{return prix_fixe;}
+    bool engendreProduction() const{return production;}
     int getPoints() const {return points;}
-    int getSolde() const {return solde_apporte;}
+    int getSoldeApporte() const {return solde_apporte;}
     Commerce(const string &n, const unsigned int &cout_piece, const unsigned int &cout_bois,
              const unsigned int &cout_argile, const unsigned int &cout_pierre,
              const unsigned int &cout_verre,const unsigned int &cout_papyrus,
@@ -237,15 +280,17 @@ class Guilde : public Batiment{
 private:
     bool piece;
     int points;
+    TypeCarte type_carte_affectee;
 public:
     bool getPiece() const {return piece;}
     int getPoints() const {return points;}
+    TypeCarte getTypeCarteAffectee() const {return type_carte_affectee;}
     Guilde(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
            const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
            const int& age,
-            const bool &p, const int &po, const Chainage &chout = aucun, const Chainage &chin = aucun)
+            const bool &p, const int &po, const TypeCarte &tca, const Chainage &chout = aucun, const Chainage &chin = aucun)
            : Batiment(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre, cout_papyrus,age, chout, chin),
-            piece(p), points(po) {type_carte=guilde;}
+            piece(p), points(po),type_carte_affectee(tca) {type_carte=guilde;}
     ~Guilde()=default;
 };
 
@@ -253,7 +298,7 @@ class Militaire : public Batiment{
 private:
     int boucliers;
 public:
-    int getBouclier() const {return boucliers;}
+    int getBoucliers() const {return boucliers;}
     Militaire(const string& n, const unsigned int &cout_piece, const unsigned int &cout_bois, const unsigned int &cout_argile,
               const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus,
               const int& age, const int &b, const Chainage &chout = aucun, const Chainage &chin = aucun)
@@ -279,11 +324,12 @@ private:
                                          // Dans le constructeur on mettra la valeur par défaut à merveille, ce qui n'a pas d'importance
                                          // si defausse_adversaire est fausse.
 public:
-    int get_nb_bois() const{return ressources[bois];}
-    int get_nb_argile() const{return ressources[argile];}
-    int get_nb_pierre() const{return ressources[pierre];}
-    int get_nb_verre() const{return ressources[verre];}
-    int get_nb_papyrus() const{return ressources[papyrus];}
+    /* Je suis pas sure que ces accesseurs soient necessaires
+    int getNbBois() const{return ressources[bois];}
+    int getNbArgile() const{return ressources[argile];}
+    int getNbPierre() const{return ressources[pierre];}
+    int getNbVerre() const{return ressources[verre];}
+    int getNbPapyrus() const{return ressources[papyrus];} */
     const unsigned int* getRessources() const { return ressources; }
     int getPoints() const {return points;}
     int getSoldeApporte() const {return solde_apporte;}
