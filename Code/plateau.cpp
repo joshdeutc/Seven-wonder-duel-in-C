@@ -2,7 +2,7 @@
 #include "jeu.h"
 #include "utils.h"
 
-PlateauAge::PlateauAge(int Age)
+PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visible, face_cache etc des batiments en fonction de l'age
 {
     switch (Age){
         case 1:{
