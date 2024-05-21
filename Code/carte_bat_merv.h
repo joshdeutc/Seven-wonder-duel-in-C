@@ -3,12 +3,10 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include <random>
-#include "joueur.h"
-#include "partie.h"
 #define NB_RESSOURCES 5
 
 enum Ressource{
+    nul, // Valeur necessaire pour pouvoir retourner nul s'il n'y a pas de ressource
     bois,
     argile,
     pierre,
@@ -28,6 +26,7 @@ enum statut{
 */
  
 enum SymboleScientifique{
+    aucunSymbole, // Valeur necessaire pour pouvoir retourner nul s'il n'y a pas de symbole
     roue,
     plume,
     globe,
@@ -91,14 +90,14 @@ public:
            const unsigned int &cout_pierre, const unsigned int &cout_verre, const unsigned int &cout_papyrus)
             : nom(n), cout_piece(cout_piece), cout_bois(cout_bois), cout_argile(cout_argile), cout_pierre(cout_pierre),
             cout_verre(cout_verre), cout_papyrus(cout_papyrus){}
-    string get_nom() const {return nom;}
+    string getNom() const {return nom;}
     unsigned int getCoutPiece() const {return cout_piece;}
     unsigned int getCoutBois() const {return cout_bois;}
     unsigned int getCoutArgile() const {return cout_argile;}
     unsigned int getCoutPierre() const {return cout_pierre;}
     unsigned int getCoutVerre() const {return cout_verre;}
     unsigned int getCoutPapyrus() const {return cout_papyrus;}
-    TypeCarte getTypeCarte() const {return type_carte;}
+    TypeCarte getType() const {return type_carte;}
      ~Carte() =default;
     
     
@@ -106,28 +105,24 @@ public:
             AFIN DE POUVOIR Y ACCEDER A PARTIR D'UN POINTEUR DE TYPE BATIMENT** OU CARTE**      */
     
     //Matiere_Premiere et Produit_Manufacture
-    virtual Ressource getRessource() const = 0;
-    virtual int getNb() const = 0;
+    virtual Ressource getRessource() const{return nul;};
+    virtual int getNb() const {return 0;}
     //Commerce
-    virtual bool affecteBois() const = 0;
-    virtual bool affecteArgile() const = 0;
-    virtual bool affectePierre() const = 0;
-    virtual bool affecteVerre() const = 0;
-    virtual bool affectePapyrus() const = 0;
-    virtual bool engendrePrixFixe() const = 0;
-    virtual bool engendreProduction() const = 0;
-    virtual int getPoints() const = 0; //Sert aussi pour Civil, Scientifique, Guilde, Merveille
-    virtual int getSoldeApporte() const = 0; // Sert aussi pour Merveille
+    virtual const bool* getRessourcesAffectees() const {return nullptr;}
+    virtual bool engendrePrixFixe() const {return false;}
+    virtual bool engendreProduction() const {return false;}
+    virtual int getPoints() const {return 0;} //Sert aussi pour Civil, Scientifique, Guilde, Merveille
+    virtual int getSoldeApporte() const {return 0;} // Sert aussi pour Merveille
     //Scientifique
-    virtual SymboleScientifique getSymbole() const = 0;
+    virtual SymboleScientifique getSymbole() const {return aucunSymbole;}
     //Guilde
     virtual bool getPiece() const = 0;
     virtual TypeCarte getTypeCarteAffectee() const = 0;
     //Militaire
-    virtual int getBoucliers() const = 0;
+    virtual int getBoucliers() const {return 0;}
     //Merveille
     virtual const unsigned int* getRessources() const = 0;
-    virtual int getSoldeRetireAdversaire() const = 0;
+    virtual int getSoldeRetireAdversaire() const {return 0;}
     virtual bool getTirage() const = 0;
     virtual bool getConstruite() const = 0;
     virtual bool getRejouter() const = 0;
@@ -212,13 +207,9 @@ private:
     int solde_apporte;
     bool prix_fixe; //Indique si le batiment fixe le prix d'une ressource (Douane et Depots)
     bool production; //Indique si le batiment produit une ressource (Forum et Caravanserail)
-    bool affecte[NB_RESSOURCES]; //On pourra verifier si la ressource est affectée en testant affecte[nomRessourceDanslEnum]
+    bool affecte[NB_RESSOURCES+1]; //On pourra verifier si la ressource est affectée en testant affecte[nomRessourceDanslEnum]
 public:
-    bool affecteBois() const{return affecte[bois];}
-    bool affecteArgile() const{return affecte[argile];}
-    bool affectePierre() const{return affecte[pierre];}
-    bool affecteVerre() const{return affecte[verre];}
-    bool affectePapyrus() const{return affecte[papyrus];}
+    const bool* getRessourcesAffectees() const { return affecte; }
     bool engendrePrixFixe() const{return prix_fixe;}
     bool engendreProduction() const{return production;}
     int getPoints() const {return points;}
@@ -310,7 +301,7 @@ public:
 class Merveille : public Carte{
 private:
     // Ressources
-    unsigned int ressources[NB_RESSOURCES]; // Ressources parmi lesquelles la merveille produit au joueur une unite a chaque tour
+    unsigned int ressources[NB_RESSOURCES+1]; // Ressources parmi lesquelles la merveille produit au joueur une unite a chaque tour
     int points;
     int solde_apporte;
     int solde_retire_adversaire;
