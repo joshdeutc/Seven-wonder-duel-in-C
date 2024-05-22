@@ -11,6 +11,8 @@ int main(int argc, char const *argv[])
 
     // Fermeture du jeu
     j->freeInstance();
+
+    //modif
     
     return 0;
 }
