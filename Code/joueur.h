@@ -36,8 +36,7 @@ public:
     void action();
     bool prix_fixe(Ressource r);
     void defausser(Batiment* bat);
-    void construire_batiment();
-    bool possede_chainage(string Nom_Chaine);
+    void construire_batiment(const Batiment& bat);
     void construire_merveille();
     int get_couleur(couleur1,couleur2);
     void choisir_merveille();

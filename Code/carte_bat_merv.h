@@ -139,6 +139,9 @@ public:
     virtual const Chainage& getChainageEntrant() const = 0;
     virtual const Chainage& getChainageSortant() const = 0;
     virtual bool est_chainee() const = 0;
+    virtual bool set_accessible(bool ac) = 0;
+    virtual bool set_face_visible(bool f) = 0;
+    virtual bool get_accessible() const = 0;
     
 };
 
@@ -159,10 +162,14 @@ public:
             const int& a, const Chainage &chout = aucun, const Chainage &chin = aucun)
     : Carte(n, cout_piece, cout_bois, cout_argile, cout_pierre, cout_verre,cout_papyrus) , age(a),
     chainageSortant(chout),chainageEntrant(chin){}
+
     
     /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
      */
+    bool set_accessible(bool ac) {accesible = ac;}
+    bool set_face_visible(bool f) {face_visible = f;}
+    bool get_accessible() const {return accesible;}
     ~Batiment() =default;
 };
 

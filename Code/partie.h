@@ -28,7 +28,13 @@ public:
     void tour_suivant();
     void fin_age();
     void choix_merveilles();
-    void selection_action(Joueur* j); //Fonction que doit faire Joshua. C'est celle qui permet au joueur j de choisir
+    void victoire_scientifique(Joueur j);
+    void change_solde_militaire(signed int nb_boucliers);
+    void victoire_militaire();
+    void victoire_civile();
+
+    // pour faire une action avec un joueur
+    void selection_action(Joueur &j,PlateauAge &platage); //Fonction que doit faire Joshua. C'est celle qui permet au joueur j de choisir
     //ce qu'il veut faire (construire un batiment ou une merveille ou bien défausser.)
     // Il faut penser à ne pas chercher à modifier les attributs de joueur, mais seulement à permettre au joueur de faire
     // son choix en prenant bien en compte l'accessibilité des batiments sur le plateau, et aussi à la capacité du joueur
@@ -44,10 +50,6 @@ public:
     //identique à un de ceux qu'il a déjà dans sa cité). Cette fonction permet donc au joueur de sélectionner le jeton
     //qu'il souhaite. Il faut que cette méthode appelle la méthode de joueur ajouter_jeton() une fois le jeton choisi
     // car cette méthode de joueur s'occupe de mettre ses attributs à jour.
-    void victoire_scientifique(Joueur j);
-    void change_solde_militaire(signed int nb_boucliers);
-    void victoire_militaire();
-    void victoire_civile();
 };
 
 #endif

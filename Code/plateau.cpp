@@ -38,6 +38,29 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             for (int i = 0; i < 20; ++i) {
                 cartes[i] = Jeu::getInstance()->tabCartesAge1[indicesSelectionnes[i]];
             }
+
+            // initialisationd des cartes face visible et accessible
+            for(int i=0;i<6;i++){
+                cartes[i]->set_accessible(true);
+            }
+            for(int i=6;i<20;i++){
+                cartes[i]->set_accessible(false);
+            }
+            for(int i=0;i<6;i++){
+                cartes[i]->set_face_visible(true);
+            }
+            for(int i=6;i<11;i++){
+                cartes[i]->set_face_visible(false);
+            }
+            for(int i=11;i<15;i++){
+                cartes[i]->set_face_visible(true);
+            }
+            for(int i=15;i<18;i++){
+                cartes[i]->set_face_visible(false);
+            }
+            for(int i=18;i<20;i++){
+                cartes[i]->set_face_visible(true);
+            }
             break;}
         case 2:{
             // Initialiser la graine de la fonction rand()
@@ -71,6 +94,30 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             // Copie des cartes sélectionnées dans le tableau du plateau
             for (int i = 0; i < 20; ++i) {
                 cartes[i] = Jeu::getInstance()->tabCartesAge2[indicesSelectionnes[i]];
+            }
+
+            // initialisationd des cartes face visible et accessible
+            for(int i=0;i<2;i++){
+                cartes[i]->set_accessible(true);
+            }
+            for(int i=2;i<20;i++){
+                cartes[i]->set_accessible(false);
+            }
+            for(int i=0;i<2;i++){
+                cartes[i]->set_face_visible(true);
+                etage1.push_back(cartes[i]);
+            }
+            for(int i=2;i<5;i++){
+                cartes[i]->set_face_visible(false);
+            }
+            for(int i=5;i<9;i++){
+                cartes[i]->set_face_visible(true);
+            }
+            for(int i=9;i<14;i++){
+                cartes[i]->set_face_visible(false);
+            }
+            for(int i=14;i<20;i++){
+                cartes[i]->set_face_visible(true);
             }
             break;}
         case 3:{
@@ -148,6 +195,28 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
                     ++indiceAge3;
                 }
             }
+            for(int i=0;i<2;i++){
+                cartes[i]->set_accessible(true);
+            }
+            for(int i=2;i<20;i++){
+                cartes[i]->set_accessible(false);
+            }
+            for(int i=0;i<2;i++){
+                cartes[i]->set_face_visible(true);
+            }
+            for(int i=2;i<5;i++){
+                cartes[i]->set_face_visible(false);
+            }
+            for(int i=5;i<9;i++){
+                cartes[i]->set_face_visible(true);
+            }
+            for(int i=9;i<11;i++){
+                cartes[i]->set_face_visible(false);
+            }
+            for(int i=11;i<15;i++){
+                cartes[i]->set_face_visible(true);
+            }
+
             break;
             
         }
@@ -161,6 +230,10 @@ PlateauAge::~PlateauAge()
     delete[] cartes;
 }
 
+
+void PlateauAge::addDefausse(Batiment *batiment) {
+    defausses.push_back(batiment);
+}
 
 PlateauMerveille::PlateauMerveille()
 {
@@ -183,19 +256,174 @@ PlateauMerveille::~PlateauMerveille()
     delete[] cartesDeuxiemePhase;
 }
 
-PlateauJetonMilit::PlateauJetonMilit()
-{
-    JetonProgres** JetonProgres = new JetonProgres*[5];
+PlateauJetonMilit::PlateauJetonMilit() {
+    JetonProgres * *JetonProgres = new JetonProgres *[5];
     // Génération d'un tableau de 5 entiers distincts aléatoires
     std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
     for (int i = 0; i < 5; ++i) {
         JetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
     }
-    
-    JetonMilitaire** JetonsMilitaires = new JetonMilitaire*[4];
-    for (unsigned int i = 0; i < 4; i++)
-    {
+
+    JetonMilitaire **JetonsMilitaires = new JetonMilitaire *[4];
+    for (unsigned int i = 0; i < 4; i++) {
         JetonsMilitaires[i] = Jeu::getInstance()->getTabJetonMilitaire()[i];
     }
-    
 }
+
+// ******************** PARTIE ACTION JOUEUR ******************//
+
+
+vector<Batiment *>  PlateauAge::trouver_etage_age1(int& choix){
+    if(0<=choix && choix<=5){
+        return etage1;
+    }
+    else if(6<=choix && choix<=10){
+        return etage2;
+    }
+    else if(11<=choix && choix<=14){
+        return etage3;
+    }
+    else if(15<=choix && choix<=17){
+        return etage4;
+    }
+    else if(18<=choix && choix<=19){
+        return etage5;
+    }
+}
+
+vector<Batiment *>  PlateauAge::trouver_etage_age2(int &choix){
+    if(0<=choix && choix<=1){
+        return etage1;
+    }
+    if(2<=choix && choix<=4){
+        return etage2;
+    }
+    if(5<=choix && choix<=8){
+        return etage3;
+    }
+    if(9<=choix && choix<=13){
+        return etage4;
+    }
+    if(14<=choix && choix<=19){
+        return etage5;
+    }
+}
+
+bool PlateauAge::deviens_accessible_age1(int &choix){
+    vector<Batiment *> etage = trouver_etage_age1(choix);
+    int pere1,pere2;
+    if(etage==etage5){
+        return false;
+    }
+    if(getCartes()[choix] == etage[0]){
+        pere1=choix+etage.size();
+        if(getCartes()[choix+1]==nullptr){
+            getCartes()[pere1]->set_accessible(true);
+            return true;
+        }
+        else return false;
+    }
+    if(getCartes()[choix] == etage[etage.size()]){
+        pere1=choix+etage.size()-1;
+        if(getCartes()[choix-1]==nullptr){
+            getCartes()[pere1]->set_accessible(true);
+            return true;
+        }
+        else return false;
+    }
+    else{
+        pere1=choix+etage.size();
+        pere2=choix+etage.size()-1;
+        if(getCartes()[choix+1]==nullptr){
+            getCartes()[pere1]->set_accessible(true);
+        }
+        if(getCartes()[choix-1]==nullptr){
+            getCartes()[pere2]->set_accessible(true);
+        }
+        if(getCartes()[choix+1]==nullptr || getCartes()[choix-1]==nullptr){
+            return true;
+        }
+        else return false;
+    }
+}
+
+bool PlateauAge::deviens_accessible_age2(int &choix) {
+    vector <Batiment *> etage = trouver_etage_age2(choix);
+    int pere1 = choix + etage.size();
+    int pere2 = choix + etage.size() + 1;
+    if(etage==etage5){
+        return false;
+    }
+    if(getCartes()[choix] == etage[0]){
+        getCartes()[pere2]->set_accessible(true);
+        if(getCartes()[choix+1]==nullptr){
+            getCartes()[pere1]->set_accessible(true);
+        }
+        return true;
+    }
+    if(getCartes()[choix]==etage[etage.size()]) {
+        getCartes()[pere1]->set_accessible(true);
+        if (getCartes()[choix - 1] == nullptr) {
+            getCartes()[pere2]->set_accessible(true);
+        }
+        return true;
+    }
+    else{
+        if(getCartes()[choix+1]==nullptr){
+            getCartes()[pere1]->set_accessible(true);
+        }
+        if(getCartes()[choix-1]==nullptr){
+            getCartes()[pere2]->set_accessible(true);
+        }
+        if(getCartes()[choix+1]==nullptr || getCartes()[choix-1]==nullptr){
+            return true;
+        }
+        else return false;
+    }
+}
+
+void PlateauAge::mettre_a_jour_etage_age1(){
+    for(int i=0;i<6;i++){
+        etage1.push_back(getCartes()[i]);
+    }
+    for(int i=6;i<11;i++){
+        etage2.push_back(getCartes()[i]);
+    }
+    for(int i=11;i<15;i++){
+        etage3.push_back(getCartes()[i]);
+    }
+    for(int i=15;i<18;i++){
+        etage4.push_back(getCartes()[i]);
+    }
+    for(int i=18;i<20;i++){
+        etage5.push_back(getCartes()[i]);
+    }
+}
+
+void PlateauAge::mettre_a_jour_etage_age2(){
+    for(int i=0;i<2;i++){
+        etage1.push_back(getCartes()[i]);
+    }
+    for(int i=2;i<5;i++){
+        etage2.push_back(getCartes()[i]);
+    }
+    for(int i=5;i<9;i++){
+        etage3.push_back(getCartes()[i]);
+    }
+    for(int i=9;i<14;i++){
+        etage4.push_back(getCartes()[i]);
+    }
+    for(int i=14;i<20;i++){
+        etage5.push_back(getCartes()[i]);
+    }
+}
+
+void PlateauAge::accessibilite(){
+    for(int i=0;i<20;i++){
+        if(getCartes()[i]->get_accessible() == true){
+            cout<<"n°"<<i;
+            getCartes()[i]->afficher_batiment();
+        }
+    }
+}
+
