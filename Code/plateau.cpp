@@ -109,15 +109,19 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             }
             for(int i=2;i<5;i++){
                 cartes[i]->set_face_visible(false);
+                etage2.push_back(cartes[i]);
             }
             for(int i=5;i<9;i++){
                 cartes[i]->set_face_visible(true);
+                etage3.push_back(cartes[i]);
             }
             for(int i=9;i<14;i++){
                 cartes[i]->set_face_visible(false);
+                etage4.push_back(cartes[i]);
             }
             for(int i=14;i<20;i++){
                 cartes[i]->set_face_visible(true);
+                etage5.push_back(cartes[i]);
             }
             break;}
         case 3:{
@@ -203,22 +207,33 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             }
             for(int i=0;i<2;i++){
                 cartes[i]->set_face_visible(true);
+                etage1.push_back(cartes[i]);
             }
             for(int i=2;i<5;i++){
                 cartes[i]->set_face_visible(false);
+                etage2.push_back(cartes[i]);
             }
             for(int i=5;i<9;i++){
                 cartes[i]->set_face_visible(true);
+                etage3.push_back(cartes[i]);
             }
             for(int i=9;i<11;i++){
                 cartes[i]->set_face_visible(false);
+                etage4.push_back(cartes[i]);
             }
             for(int i=11;i<15;i++){
                 cartes[i]->set_face_visible(true);
+                etage5.push_back(cartes[i]);
             }
-
+            for(int i=15;i<18;i++){
+                cartes[i]->set_face_visible(false);
+                etage6.push_back(cartes[i]);
+            }
+            for(int i=18;i<20;i++){
+                cartes[i]->set_face_visible(true);
+                etage7.push_back(cartes[i]);
+            }
             break;
-            
         }
             
     }
@@ -309,6 +324,7 @@ vector<Batiment *>  PlateauAge::trouver_etage_age2(int &choix){
     }
 }
 
+
 bool PlateauAge::deviens_accessible_age1(int &choix){
     vector<Batiment *> etage = trouver_etage_age1(choix);
     int pere1,pere2;
@@ -379,42 +395,6 @@ bool PlateauAge::deviens_accessible_age2(int &choix) {
             return true;
         }
         else return false;
-    }
-}
-
-void PlateauAge::mettre_a_jour_etage_age1(){
-    for(int i=0;i<6;i++){
-        etage1.push_back(getCartes()[i]);
-    }
-    for(int i=6;i<11;i++){
-        etage2.push_back(getCartes()[i]);
-    }
-    for(int i=11;i<15;i++){
-        etage3.push_back(getCartes()[i]);
-    }
-    for(int i=15;i<18;i++){
-        etage4.push_back(getCartes()[i]);
-    }
-    for(int i=18;i<20;i++){
-        etage5.push_back(getCartes()[i]);
-    }
-}
-
-void PlateauAge::mettre_a_jour_etage_age2(){
-    for(int i=0;i<2;i++){
-        etage1.push_back(getCartes()[i]);
-    }
-    for(int i=2;i<5;i++){
-        etage2.push_back(getCartes()[i]);
-    }
-    for(int i=5;i<9;i++){
-        etage3.push_back(getCartes()[i]);
-    }
-    for(int i=9;i<14;i++){
-        etage4.push_back(getCartes()[i]);
-    }
-    for(int i=14;i<20;i++){
-        etage5.push_back(getCartes()[i]);
     }
 }
 

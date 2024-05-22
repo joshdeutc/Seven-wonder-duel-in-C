@@ -130,6 +130,8 @@ public:
     virtual const Chainage& getChainageEntrant() const = 0;
     virtual const Chainage& getChainageSortant() const = 0;
     virtual bool est_chainee() const = 0;
+    virtual bool set_accessible(bool f);
+    virtual bool set_face_visible(bool v);
 };
 
 class Batiment : public Carte {
@@ -143,7 +145,8 @@ public:
     const Chainage& getChainageEntrant() const override { return chainageEntrant; }
     const Chainage& getChainageSortant() const override { return chainageSortant; }
     bool est_chainee() const override { return (chainageSortant != aucun || chainageEntrant != aucun); }
-
+    bool set_accessible(bool f) override { accesible = f;  }
+    bool set_face_visible(bool v) override { face_visible = v; }
        /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      dans le constructeur mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
      */

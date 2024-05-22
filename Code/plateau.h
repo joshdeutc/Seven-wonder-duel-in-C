@@ -47,8 +47,6 @@ public:
     const vector<Batiment*>& getDefausses() const { return defausses; }
     void addDefausse(Batiment *batiment);
     void accessibilite();
-    void mettre_a_jour_etage_age1();
-    void mettre_a_jour_etage_age2();
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);
     vector<Batiment *>  trouver_etage_age1(int& choix);
