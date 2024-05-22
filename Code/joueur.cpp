@@ -7,27 +7,30 @@
 Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     type = type_joueur;
     id = identifiant;
+    cartes = new const Carte*[nb_cartesMax];
     //points, solde et ressources sont deja initialisees
-    for(int i=0;i<nb_batMax;i++) batiments[i]=nullptr;
-    for(int i=0;i<7;i++) merveilles[i]=nullptr;
+    for(int i=0;i<nb_cartesMax;i++) cartes[i]=nullptr;
     for(int i=0;i<NB_JETONS;i++) jetons[i] = nullptr;
 }
 
-Joueur::~Joueur(
+Joueur::~Joueur(){
+    delete[] cartes;
+}
 
-int Joueur::nb_symboles() const{
+int Joueur::nbSymboles() const{
     int nb=0;
-    for(int i=0; i<(NB_SYMB) ; i++){
+    for(int i=1; i<(NB_SYMB) ; i++){
         if (symboles[i]>1) nb++;
     }
     return nb;
 }
 
-bool Joueur::double_symbole(string s){
+bool Joueur::doubleSymbole(SymboleScientifique s){
+    if (s == aucunSymbole) return false;
     int nb = 0;
-    for (int i=0;i<nb_bat;i++)
-        if (batiments[i]->type == "Scientifique")
-            if (batiments[i]->getSymbole() == s)
+    for (int i=0;i<nb_cartes;i++)
+        if (cartes[i]->getType() == batimentScientifique)
+            if (cartes[i]->getSymbole()== s)
                 nb++;
     return nb>1;
 }
@@ -35,57 +38,42 @@ bool Joueur::double_symbole(string s){
 //Cette méthode se charge d'effectuer les effets immédiats d'un jeton progrès.
 //Les autres effets seront gérés par d'autres classes au moment pertinent
 void Joueur::ajouter_jeton(JetonProgres* jeton){
-    if (jeton->nom=="Mathematiques")
-        points+=3;
-    else if (jeton->nom=="Philosophie")
-        points +=7;
-    else if (jeton->nom=="Agriculture"){
-        points += 4;
-        solde+=6;
-    }
-    else if (jeton->nom=="Loi")
-        symboles[balance] = 1;
-    else if (jeton->nom=="Urbanisme")
-        solde+=6;
+    points+=jeton->getPoints();
+    solde+=jeton->getSoldeApporte();
+    if(jeton->getSymbole()!=aucunSymbole) symboles[jeton->getSymbole()]=1;
     
-    //ajout du jeton
+    //ajout du jeton aux attributs du joueur
     jetons[nb_jetons++] = jeton;
 }
 
 
+// Cette fonction renvoie vrai si la ressource r est au prix fixe de 1 piece pour le joueur
 bool Joueur::prix_fixe(Ressource r){
-    for(int i=0;i<nb_bat;i++)
-        if(batiments[i]->getType()=="Commerce")
-            if(batiments[i]->getAffecte()==r) // Il faut un accesseur en lecture dans classe commerce
-                                              // Vérifier qu'on peut faire ça avec un type enum
+    for(int i=0;i<nb_cartes;i++)
+        if(cartes[i]->getType()==batimentCommerce)
+            if(cartes[i]->engendrePrixFixe() && cartes[i]->getRessourcesAffectees()[r])
                 return true;
     return false;
 }
 
-//Il faudrait ajouter une methode supprimer(carte) a la classe Partie pour l'enlever du tableau disposition
-/*Il faudrait peut etre aussi creer une classe defausse? Qui aurait un attributs pointeur sur les cartes presentes en defausse? Ce sera surement plus simple pour l'affichage que de faire le tour de toutes les cartes pour vérifier si elles sont en defausse ou non?? */
-//Ajouter un accesseur en ecriture setStatut à la classe Batiment
+//Il faudrait ajouter une methode supprimer(carte) a la classe Partie pour l'enlever du plateau
 
-//Vaut il mieux rendre la classe Joueur amie de la classe Batiment, ou ajouter plein d'accesseurs à la classe
-//batiment pour que les méthodes de Joueur puissent en modifier les attributs?
-
-void Joueur::defausser(Batiment* bat){
+//Cette fonction met seulement a jour les attributs de Joueur lors de la defausse.
+//Il faut une methode de Partie qui permet de placer un batiment sur le plateau defausse (avec une methode du plateau defausse ajouter)
+//ainsi que le retirer du plateau Age
+void Joueur::defausser(){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
-    
-    bat->st = defausse;
     
     int gain=2;
     for(int i=0;i<nb_bat;i++)
-        if (bat[i]->getType() == "Commerce")
+        if (batiments[i]->getType() == batimentCommerce)
             gain+=2;
     solde += gain;
 }
 
-
-void Joueur::ajouter_batiment(const Batiment* bat){
+void Joueur::ajouter_carte(const Carte& c){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
-    if (bat == nullptr) return;
     if (nb_bat == nb_batMax)
         {
         const Batiment** newtab = new const Batiment*[(nb_batMax + 1) * 2];
@@ -93,7 +81,7 @@ void Joueur::ajouter_batiment(const Batiment* bat){
         auto old = batiments;       batiments = newtab;   delete[] old;
         nb_batMax = (nb_batMax + 1) * 2;
         }
-    batiments[nb_bat++] = bat;
+    cartes[nb_bat++] = &bat;
 }
 
 
@@ -103,15 +91,14 @@ void Joueur::construire_batiment(const Batiment& bat){
     
     //Actions générales, communes à tous les bâtiments
     
-    ajouter_batiment(bat);
-    
     //Faire toutes les actions spécifiques aux différents types de cartes:
     
-    if (bat.type=="Scientifique"){
-        symboles[bat.getSymbole()]+=1;
+    if (c.getType()==batimentScientifique){
+        symboles[c.getSymbole()]+=1;
+        ajouter_batiment(c);
         //Il faudra tester dans la classe Partie :
         // if (nb_symboles()>6) victoire_scientifique();
-    }else if (bat.type == "Commerce"){
+    }else if (bat.getType() == batimentCommerce){
         //Actions sur les ressources
         cout << "pass";
     }else if (bat.type=="Civil"){
