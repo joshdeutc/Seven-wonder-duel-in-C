@@ -65,8 +65,8 @@ void Joueur::defausser(){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
     
     int gain=2;
-    for(int i=0;i<nb_bat;i++)
-        if (batiments[i]->getType() == batimentCommerce)
+    for(int i=0;i<nb_cartes;i++)
+        if (cartes[i]->getType() == batimentCommerce)
             gain+=2;
     solde += gain;
 }
@@ -74,14 +74,14 @@ void Joueur::defausser(){
 void Joueur::ajouter_carte(const Carte& c){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
-    if (nb_bat == nb_batMax)
+    if (nb_cartes == nb_cartesMax)
         {
-        const Batiment** newtab = new const Batiment*[(nb_batMax + 1) * 2];
-        for (size_t i = 0; i < nb_bat; i++) newtab[i] = batiments[i];
-        auto old = batiments;       batiments = newtab;   delete[] old;
-        nb_batMax = (nb_batMax + 1) * 2;
+        const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
+        for (size_t i = 0; i < nb_cartes; i++) newtab[i] = cartes[i];
+        auto old = cartes;       cartes = newtab;   delete[] old;
+        nb_cartesMax = (nb_cartesMax + 1) * 2;
         }
-    cartes[nb_bat++] = &bat;
+    cartes[nb_cartes++] = &c;
 }
 
 
