@@ -85,24 +85,27 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
                 // ( je ne sais pas si construire batiment le fais ** voir chloe**)
-                j.construire_batiment(platage.getCartes()[choix1]);
+                j.construire_carte(platage.getCartes()[choix1]);
                 //mettre a jour le plateau
-                platage.deviens_accessible_age1(choix1);
-                //enlever la carte du plateau
-                platage.getCartes()[choix]=nullptr;
+               platage.destruction_carte_plateau_age1(choix1);
             }
             if(age==2){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
                 // ( je ne sais pas si construire batiment le fais ** voir chloe**)
-                j.construire_batiment(platage.getCartes()[choix1]);
+                j.construire_carte(platage.getCartes()[choix1]);
                 //mettre a jour le plateau
-                platage.deviens_accessible_age2(choix1);
-                //enlever la carte du plateau
-                platage.getCartes()[choix]=nullptr;
+                platage.destruction_carte_plateau_age2(choix1);
             }
-            if(age==3){}
+            if(age==3){
+                cout<<"choisissser un batiment a construire"<<endl;
+                int choix1;cin>>choix1;
+                // il faut vérifier avant si l'on a les ressources nécessaire
+                j.construire_carte(platage.getCartes()[choix1]);
+                //mettre a jour le plateau
+                platage.destruction_carte_plateau_age3(choix1);
+            }
             break;
 
         case 2:
@@ -114,9 +117,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 // ( je ne sais pas si construire batiment le fais ** voir chloe**)
                 j.construire_merveille(platage.getCartes()[choix1]);
                 //mettre a jour le plateau
-                platage.deviens_accessible_age1(choix1);
-                //enlever la carte du plateau
-                platage.getCartes()[choix]=nullptr;
+                platage.destruction_carte_plateau_age1(choix1);
             }
             if(age==2){
                 cout<<"choisissser une merveille a construire"<<endl;
@@ -125,11 +126,17 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 // ( il faut une méthode construire une merveille ** voir chloe**)
                 j.construire_merveille(platage.getCartes()[choix1]);
                 //mettre a jour le plateau
-                platage.deviens_accessible_age2(choix1);
-                //enlever la carte du plateau
-                platage.getCartes()[choix]=nullptr;
+                platage.destruction_carte_plateau_age2(choix1);
             }
-            if(age==3){}
+            if(age==3){
+                cout<<"choisissser une merveille a construire"<<endl;
+                int choix1;cin>>choix1;
+                // il faut vérifier avant si l'on a les ressources nécessaire
+                // ( il faut une méthode construire une merveille ** voir chloe**)
+                j.construire_merveille(platage.getCartes()[choix1]);
+                //mettre a jour le plateau
+                platage.destruction_carte_plateau_age3(choix1);
+            }
             break;
         case 3 :
             //defausser une carte
@@ -137,25 +144,27 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
             int choix1;cin>>choix1;
             if(age==1){
                 // defausser
-                j.defausser(platage.getCartes()[choix1]);
+                platage.addDefausse(platage.getCartes()[choix1]);
                 // augmenter le solde du joueur
-
+                j.defausser();
                 //mettre a jour le plateau
-                platage.deviens_accessible_age1(choix1);
-                //enlever la carte du plateau
-                platage.getCartes()[choix]=nullptr;
+                platage.destruction_carte_plateau_age1(choix1);
             }
             if(age==2){
                 // defausser
-                j.defausser(platage.getCartes()[choix1]);
+                platage.addDefausse(platage.getCartes()[choix1]);
                 // augmenter le solde du joueur
-
+                j.defausser();
                 //mettre a jour le plateau
-                platage.deviens_accessible_age2(choix1);
-                //enlever la carte du plateau
-                platage.getCartes()[choix]=nullptr;
+                platage.destruction_carte_plateau_age2(choix1);
             }
             if(age==3){
+                // defausser
+                platage.addDefausse(platage.getCartes()[choix1]);
+                // augmenter le solde du joueur
+                j.defausser();
+                //mettre a jour le plateau
+                platage.destruction_carte_plateau_age3(choix1);
             }
             break;
     }

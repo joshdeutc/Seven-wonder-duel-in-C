@@ -324,6 +324,29 @@ vector<Batiment *>  PlateauAge::trouver_etage_age2(int &choix){
     }
 }
 
+vector<Batiment *> PlateauAge::trouver_etage_age3(int &choix){
+    if(0<=choix && choix<=1){
+        return etage1;
+    }
+    if(2<=choix && choix<=4){
+        return etage2;
+    }
+    if(5<=choix && choix<=8){
+        return etage3;
+    }
+    if(9<=choix && choix<=10){
+        return etage4;
+    }
+    if(11<=choix && choix<=14){
+        return etage5;
+    }
+    if(15<=choix && choix<=17){
+        return etage6;
+    }
+    if(18<=choix && choix<=19){
+        return etage7;
+    }
+}
 
 bool PlateauAge::deviens_accessible_age1(int &choix){
     vector<Batiment *> etage = trouver_etage_age1(choix);
@@ -365,8 +388,8 @@ bool PlateauAge::deviens_accessible_age1(int &choix){
 
 bool PlateauAge::deviens_accessible_age2(int &choix) {
     vector <Batiment *> etage = trouver_etage_age2(choix);
-    int pere1 = choix + etage.size();
-    int pere2 = choix + etage.size() + 1;
+    int pere1 = choix + etage.size();// pere de gauche
+    int pere2 = choix + etage.size() + 1; // pere de droite
     if(etage==etage5){
         return false;
     }
@@ -398,12 +421,147 @@ bool PlateauAge::deviens_accessible_age2(int &choix) {
     }
 }
 
+bool PlateauAge::deviens_accessible_age3(int &choix){
+    vector<Batiment *> etage = trouver_etage_age3(choix);
+    int pere1,pere2;
+    // cas des étages
+    if(etage==etage7){
+        return false;
+    }
+    if(etage==etage1 ||  etage==etage2 ){
+        //cas du cas ou l'on est comme dans l'age 2
+        pere1 = choix + etage.size();// pere de gauche
+        pere2 = choix + etage.size() + 1; // pere de droite
+        if(getCartes()[choix] == etage[0]){
+            getCartes()[pere2]->set_accessible(true);
+            if(getCartes()[choix+1]==nullptr){
+                getCartes()[pere1]->set_accessible(true);
+            }
+            return true;
+        }
+        if(getCartes()[choix]==etage[etage.size()]) {
+            getCartes()[pere1]->set_accessible(true);
+            if (getCartes()[choix - 1] == nullptr) {
+                getCartes()[pere2]->set_accessible(true);
+            }
+            return true;
+        }
+        else{
+            if(getCartes()[choix+1]==nullptr){
+                getCartes()[pere1]->set_accessible(true);
+            }
+            if(getCartes()[choix-1]==nullptr){
+                getCartes()[pere2]->set_accessible(true);
+            }
+            if(getCartes()[choix+1]==nullptr || getCartes()[choix-1]==nullptr){
+                return true;
+            }
+            else return false;
+        }
+    }
+    if(etage==etage5 || etage==etage6){
+        //cas du cas ou l'on est comme dans l'age 1
+        if(getCartes()[choix] == etage[0]){
+            pere1=choix+etage.size();
+            if(getCartes()[choix+1]==nullptr){
+                getCartes()[pere1]->set_accessible(true);
+                return true;
+            }
+            else return false;
+        }
+        if(getCartes()[choix] == etage[etage.size()]){
+            pere1=choix+etage.size()-1;
+            if(getCartes()[choix-1]==nullptr){
+                getCartes()[pere1]->set_accessible(true);
+                return true;
+            }
+            else return false;
+        }
+        else{
+            pere1=choix+etage.size();
+            pere2=choix+etage.size()-1;
+            if(getCartes()[choix+1]==nullptr){
+                getCartes()[pere1]->set_accessible(true);
+            }
+            if(getCartes()[choix-1]==nullptr){
+                getCartes()[pere2]->set_accessible(true);
+            }
+            if(getCartes()[choix+1]==nullptr || getCartes()[choix-1]==nullptr){
+                return true;
+            }
+            else return false;
+        }
+    }
+    else{
+        if(etage==etage3){
+            if(choix==5){
+                pere1=choix+etage.size();
+                if(getCartes()[choix+1]==nullptr){
+                    getCartes()[pere1]->set_accessible(true);
+                    return true;
+                }
+                else return false;
+            }
+            if(choix==6){
+                pere1=choix+etage.size()-1;
+                if(getCartes()[choix-1]==nullptr){
+                    getCartes()[pere1]->set_accessible(true);
+                    return true;
+                }
+                else return false;
+            }
+            if(choix==7){
+                pere1=choix+etage.size()-1;
+                if(getCartes()[choix+1]==nullptr){
+                    getCartes()[pere1]->set_accessible(true);
+                    return true;
+                }
+                else return false;
+            }
+            if(choix==8){
+                pere1=choix+etage.size()-2;
+                if(getCartes()[choix-1]==nullptr){
+                    getCartes()[pere1]->set_accessible(true);
+                    return true;
+                }
+                else return false;
+            }
+        }
+        if(etage==etage4){
+            pere1=choix+etage.size();//pere de gauche
+            pere2=choix+etage.size()+1;// pere de droite
+            getCartes()[pere1]->set_accessible(true);
+            getCartes()[pere2]->set_accessible(true);
+            return true;
+        }
+    }
+}
+
 void PlateauAge::accessibilite(){
     for(int i=0;i<20;i++){
-        if(getCartes()[i]->get_accessible() == true){
+        if(getCartes()[i]->est_accessible() == true){
             cout<<"n°"<<i;
             getCartes()[i]->afficher_batiment();
         }
     }
 }
+void PlateauAge::destruction_carte_plateau_age1(int &choix) {
+    // on mets a jour le tableau des cartes
+    this->deviens_accessible_age1(choix);
+    // on détruit la carte
+    this->getCartes()[choix] = nullptr;
+}
 
+void PlateauAge::destruction_carte_plateau_age2(int &choix) {
+    // on mets a jour le tableau des cartes
+    this->deviens_accessible_age2(choix);
+    // on détruit la carte
+    this->getCartes()[choix] = nullptr;
+}
+
+void PlateauAge::destruction_carte_plateau_age3(int &choix){
+    // on mets a jour le tableau des cartes
+    this->deviens_accessible_age3(choix);
+    // on détruit la carte
+    this->getCartes()[choix] = nullptr;
+}

@@ -50,6 +50,7 @@ public:
     //identique à un de ceux qu'il a déjà dans sa cité). Cette fonction permet donc au joueur de sélectionner le jeton
     //qu'il souhaite. Il faut que cette méthode appelle la méthode de joueur ajouter_jeton() une fois le jeton choisi
     // car cette méthode de joueur s'occupe de mettre ses attributs à jour.
+
 };
 
 #endif

@@ -49,8 +49,13 @@ public:
     void accessibilite();
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);
+    bool deviens_accessible_age3(int &choix);
     vector<Batiment *>  trouver_etage_age1(int& choix);
     vector<Batiment *>  trouver_etage_age2(int &choix);
+    vector<Batiment *> trouver_etage_age3(int &choix);
+    void destruction_carte_plateau_age1(int &choix);
+    void destruction_carte_plateau_age2(int &choix);
+    void destruction_carte_plateau_age3(int &choix)
 };
 
 

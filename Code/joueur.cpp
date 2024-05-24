@@ -1,4 +1,4 @@
-#include "joueur.hpp"
+#include "joueur.h"
 #define NB_SYMB 6
 
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
