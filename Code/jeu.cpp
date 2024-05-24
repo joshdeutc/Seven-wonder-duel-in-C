@@ -2,137 +2,167 @@
 #include "carte_bat_merv.h"
 
 
+// Initialiser le pointeur à nullptr
+Jeu* Jeu::instance = nullptr;
+
 Jeu::Jeu()
 {
-    tabCartesAge1 = new Batiment*;
-    tabCartesAge2 = new Batiment*;
-    tabCartesAge3 = new Batiment*;
-    tabCartesGuilde = new Guilde*;
-    tabCartesMerveille = new Merveille*;
-    tabJetonMilitaire = new JetonMilitaire*;
-    tabJetonProgres = new JetonProgres*;
+    
+    const int nbCartesAge1 = 23;
+    const int nbCartesAge2 = 23;
+    const int nbCartesAge3 = 20;
+    const int nbCartesGuilde = 7; // Ajustez selon vos besoins
+    const int nbCartesMerveille = 12; // Ajustez selon vos besoins
+    const int nbJetonsProgres = 10;
+    
+    tabCartesAge1 = new Batiment*[nbCartesAge1];
+    tabCartesAge2 = new Batiment*[nbCartesAge2];
+    tabCartesAge3 = new Batiment*[nbCartesAge3];
+    tabCartesGuilde = new Guilde*[nbCartesGuilde];
+    tabCartesMerveille = new Merveille*[nbCartesMerveille];
+    tabJetonProgres = new JetonProgres*[nbJetonsProgres];
 
     // Il faudra initialiser toutes les cartes ici
-
-    // Jetons Militaires
-        // Joueur 1
-    JetonMilitaire* jetonMilitaire2_1 = new JetonMilitaire(2);
-    JetonMilitaire* jetonMilitaire5_1 = new JetonMilitaire(5);
-    tabJetonMilitaire[0] = jetonMilitaire2_1;
-    tabJetonMilitaire[1] = jetonMilitaire5_1;
-
-        // Joueur 2
-    JetonMilitaire* jetonMilitaire2_2 = new JetonMilitaire(2);
-    JetonMilitaire* jetonMilitaire5_2 = new JetonMilitaire(5);
-    tabJetonMilitaire[2] = jetonMilitaire2_2;
-    tabJetonMilitaire[3] = jetonMilitaire5_2;
-
-    // Jetons Progrès
-    JetonProgres *jetonProgresAgriculture = new JetonProgres("Agriculture");
-    JetonProgres *jetonProgresArchitecture = new JetonProgres("Architecture");
-    JetonProgres *jetonProgresEconomie = new JetonProgres("Economie");
-    JetonProgres *jetonProgresLoi = new JetonProgres("Loi");
-    JetonProgres *jetonProgresMaçonnerie = new JetonProgres("Maçonnerie");
-    JetonProgres *jetonProgresMathematiques = new JetonProgres("Mathematiques");
-    JetonProgres *jetonProgresPhilosophie = new JetonProgres("Philosophie");
-    JetonProgres *jetonProgresStrategie = new JetonProgres("Strategie");
-    JetonProgres *jetonProgresTheologie = new JetonProgres("Theologie");
-    JetonProgres *jetonProgresUrbanisme = new JetonProgres("Urbanisme");
-    tabJetonProgres[0] = jetonProgresAgriculture;
-    tabJetonProgres[1] = jetonProgresArchitecture;
-    tabJetonProgres[2] = jetonProgresEconomie;
-    tabJetonProgres[3] = jetonProgresLoi;
-    tabJetonProgres[4] = jetonProgresMaçonnerie;
-    tabJetonProgres[5] = jetonProgresMathematiques;
-    tabJetonProgres[6] = jetonProgresPhilosophie;
-    tabJetonProgres[7] = jetonProgresStrategie;
-    tabJetonProgres[8] = jetonProgresTheologie;
-    tabJetonProgres[9] = jetonProgresUrbanisme;
-
-    // Merveilles
-    // ⚠️⚠️⚠️ Les variables non entières, exceptés les noms devront être modifiés pour correspondre au jeu 
-    Merveille* merveilleCircusMaximus = new Merveille("Circus Maximus", 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 5, papyrus, false, false);
-    Merveille* merveilleColosse = new Merveille("Le Colosse", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
-    Merveille* merveilleGrandPhare = new Merveille("Le Grand Phare", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, verre, false, false);
-    Merveille* merveilleJardinsSuspendus = new Merveille("Les Jardins Suspendus", 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 6, verre, false, false);
-    Merveille* merveilleGrandeBibliotheque = new Merveille("La Grande Bibliotheque", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, papyrus, false, false);
-    Merveille* merveilleMausolee = new Merveille("Le Mausolee", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
-    Merveille* merveillePiree = new Merveille("Le Pirée", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, bois, false, false);
-    Merveille* merveillePyramides = new Merveille("Les Pyramides", 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 9, papyrus, false, false);
-    Merveille* merveilleSphinx = new Merveille("Le Sphinx", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, pierre, false, false);
-    Merveille* merveilleStatueDeZeus = new Merveille("La Statue de Zeus", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, bois, false, false);
-    Merveille* merveilleTempleDArtemis = new Merveille("Le Temple d’Artémis", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, papyrus, false, false);
-    Merveille* merveilleViaAppia = new Merveille("La Via Appia", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, verre, false, false);
-    tabCartesMerveille[0] = merveilleCircusMaximus;
-    tabCartesMerveille[1] = merveilleColosse;
-    tabCartesMerveille[2] = merveilleGrandPhare;
-    tabCartesMerveille[3] = merveilleJardinsSuspendus;
-    tabCartesMerveille[4] = merveilleGrandeBibliotheque;
-    tabCartesMerveille[5] = merveilleMausolee;
-    tabCartesMerveille[6] = merveillePiree;
-    tabCartesMerveille[7] = merveillePyramides;
-    tabCartesMerveille[8] = merveilleSphinx;
-    tabCartesMerveille[9] = merveilleStatueDeZeus;
-    tabCartesMerveille[10] = merveilleTempleDArtemis;
-    tabCartesMerveille[11] = merveilleViaAppia;
-
-    // Cartes Age 1
-        // Sans chainage
-    Matiere_Premiere* matierePremiereChantier = new Matiere_Premiere("Chantier", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 1, 0, 0, 0, 0, "Batiment", 1);
-    Matiere_Premiere* matierePremiereExploitation = new Matiere_Premiere("Exploitation", 0, 1, 0, 0, 0, 0, 1, false, false, statut, "", 1, 0, 0, 0, 0, "Batiment", 1);
-    Matiere_Premiere* matierePremiereBassinArgileux = new Matiere_Premiere("Bassin Argileux", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, 0, 0, 0, "Batiment", 1);
-    Matiere_Premiere* matierePremiereCavite = new Matiere_Premiere("Cavité", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, 0, 0, 0, "Batiment", 1);
-    Matiere_Premiere* matierePremiereGisement = new Matiere_Premiere("Gisement", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 1, 0, 0, "Batiment", 1);
-    Matiere_Premiere* matierePremiereMine = new Matiere_Premiere("Mine", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 1, 0, 0, "Batiment", 1);
-    Produit_Manufacture* produitManufactureVerrerie = new Produit_Manufacture("Verrerie", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 0, 1, 0, "Batiment", 1);
-    Produit_Manufacture* produitManufacturePresse = new Produit_Manufacture("Presse", 1, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 0, 0, 0, 1, "Batiment", 1);
-    Militaire* militaireTourDeGarde = new Militaire("Tour de garde", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "", 1, "Batiment", 1);
-    Scientifique* scientifiqueAtelier = new Scientifique("Atelier", 0 ,0 ,0 ,0, 0, 1, 1, false, false, statut, "", 1, A,"Batiment", 1));
-    Scientifique* scientifiqueAtelier = new Scientifique("Apothicaire", 0 ,0 ,0 ,0, 1, 0, 1, false, false, statut, "", 1, roue,"Batiment", 1));
-    Commerce* commerceDepotDePierre = new Commerce("Dépôt de pierre", 3, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, pierre, 0, 0, 0, 0, 0, "Batiment", 1);
-    Commerce* commerceDepotDArgile = new Commerce("Dépôt d'argile", 3, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, argile, 0, 0, 0, 0, 0, "Batiment", 1);
-    Commerce* commerceDepotDeBois = new Commerce("Dépôt de bois", 3, 0, 0, 0, 0, 0, 1, false, false, statut, "", 0, 1, bois, 0, 0, 0, 0, 0, "Batiment", 1);
-
-        // Avec chainage
-    Militaire* militaireEcuries = new Militaire("Ecuries", 0, 1, 0, 0, 0, 0, 1, false, false, statut, "Haras", 1, "Militaire", 1); )
-    Militaire* militaireCaserne = new Militaire("Caserne", 0, 0, 1, 0, 0, 0, 1, false, false, statut, "Baraquements", 1, "Militaire", 1);
-    Militaire* militairePalissade = new Militaire("Palissade", 2, 0, 0, 0, 0, 0, 1, false, false, statut, "Fortifications", 1, "Militaire", 1);
-    Civil* civilTheatre = new Civil("Théâtre", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Statue", 3, "Civil", 1);
-    Civil* civilAutel = new Civil("Autel", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Temple", 3, "Civil", 1);
-    Civil* civilBains = new Civil("Bains", 0, 0, 0, 1, 0, 0, 1, false, false, statut, "Aqueduc", 3, "Civil", 1);
-    Commerce* commerceTaverne = new Commerce("Taverne", 0, 0, 0, 0, 0, 0, 1, false, false, statut, "Phare", 99, 4, 0, 0, 0, 0, 0, 0, "Commerce", 1); // Bizarre
-
-    // Age 2
-        // Sans chainage
-    Matiere_Premiere* matierePremiereScierie = new Matiere_Premiere("Scierie", 2, 0, 0, 0, 0, 0, 2, false, false, statut, "", 2, 0, 0, 0, 0, "Matiere Premiere", 2);
-    Matiere_Premiere* matierePremiereBriqueterie = new Matiere_Premiere("Briqueterie", 2, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 2, 0, 0, 0, "Matiere Premiere", 2);
-    Matiere_Premiere* matierePremiereCarriere = new Matiere_Premiere("Carriere", 2, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 2, 0, 0, "Matiere Premiere", 2);
-    Produit_Manufacture* matierePremiereSoufflerie = new Produit_Manufacture("Soufflerie", 0, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 0, 1, 0, "Produit Manufacture", 2);
-    Produit_Manufacture* matierePremiereSechoir = new Produit_Manufacture("Sechoir", 0, 0, 0, 0, 0, 0, 2, false, false, statut, "", 0, 0, 0, 0, 1, "Produit Manufacture", 2);
-    Militaire* militaireMuraille = new Militaire("Muraille", 0, 0, 0, 2, 0, 0, 2, false, false, statut, "", 2, "Militaire", 2);
-    Commerce* commerceForum = new Commerce("Forum", 3, 0, 1, 0, 0, 0, 2, false, false, statut, "", 0, 0, 
-    Commerce* commerceCaravanserail = new Commerce("Caravanserail", 2, 0, 0, 0, 1, 1, 2, false, false, statut, "", 0, 0, 0, 0, 0, "Commerce", 2);
-    Commerce* commerceDouanes = new Commerce("Douanes", 4, 0, 0, 0, 0, 0, 2, false, false, statut, "", ...);
-    Civil* civilTribunal = new Civil("Tribunal", 0, 2, 0, 0, 1, 0, 2, false, false, statut, "", 5, "Civil", 2);
-
-        // Avec chainage
-    Militaire* militaireHaras = new Militaire("Haras", 0, 1, 1, 0, 0, 0, 2, false, false, statut, "Ecuries", 1, "Militaire", 2);
-    Militaire* militaireBaraquements = new Militaire("Baraquements", 0, 1, 1, 0, 0, 0, 2, false, false, statut, "Caserne", 1, "Militaire", 2);
-    Militaire* militaireChampsDeTir = new Militaire("Champs de Tir", 0, 1, 0, 1, 0, 1, 2, false, false, statut, "Atelier de siege", 2, "Militaire", 2);
-    Militaire* militairePlaceDArmes = new Militaire("Place d'Armes", 0, 0, 2, 0, 1, 0, 2, false, false, statut, "Cirque", 2, "Militaire", 2);
-    Civil* civilBibliotheque = new Civil("Bibliotheque", 0, 1, 0, 1, 1, 0, 2, false, false, statut, "Scriptorium", 2, "Civil", 2);
     
-    // Age 3
-        // Sans chainage
-    Militaire* militaireArsenal = new Militaire("Arsenal", 0, 2, 3, 0, 0, 0, 3, false, false, statut, "", 3, "Militaire", 3);
-    Militaire* militairePretoire = new Militaire("Pretoire", 8, 0, 0, 0, 0, 0, 3, false, false, statut, "", 3, "Militaire", 3);
-    Scientifique* scientifiqueAcademie = new Scientifique("Academie", 0, 1, 0, 1, 2, 0, 3, false, false, statut, "", 3, horloge, "Scientifique", 3);
-    Scientifique* scientifiqueEtude = new Scientifique("Etude", 0, 2, 0, 0, 1, 1, 3, false, false, statut, "", 3, horloge, "Scientifique", 3);
+    unsigned int prix_aucun[NB_RESSOURCES];
+    unsigned int prix[NB_RESSOURCES];
     
-    Civil* civilPalace = new Civil("Palace", 0, 1, 1, 1, 2, 0, 3, false, false, statut, "", 7, "Civil", 3);
-    Civil* civilHotelDeVille = new Civil("Hotel de Ville", 0, 2, 0, 3, 0, 0, 3, false, false, statut, "", 7, "Civil", 3);
-    Civil* civilObelisque = new Civil("Obelisque", 0, 0, 0, 2, 1, 0, 3, false, false, statut, "", 5, "Civil", 3);
-        // Avec chainage
+    for(int i=0;i<NB_RESSOURCES;i++){
+        prix_aucun[i] = 0;
+        prix[i] = 0;
+    }
+    
+    
+    // MATIERES PREMIERES
+    
+    tabCartesAge1[0] = new Matiere_Premiere("CHANTIER", 0, prix_aucun, 1, bois, 1);
+    tabCartesAge1[1] = new Matiere_Premiere("EXPLOITATION", 1, prix_aucun, 1, bois, 1);
+    tabCartesAge1[2] = new Matiere_Premiere("BASSIN ARGILEUX",0,prix_aucun,1,argile,1);
+    tabCartesAge1[3] = new Matiere_Premiere("CAVITÉ",1,prix_aucun,1,argile,1);
+    tabCartesAge1[4] = new Matiere_Premiere("GISEMENT",0,prix_aucun,1,pierre,1);
+    tabCartesAge1[5] = new Matiere_Premiere("MINE",1,prix_aucun,1,pierre,1);
+    
+    tabCartesAge2[0] = new Matiere_Premiere("SCIERIE",2,prix_aucun,2,bois,2);
+    tabCartesAge2[1] = new Matiere_Premiere("BRIQUETERIE",2,prix_aucun,2,argile,2);
+    tabCartesAge2[2] = new Matiere_Premiere("CARRIÈRE",2,prix_aucun,2,pierre,2);
+
+    // PRODUIT MANUFACTURE
+    
+    tabCartesAge1[6] = new Produit_Manufacture("VERRERIE", 1, prix_aucun, 1, verre, 1);
+    tabCartesAge1[7] = new Produit_Manufacture("PRESSE", 1, prix_aucun, 1, papyrus, 1);
+    
+    tabCartesAge2[3] = new Produit_Manufacture("SOUFFLERIE", 0, prix_aucun, 2, verre, 1);
+    tabCartesAge2[4] = new Produit_Manufacture("SÉCHOIR", 0, prix_aucun, 2, papyrus, 1);
+    
+    // MILITAIRE
+    
+    tabCartesAge1[8] = new Militaire("TOUR DE GARDE", 0, prix_aucun, 1, 1);
+    prix[bois]=1;
+    tabCartesAge1[9] = new Militaire("ÉCURIES", 0, prix, 1, 1,fer);
+    prix[bois]=0; prix[argile] = 1;
+    tabCartesAge1[10] = new Militaire("CASERNE", 0, prix, 1, 1,epee);
+    prix[argile] = 0;
+    tabCartesAge1[11] = new Militaire("PALISSADE", 2, prix_aucun, 1, 1,tour);
+    
+    prix[pierre]=2;
+    tabCartesAge2[5] = new Militaire("MURAILLE", 0, prix, 2, 2);
+    prix[pierre]=0; prix[argile] = 1; prix[bois] = 1;
+    tabCartesAge2[6] = new Militaire("HARAS", 0, prix, 2, 1,fer);
+    tabCartesAge2[7] = new Militaire("BARAQUEMENTS", 3, prix_aucun, 2, 1,epee);
+    prix[pierre]=1; prix[argile] = 0; prix[papyrus] = 1;
+    tabCartesAge2[8] = new Militaire("CHAMP DE TIR", 0, prix, 2, 2,cible);
+    prix[pierre]=0; prix[argile] = 2; prix[bois] = 0; prix[verre]=1; prix[papyrus] = 0;
+    tabCartesAge2[9] = new Militaire("PLACE D'ARMES", 0, prix, 2, 2,casque);
+    
+    prix[argile]=3; prix[bois]=2;
+    tabCartesAge3[0] = new Militaire("ARSENAL", 0, prix, 3, 3);
+    tabCartesAge3[1] = new Militaire("PRÉTOIRE", 8, prix_aucun, 3, 3);
+    prix[pierre]=2; prix[argile]=1; prix[papyrus] = 1; prix[verre] = 0;
+    tabCartesAge3[2] = new Militaire("FORTIFICATIONS", 0, prix, 3, 2,tour);
+    prix[pierre]=0; prix[argile]=0; prix[papyrus] = 0; prix[verre] = 1; prix[bois]=3;
+    tabCartesAge3[3] = new Militaire("ATELIER DE SIÈGE", 0, prix, 3, 2,cible);
+    prix[pierre]=2; prix[argile]=2; prix[verre] = 0; prix[argile] = 2;
+    tabCartesAge3[4] = new Militaire("CIRQUE", 0, prix, 3, 2,casque);
+
+
+
+
+    // SCIENTIFIQUE
+    
+    prix[argile] = 0; prix[verre] = 0; prix[papyrus] = 1;
+    tabCartesAge1[12] = new Scientifique("ATELIER", 0, prix, 1, A,1);
+    prix[verre] = 1; prix[papyrus] = 0;
+    tabCartesAge1[13] = new Scientifique("APOTHICAIRE", 0, prix, 1, roue,1);
+    tabCartesAge1[14] = new Scientifique("SCRIPTORIUM", 2, prix_aucun, 1, plume,0,livre);
+    tabCartesAge1[15] = new Scientifique("OFFICINE", 2, prix_aucun, 1, bol,0,engrenage);
+    
+    prix[bois] = 1; prix[pierre] = 1;
+    tabCartesAge2[10] = new Scientifique("BIBLIOTHÈQUE", 0, prix, 2, plume,2,livre);
+    prix[bois]=0; prix[verre]=0; prix[argile]=2;
+    tabCartesAge2[11] = new Scientifique("DISPENSAIRE", 0, prix, 2, bol,2,engrenage);
+    prix[argile]=0;prix[pierre]=0;prix[bois]=1;prix[papyrus]=3;
+    tabCartesAge2[12] = new Scientifique("ÉCOLE", 0, prix, 2, roue,1,harpe);
+    prix[papyrus]=0; prix[verre]=2;
+    tabCartesAge2[13] = new Scientifique("LABORATOIRE", 0, prix, 2, A,1,lampe);
+    
+    prix[pierre]=1;
+    tabCartesAge3[14] = new Scientifique("ACADÉMIE", 0, prix, 3, horloge,3);
+    prix[bois]=2; prix[verre]=1; prix[papyrus] = 1; prix[pierre] = 0;
+    tabCartesAge3[14] = new Scientifique("ÉTUDE", 0, prix, 3, horloge,3);
+    prix[bois] = 0; prix[argile] = 1;
+    tabCartesAge3[14] = new Scientifique("UNIVERSITÉ", 0, prix, 3, globe,2,harpe);
+    prix[argile] = 0; prix[verre] = 0; prix[papyrus] = 2; prix[pierre] = 1;
+    tabCartesAge3[14] = new Scientifique("OBSERVATOIRE", 0, prix, 3, globe,2,lampe);
+    
+    // COMMERCE
+    
+    bool affecte[NB_RESSOURCES];
+    
+    for(int i=0;i<NB_RESSOURCES;i++){
+        affecte[i] = false;
+    }
+    
+    affecte[pierre]=true;
+    tabCartesAge1[16] = new Commerce("DÉPÔT DE PIERRE", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    affecte[pierre]=false; affecte[argile] = true;
+    tabCartesAge1[17] = new Commerce("DÉPÔT D'ARGILE'", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    affecte[argile]=false; affecte[bois]=true;
+    tabCartesAge1[18] = new Commerce("DÉPÔT DE BOIS", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    affecte[bois]=false;
+    tabCartesAge1[19] = new Commerce("TAVERNE", 0, prix_aucun, 1, 0,4,false,false,affecte,0,aucuneCarte,vase);
+    
+    prix[argile] = 1; prix[papyrus] = 0; prix[verre] = 0;
+    affecte[verre] = true; affecte[papyrus] = true;
+    tabCartesAge2[14] = new Commerce("FORUM", 3, prix, 2, 0,0,false,true,affecte,0,aucuneCarte);
+    prix[verre]=1; prix[papyrus]=1; prix[argile]=0;
+    affecte[verre] = false; affecte[papyrus] = false;
+    affecte[bois] = true; affecte[argile] = true; affecte[pierre] = true;
+    tabCartesAge2[15] = new Commerce("CARAVANSERAIL", 2, prix, 2, 0,0,false,false,affecte,0,aucuneCarte);
+    affecte[verre] = true; affecte[papyrus] = true;
+    affecte[bois] = false; affecte[argile] = false; affecte[pierre] = false;
+    tabCartesAge2[16] = new Commerce("DOUANES", 4, prix_aucun, 2, 0,0,true,false,affecte,0,aucuneCarte);
+    affecte[verre] = false; affecte[papyrus] = false;
+    tabCartesAge2[17] = new Commerce("BRASSERIE", 0, prix_aucun, 2, 0,6,false,false,affecte,0,aucuneCarte,tonneau);
+    
+    /*Commerce(const string &n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
+     const int &age,
+     const int &p, const int &sa,
+     const bool &prixF, const bool &prod,
+     const bool affect[NB_RESSOURCES],
+     const int piece_p_carte, const TypeCarte carte_aff,
+     const Chainage &ch1 = aucun, const Chainage &ch2 = aucun)*/
+    
+    prix[verre] = 0; prix[papyrus] = 2;
+    tabCartesAge3[15] = new Commerce("CHAMBRE DE COMMERCE", 0, prix, 3, 3,0,false,false,affecte,3,produitManufacture);
+    prix[verre] = 1; prix[papyrus] = 1; prix[bois] = 1;
+    tabCartesAge3[16] = new Commerce("PORT", 0, prix, 3, 3,0,false,false,affecte,2,matierePremiere);
+    prix[papyrus] = 0; prix[bois] = 0; prix[pierre] = 2;
+    tabCartesAge3[17] = new Commerce("ARMURERIE", 0, prix, 3, 3,0,false,false,affecte,1,batimentMilitaire);
+    prix[pierre] = 0; prix[argile] = 2;
+    tabCartesAge3[18] = new Commerce("PHARE", 0, prix, 3, 3,0,false,false,affecte,1,batimentCommerce,vase);
+    prix[pierre] = 1; prix[argile] = 1; prix[verre] = 0; prix[bois] = 1;
+    tabCartesAge3[19] = new Commerce("ARÈNE", 0, prix, 3, 3,0,false,false,affecte,2,merveille,tonneau);
+
 }
 
 
@@ -144,7 +174,6 @@ Jeu::~Jeu()
     delete[] tabCartesAge3;
     delete[] tabCartesGuilde;
     delete[] tabCartesMerveille;
-    delete[] tabJetonMilitaire;
     delete[] tabJetonProgres;
 }
 
