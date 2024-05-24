@@ -22,7 +22,6 @@ private:
     Batiment** tabCartesAge3;
     Guilde** tabCartesGuilde;
     Merveille** tabCartesMerveille;
-    JetonMilitaire** tabJetonMilitaire;
     JetonProgres** tabJetonProgres;
 
 public:
@@ -33,12 +32,8 @@ public:
     Batiment** getTabCartesAge3() const { return tabCartesAge3; }
     Guilde** getTabCartesGuilde() const { return tabCartesGuilde; }
     Merveille** getTabCartesMerveille() const { return tabCartesMerveille; }
-    JetonMilitaire** getTabJetonMilitaire() const { return tabJetonMilitaire; }
     JetonProgres** getTabJetonProgres() const { return tabJetonProgres; }
 };
-
-// Initialiser le pointeur à nullptr
-Jeu* Jeu::instance = nullptr;
 
 
 
