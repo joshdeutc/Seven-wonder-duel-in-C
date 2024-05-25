@@ -20,6 +20,7 @@ Partie::~Partie() {
     for (int i = 0; i < 2; ++i) {
         delete joueurs[i];
     }
+     delete[] joueurs;
 }
 
 void Partie::tour_suivant(){
@@ -27,12 +28,11 @@ void Partie::tour_suivant(){
     else tour = 1;
 }
 
-bool Partie::fin_age(){
+void Partie::fin_age(){
     if(platAge.getCartes() == nullptr){//Si il ne reste plus de carte sur le plateau
-        if (age == 1){ age = 2; platAge = PlateauAge(2);}
-        else if(age == 2) {age = 3; platAge = PlateauAge(3);}
-        else {victoire_civile(); return false;} //age 3 finit, vict civile
-        return true;
+        if (age == 1) age = 2;
+        else if(age == 2) age = 3;
+        else victoire_civile(); //age 3 finit, vict civile
     }
     else return false;
 }
@@ -77,7 +77,7 @@ void Partie::victoire_civile(){
     PtV1 += joueurs[0]->getSolde()/3;
     PtV1 += joueurs[1]->getSolde()/3;
 
-    vainqueur =  (PtV1 > PtV2) joueurs[0] : joueurs[1];
+    vainqueur =  (PtV1 > PtV2) ? joueurs[0] : joueurs[1];
 }
 
 void Partie::victoire_scientifique(Joueur j){
@@ -94,6 +94,7 @@ void Partie::choix_jeton(Joueur *j) {
 void Partie::addDefausse(Carte*carte) {
     defausses.push_back(carte);
 }
+
 
 void Partie::selection_action(Joueur &j,PlateauAge &platage){
     cout<<"Choisissez une action :"<<endl;
@@ -218,4 +219,5 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
             }
             break;
     }
+
 }
