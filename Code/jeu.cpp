@@ -1,7 +1,6 @@
 #include "jeu.h"
 #include "carte_bat_merv.h"
 
-
 // Initialiser le pointeur à nullptr
 Jeu* Jeu::instance = nullptr;
 
@@ -106,13 +105,13 @@ Jeu::Jeu()
     tabCartesAge2[13] = new Scientifique("LABORATOIRE", 0, prix, 2, A,1,lampe);
     
     prix[pierre]=1;
-    tabCartesAge3[14] = new Scientifique("ACADÉMIE", 0, prix, 3, horloge,3);
+    tabCartesAge3[5] = new Scientifique("ACADÉMIE", 0, prix, 3, horloge,3);
     prix[bois]=2; prix[verre]=1; prix[papyrus] = 1; prix[pierre] = 0;
-    tabCartesAge3[14] = new Scientifique("ÉTUDE", 0, prix, 3, horloge,3);
+    tabCartesAge3[6] = new Scientifique("ÉTUDE", 0, prix, 3, horloge,3);
     prix[bois] = 0; prix[argile] = 1;
-    tabCartesAge3[14] = new Scientifique("UNIVERSITÉ", 0, prix, 3, globe,2,harpe);
+    tabCartesAge3[7] = new Scientifique("UNIVERSITÉ", 0, prix, 3, globe,2,harpe);
     prix[argile] = 0; prix[verre] = 0; prix[papyrus] = 2; prix[pierre] = 1;
-    tabCartesAge3[14] = new Scientifique("OBSERVATOIRE", 0, prix, 3, globe,2,lampe);
+    tabCartesAge3[8] = new Scientifique("OBSERVATOIRE", 0, prix, 3, globe,2,lampe);
     
     // COMMERCE
     
@@ -133,35 +132,88 @@ Jeu::Jeu()
     
     prix[argile] = 1; prix[papyrus] = 0; prix[verre] = 0;
     affecte[verre] = true; affecte[papyrus] = true;
+    prix[pierre] = 0;
     tabCartesAge2[14] = new Commerce("FORUM", 3, prix, 2, 0,0,false,true,affecte,0,aucuneCarte);
     prix[verre]=1; prix[papyrus]=1; prix[argile]=0;
     affecte[verre] = false; affecte[papyrus] = false;
     affecte[bois] = true; affecte[argile] = true; affecte[pierre] = true;
-    tabCartesAge2[15] = new Commerce("CARAVANSERAIL", 2, prix, 2, 0,0,false,false,affecte,0,aucuneCarte);
+    tabCartesAge2[15] = new Commerce("CARAVANSERAIL", 2, prix, 2, 0,0,false,true,affecte,0,aucuneCarte);
     affecte[verre] = true; affecte[papyrus] = true;
     affecte[bois] = false; affecte[argile] = false; affecte[pierre] = false;
     tabCartesAge2[16] = new Commerce("DOUANES", 4, prix_aucun, 2, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[verre] = false; affecte[papyrus] = false;
     tabCartesAge2[17] = new Commerce("BRASSERIE", 0, prix_aucun, 2, 0,6,false,false,affecte,0,aucuneCarte,tonneau);
     
-    /*Commerce(const string &n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
-     const int &age,
-     const int &p, const int &sa,
-     const bool &prixF, const bool &prod,
-     const bool affect[NB_RESSOURCES],
-     const int piece_p_carte, const TypeCarte carte_aff,
-     const Chainage &ch1 = aucun, const Chainage &ch2 = aucun)*/
-    
     prix[verre] = 0; prix[papyrus] = 2;
-    tabCartesAge3[15] = new Commerce("CHAMBRE DE COMMERCE", 0, prix, 3, 3,0,false,false,affecte,3,produitManufacture);
+    tabCartesAge3[9] = new Commerce("CHAMBRE DE COMMERCE", 0, prix, 3, 3,0,false,false,affecte,3,produitManufacture);
     prix[verre] = 1; prix[papyrus] = 1; prix[bois] = 1;
-    tabCartesAge3[16] = new Commerce("PORT", 0, prix, 3, 3,0,false,false,affecte,2,matierePremiere);
+    tabCartesAge3[10] = new Commerce("PORT", 0, prix, 3, 3,0,false,false,affecte,2,matierePremiere);
     prix[papyrus] = 0; prix[bois] = 0; prix[pierre] = 2;
-    tabCartesAge3[17] = new Commerce("ARMURERIE", 0, prix, 3, 3,0,false,false,affecte,1,batimentMilitaire);
+    tabCartesAge3[11] = new Commerce("ARMURERIE", 0, prix, 3, 3,0,false,false,affecte,1,batimentMilitaire);
     prix[pierre] = 0; prix[argile] = 2;
-    tabCartesAge3[18] = new Commerce("PHARE", 0, prix, 3, 3,0,false,false,affecte,1,batimentCommerce,vase);
+    tabCartesAge3[12] = new Commerce("PHARE", 0, prix, 3, 3,0,false,false,affecte,1,batimentCommerce,vase);
     prix[pierre] = 1; prix[argile] = 1; prix[verre] = 0; prix[bois] = 1;
-    tabCartesAge3[19] = new Commerce("ARÈNE", 0, prix, 3, 3,0,false,false,affecte,2,merveille,tonneau);
+    tabCartesAge3[13] = new Commerce("ARÈNE", 0, prix, 3, 3,0,false,false,affecte,2,merveille,tonneau);
+
+    
+    //CIVIL
+ 
+    tabCartesAge1[20] = new Civil("THÉÂTRE", 0, prix_aucun, 1, 3,masque);
+    tabCartesAge1[21] = new Civil("AUTEL", 0, prix_aucun, 1, 3,lune);
+    prix[bois] = 0; prix[argile] = 0;
+    tabCartesAge1[22] = new Civil("BAINS", 0, prix, 1, 3,goutte);
+    
+    prix[bois] = 2; prix[verre] = 1; prix[pierre] = 0;
+    tabCartesAge2[18] = new Civil("TRIBUNAL", 0, prix, 2, 5);
+    prix[bois] = 0; prix[verre] = 0; prix[argile] = 2;
+    tabCartesAge2[19] = new Civil("STATUE", 0, prix, 2, 4, masque, poutre);
+    prix[argile] = 0; prix[papyrus] = 1; prix[bois] = 1;
+    tabCartesAge2[20] = new Civil("TEMPLE", 0, prix, 2, 4, lune, soleil);
+    prix[bois] = 0; prix[papyrus] = 0; prix[pierre] = 3;
+    tabCartesAge2[21] = new Civil("AQUEDUC", 0, prix, 2, 5, goutte);
+    prix[pierre] = 1; prix[bois] = 1;
+    tabCartesAge2[22] = new Civil("ROSTRES",0,prix,2,4,temple);
+    
+    prix[argile] = 1; prix[verre] = 2;
+    tabCartesAge3[14] = new Civil("PALACE", 0, prix, 3, 7);
+    prix[argile] = 0; prix[verre] = 0; prix[pierre] = 3; prix[bois] = 2;
+    tabCartesAge3[15] = new Civil("HOTEL DE VILLE", 0, prix, 3, 7);
+    prix[bois] = 0; prix[pierre] = 2; prix[verre] = 1;
+    tabCartesAge3[16] = new Civil("OBÉLISQUE", 0, prix, 3, 5);
+    prix[argile] = 2; prix[bois] = 2; prix[verre] = 0; prix[pierre] = 0;
+    tabCartesAge3[17] = new Civil("JARDINS", 0, prix, 3, 6,poutre);
+    prix[argile] = 1; prix[bois] = 1; prix[papyrus] = 2;
+    tabCartesAge3[18] = new Civil("PANTHÉON", 0, prix, 3, 6,soleil);
+    prix[argile] = 2; prix[bois] = 0; prix[papyrus] = 1; prix[pierre] = 1;
+    tabCartesAge3[19] = new Civil("SÉNAT", 0, prix, 3, 5,temple);
+    
+    
+    //GUILDE
+    /*Guilde(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
+     const int &age,
+     const int &pts, const int &piece,
+     const TypeCarte &tc_affectee,
+     const TypeCarte &tc_affectee_2=aucuneCarte)
+  : Batiment(n, cout_piece, cout_prod, age),
+    points_par_carte(pts), piece_par_carte(piece),
+    type_carte_affectee_1(tc_affectee), type_carte_affectee_2(tc_affectee_2){
+  type_carte = guilde;
+}*/
+    prix[pierre] = 0; prix[argile] = 1; prix[bois] = 1; prix[verre] = 1;
+    tabCartesGuilde[0] = new Guilde("GUILDE DES COMMERÇANTS", 0, prix, 0, 1,1,batimentCommerce);
+    prix[bois] = 0; prix[pierre] = 1;
+    tabCartesGuilde[1] = new Guilde("GUILDE DES ARMATEURS",0,prix,0,1,1,matierePremiere,produitManufacture);
+    prix[bois] = 1; prix[pierre] = 2; prix[papyrus] = 0;
+    tabCartesGuilde[2] = new Guilde("GUILDE DES BÂTISSEURS",0,prix,0,2,0,merveille);
+    prix[bois] = 2; prix[pierre] = 0; prix[papyrus] = 1; prix[verre] = 0;
+    tabCartesGuilde[3] = new Guilde("GUILDE DES MAGISTRATS",0,prix,0,1,1,batimentCivil);
+    prix[argile] = 2; prix[papyrus] = 0;
+    tabCartesGuilde[4] = new Guilde("GUILDE DES SCIENTIFIQUES",0,prix,0,1,1,batimentScientifique);
+    prix[argile] = 0; prix[pierre] = 2;
+    tabCartesGuilde[5] = new Guilde("GUILDE DES USURIERS",0,prix,0,1,0,aucuneCarte);
+    prix[bois] = 0; prix[argile] = 1; prix[papyrus] = 1;
+    tabCartesGuilde[6] = new Guilde("GUILDE DES TACTICIENS",0,prix,0,1,1,batimentMilitaire);
+    
 
 }
 
