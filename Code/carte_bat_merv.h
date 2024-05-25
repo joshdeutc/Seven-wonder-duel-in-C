@@ -139,7 +139,11 @@ public:
     virtual const Chainage getChainage2() const {return aucun;}
     virtual bool estChainee() const {return false;}
     virtual const int getAge() const {return 0;}
-    
+    virtual void set_accessible(bool ac) ;
+    virtual void set_face_visible(bool fv) ;
+    virtual bool get_accessible() const {return false;}
+    virtual bool get_face_visible() const {return false;}
+
     //Affichage
     void afficher(std::ostream& f= cout) const;
 };
@@ -156,6 +160,10 @@ public:
     const Chainage getChainage1() const override { return chainage1; }
     const Chainage getChainage2() const override { return chainage2; }
     bool estChainee() const override { return (chainage1 != aucun || chainage2!=aucun); }
+    void set_accessible(bool ac) override { accesible = ac; set_face_visible(true); }
+    void set_face_visible(bool fv) override { face_visible = fv; }
+    bool get_accessible() const override { return accesible; }
+    bool get_face_visible() const override { return face_visible; }
 
        /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      dans le constructeur mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
