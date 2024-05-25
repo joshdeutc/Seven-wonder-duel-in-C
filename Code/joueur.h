@@ -43,6 +43,12 @@ public:
     void construire_merveille();
     int get_couleur(TypeCarte couleur1,TypeCarte couleur2);
     void choisir_merveille();
+    void afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f);
+    unsigned int nombreCartesDeCategorie(TypeCarte typeRecherche);
+
+    int getNbCartes() const {return nb_cartes;}
+    int getNbJetons() const {return nb_jetons;}
+    int getSolde() const {return solde;}
 };
 
 

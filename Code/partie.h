@@ -23,7 +23,7 @@ private:
     PlateauJetonMilit platJeton;
     Joueur* joueurs[2];
 public:
-    Partie();
+    Partie(TypeJoueur type_joueur1, string identifiant1, TypeJoueur type_joueur2, string identifiant2);
     ~Partie();
     void tour_suivant();
     void fin_age();

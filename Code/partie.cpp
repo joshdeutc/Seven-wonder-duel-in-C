@@ -1,28 +1,24 @@
 #include "partie.h"
 
 
-Partie::Partie() {
+
+Partie::Partie(TypeJoueur type_joueur1, string identifiant1, TypeJoueur type_joueur2, string identifiant2) {
     platAge = PlateauAge(); // Initialiser le plateau de l'âge
     platMilitaire = PlateauJetonMilit(); // Initialiser le plateau militaire
     platMerveille = PlateauMerveille(); // Initialiser le plateau des merveilles
     platJeton = PlateauJetonMilit(); // Initialiser le plateau des jetons
-    joueurs[0] = new Joueur(/* args */); // Créer le joueur 1
-    joueurs[1] = new Joueur(/* args */); // Créer le joueur 2
+    joueurs[0] = new Joueur(type_joueur1, identifiant1); // Créer le joueur 1
+    joueurs[1] = new Joueur(type_joueur2, identifiant2); // Créer le joueur 2
     
     // Autres initialisations si nécessaire
 }
 
 Partie::~Partie() {
-    // Libérer la mémoire allouée pour le tableau de cartes
-    delete[] cartes;
-    
-    
     // Libérer la mémoire allouée pour les joueurs
     for (int i = 0; i < 2; ++i) {
         delete joueurs[i];
     }
-
-    //Libérer la mémoire plateaux
+     delete[] joueurs;
 }
 
 void Partie::tour_suivant(){
@@ -55,7 +51,7 @@ void Partie::victoire_civile(){
     PtV1 += joueurs[0]->getSolde()/3;
     PtV1 += joueurs[1]->getSolde()/3;
 
-    vainqueur =  (PtV1 > PtV2) joueurs[0] : joueurs[1];
+    vainqueur =  (PtV1 > PtV2) ? joueurs[0] : joueurs[1];
 }
 
 void Partie::victoire_scientifique(Joueur j){
@@ -63,7 +59,7 @@ void Partie::victoire_scientifique(Joueur j){
 }
 
 void Partie::distribuer(){
-    //methode  qui peut integrer la classe Plateau, methode qui ressemble a celle de la classe controleur de l'ex SET
+    //methode  qui peut ê integrer dans la classe Plateau, methode qui ressemble a celle de la classe controleur de l'ex SET
 }
 
 
