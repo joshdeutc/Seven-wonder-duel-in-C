@@ -189,16 +189,7 @@ Jeu::Jeu()
     
     
     //GUILDE
-    /*Guilde(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
-     const int &age,
-     const int &pts, const int &piece,
-     const TypeCarte &tc_affectee,
-     const TypeCarte &tc_affectee_2=aucuneCarte)
-  : Batiment(n, cout_piece, cout_prod, age),
-    points_par_carte(pts), piece_par_carte(piece),
-    type_carte_affectee_1(tc_affectee), type_carte_affectee_2(tc_affectee_2){
-  type_carte = guilde;
-}*/
+    
     prix[pierre] = 0; prix[argile] = 1; prix[bois] = 1; prix[verre] = 1;
     tabCartesGuilde[0] = new Guilde("GUILDE DES COMMERÇANTS", 0, prix, 0, 1,1,batimentCommerce);
     prix[bois] = 0; prix[pierre] = 1;
