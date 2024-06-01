@@ -4,33 +4,35 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "jeu.h"
+#include "utils.h"
+
 using namespace std;
 
 #include "carte_bat_merv.h"
 
-class Plateau
-{
-private:
-    //
-public:
-    Plateau(/* args */);
-    ~Plateau();
-    friend class Jeu;
-};
+//class Plateau
+//{
+//private:
+//    //
+//public:
+//    Plateau(/* args */);
+//    ~Plateau();
+//    friend class Jeu;
+//};
+//
+//Plateau::Plateau(/* args */)
+//{
+//}
+//
+//Plateau::~Plateau()
+//{
+//}
 
-Plateau::Plateau(/* args */)
-{
-}
-
-Plateau::~Plateau()
-{
-}
-
-class PlateauAge : public Plateau
+class PlateauAge
 {
 private:
     Carte** cartes = nullptr;
-    vector<Carte*> defausses;
     // vecteur permettant de mettre a jour le plateau
     vector<Carte*> etage1;
     vector<Carte*> etage2;
@@ -43,8 +45,6 @@ public:
     PlateauAge(int Age);
     ~PlateauAge();
     Carte**getCartes() const { return cartes; }
-    const vector<Carte*>& getDefausses() const { return defausses; }
-    void addDefausse(Carte*carte);
     void accessibilite();
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);
@@ -59,7 +59,7 @@ public:
 
 
 
-class PlateauMerveille : public Plateau
+class PlateauMerveille
 {
 private:
     Merveille** cartesPremierPhase = nullptr;
@@ -69,14 +69,26 @@ public:
     ~PlateauMerveille();
 };
 
-class PlateauJetonMilit : public Plateau
+class PlateauJetonMilit
 {
 private:
-
-    JetonProgres** jetonProgres = nullptr;
+    bool jetonMilit1_j1 = false;
+    bool jetonMilit2_j1 = false;
+    bool jetonMilit1_j2 = false;
+    bool jetonMilit2_j2 = false;
+    JetonProgres** jetonprogres = nullptr;
 public:
     PlateauJetonMilit();
     ~PlateauJetonMilit();
+    JetonProgres **getJetonProgres() const { return jetonprogres; }
+    bool getJetonMilit1_j1() const { return jetonMilit1_j1; }
+    bool getJetonMilit2_j1() const { return jetonMilit2_j1; }
+    bool getJetonMilit1_j2() const { return jetonMilit1_j2; }
+    bool getJetonMilit2_j2() const { return jetonMilit2_j2; }
+    void setJetonMilit1_j1(bool b) { jetonMilit1_j1 = b; }
+    void setJetonMilit2_j1(bool b) { jetonMilit2_j1 = b; }
+    void setJetonMilit1_j2(bool b) { jetonMilit1_j2 = b; }
+    void setJetonMilit2_j2(bool b) { jetonMilit2_j2 = b; }
 };
 
 #endif /* PLATEAU_H */

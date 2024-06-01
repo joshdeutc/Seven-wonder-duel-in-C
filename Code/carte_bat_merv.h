@@ -139,12 +139,12 @@ public:
     virtual const Chainage getChainage2() const {return aucun;}
     virtual bool estChainee() const {return false;}
     virtual const int getAge() const {return 0;}
-    virtual void set_accessible(bool ac) {}
+    virtual void set_accessible(bool ac)  {}
     virtual void set_face_visible(bool fv) {}
     virtual bool get_accessible() const {return false;}
     virtual bool get_face_visible() const {return false;}
 
-    
+
     //Affichage
     void afficher(std::ostream& f= cout) const;
 };
@@ -165,7 +165,6 @@ public:
     void set_face_visible(bool fv) override { face_visible = fv; }
     bool get_accessible() const override { return accesible; }
     bool get_face_visible() const override { return face_visible; }
-
 
        /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      dans le constructeur mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
@@ -388,7 +387,7 @@ public:
 };
 
 
-class JetonProgres{
+class JetonProgres : public Carte {
 private:
     const unsigned int solde_apporte;
     const unsigned int points_immediats;
@@ -407,7 +406,7 @@ public:
                  solde_apporte(sld_immediat), points_immediats(pts_immediats), points_condition(pts_condition),
                  ressources_gratuites(ressources), carte_condition(carte_cdt), boucliers_supplementaires(boucliers_supp),
                  effet_rejouer(rejouer), condition_chainage(cdt_chainage), symbole(symb) {}
-    
+
     int getPoints() const { return points_immediats; }
     int getPointsCondition() const { return points_condition; }
     int getSoldeApporte() const { return solde_apporte; }

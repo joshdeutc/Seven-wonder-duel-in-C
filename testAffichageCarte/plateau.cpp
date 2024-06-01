@@ -1,6 +1,5 @@
 #include "plateau.h"
-#include "jeu.h"
-#include "utils.h"
+
 
 PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visible, face_cache etc des Carte
 //s en fonction de l'age
@@ -49,18 +48,23 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             }
             for(int i=0;i<6;i++){
                 cartes[i]->set_face_visible(true);
+                etage1.push_back(cartes[i]);
             }
             for(int i=6;i<11;i++){
                 cartes[i]->set_face_visible(false);
+                etage2.push_back(cartes[i]);
             }
             for(int i=11;i<15;i++){
                 cartes[i]->set_face_visible(true);
+                etage3.push_back(cartes[i]);
             }
             for(int i=15;i<18;i++){
                 cartes[i]->set_face_visible(false);
+                etage4.push_back(cartes[i]);
             }
             for(int i=18;i<20;i++){
                 cartes[i]->set_face_visible(true);
+                etage5.push_back(cartes[i]);
             }
             break;}
         case 2:{
@@ -107,6 +111,7 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             for(int i=0;i<2;i++){
                 cartes[i]->set_face_visible(true);
                 etage1.push_back(cartes[i]);
+                cout<<"taille de etage1 ="<<etage1.size()<<endl;
             }
             for(int i=2;i<5;i++){
                 cartes[i]->set_face_visible(false);
@@ -270,11 +275,11 @@ PlateauMerveille::~PlateauMerveille()
 }
 
 PlateauJetonMilit::PlateauJetonMilit() {
-    jetonProgres = new JetonProgres *[5];
+    jetonprogres = new JetonProgres *[5];
     // Génération d'un tableau de 5 entiers distincts aléatoires
     std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
     for (int i = 0; i < 5; ++i) {
-        jetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
+        jetonprogres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
     }
 //    JetonMilitaire **jetonsMilitaires = new JetonMilitaire *[4];
 //    for (unsigned int i = 0; i < 4; i++) {
@@ -283,10 +288,6 @@ PlateauJetonMilit::PlateauJetonMilit() {
 }
 
 // ******************** PARTIE ACTION JOUEUR ******************//
-
-void PlateauAge::addDefausse(Carte*carte) {
-    defausses.push_back(carte);
-}
 
 
 vector<Carte*>  PlateauAge::trouver_etage_age1(int& choix){
@@ -350,6 +351,7 @@ bool PlateauAge::deviens_accessible_age1(int &choix){
         return false;
     }
     if(getCartes()[choix] == etage[0]){
+        cout<<"test\n";
         pere1=choix+etage.size();
         if(getCartes()[choix+1]==nullptr){
             getCartes()[pere1]->set_accessible(true);
@@ -357,7 +359,7 @@ bool PlateauAge::deviens_accessible_age1(int &choix){
         }
         else return false;
     }
-    if(getCartes()[choix] == etage[etage.size()]){
+    if(getCartes()[choix] == etage[etage.size()-1]){
         pere1=choix+etage.size()-1;
         if(getCartes()[choix-1]==nullptr){
             getCartes()[pere1]->set_accessible(true);
@@ -382,35 +384,34 @@ bool PlateauAge::deviens_accessible_age1(int &choix){
 }
 
 bool PlateauAge::deviens_accessible_age2(int &choix) {
-    vector <Carte
- *> etage = trouver_etage_age2(choix);
+    vector <Carte*> etage = trouver_etage_age2(choix);
     int pere1 = choix + etage.size();// pere de gauche
     int pere2 = choix + etage.size() + 1; // pere de droite
     if(etage==etage5){
         return false;
     }
-    if(getCartes()[choix] == etage[0]){
-        getCartes()[pere2]->set_accessible(true);
-        if(getCartes()[choix+1]==nullptr){
-            getCartes()[pere1]->set_accessible(true);
+    if(cartes[choix] == etage[0]){
+        getCartes()[pere1]->set_accessible(true);
+        if(cartes[choix+1]==nullptr){
+            getCartes()[pere2]->set_accessible(true);
         }
         return true;
     }
-    if(getCartes()[choix]==etage[etage.size()]) {
-        getCartes()[pere1]->set_accessible(true);
-        if (getCartes()[choix - 1] == nullptr) {
-            getCartes()[pere2]->set_accessible(true);
+    if(cartes[choix]==etage[etage.size()-1]) {
+        getCartes()[pere2]->set_accessible(true);
+        if (cartes[choix - 1] == nullptr) {
+            getCartes()[pere1]->set_accessible(true);
         }
         return true;
     }
     else{
-        if(getCartes()[choix+1]==nullptr){
-            getCartes()[pere1]->set_accessible(true);
-        }
-        if(getCartes()[choix-1]==nullptr){
+        if(cartes[choix+1]==nullptr){
             getCartes()[pere2]->set_accessible(true);
         }
-        if(getCartes()[choix+1]==nullptr || getCartes()[choix-1]==nullptr){
+        if(cartes[choix-1]==nullptr){
+            getCartes()[pere1]->set_accessible(true);
+        }
+        if(cartes[choix+1]==nullptr || cartes[choix-1]==nullptr){
             return true;
         }
         else return false;
@@ -428,28 +429,28 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
         //cas du cas ou l'on est comme dans l'age 2
         pere1 = choix + etage.size();// pere de gauche
         pere2 = choix + etage.size() + 1; // pere de droite
-        if(getCartes()[choix] == etage[0]){
-            getCartes()[pere2]->set_accessible(true);
-            if(getCartes()[choix+1]==nullptr){
-                getCartes()[pere1]->set_accessible(true);
+        if(cartes[choix] == etage[0]){
+            getCartes()[pere1]->set_accessible(true);
+            if(cartes[choix+1]==nullptr){
+                getCartes()[pere2]->set_accessible(true);
             }
             return true;
         }
-        if(getCartes()[choix]==etage[etage.size()]) {
-            getCartes()[pere1]->set_accessible(true);
-            if (getCartes()[choix - 1] == nullptr) {
-                getCartes()[pere2]->set_accessible(true);
+        if(cartes[choix]==etage[etage.size()-1]) {
+            getCartes()[pere2]->set_accessible(true);
+            if (cartes[choix - 1] == nullptr) {
+                getCartes()[pere1]->set_accessible(true);
             }
             return true;
         }
         else{
-            if(getCartes()[choix+1]==nullptr){
-                getCartes()[pere1]->set_accessible(true);
-            }
-            if(getCartes()[choix-1]==nullptr){
+            if(cartes[choix+1]==nullptr){
                 getCartes()[pere2]->set_accessible(true);
             }
-            if(getCartes()[choix+1]==nullptr || getCartes()[choix-1]==nullptr){
+            if(cartes[choix-1]==nullptr){
+                getCartes()[pere1]->set_accessible(true);
+            }
+            if(cartes[choix+1]==nullptr || cartes[choix-1]==nullptr){
                 return true;
             }
             else return false;
@@ -465,7 +466,7 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
             }
             else return false;
         }
-        if(getCartes()[choix] == etage[etage.size()]){
+        if(getCartes()[choix] == etage[etage.size()-1]){
             pere1=choix+etage.size()-1;
             if(getCartes()[choix-1]==nullptr){
                 getCartes()[pere1]->set_accessible(true);
@@ -524,8 +525,14 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
             }
         }
         if(etage==etage4){
-            pere1=choix+etage.size();//pere de gauche
-            pere2=choix+etage.size()+1;// pere de droite
+            if(choix==9){
+                pere1=choix+etage.size();//pere de gauche
+                pere2=choix+etage.size()+1;// pere de droite
+            }
+            else{
+                pere1=choix+etage.size()+1;//pere de gauche
+                pere2=choix+etage.size()+2;// pere de droite
+            }
             getCartes()[pere1]->set_accessible(true);
             getCartes()[pere2]->set_accessible(true);
             return true;
@@ -536,29 +543,34 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
 
 void PlateauAge::accessibilite(){
     for(int i=0;i<20;i++){
-        if(getCartes()[i]->get_accessible() == true){
-            cout<<"n°"<<i;
-            getCartes()[i]->afficher(cout);
+        if(cartes[i]){
+            if(getCartes()[i]->get_accessible() == true){
+                cout<<"carte numero : "<<i<<"\n"<<endl;
+                getCartes()[i]->afficher(cout);
+                cout<<"\n";
+            }
         }
     }
 }
 void PlateauAge::destruction_carte_plateau_age1(int &choix) {
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age1(choix);
+    cout<<"on est sortis  de deviens_accessible_age1\n";
     // on détruit la carte
-    this->getCartes()[choix] = nullptr;
+    cartes[choix] = nullptr;
+    cout<<"on est sortis  de destruction_carte_plateau_age1\n";
 }
 
 void PlateauAge::destruction_carte_plateau_age2(int &choix) {
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age2(choix);
     // on détruit la carte
-    this->getCartes()[choix] = nullptr;
+    cartes[choix] = nullptr;
 }
 
 void PlateauAge::destruction_carte_plateau_age3(int &choix){
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age3(choix);
     // on détruit la carte
-    this->getCartes()[choix] = nullptr;
+    cartes[choix] = nullptr;
 }

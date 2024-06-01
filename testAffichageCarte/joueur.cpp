@@ -1,5 +1,5 @@
 #include "joueur.h"
-//#define NB_SYMB 6
+#define NB_SYMB 6
 
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
 //Des modifications devront être faites pour utiliser le polymorphisme pour un bon fonctionnement du code
@@ -43,7 +43,7 @@ void Joueur::ajouterJeton(JetonProgres* jeton){
     points+=jeton->getPoints();
     solde+=jeton->getSoldeApporte();
     if(jeton->getSymbole()!=aucunSymbole) symboles[jeton->getSymbole()]=1;
-
+    
     //ajout du jeton aux attributs du joueur
     jetons[nb_jetons++] = jeton;
 }
@@ -63,7 +63,7 @@ bool Joueur::prixFixe(Ressource r){
 //ainsi que le retirer du plateau Age
 void Joueur::defausser(){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
-
+    
     int gain=2;
     for(int i=0;i<nb_cartes;i++)
         if (cartes[i]->getType() == batimentCommerce)
@@ -75,12 +75,12 @@ void Joueur::ajouterCarte(const Carte& c){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
     if (nb_cartes == nb_cartesMax)
-    {
+        {
         const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
         for (size_t i = 0; i < nb_cartes; i++) newtab[i] = cartes[i];
         auto old = cartes;       cartes = newtab;   delete[] old;
         nb_cartesMax = (nb_cartesMax + 1) * 2;
-    }
+        }
     cartes[nb_cartes++] = &c;
 }
 
@@ -100,7 +100,7 @@ void Joueur::construireCarte(const Carte& c){
     // verification faite par la méthode action() avec prix_final
     //Actions générales, communes à toutes les cartes
     //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
-
+    
     if(c.getRessource()!=aucuneRessource){
         ressources_prod[c.getRessource()]+=c.getNb();
     }
@@ -108,8 +108,8 @@ void Joueur::construireCarte(const Carte& c){
         for (int i = 0; i < NB_RESSOURCES; ++i) {
             if (c.getRessourcesAffectees()[i]) {
                 ressources_non_prod[i] ++;
+                }
             }
-        }
     }
     points+=c.getPoints();
     solde+=c.getSoldeApporte();
@@ -119,7 +119,7 @@ void Joueur::construireCarte(const Carte& c){
     if(c.getPieceParCarte()>0){
         solde += c.getPieceParCarte()*nombreCartesDeCategorie(c.getTypeCarteAffectee());
     }
-
+    
     ajouterCarte(c);
 }
 

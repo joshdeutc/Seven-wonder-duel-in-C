@@ -139,8 +139,8 @@ public:
     virtual const Chainage getChainage2() const {return aucun;}
     virtual bool estChainee() const {return false;}
     virtual const int getAge() const {return 0;}
-    virtual void set_accessible(bool ac) ;
-    virtual void set_face_visible(bool fv) ;
+    virtual void set_accessible(bool ac) {}
+    virtual void set_face_visible(bool fv) {}
     virtual bool get_accessible() const {return false;}
     virtual bool get_face_visible() const {return false;}
 

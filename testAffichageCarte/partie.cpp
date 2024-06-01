@@ -2,9 +2,9 @@
 
 
 Partie::Partie(const TypeJoueur &typJ1,const TypeJoueur &typJ2,string id1,string id2) :
-        platAge(1),platMilitaire(),
-        platMerveille(),
-        joueurs{new Joueur(typJ1,id1),new Joueur(typJ2,id2)}
+    platAge(1),platMilitaire(),
+    platMerveille(),
+    joueurs{new Joueur(typJ1,id1),new Joueur(typJ2,id2)}
 {   }
 
 Partie::~Partie() {
@@ -118,7 +118,7 @@ void Partie::selection_action(Joueur &j_current){
                     change_solde_militaire(platMilitaire, j_current,choix1);
                 }
                 //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age1(choix1);
+               platAge.destruction_carte_plateau_age1(choix1);
             }
             if(age==2){
                 cout<<"choisissser un batiment a construire"<<endl;
@@ -155,7 +155,7 @@ void Partie::selection_action(Joueur &j_current){
                 }
                 // mis a jour du plateau militaire si besoin
                 if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
+                change_solde_militaire(platMilitaire, j_current,choix1);
                 }
                 //mettre a jour le plateau
                 platAge.destruction_carte_plateau_age3(choix1);

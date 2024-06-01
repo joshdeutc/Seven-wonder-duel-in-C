@@ -4,29 +4,32 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "jeu.h"
+#include "utils.h"
+
 using namespace std;
 
 #include "carte_bat_merv.h"
 
-class Plateau
-{
-private:
-    //
-public:
-    Plateau(/* args */);
-    ~Plateau();
-    friend class Jeu;
-};
+//class Plateau
+//{
+//private:
+//    //
+//public:
+//    Plateau(/* args */);
+//    ~Plateau();
+//    friend class Jeu;
+//};
+//
+//Plateau::Plateau(/* args */)
+//{
+//}
+//
+//Plateau::~Plateau()
+//{
+//}
 
-Plateau::Plateau(/* args */)
-{
-}
-
-Plateau::~Plateau()
-{
-}
-
-class PlateauAge : public Plateau
+class PlateauAge
 {
 private:
     Carte** cartes = nullptr;
@@ -56,7 +59,7 @@ public:
 
 
 
-class PlateauMerveille : public Plateau
+class PlateauMerveille
 {
 private:
     Merveille** cartesPremierPhase = nullptr;
@@ -66,7 +69,7 @@ public:
     ~PlateauMerveille();
 };
 
-class PlateauJetonMilit : public Plateau
+class PlateauJetonMilit
 {
 private:
     bool jetonMilit1_j1 = false;
