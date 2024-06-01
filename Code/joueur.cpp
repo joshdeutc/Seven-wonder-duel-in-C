@@ -25,6 +25,8 @@ int Joueur::nbSymboles() const{
     return nb;
 }
 
+// A appeler dans partie avant d'appeler la construction de la carte (sinon ça retournera
+// forcément vrai)
 bool Joueur::doubleSymbole(SymboleScientifique s){
     if (s == aucunSymbole) return false;
     int nb = 0;
@@ -37,7 +39,7 @@ bool Joueur::doubleSymbole(SymboleScientifique s){
 
 //Cette méthode se charge d'effectuer les effets immédiats d'un jeton progrès.
 //Les autres effets seront gérés par d'autres classes au moment pertinent
-void Joueur::ajouter_jeton(JetonProgres* jeton){
+void Joueur::ajouterJeton(JetonProgres* jeton){
     points+=jeton->getPoints();
     solde+=jeton->getSoldeApporte();
     if(jeton->getSymbole()!=aucunSymbole) symboles[jeton->getSymbole()]=1;
@@ -46,13 +48,11 @@ void Joueur::ajouter_jeton(JetonProgres* jeton){
     jetons[nb_jetons++] = jeton;
 }
 
-
 // Cette fonction renvoie vrai si la ressource r est au prix fixe de 1 piece pour le joueur
-bool Joueur::prix_fixe(Ressource r){
+bool Joueur::prixFixe(Ressource r){
     for(int i=0;i<nb_cartes;i++)
-        if(cartes[i]->getType()==batimentCommerce)
-            if(cartes[i]->engendrePrixFixe() && cartes[i]->getRessourcesAffectees()[r])
-                return true;
+        if(cartes[i]->engendrePrixFixe() && cartes[i]->getRessourcesAffectees()[r])
+            return true;
     return false;
 }
 
@@ -71,7 +71,7 @@ void Joueur::defausser(){
     solde += gain;
 }
 
-void Joueur::ajouter_carte(const Carte& c){
+void Joueur::ajouterCarte(const Carte& c){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
     if (nb_cartes == nb_cartesMax)
@@ -84,39 +84,51 @@ void Joueur::ajouter_carte(const Carte& c){
     cartes[nb_cartes++] = &c;
 }
 
-
-void Joueur::construire_batiment(const Batiment& bat){
+// Partie s'occupe des boucliers
+// Partie s'occupe de savoir s'il y a victoire scientifique (nbSymboles a appeler après cette fonction)
+// Partie s'occupe de savoir s'il y a pioche de jeton (doubleSymboles a appeler avant cette fonction)
+// Partie s'occupe de retirer un solde a l'adversaire (c.getSoldeRetireAdversaire())
+// Partie s'occupe de savoir s'il faut piocher un jeton (c.getTirage())
+// Partie s'occupe de savoir si le joueur rejoue (c.getRejouer())
+// Partie s'occupe de savoir si le joueur pioche dans la défausse (c.getPiocheDefausse())
+// Partie s'occupe de savoir si le joueur défausse une carte de son adversaire (c.getDefausseAdversaire())
+// Partie s'occupe d'ajouter au Joueur les choses à conditions CiteMax (getPieceParCarteMax())
+// dans l'immediat.
+// Partie s'occupe également d'ajouter en fin de partie (méthode victoire civile) les choses à condition CiteMax (getPointsParCarte())
+void Joueur::construireCarte(const Carte& c){
     //Si cette methode est appelee, les conditions pour que le joueur construise ce batiment sont reunies,
     // verification faite par la méthode action() avec prix_final
+    //Actions générales, communes à toutes les cartes
+    //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
     
-    //Actions générales, communes à tous les bâtiments
-    
-    //Faire toutes les actions spécifiques aux différents types de cartes:
-    
-    if (c.getType()==batimentScientifique){
-        symboles[c.getSymbole()]+=1;
-        ajouter_batiment(c);
-        //Il faudra tester dans la classe Partie :
-        // if (nb_symboles()>6) victoire_scientifique();
-    }else if (bat.getType() == batimentCommerce){
-        //Actions sur les ressources
-        cout << "pass";
-    }else if (bat.type=="Civil"){
-        points += bat.points;
-    } else if (bat.type=="MatierePremiere" || bat.type=="MatiereManufacture"){
-        ressources_prod[bat.ressource] +=1;
-    } else if (bat.type == "Militaire"){
-        instance_de_partie.change_solde_militaire(this,bat.bouclier);
-        //Toujours la même question de comment trouver l'instance de la partie
-        //qu'on est en train de jouer.
-    } else if (type=="Guilde"){
-        //action des cardes Guilde
-        //compliqué
-        cout << "a faire";
+    if(c.getRessource()!=aucuneRessource){
+        ressources_prod[c.getRessource()]+=c.getNb();
     }
+    if(c.engendreProduction()){
+        for (int i = 0; i < NB_RESSOURCES; ++i) {
+            if (c.getRessourcesAffectees()[i]) {
+                ressources_non_prod[i] ++;
+                }
+            }
+    }
+    points+=c.getPoints();
+    solde+=c.getSoldeApporte();
+    if(c.getSymbole()!=aucunSymbole){
+        symboles[c.getSymbole()]++;
+    }
+    if(c.getPieceParCarte()>0){
+        solde += c.getPieceParCarte()*nombreCartesDeCategorie(c.getTypeCarteAffectee());
+    }
+    
+    ajouterCarte(c);
 }
 
-
+void Joueur::supprimerCarte(const Carte& c){
+    int i=0;
+    while(cartes[i]->getNom()!=c.getNom()) i++;
+    while(i<nb_cartes-1) cartes[i]=cartes[i+1];
+    nb_cartes--;
+}
 
 void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f)  {
     for (int i = 0; i < nb_cartes; ++i) {

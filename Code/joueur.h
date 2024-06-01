@@ -33,22 +33,23 @@ public:
     ~Joueur();
     int nbSymboles() const;
     bool doubleSymbole(SymboleScientifique s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
-    void ajouter_jeton(JetonProgres* jeton);
+    void ajouterJeton(JetonProgres* jeton);
     void action();
-    bool prix_fixe(Ressource r);
+    bool prixFixe(Ressource r);
     void defausser();
-    void ajouter_carte(const Carte& c);
-    void construire_carte(const Carte& c);
+    void ajouterCarte(const Carte& c);
+    void construireCarte(const Carte& c);
+    void supprimerCarte(const Carte& c);
     bool possede_chainage(string Nom_Chaine);
-    void construire_merveille();
     int get_couleur(TypeCarte couleur1,TypeCarte couleur2);
-    void choisir_merveille();
     void afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f);
     unsigned int nombreCartesDeCategorie(TypeCarte typeRecherche);
-
     int getNbCartes() const {return nb_cartes;}
     int getNbJetons() const {return nb_jetons;}
     int getSolde() const {return solde;}
+    void setSolde(int s) {solde = s;}
+    int getPoints() const {return points;}
+    void setPoints(int p) {points = p;}
 };
 
 

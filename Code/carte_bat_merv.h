@@ -139,11 +139,12 @@ public:
     virtual const Chainage getChainage2() const {return aucun;}
     virtual bool estChainee() const {return false;}
     virtual const int getAge() const {return 0;}
-    virtual void set_accessible(bool ac) ;
-    virtual void set_face_visible(bool fv) ;
+    virtual void set_accessible(bool ac) {}
+    virtual void set_face_visible(bool fv) {}
     virtual bool get_accessible() const {return false;}
     virtual bool get_face_visible() const {return false;}
 
+    
     //Affichage
     void afficher(std::ostream& f= cout) const;
 };
@@ -164,6 +165,7 @@ public:
     void set_face_visible(bool fv) override { face_visible = fv; }
     bool get_accessible() const override { return accesible; }
     bool get_face_visible() const override { return face_visible; }
+
 
        /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      dans le constructeur mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
@@ -386,7 +388,7 @@ public:
 };
 
 
-class JetonProgres : public Carte {
+class JetonProgres{
 private:
     const unsigned int solde_apporte;
     const unsigned int points_immediats;
@@ -398,26 +400,23 @@ private:
     const bool condition_chainage;
     SymboleScientifique symbole;
 public:
-    JetonProgres(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
+    JetonProgres(const string& n,
                  const unsigned int sld_immediat,const unsigned int pts_immediats,
                  const unsigned int pts_condition,const unsigned int ressources,TypeCarte carte_cdt,
                  bool cdt_chainage,int boucliers_supp,bool rejouer,SymboleScientifique symb) :
-                 Carte(n, cout_piece, cout_prod),
                  solde_apporte(sld_immediat), points_immediats(pts_immediats), points_condition(pts_condition),
                  ressources_gratuites(ressources), carte_condition(carte_cdt), boucliers_supplementaires(boucliers_supp),
-                 effet_rejouer(rejouer), condition_chainage(cdt_chainage), symbole(symb) {
-        type_carte = jetonProgres;
-    }
+                 effet_rejouer(rejouer), condition_chainage(cdt_chainage), symbole(symb) {}
     
-    int getPoints() const override { return points_immediats; }
+    int getPoints() const { return points_immediats; }
     int getPointsCondition() const { return points_condition; }
-    int getSoldeApporte() const override { return solde_apporte; }
+    int getSoldeApporte() const { return solde_apporte; }
     int getRessourcesGratuites() const { return ressources_gratuites; }
     TypeCarte getTypeCarteCondition() const { return carte_condition; }
-    int getBoucliers() const override { return boucliers_supplementaires; }
+    int getBoucliers() const { return boucliers_supplementaires; }
     bool getEffetRejouer() const { return effet_rejouer; }
     bool getCondChainage() const { return condition_chainage; }
-    SymboleScientifique getSymbole() const override { return symbole; }
+    SymboleScientifique getSymbole() const { return symbole; }
 
     ~JetonProgres() = default;
 };
