@@ -43,13 +43,13 @@ void Joueur::ajouterJeton(JetonProgres* jeton){
     points+=jeton->getPoints();
     solde+=jeton->getSoldeApporte();
     if(jeton->getSymbole()!=aucunSymbole) symboles[jeton->getSymbole()]=1;
-
+    
     //ajout du jeton aux attributs du joueur
     jetons[nb_jetons++] = jeton;
 }
 
 // Cette fonction renvoie vrai si la ressource r est au prix fixe de 1 piece pour le joueur
-bool Joueur::prixFixe(Ressource r){
+bool Joueur::prixFixe(Ressource r) const{
     for(int i=0;i<nb_cartes;i++)
         if(cartes[i]->engendrePrixFixe() && cartes[i]->getRessourcesAffectees()[r])
             return true;
@@ -63,7 +63,7 @@ bool Joueur::prixFixe(Ressource r){
 //ainsi que le retirer du plateau Age
 void Joueur::defausser(){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
-
+    
     int gain=2;
     for(int i=0;i<nb_cartes;i++)
         if (cartes[i]->getType() == batimentCommerce)
@@ -75,12 +75,12 @@ void Joueur::ajouterCarte(const Carte& c){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
     if (nb_cartes == nb_cartesMax)
-    {
+        {
         const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
         for (size_t i = 0; i < nb_cartes; i++) newtab[i] = cartes[i];
         auto old = cartes;       cartes = newtab;   delete[] old;
         nb_cartesMax = (nb_cartesMax + 1) * 2;
-    }
+        }
     cartes[nb_cartes++] = &c;
 }
 
@@ -95,12 +95,15 @@ void Joueur::ajouterCarte(const Carte& c){
 // Partie s'occupe d'ajouter au Joueur les choses à conditions CiteMax (getPieceParCarteMax())
 // dans l'immediat.
 // Partie s'occupe également d'ajouter en fin de partie (méthode victoire civile) les choses à condition CiteMax (getPointsParCarte())
-void Joueur::construireCarte(const Carte& c){
+void Joueur::construireCarte(const Carte& c, const Joueur& other){
     //Si cette methode est appelee, les conditions pour que le joueur construise ce batiment sont reunies,
     // verification faite par la méthode action() avec prix_final
     //Actions générales, communes à toutes les cartes
     //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
-
+    
+    
+    solde -= prixFinal(c, other);
+    
     if(c.getRessource()!=aucuneRessource){
         ressources_prod[c.getRessource()]+=c.getNb();
     }
@@ -108,8 +111,8 @@ void Joueur::construireCarte(const Carte& c){
         for (int i = 0; i < NB_RESSOURCES; ++i) {
             if (c.getRessourcesAffectees()[i]) {
                 ressources_non_prod[i] ++;
+                }
             }
-        }
     }
     points+=c.getPoints();
     solde+=c.getSoldeApporte();
@@ -119,7 +122,7 @@ void Joueur::construireCarte(const Carte& c){
     if(c.getPieceParCarte()>0){
         solde += c.getPieceParCarte()*nombreCartesDeCategorie(c.getTypeCarteAffectee());
     }
-
+    
     ajouterCarte(c);
 }
 
@@ -130,7 +133,17 @@ void Joueur::supprimerCarte(const Carte& c){
     nb_cartes--;
 }
 
-void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f)  {
+bool Joueur::possedeChainage(Chainage ch) const {
+    if(ch==aucun) return false;
+    for (int i=0;i<nb_cartes;i++){
+        if(cartes[i]->getChainage1()==ch || cartes[i]->getChainage2()==ch){
+            return true;
+        }
+    }
+    return false;
+}
+
+void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f) const {
     for (int i = 0; i < nb_cartes; ++i) {
         if (cartes[i]->getType() == typeRecherche) {
             cartes[i]->afficher(f);
@@ -138,7 +151,16 @@ void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f)  {
     }
 }
 
-unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche)  {
+void Joueur::afficherCartes() const{
+    for (int i=0;i<NB_TYPES_CARTES;i++){
+        if(nombreCartesDeCategorie(static_cast<TypeCarte>(i))){
+            cout << "Cartes " << static_cast<TypeCarte>(i) << ": "<< endl;
+            afficherCartesDeCategorie(static_cast<TypeCarte>(i));
+        }
+    }
+}
+
+unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche) const {
     unsigned int nombre = 0;
     for (int i = 0; i < nb_cartes; ++i) {
         if (cartes[i]->getType() == typeRecherche) {
@@ -146,4 +168,41 @@ unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche)  {
         }
     }
     return nombre;
+}
+
+int Joueur::prixFinal(const Carte& c, const Joueur& other) const{
+    int prix = c.getCoutPiece();
+    
+    int choixGris = 0; //Nombre de produits manufacurés choisis en ressource non produite directement
+    int choixMarron = 0; //Nombre de matières premières choisies en ressource non produite directement
+    bool choix = false;
+    
+    // Condition de construction gratuite
+    if(possedeChainage(c.getChainage1())||possedeChainage(c.getChainage2())) return 0;
+    
+    for (int i=0;i<NB_RESSOURCES;i++){
+        // On vérifie si le joueur ne produit pas déjà les ressources nécessaires
+        if(c.getCoutRessources()[i]>ressources_prod[i]){
+            // Choix des ressources non produites directement
+            choix = false;
+            if(ressources_non_prod[i]>0){
+                if(i<3 && ressources_non_prod[i]>choixMarron){ // Matière première (marron)
+                    choixMarron++;
+                    choix = true;
+                }
+                else if(i<5 && ressources_non_prod[i]>choixGris){ // Produit manufacure (gris)
+                    choixGris++;
+                    choix = true;
+                }
+            }if(!choix){
+                if(prixFixe(static_cast<Ressource>(i))){
+                    prix +=1;
+                }else{
+                    prix += (c.getCoutRessources()[i]-ressources_prod[i])*(2+other.getRessourcesProduites()[i]);
+                }
+            }
+        }
+    }
+    
+    return prix;
 }
