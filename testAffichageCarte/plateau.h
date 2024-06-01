@@ -30,6 +30,7 @@ class PlateauAge : public Plateau
 {
 private:
     Carte** cartes = nullptr;
+    vector<Carte*> defausses;
     // vecteur permettant de mettre a jour le plateau
     vector<Carte*> etage1;
     vector<Carte*> etage2;
@@ -42,6 +43,8 @@ public:
     PlateauAge(int Age);
     ~PlateauAge();
     Carte**getCartes() const { return cartes; }
+    const vector<Carte*>& getDefausses() const { return defausses; }
+    void addDefausse(Carte*carte);
     void accessibilite();
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);
@@ -69,23 +72,11 @@ public:
 class PlateauJetonMilit : public Plateau
 {
 private:
-    bool jetonMilit1_j1 = false;
-    bool jetonMilit2_j1 = false;
-    bool jetonMilit1_j2 = false;
-    bool jetonMilit2_j2 = false;
-    JetonProgres** JetProgres = nullptr;
+
+    JetonProgres** jetonProgres = nullptr;
 public:
     PlateauJetonMilit();
     ~PlateauJetonMilit();
-    JetonProgres **getJetonProgres() const { return JetProgres; }
-    bool getJetonMilit1_j1() const { return jetonMilit1_j1; }
-    bool getJetonMilit2_j1() const { return jetonMilit2_j1; }
-    bool getJetonMilit1_j2() const { return jetonMilit1_j2; }
-    bool getJetonMilit2_j2() const { return jetonMilit2_j2; }
-    void setJetonMilit1_j1(bool b) { jetonMilit1_j1 = b; }
-    void setJetonMilit2_j1(bool b) { jetonMilit2_j1 = b; }
-    void setJetonMilit1_j2(bool b) { jetonMilit1_j2 = b; }
-    void setJetonMilit2_j2(bool b) { jetonMilit2_j2 = b; }
 };
 
 #endif /* PLATEAU_H */

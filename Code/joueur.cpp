@@ -116,3 +116,22 @@ void Joueur::construire_batiment(const Batiment& bat){
     }
 }
 
+
+
+void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f)  {
+    for (int i = 0; i < nb_cartes; ++i) {
+        if (cartes[i]->getType() == typeRecherche) {
+            cartes[i]->afficher(f);
+        }
+    }
+}
+
+unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche)  {
+    unsigned int nombre = 0;
+    for (int i = 0; i < nb_cartes; ++i) {
+        if (cartes[i]->getType() == typeRecherche) {
+            nombre++;
+        }
+    }
+    return nombre;
+}

@@ -1,28 +1,26 @@
 #include "partie.h"
 
 
-Partie::Partie() {
-    platAge = PlateauAge(); // Initialiser le plateau de l'âge
+Partie::Partie(const TypeJoueur &typJ1,const TypeJoueur &typJ2,string id1,string id2) {
+    platAge = PlateauAge(1);
+     // Initialiser le plateau de l'âge
     platMilitaire = PlateauJetonMilit(); // Initialiser le plateau militaire
     platMerveille = PlateauMerveille(); // Initialiser le plateau des merveilles
     platJeton = PlateauJetonMilit(); // Initialiser le plateau des jetons
-    joueurs[0] = new Joueur(/* args */); // Créer le joueur 1
-    joueurs[1] = new Joueur(/* args */); // Créer le joueur 2
-    
-    // Autres initialisations si nécessaire
+    joueurs[0] = new Joueur(typJ1,id1); // Créer le joueur 1
+    joueurs[1] = new Joueur(typJ2,id2); // Créer le joueur 2
 }
 
 Partie::~Partie() {
-    // Libérer la mémoire allouée pour le tableau de cartes
-    delete[] cartes;
-    
-    
+    // Libérer la mémoire allouée pour les plateaux
+    ~PlateauAge();
+    ~PlateauJetonMilit();
+    ~PlateauMerveille();
     // Libérer la mémoire allouée pour les joueurs
     for (int i = 0; i < 2; ++i) {
         delete joueurs[i];
     }
-
-    //Libérer la mémoire plateaux
+     delete[] joueurs;
 }
 
 void Partie::tour_suivant(){
@@ -36,16 +34,40 @@ void Partie::fin_age(){
         else if(age == 2) age = 3;
         else victoire_civile(); //age 3 finit, vict civile
     }
+    else return false;
 }
 
-void Partie::change_solde_militaire(signed int nbBoucliers){
-    solde_militaire += nbBoucliers;
-    if(abs(solde_militaire) >= 9) victoire_militaire();
+void Partie::change_solde_militaire( PlateauJetonMilit &platmilit ){
+    solde_militaire = joueurs[0].get_solde_militaire() - joueurs[1].get_solde_militaire();
+    if(platmilit.getJetonMilit1_j1()==false) {
+        if (solde_militaire >= 3 && solde_militaire <= 5) {
+            joueurs[1].set_solde(-2);
+            platmilit.setJetonMilit1_j1(true);
+        }
+    }
+    if(platmilit.getJetonMilit1_j2()==false) {
+        if (solde_militaire <= -3 && solde_militaire >= -5) {
+            joueurs[0].set_solde(-2);
+            platmilit.setJetonMilit1_j2(true);
+        }
+    }
+    if(platmilit.getJetonMilit2_j1()==false) {
+        if (solde_militaire >= 6 && solde_militaire <= 8) {
+            joueurs[1].set_solde(-5);
+            platmilit.setJetonMilit2_j1(true);
+        }
+    }
+    if(platmilit.getJetonMilit2_j2()==false) {
+        if (solde_militaire <= -6 && solde_militaire >= -8) {
+            joueurs[0].set_solde(-5);
+            platmilit.setJetonMilit2_j2(true);
+        }
+    }
 }
 
 void Partie::victoire_militaire(){
-    if (solde_militaire>9) vainqueur = joueurs[0];
-    else vainqueur = joueurs[1];
+    if (solde_militaire >= 9) vainqueur = joueurs[0];
+    else if(solde_militaire <= -9) vainqueur = joueurs[1];
 }
 
 void Partie::victoire_civile(){
@@ -55,15 +77,22 @@ void Partie::victoire_civile(){
     PtV1 += joueurs[0]->getSolde()/3;
     PtV1 += joueurs[1]->getSolde()/3;
 
-    vainqueur =  (PtV1 > PtV2) joueurs[0] : joueurs[1];
+    vainqueur =  (PtV1 > PtV2) ? joueurs[0] : joueurs[1];
 }
 
 void Partie::victoire_scientifique(Joueur j){
-
 }
 
-void Partie::distribuer(){
-    //methode  qui peut integrer la classe Plateau, methode qui ressemble a celle de la classe controleur de l'ex SET
+// ********************  Partie selection action ********************
+
+void Partie::choix_jeton(Joueur *j) {
+    cout<<"choisissez un jeton"<<endl;
+    int choix;cin>>choix;
+    j->ajouter_jeton(platJeton.getJetonProgres()[choix]);
+}
+
+void Partie::addDefausse(Carte*carte) {
+    defausses.push_back(carte);
 }
 
 
@@ -84,8 +113,15 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
-                // ( je ne sais pas si construire batiment le fais ** voir chloe**)
-                j.construire_carte(platage.getCartes()[choix1]);
+
+                // construction de la carte
+                j.construire_carte(*platage.getCartes()[choix1]);
+                //verification que la carte scientifique n'implique pas un jeton
+                if(platage.getCartes()[choix1]->getType()==batimentScientifique){
+                    if(j.doubleSymbole(platage.getCartes()[choix1]->getSymbole())){
+                        choix_jeton(&j);
+                    }
+                }
                 //mettre a jour le plateau
                platage.destruction_carte_plateau_age1(choix1);
             }
@@ -93,8 +129,15 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
-                // ( je ne sais pas si construire batiment le fais ** voir chloe**)
-                j.construire_carte(platage.getCartes()[choix1]);
+
+                // construction de la carte
+                j.construire_carte(*platage.getCartes()[choix1]);
+                //verification que la carte scientifique n'implique pas un jeton
+                if(platage.getCartes()[choix1]->getType()==batimentScientifique){
+                    if(j.doubleSymbole(platage.getCartes()[choix1]->getSymbole())){
+                        choix_jeton(&j);
+                    }
+                }
                 //mettre a jour le plateau
                 platage.destruction_carte_plateau_age2(choix1);
             }
@@ -102,7 +145,15 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
-                j.construire_carte(platage.getCartes()[choix1]);
+
+                // construction de la carte
+                j.construire_carte(*platage.getCartes()[choix1]);
+                //verification que la carte scientifique n'implique pas un jeton
+                if(platage.getCartes()[choix1]->getType()==batimentScientifique){
+                    if(j.doubleSymbole(platage.getCartes()[choix1]->getSymbole())){
+                        choix_jeton(&j);
+                    }
+                }
                 //mettre a jour le plateau
                 platage.destruction_carte_plateau_age3(choix1);
             }
@@ -115,7 +166,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
                 // ( je ne sais pas si construire batiment le fais ** voir chloe**)
-                j.construire_merveille(platage.getCartes()[choix1]);
+                j.construire_carte(*platage.getCartes()[choix1]);
                 //mettre a jour le plateau
                 platage.destruction_carte_plateau_age1(choix1);
             }
@@ -124,7 +175,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
                 // ( il faut une méthode construire une merveille ** voir chloe**)
-                j.construire_merveille(platage.getCartes()[choix1]);
+                j.construire_carte(*platage.getCartes()[choix1]);
                 //mettre a jour le plateau
                 platage.destruction_carte_plateau_age2(choix1);
             }
@@ -133,7 +184,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
                 // ( il faut une méthode construire une merveille ** voir chloe**)
-                j.construire_merveille(platage.getCartes()[choix1]);
+                j.construire_carte(*platage.getCartes()[choix1]);
                 //mettre a jour le plateau
                 platage.destruction_carte_plateau_age3(choix1);
             }
@@ -144,7 +195,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
             int choix1;cin>>choix1;
             if(age==1){
                 // defausser
-                platage.addDefausse(platage.getCartes()[choix1]);
+                addDefausse(platage.getCartes()[choix1]);
                 // augmenter le solde du joueur
                 j.defausser();
                 //mettre a jour le plateau
@@ -152,7 +203,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
             }
             if(age==2){
                 // defausser
-                platage.addDefausse(platage.getCartes()[choix1]);
+                addDefausse(platage.getCartes()[choix1]);
                 // augmenter le solde du joueur
                 j.defausser();
                 //mettre a jour le plateau
@@ -160,7 +211,7 @@ void Partie::selection_action(Joueur &j,PlateauAge &platage){
             }
             if(age==3){
                 // defausser
-                platage.addDefausse(platage.getCartes()[choix1]);
+                addDefausse(platage.getCartes()[choix1]);
                 // augmenter le solde du joueur
                 j.defausser();
                 //mettre a jour le plateau

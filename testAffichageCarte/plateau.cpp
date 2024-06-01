@@ -270,16 +270,23 @@ PlateauMerveille::~PlateauMerveille()
 }
 
 PlateauJetonMilit::PlateauJetonMilit() {
-    JetonProgres **jetonProgres = new JetonProgres *[5];
+    jetonProgres = new JetonProgres *[5];
     // Génération d'un tableau de 5 entiers distincts aléatoires
     std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
     for (int i = 0; i < 5; ++i) {
         jetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
     }
+//    JetonMilitaire **jetonsMilitaires = new JetonMilitaire *[4];
+//    for (unsigned int i = 0; i < 4; i++) {
+//        JetonsMilitaires[i] = Jeu::getInstance()->getTabJetonMilitaire()[i];
+//    }
 }
 
 // ******************** PARTIE ACTION JOUEUR ******************//
 
+void PlateauAge::addDefausse(Carte*carte) {
+    defausses.push_back(carte);
+}
 
 
 vector<Carte*>  PlateauAge::trouver_etage_age1(int& choix){
@@ -295,9 +302,7 @@ vector<Carte*>  PlateauAge::trouver_etage_age1(int& choix){
     else if(15<=choix && choix<=17){
         return etage4;
     }
-    else if(18<=choix && choix<=19){
-        return etage5;
-    }
+    return etage5;
 }
 
 vector<Carte*>  PlateauAge::trouver_etage_age2(int &choix){
@@ -313,9 +318,7 @@ vector<Carte*>  PlateauAge::trouver_etage_age2(int &choix){
     if(9<=choix && choix<=13){
         return etage4;
     }
-    if(14<=choix && choix<=19){
-        return etage5;
-    }
+   return etage5;
 }
 
 vector<Carte*> PlateauAge::trouver_etage_age3(int &choix){
@@ -337,9 +340,7 @@ vector<Carte*> PlateauAge::trouver_etage_age3(int &choix){
     if(15<=choix && choix<=17){
         return etage6;
     }
-    if(18<=choix && choix<=19){
-        return etage7;
-    }
+    return etage7;
 }
 
 bool PlateauAge::deviens_accessible_age1(int &choix){
@@ -417,8 +418,7 @@ bool PlateauAge::deviens_accessible_age2(int &choix) {
 }
 
 bool PlateauAge::deviens_accessible_age3(int &choix){
-    vector<Carte
- *> etage = trouver_etage_age3(choix);
+    vector<Carte*> etage = trouver_etage_age3(choix);
     int pere1,pere2;
     // cas des étages
     if(etage==etage7){
@@ -531,6 +531,7 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
             return true;
         }
     }
+    return false;
 }
 
 void PlateauAge::accessibilite(){

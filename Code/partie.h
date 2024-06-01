@@ -14,6 +14,7 @@ private:
     int merveille_construite = 0;
     int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
     int nb_tour = 0;
+    vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
 
     Jeu* jeu;
@@ -23,16 +24,17 @@ private:
     PlateauJetonMilit platJeton;
     Joueur* joueurs[2];
 public:
-    Partie();
+    Partie(const TypeJoueur &typJ1,const TypeJoueur &typJ2,string id1,string id2);
     ~Partie();
     void tour_suivant();
-    void fin_age();
+    bool fin_age();
     void choix_merveilles();
     void victoire_scientifique(Joueur j);
-    void change_solde_militaire(signed int nb_boucliers);
+    void change_solde_militaire(PlateauJetonMilit &platmilit)
     void victoire_militaire();
     void victoire_civile();
-
+    void addDefausse(Carte*carte);
+    const vector<Carte*>& getDefausses() const { return defausses; }
     // pour faire une action avec un joueur
     void selection_action(Joueur &j,PlateauAge &platage); //Fonction que doit faire Joshua. C'est celle qui permet au joueur j de choisir
     //ce qu'il veut faire (construire un batiment ou une merveille ou bien défausser.)

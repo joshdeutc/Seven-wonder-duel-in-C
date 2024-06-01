@@ -10,14 +10,13 @@ add_executable(projet_lo21
         Code/joueur.h
         Code/main.cpp
         Code/partie.h
-        Code/carte.cpp
         Code/plateau.cpp
         Code/plateau.h
-        Code/batiment.cpp
-        Code/batiment.cpp
         Code/utils.cpp
         Code/carte_bat_merv.h
-        Code/carte_bat_merv.h
         Code/jeu.cpp
+        Code/jeu.h
         Code/partie.cpp
+        Code/carte_bat_merv.cpp
 )
+add_subdirectory(testAffichageCarte)
