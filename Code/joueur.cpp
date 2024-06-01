@@ -92,8 +92,6 @@ void Joueur::ajouterCarte(const Carte& c){
 // Partie s'occupe de savoir si le joueur rejoue (c.getRejouer())
 // Partie s'occupe de savoir si le joueur pioche dans la défausse (c.getPiocheDefausse())
 // Partie s'occupe de savoir si le joueur défausse une carte de son adversaire (c.getDefausseAdversaire())
-// Partie s'occupe d'ajouter au Joueur les choses à conditions CiteMax (getPieceParCarteMax())
-// dans l'immediat.
 // Partie s'occupe également d'ajouter en fin de partie (méthode victoire civile) les choses à condition CiteMax (getPointsParCarte())
 void Joueur::construireCarte(const Carte& c, const Joueur& other){
     //Si cette methode est appelee, les conditions pour que le joueur construise ce batiment sont reunies,
@@ -121,6 +119,12 @@ void Joueur::construireCarte(const Carte& c, const Joueur& other){
     }
     if(c.getPieceParCarte()>0){
         solde += c.getPieceParCarte()*nombreCartesDeCategorie(c.getTypeCarteAffectee());
+    }
+    if(c.getPieceParCarteMax()>0){
+        if(c.getDeuxiemeTypeCarteAffectee()==aucuneCarte){
+            solde += c.getPieceParCarteMax()*(max(nombreCartesDeCategorie(c.getTypeCarteAffectee()),other.nombreCartesDeCategorie(c.getTypeCarteAffectee())));
+        }else
+            solde += c.getPieceParCarteMax()*(max(nombreCartesDeCategorie(c.getDeuxiemeTypeCarteAffectee())+nombreCartesDeCategorie(c.getTypeCarteAffectee()),other.nombreCartesDeCategorie(c.getDeuxiemeTypeCarteAffectee())+other.nombreCartesDeCategorie(c.getTypeCarteAffectee())));
     }
     
     ajouterCarte(c);
