@@ -2,7 +2,8 @@
 //#define NB_SYMB 6
 
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
-//Des modifications devront être faites pour utiliser le polymorphisme pour un bon fonctionnement du code
+//Il a deux tableaux spécifiques pour les merveilles afin de différencier les merveilles
+//construites des merveilles seulement possédées mais non construites.
 
 Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     type = type_joueur;
@@ -11,6 +12,10 @@ Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     //points, solde et ressources sont deja initialisees
     for(int i=0;i<nb_cartesMax;i++) cartes[i]=nullptr;
     for(int i=0;i<NB_JETONS;i++) jetons[i] = nullptr;
+    for (int i=0; i<7; i++){
+        merveillesConstruites[i] = nullptr;
+        merveillesNonConstruites[i] = nullptr;
+    }
 }
 
 Joueur::~Joueur(){
@@ -64,24 +69,41 @@ bool Joueur::prixFixe(Ressource r) const{
 void Joueur::defausser(){
     //Methode disponible pour toutes les cartes; independamment de la cite du joueur.
     
-    int gain=2;
-    for(int i=0;i<nb_cartes;i++)
-        if (cartes[i]->getType() == batimentCommerce)
-            gain+=2;
+    int gain=2+nombreCartesDeCategorie(batimentCommerce);
     solde += gain;
 }
 
-void Joueur::ajouterCarte(const Carte& c){
+void Joueur::ajouterCarte(const Carte& c, bool construire){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
-    if (nb_cartes == nb_cartesMax)
-        {
-        const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
-        for (size_t i = 0; i < nb_cartes; i++) newtab[i] = cartes[i];
-        auto old = cartes;       cartes = newtab;   delete[] old;
-        nb_cartesMax = (nb_cartesMax + 1) * 2;
+    if (c.getType()==merveille){
+        if(construire){
+            merveillesConstruites[nb_merveilles_construites++] = dynamic_cast<const Merveille*>(&c);
+            // Supprimer la merveille du tableau des non construites si elle est dedans
+            int i = 0;
+            while (i < nb_merveilles_non_construites && merveillesNonConstruites[i]->getNom() != c.getNom()) i++;
+            if (i < nb_merveilles_non_construites) {
+                // Déplacer les éléments après l'élément supprimé
+                for (int j = i; j < nb_merveilles_non_construites - 1; j++) {
+                    merveillesNonConstruites[j] = merveillesNonConstruites[j + 1];
+                }
+                // Décrémenter le compteur et mettre le dernier élément à nullptr
+                merveillesNonConstruites[--nb_merveilles_non_construites] = nullptr;
+            }
+
         }
-    cartes[nb_cartes++] = &c;
+        else
+            merveillesNonConstruites[nb_merveilles_non_construites++] = dynamic_cast<const Merveille*>(&c);
+    }else{
+        if (nb_cartes == nb_cartesMax)
+        {
+            const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
+            for (size_t i = 0; i < nb_cartes; i++) newtab[i] = cartes[i];
+            auto old = cartes;       cartes = newtab;   delete[] old;
+            nb_cartesMax = (nb_cartesMax + 1) * 2;
+        }
+        cartes[nb_cartes++] = &c;
+    }
 }
 
 // Partie s'occupe des boucliers
@@ -127,14 +149,81 @@ void Joueur::construireCarte(const Carte& c, const Joueur& other){
             solde += c.getPieceParCarteMax()*(max(nombreCartesDeCategorie(c.getDeuxiemeTypeCarteAffectee())+nombreCartesDeCategorie(c.getTypeCarteAffectee()),other.nombreCartesDeCategorie(c.getDeuxiemeTypeCarteAffectee())+other.nombreCartesDeCategorie(c.getTypeCarteAffectee())));
     }
     
-    ajouterCarte(c);
+    ajouterCarte(c,true);
 }
 
-void Joueur::supprimerCarte(const Carte& c){
-    int i=0;
-    while(cartes[i]->getNom()!=c.getNom()) i++;
-    while(i<nb_cartes-1) cartes[i]=cartes[i+1];
-    nb_cartes--;
+void Joueur::supprimerCarte(const Carte& c) {
+    int i = 0;
+
+    if (!possedeCarte(c)) {
+        throw WondersException("Erreur : Tentative de supprimer une carte que le joueur ne possède pas.");
+    }
+
+    if (estConstruite(c)) {
+        // Trouver l'index de la carte dans le tableau cartes
+        while (cartes[i]->getNom() != c.getNom()) i++;
+        
+        // Suppression des attributs liés à la carte
+        if (c.getRessource() != aucuneRessource) {
+            ressources_prod[c.getRessource()] -= c.getNb();
+        }
+        if (c.engendreProduction()) {
+            for (int j = 0; j < NB_RESSOURCES; ++j) {
+                if (c.getRessourcesAffectees()[j]) {
+                    ressources_non_prod[j]--;
+                }
+            }
+        }
+        points -= c.getPoints();
+        if (c.getSymbole() != aucunSymbole) {
+            symboles[c.getSymbole()]--;
+        }
+        
+        // Suppression de la carte du tableau cartes ou merveilles du joueur
+        if (c.getType() == merveille) {
+            // Déplacer les éléments du tableau merveillesConstruites
+            for (int j = i; j < nb_merveilles_construites - 1; j++) {
+                merveillesConstruites[j] = merveillesConstruites[j + 1];
+            }
+            merveillesConstruites[--nb_merveilles_construites] = nullptr;
+        } else {
+            // Déplacer les éléments du tableau cartes
+            for (int j = i; j < nb_cartes - 1; j++) {
+                cartes[j] = cartes[j + 1];
+            }
+            cartes[--nb_cartes] = nullptr;
+        }
+    } else {
+        // Trouver l'index de la carte dans le tableau merveillesNonConstruites
+        while (merveillesNonConstruites[i]->getNom() != c.getNom()) i++;
+        
+        // Déplacer les éléments du tableau merveillesNonConstruites
+        for (int j = i; j < nb_merveilles_non_construites - 1; j++) {
+            merveillesNonConstruites[j] = merveillesNonConstruites[j + 1];
+        }
+        merveillesNonConstruites[--nb_merveilles_non_construites] = nullptr;
+    }
+}
+
+
+// Renvoie vrai si le joueur possede la carte, construite ou non
+bool Joueur::possedeCarte(const Carte& c) const{
+    for (int i=0;i<nb_cartes;i++)
+        if (cartes[i]->getNom()==c.getNom()) return true;
+    for (int i=0;i<nb_merveilles_non_construites;i++)
+        if (merveillesNonConstruites[i]->getNom()==c.getNom()) return true;
+    for (int i = 0; i<nb_merveilles_construites; i++)
+        if (merveillesConstruites[i]->getNom()==c.getNom()) return true;
+    return false;
+}
+
+// Utile pour les merveilles
+bool Joueur::estConstruite(const Carte& c) const {
+    if (!possedeCarte(c)) return false;
+    for (int i=0;i<nb_merveilles_non_construites;i++){
+        if (merveillesNonConstruites[i]->getNom()==c.getNom()) return false;
+    }
+    return true;
 }
 
 bool Joueur::possedeChainage(Chainage ch) const {
@@ -148,27 +237,47 @@ bool Joueur::possedeChainage(Chainage ch) const {
 }
 
 void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f) const {
-    for (int i = 0; i < nb_cartes; ++i) {
-        if (cartes[i]->getType() == typeRecherche) {
-            cartes[i]->afficher(f);
+    if (typeRecherche==merveille){
+        if(nb_merveilles_construites>0){
+            f << " MERVEILLES CONSTRUITES : " << endl;
+            for (int i = 0; i < nb_merveilles_construites; ++i) {
+                merveillesConstruites[i]->afficher(f);
+            }
+        }
+        if(nb_merveilles_non_construites>0){
+            f << " MERVEILLES NON CONSTRUITES : " << endl;
+            for (int i = 0; i< nb_merveilles_non_construites; i++){
+                merveillesNonConstruites[i]->afficher(f);
+            }
+        }
+    }else{
+        for (int i = 0; i < nb_cartes; ++i) {
+            if (cartes[i]->getType() == typeRecherche) {
+                cartes[i]->afficher(f);
+            }
         }
     }
 }
 
-void Joueur::afficherCartes() const{
+void Joueur::afficherCartes(ostream& f) const{
     for (int i=0;i<NB_TYPES_CARTES;i++){
         if(nombreCartesDeCategorie(static_cast<TypeCarte>(i))){
             cout << "Cartes " << static_cast<TypeCarte>(i) << ": "<< endl;
-            afficherCartesDeCategorie(static_cast<TypeCarte>(i));
+            afficherCartesDeCategorie(static_cast<TypeCarte>(i),f);
+            cout << endl;
         }
     }
 }
 
 unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche) const {
     unsigned int nombre = 0;
-    for (int i = 0; i < nb_cartes; ++i) {
-        if (cartes[i]->getType() == typeRecherche) {
-            nombre++;
+    if(typeRecherche==merveille){
+        nombre = nb_merveilles_construites + nb_merveilles_non_construites;
+    }else{
+        for (int i = 0; i < nb_cartes; ++i) {
+            if (cartes[i]->getType() == typeRecherche) {
+                nombre++;
+            }
         }
     }
     return nombre;
@@ -210,3 +319,24 @@ int Joueur::prixFinal(const Carte& c, const Joueur& other) const{
     
     return prix;
 }
+
+void Joueur::afficher(std::ostream& f) const{
+    f << "***********************************************\n";
+    f << "***********************************************\n";
+    f << "       Joueur " << id << endl;
+    f << "-----------------------------------------------\n";
+    f << " Cartes de la cité : \n\n";
+    afficherCartes(f);
+    f << "-----------------------------------------------\n";
+    f << " Solde: " << solde << "  |  Points: " << points << endl;
+    f << " Symboles scientifiques: " << endl;
+    for (int i= 0; i<NB_SYMB ; i++)
+        if (symboles[i]>0) f << "   " << static_cast<SymboleScientifique>(i) << " : " << symboles[i] << endl;
+    f << "-----------------------------------------------\n";
+    f << " Jetons Progrès de la cité : \n";
+    for (int i=0; i<nb_jetons;i++)
+        cout << " - " << jetons[i]->getNom() << endl;
+    f << "***********************************************\n";
+    f << "***********************************************\n";
+}
+

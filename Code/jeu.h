@@ -8,6 +8,13 @@
 
 using namespace std;
 
+constexpr int nbCartesAge1 = 23;
+constexpr int nbCartesAge2 = 23;
+constexpr int nbCartesAge3 = 20;
+constexpr int nbCartesGuilde = 7; // Ajustez selon vos besoins
+constexpr int nbCartesMerveille = 12; // Ajustez selon vos besoins
+constexpr int nbJetonsProgres = 10;
+
 class Jeu { // Singleton Jeu
 private:
     friend class PlateauAge;
@@ -33,6 +40,8 @@ public:
     Guilde** getTabCartesGuilde() const { return tabCartesGuilde; }
     Merveille** getTabCartesMerveille() const { return tabCartesMerveille; }
     JetonProgres** getTabJetonProgres() const { return tabJetonProgres; }
+    Carte* rechercherCarte(string s) const;
+    JetonProgres* rechercherJeton(string s) const;
 };
 
 

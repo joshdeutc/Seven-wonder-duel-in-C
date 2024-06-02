@@ -23,9 +23,13 @@ class Joueur{
     int ressources_prod[NB_RESSOURCES] = {0,0,0,0,0}; //Inutile de stocker la valeur nulle
     int ressources_non_prod[NB_RESSOURCES] = {0,0,0,0,0}; //Inutile de stocker la valeur nulle
     int symboles[NB_SYMB] = {0,0,0,0,0,0,0}; //On se servira de l'enum pour acceder aux symboles par leur nom
-    int nb_cartesMax = 10; //Taille du tableau de pointeurs vers batiments
     const Carte** cartes;
+    int nb_cartesMax = 10; //Taille du tableau de pointeurs vers les cartes construites
     int nb_cartes = 0;
+    const Merveille* merveillesConstruites[7];
+    int nb_merveilles_construites = 0; //Taille du tableau de pointeurs vers les cartes non construites
+    const Merveille* merveillesNonConstruites[7];
+    int nb_merveilles_non_construites = 0;
     JetonProgres* jetons[NB_JETONS];
     int nb_jetons=0;
 public:
@@ -37,14 +41,22 @@ public:
     void action();
     bool prixFixe(Ressource r) const;
     void defausser();
-    void ajouterCarte(const Carte& c);
+    // Ajouter la carte a la cite du joueur, en renseignant si on veut la construire ou non
+    void ajouterCarte(const Carte& c, bool construire = true);
     void construireCarte(const Carte& c, const Joueur& other);
+    
     void supprimerCarte(const Carte& c);
+    
+    bool possedeCarte(const Carte& c) const;
+    bool estConstruite(const Carte& c) const;
+    
     bool possedeChainage(Chainage ch) const;
     int prixFinal(const Carte& c, const Joueur& other) const;
+    
     void afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f=cout) const;
     unsigned int nombreCartesDeCategorie(TypeCarte typeRecherche) const;
-    void afficherCartes() const;
+    void afficherCartes(ostream& f = cout) const;
+    
     int getNbCartes() const { return nb_cartes; }
     int getNbJetons() const { return nb_jetons; }
     int getSolde() const { return solde; }
@@ -53,6 +65,8 @@ public:
     void addPoints(int p) { points += p; }
     const int* getRessourcesProduites() const { return ressources_prod; }
     const Carte** getCartes() const { return cartes; }
+    //Affichage
+    void afficher(std::ostream& f= cout) const;
 };
 
 

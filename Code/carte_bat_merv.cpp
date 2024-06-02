@@ -112,11 +112,11 @@ void Carte::afficher(ostream& f) const{
     if(getSymbole()!=aucunSymbole) f << "| Symbole Scientifique : " << getSymbole() << endl;
     if(getBoucliers()!=0) f << "| Boucliers : " << getBoucliers() << endl;
     if(getSoldeRetireAdversaire()!=0) f << "| L'adversaire perd " << getSoldeRetireAdversaire()
-        << " pieces qui sont remises a la banque" << endl;
-    if (getTirage()) f << "| Le joueur choisi un jeton parmi ceux laisses de cote " << endl;
+        << " pieces \n| qui sont remises a la banque" << endl;
+    if (getTirage()) f << "| Le joueur choisi un jeton parmi \n| ceux laisses de cote " << endl;
     if (getRejouer()) f << "| Le joueur rejoue " << endl;
-    if (getPiocheDefausse()) f<< "| Le joueur construit gratuitement une carte dans la defausse" << endl;
-    if (getDefausseAdversaire()) f << "| Le joueur defausse une carte " << getCarteDefausseAdversaire()
+    if (getPiocheDefausse()) f<< "| Le joueur construit gratuitement \n| une carte dans la defausse" << endl;
+    if (getDefausseAdversaire()) f << "| Le joueur defausse une carte \n| " << getCarteDefausseAdversaire()
         << " de son adversaire" << endl;
     if(getPieceParCarte()!=0){
         f << "| " << getPieceParCarte() << " piece(s) par carte \n|   " << getTypeCarteAffectee()
