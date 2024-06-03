@@ -239,3 +239,11 @@ void Partie::selection_action(Joueur &j_current){
     }
 
 }
+
+void Partie::choix_merveilles(){
+
+}
+
+void victoire_militaire(Joueur j){
+    
+}
