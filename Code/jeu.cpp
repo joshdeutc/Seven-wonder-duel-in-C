@@ -245,6 +245,20 @@ Jeu::Jeu()
     prix[verre] = 2; prix[papyrus] = 0; prix[pierre] = 1; prix[bois] = 0; prix[argile] = 1;
     tabCartesMerveille[11] = new Merveille("LE SPHINX",0,prix,6,0,0,0,false,true,false,false,aucuneCarte,false,affecte);
 
+
+    // JETONS PROGRES
+    
+    tabJetonProgres[0] = new JetonProgres("AGRICULTURE",6,0,4,0,0,aucuneCarte,false,false,0,false,false,aucunSymbole);
+    tabJetonProgres[1] = new JetonProgres("ARCHITECTURE",0,0,0,0,2,merveille,false,false,0,false,false,aucunSymbole);
+    tabJetonProgres[2] = new JetonProgres("ECONOMIE",0,0,0,0,0,aucuneCarte,false,false,0,true,false,aucunSymbole);
+    tabJetonProgres[3] = new JetonProgres("LOI",0,0,0,0,0,aucuneCarte,false,false,0,false,false,balance);
+    tabJetonProgres[4] = new JetonProgres("MACONNERIE",0,0,0,0,2,batimentCivil,false,false,0,false,false,aucunSymbole);
+    tabJetonProgres[5] = new JetonProgres("MATHEMATIQUES",0,0,3,3,0,aucuneCarte,true,false,0,false,false,aucunSymbole);
+    tabJetonProgres[6] = new JetonProgres("PHILOSOPHIE",0,0,7,0,0,aucuneCarte,false,false,0,false,false,aucunSymbole);
+    tabJetonProgres[7] = new JetonProgres("STRATEGIE",0,0,0,0,0,batimentMilitaire,false,false,1,false,false,aucunSymbole);
+    tabJetonProgres[8] = new JetonProgres("THEOLOGIE",0,0,0,0,0,merveille,false,false,0,false,true,aucunSymbole);
+    tabJetonProgres[9] = new JetonProgres("URBANISME",6,4,0,0,0,aucuneCarte,false,true,0,false,false,aucunSymbole);
+
 }
 
 

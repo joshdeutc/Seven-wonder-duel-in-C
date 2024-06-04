@@ -2,7 +2,7 @@
 //#define NB_SYMB 6
 
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
-//Il a deux tableaux spécifiques pour les merveilles afin de différencier les merveilles
+//Il a un tableau spécifique pour les merveilles non construites afin de différencier les merveilles
 //construites des merveilles seulement possédées mais non construites.
 
 Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
@@ -13,7 +13,6 @@ Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     for(int i=0;i<nb_cartesMax;i++) cartes[i]=nullptr;
     for(int i=0;i<NB_JETONS;i++) jetons[i] = nullptr;
     for (int i=0; i<7; i++){
-        merveillesConstruites[i] = nullptr;
         merveillesNonConstruites[i] = nullptr;
     }
 }
@@ -21,8 +20,6 @@ Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
 Joueur::~Joueur(){
     delete[] cartes;
 }
-
-
 
 int Joueur::nbSymboles() const{
     int nb=0;
@@ -48,7 +45,7 @@ bool Joueur::doubleSymbole(SymboleScientifique s){
 //Les autres effets seront gérés par d'autres classes au moment pertinent
 void Joueur::ajouterJeton(JetonProgres* jeton){
     points+=jeton->getPoints();
-    solde+=jeton->getSoldeApporte();
+    solde+=jeton->getSoldeImmediat();
     if(jeton->getSymbole()!=aucunSymbole) symboles[jeton->getSymbole()]=1;
     
     //ajout du jeton aux attributs du joueur
@@ -78,9 +75,9 @@ void Joueur::defausser(){
 void Joueur::ajouterCarte(const Carte& c, bool construire){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
-    if (c.getType()==merveille){
-        if(construire){
-            merveillesConstruites[nb_merveilles_construites++] = dynamic_cast<const Merveille*>(&c);
+    if(construire){
+        if (c.getType()==merveille){
+            nb_merveilles_construites++;
             // Supprimer la merveille du tableau des non construites si elle est dedans
             int i = 0;
             while (i < nb_merveilles_non_construites && merveillesNonConstruites[i]->getNom() != c.getNom()) i++;
@@ -92,11 +89,8 @@ void Joueur::ajouterCarte(const Carte& c, bool construire){
                 // Décrémenter le compteur et mettre le dernier élément à nullptr
                 merveillesNonConstruites[--nb_merveilles_non_construites] = nullptr;
             }
-
         }
-        else
-            merveillesNonConstruites[nb_merveilles_non_construites++] = dynamic_cast<const Merveille*>(&c);
-    }else{
+        //Ajouter au tableau de cartes
         if (nb_cartes == nb_cartesMax)
         {
             const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
@@ -106,6 +100,8 @@ void Joueur::ajouterCarte(const Carte& c, bool construire){
         }
         cartes[nb_cartes++] = &c;
     }
+    else
+        merveillesNonConstruites[nb_merveilles_non_construites++] = dynamic_cast<const Merveille*>(&c);
 }
 
 // Partie s'occupe des boucliers
@@ -182,19 +178,12 @@ void Joueur::supprimerCarte(const Carte& c) {
         }
         
         // Suppression de la carte du tableau cartes ou merveilles du joueur
-        if (c.getType() == merveille) {
-            // Déplacer les éléments du tableau merveillesConstruites
-            for (int j = i; j < nb_merveilles_construites - 1; j++) {
-                merveillesConstruites[j] = merveillesConstruites[j + 1];
-            }
-            merveillesConstruites[--nb_merveilles_construites] = nullptr;
-        } else {
-            // Déplacer les éléments du tableau cartes
-            for (int j = i; j < nb_cartes - 1; j++) {
-                cartes[j] = cartes[j + 1];
-            }
-            cartes[--nb_cartes] = nullptr;
+        if (c.getType() == merveille) nb_merveilles_construites--;
+        // Déplacer les éléments du tableau cartes
+        for (int j = i; j < nb_cartes - 1; j++) {
+            cartes[j] = cartes[j + 1];
         }
+        cartes[--nb_cartes] = nullptr;
     } else {
         // Trouver l'index de la carte dans le tableau merveillesNonConstruites
         while (merveillesNonConstruites[i]->getNom() != c.getNom()) i++;
@@ -214,8 +203,6 @@ bool Joueur::possedeCarte(const Carte& c) const{
         if (cartes[i]->getNom()==c.getNom()) return true;
     for (int i=0;i<nb_merveilles_non_construites;i++)
         if (merveillesNonConstruites[i]->getNom()==c.getNom()) return true;
-    for (int i = 0; i<nb_merveilles_construites; i++)
-        if (merveillesConstruites[i]->getNom()==c.getNom()) return true;
     return false;
 }
 
@@ -242,8 +229,9 @@ void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f) cons
     if (typeRecherche==merveille){
         if(nb_merveilles_construites>0){
             f << " MERVEILLES CONSTRUITES : " << endl;
-            for (int i = 0; i < nb_merveilles_construites; ++i) {
-                merveillesConstruites[i]->afficher(f);
+            for (int i = 0; i < nb_cartes ; ++i) {
+                if (cartes[i]->getType()==merveille)
+                    cartes[i]->afficher(f);
             }
         }
         if(nb_merveilles_non_construites>0){
@@ -341,6 +329,20 @@ void Joueur::afficher(std::ostream& f) const{
     f << "***********************************************\n";
     f << "***********************************************\n";
 }
+
+/*
+int Joueur::choixEntier(int* tab) const{
+    switch (type){
+        case humain:
+            throw WondersException("Tentative de choix IA avec un joueur humain");
+            break;
+        case IA_aleatoire:
+            break;
+    }
+    
+    
+}
+ */
 
 bool Joueur::peutConstruire(const Carte& c) const {
     for (int i = 0; i < NB_RESSOURCES; i++) {

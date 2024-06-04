@@ -138,3 +138,23 @@ void Carte::afficher(ostream& f) const{
     }
     f << "|________________________\n";
 }
+
+void JetonProgres::afficher(ostream& f) const{
+    f << "   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  \n";
+    f << "   |              " << nom << endl;
+    f << "   |            Jeton Progres" << endl;
+    if (solde_immediat>0) f << "   | " << solde_immediat << " pieces (immediat)" << endl;
+    if (points_immediats>0) f << "   | " << points_immediats << " points \n";
+    if (solde_condition>0) f << "   | " << solde_condition << " pieces ";
+    if (points_condition>0) f << "   | " << points_condition << " points ";
+    if (ressources_gratuites>0) f << "   | " << ressources_gratuites << " ressources gratuites ";
+    if (boucliers_supplementaires>0) f << "   | " << boucliers_supplementaires << " boucliers supp ";
+    if (effet_rejouer) f << "   | Effet rejouer (si non deja present) ";
+    if (condition_jeton) f << "pour chaque jeton progres en sa possession a la fin de la partie \n";
+    if (carte_condition!=aucuneCarte) f << "pour les prochaines cartes " << carte_condition << " construites par le joueur \n";
+    if (condition_chainage) f << "recues pour toutes les prochaines constructions gratuites par chainage \n";
+    if (recup_argent_achats_adversaire) f << "   | Recupere argent depense par l'adversaires lorsqu'il achete des ressourves \n";
+    if (symbole!=aucunSymbole) f << "   | Rapporte le symbole " << symbole << endl;
+    f << "   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  \n \n";
+
+}

@@ -26,9 +26,8 @@ class Joueur{
     const Carte** cartes;
     int nb_cartesMax = 10; //Taille du tableau de pointeurs vers les cartes construites
     int nb_cartes = 0;
-    const Merveille* merveillesConstruites[4];
     int nb_merveilles_construites = 0; //Taille du tableau de pointeurs vers les cartes non construites
-    const Merveille* merveillesNonConstruites[4];
+    const Merveille* merveillesNonConstruites[7];
     int nb_merveilles_non_construites = 0;
     JetonProgres* jetons[NB_JETONS];
     int nb_jetons=0;
@@ -42,7 +41,7 @@ public:
     bool prixFixe(Ressource r) const;
     void defausser();
     // Ajouter la carte a la cite du joueur, en renseignant si on veut la construire ou non
-    void ajouterCarte(const Carte& c, bool construire = true);
+    void ajouterCarte(const Carte& c, bool construire = false);
     void construireCarte(const Carte& c, const Joueur& other);
     
     void supprimerCarte(const Carte& c);
@@ -65,15 +64,14 @@ public:
     void addPoints(int p) { points += p; }
     const int* getRessourcesProduites() const { return ressources_prod; }
     const Carte** getCartes() const { return cartes; }
-    unsigned int getsymbole(unsigned int i) const {return symboles[i];}
+    
     int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
-    const Merveille* getMerveillesConstruites(unsigned int i) const{return merveillesConstruites[i];}
-
-
-    bool peutConstruire(const Carte& c) const {}
-
+    
     //Affichage
     void afficher(std::ostream& f= cout) const;
+    
+    //Stratégies d'IA
+    int choixEntier(int *tab, int n taille) const;
 };
 
 
