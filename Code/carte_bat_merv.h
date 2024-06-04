@@ -74,13 +74,12 @@ protected:
     unsigned int cout_ressources[NB_RESSOURCES];
     TypeCarte type_carte;
 public:
-    Carte(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES])
-        : nom(n), cout_piece(cout_piece) {
+    Carte(const string& name, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES])
+        : nom(name), cout_piece(cout_piece) {
             for (unsigned int i = 0; i < NB_RESSOURCES; i++) {
                 cout_ressources[i] = cout_prod[i];
             }
         }
-
     string getNom() const { return nom; }
     unsigned int getCoutPiece() const { return cout_piece; }
     const unsigned int* getCoutRessources() const { return cout_ressources; }
