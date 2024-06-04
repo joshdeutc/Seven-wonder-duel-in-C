@@ -131,62 +131,69 @@ void Partie::selection_action(Joueur &j_current){
             if(age==1){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
-                
-                //if(j_current.peutConstruire(*platAge.getCartes()[choix1])){  pour vérifier si il a les ressources necessaires
-                // construction de la carte
-                j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
-                //verification que la carte scientifique n'implique pas un jeton
-                if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
-                    if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
-                        choix_jeton(j_current);
+
+                if(j_current.peutConstruire(*platAge.getCartes()[choix1])){
+                    // construction de la carte
+                    j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
+                    //verification que la carte scientifique n'implique pas un jeton
+                    if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
+                        if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
+                            choix_jeton(j_current);
+                        }
                     }
-                }
-                // mis a jour du plateau militaire si besoin
-                if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
-                }
-                //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age1(choix1);
+                    // mis a jour du plateau militaire si besoin
+                    if(platAge.getCartes()[choix1]->getBoucliers()!=0){
+                        change_solde_militaire(platMilitaire, j_current,choix1);
+                    }
+                    //mettre a jour le plateau
+                    platAge.destruction_carte_plateau_age1(choix1);
+                } 
+                
             }
             if(age==2){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
-
-                // construction de la carte
-                j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
-                //verification que la carte scientifique n'implique pas un jeton
-                if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
-                    if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
-                        choix_jeton(j_current);
+                if(j_current.peutConstruire(*platAge.getCartes()[choix1])){
+                    // construction de la carte
+                    j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
+                    //verification que la carte scientifique n'implique pas un jeton
+                    if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
+                        if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
+                            choix_jeton(j_current);
+                        }
                     }
+                    // mis a jour du plateau militaire si besoin
+                    if(platAge.getCartes()[choix1]->getBoucliers()!=0){
+                        change_solde_militaire(platMilitaire, j_current,choix1);
+                    }
+                    //mettre a jour le plateau
+                    platAge.destruction_carte_plateau_age2(choix1);
                 }
-                // mis a jour du plateau militaire si besoin
-                if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
-                }
-                //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age2(choix1);
+                
             }
             if(age==3){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
-                // il faut vérifier avant si l'on a les ressources nécessaire
                 
-                // construction de la carte
-                j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
-                //verification que la carte scientifique n'implique pas un jeton
-                if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
-                    if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
-                        choix_jeton(j_current);
+                if(j_current.peutConstruire(*platAge.getCartes()[choix1])){
+                    // construction de la carte
+                    j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
+                    //verification que la carte scientifique n'implique pas un jeton
+                    if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
+                        if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
+                            choix_jeton(j_current);
+                        }
                     }
+                    // mis a jour du plateau militaire si besoin
+                    if(platAge.getCartes()[choix1]->getBoucliers()!=0){
+                        change_solde_militaire(platMilitaire, j_current,choix1);
+                    }
+                    //mettre a jour le plateau
+                    platAge.destruction_carte_plateau_age3(choix1);
                 }
-                // mis a jour du plateau militaire si besoin
-                if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
-                }
-                //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age3(choix1);
+                
+        
             }
             break;
 
