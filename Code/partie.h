@@ -29,7 +29,7 @@ public:
     bool fin_age();
     void choix_merveilles();
     void victoire_militaire(Joueur j);
-    void victoire_scientifique(Joueur j);
+    void victoire_scientifique(Joueur& j);
     void change_solde_militaire(PlateauJetonMilit &platmilit, Joueur &j_current,const int &choix);
     void victoire_civile();
     void addDefausse(Carte*carte);

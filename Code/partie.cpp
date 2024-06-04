@@ -15,8 +15,7 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-    if(tour == 1) tour = 2;
-    else tour = 1;
+    tour = (tour == 1) ? 2 : 1;
 }
 
 bool Partie::fin_age(){
@@ -62,16 +61,40 @@ void Partie::change_solde_militaire( PlateauJetonMilit &platmilit , Joueur &j_cu
 }
 
 void Partie::victoire_civile(){
-    //Parcourir toutes les cartes ainsi que les merveilles construites du joueur, et conversion des pieces en points de pouvoir pour chaque joueur
-    //declare un gagnant et un perdant
     unsigned int PtV1 = 0, PtV2 = 0;
+    
+    //Parcourir toutes les merveilles construites
+    for (int i=0; i< joueurs[0]->getNbMerveillesConstruites() ; i++){
+        PtV1 += joueurs[0]->getMerveillesConstruites(i)->getPoints();
+    }
+    for (int i=0; i< joueurs[1]->getNbMerveillesConstruites() ; i++){
+        PtV2 += joueurs[1]->getMerveillesConstruites(i)->getPoints();
+    }
+
+    //Parcourir toutes les cartes construites
+    for(int i=0 ; i < joueurs[0]->getNbCartes(); i++){
+        PtV1 += joueurs[0]->getCartes()[i]->getPoints();
+    }
+
+    for(int i=0 ; i < joueurs[1]->getNbCartes(); i++){
+        PtV2 += joueurs[1]->getCartes()[i]->getPoints();
+    }
+
+    //conversion des pieces en points de pouvoir
     PtV1 += joueurs[0]->getSolde()/3;
     PtV1 += joueurs[1]->getSolde()/3;
 
     vainqueur =  (PtV1 > PtV2) ? joueurs[0] : joueurs[1];
 }
 
-void Partie::victoire_scientifique(Joueur j){
+
+
+void Partie::victoire_scientifique(Joueur& j){
+    unsigned int compteur = 0;
+    for (int i=0 ; i<NB_SYMB ; i++){
+        if(j.getsymbole(i)) compteur++;
+    }
+    if(compteur>=6) vainqueur = &j;
 }
 
 // ********************  Partie selection action ********************

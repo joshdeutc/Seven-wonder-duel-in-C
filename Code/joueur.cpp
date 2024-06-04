@@ -22,6 +22,8 @@ Joueur::~Joueur(){
     delete[] cartes;
 }
 
+
+
 int Joueur::nbSymboles() const{
     int nb=0;
     for(int i=1; i<(NB_SYMB) ; i++){
