@@ -69,6 +69,9 @@ public:
     int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
     const Merveille* getMerveillesConstruites(unsigned int i) const{return merveillesConstruites[i];}
 
+
+    bool peutConstruire(const Carte& c) const {}
+
     //Affichage
     void afficher(std::ostream& f= cout) const;
 };

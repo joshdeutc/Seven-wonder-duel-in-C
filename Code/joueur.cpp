@@ -342,3 +342,14 @@ void Joueur::afficher(std::ostream& f) const{
     f << "***********************************************\n";
 }
 
+bool Joueur::peutConstruire(const Carte& c) const {
+    for (int i = 0; i < NB_RESSOURCES; i++) {
+        if (ressources_prod[i] + ressources_non_prod[i] >= c.getCoutRessources()[i]) {
+            return true;
+        }
+    }
+    if (solde >= c.getCoutPiece()) {
+        return true;
+    }
+    return false;
+}

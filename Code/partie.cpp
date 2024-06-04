@@ -131,8 +131,8 @@ void Partie::selection_action(Joueur &j_current){
             if(age==1){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
-                // il faut vérifier avant si l'on a les ressources nécessaire
                 
+                //if(j_current.peutConstruire(*platAge.getCartes()[choix1])){  pour vérifier si il a les ressources necessaires
                 // construction de la carte
                 j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
                 //verification que la carte scientifique n'implique pas un jeton
@@ -172,7 +172,7 @@ void Partie::selection_action(Joueur &j_current){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
-
+                
                 // construction de la carte
                 j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
                 //verification que la carte scientifique n'implique pas un jeton
