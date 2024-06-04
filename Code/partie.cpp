@@ -97,6 +97,11 @@ void Partie::victoire_scientifique(Joueur& j){
     if(compteur>=6) vainqueur = &j;
 }
 
+void Partie::victoire_militaire(){
+    if(solde_militaire >=9) vainqueur = joueurs[0];
+    else if (solde_militaire <=-9) vainqueur = joueurs[1];
+}
+
 // ********************  Partie selection action ********************
 
 void Partie::choix_jeton(Joueur &j) {
@@ -127,9 +132,9 @@ void Partie::selection_action(Joueur &j_current){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
                 // il faut vérifier avant si l'on a les ressources nécessaire
-
+                
                 // construction de la carte
-                j_current.construireCarte(*platAge.getCartes()[choix1]);
+                j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
                 //verification que la carte scientifique n'implique pas un jeton
                 if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
                     if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
@@ -149,7 +154,7 @@ void Partie::selection_action(Joueur &j_current){
                 // il faut vérifier avant si l'on a les ressources nécessaire
 
                 // construction de la carte
-                j_current.construireCarte(*platAge.getCartes()[choix1]);
+                j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
                 //verification que la carte scientifique n'implique pas un jeton
                 if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
                     if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
@@ -169,7 +174,7 @@ void Partie::selection_action(Joueur &j_current){
                 // il faut vérifier avant si l'on a les ressources nécessaire
 
                 // construction de la carte
-                j_current.construireCarte(*platAge.getCartes()[choix1]);
+                j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
                 //verification que la carte scientifique n'implique pas un jeton
                 if(platAge.getCartes()[choix1]->getType()==batimentScientifique){
                     if(j_current.doubleSymbole(platAge.getCartes()[choix1]->getSymbole())){
@@ -267,6 +272,3 @@ void Partie::choix_merveilles(){
 
 }
 
-void victoire_militaire(Joueur j){
-    
-}
