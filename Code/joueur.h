@@ -26,6 +26,7 @@ class Joueur{
     const Carte** cartes;
     int nb_cartesMax = 10; //Taille du tableau de pointeurs vers les cartes construites
     int nb_cartes = 0;
+    //const Merveille* merveillesConstruites[7];
     int nb_merveilles_construites = 0; //Taille du tableau de pointeurs vers les cartes non construites
     const Merveille* merveillesNonConstruites[7];
     int nb_merveilles_non_construites = 0;
@@ -37,7 +38,7 @@ public:
     int nbSymboles() const;
     bool doubleSymbole(SymboleScientifique s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
     void ajouterJeton(JetonProgres* jeton);
-    void action();
+    
     bool prixFixe(Ressource r) const;
     void defausser();
     // Ajouter la carte a la cite du joueur, en renseignant si on veut la construire ou non
@@ -50,7 +51,8 @@ public:
     bool estConstruite(const Carte& c) const;
     
     bool possedeChainage(Chainage ch) const;
-    int prixFinal(const Carte& c, const Joueur& other) const;
+    int prixFinal(const Carte& c, const Joueur& other, int ressources_gratuites_jeton[NB_RESSOURCES],
+                  int ressources_gratuites_cartes[NB_RESSOURCES]) const;
     
     void afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f=cout) const;
     unsigned int nombreCartesDeCategorie(TypeCarte typeRecherche) const;
@@ -63,19 +65,22 @@ public:
     int getPoints() const { return points; }
     void addPoints(int p) { points += p; }
     const int* getRessourcesProduites() const { return ressources_prod; }
+    const int* getRessourcesNonProduites() const { return ressources_non_prod; }
     const Carte** getCartes() const { return cartes; }
-    bool peutConstruire(const Carte& c);
+    
+    int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
     
     //Affichage
     void afficher(std::ostream& f= cout) const;
     
     //Stratégies d'IA
-    int choixEntier(int *tab, int n taille) const;
+    int choixEntierIA(int *tab, int taille) const;
+    
+    //Methodes de choix
+    void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
+    void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
 };
 
 
-
-
-
-
 #endif
+

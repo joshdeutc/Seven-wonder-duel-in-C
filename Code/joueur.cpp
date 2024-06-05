@@ -119,9 +119,6 @@ void Joueur::construireCarte(const Carte& c, const Joueur& other){
     //Actions générales, communes à toutes les cartes
     //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
     
-    
-    solde -= prixFinal(c, other);
-    
     if(c.getRessource()!=aucuneRessource){
         ressources_prod[c.getRessource()]+=c.getNb();
     }
@@ -273,45 +270,36 @@ unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche) const {
     return nombre;
 }
 
-int Joueur::prixFinal(const Carte& c, const Joueur& other) const{
+int Joueur::prixFinal(const Carte& c, const Joueur& other, int ressources_gratuites_jeton[NB_RESSOURCES], 
+                      int ressources_gratuites_cartes[NB_RESSOURCES]) const{
     int prix = c.getCoutPiece();
-    
-    int choixGris = 0; //Nombre de produits manufacurés choisis en ressource non produite directement
-    int choixMarron = 0; //Nombre de matières premières choisies en ressource non produite directement
-    bool choix = false;
     
     // Condition de construction gratuite
     if(possedeChainage(c.getChainage1())||possedeChainage(c.getChainage2())) return 0;
     
+    // Copier le cout des ressources dans un autre tableau qu'on peut modifier et retirer les ressources gratuites
+    int coutRes[NB_RESSOURCES];
+    for (int i = 0; i<NB_RESSOURCES; i++){
+        coutRes[i]=c.getCoutRessources()[i];
+        coutRes[i] -= (ressources_gratuites_jeton[i] + ressources_gratuites_cartes[i]);
+        if (coutRes[i]<0) coutRes[i] = 0;
+    }
+    
+    
+    
     for (int i=0;i<NB_RESSOURCES;i++){
         // On vérifie si le joueur ne produit pas déjà les ressources nécessaires
-        if(c.getCoutRessources()[i]>ressources_prod[i]){
-            // Choix des ressources non produites directement
-            choix = false;
-            if(ressources_non_prod[i]>0){
-                if(i<3 && ressources_non_prod[i]>choixMarron){ // Matière première (marron)
-                    choixMarron++;
-                    choix = true;
-                }
-                else if(i<5 && ressources_non_prod[i]>choixGris){ // Produit manufacure (gris)
-                    choixGris++;
-                    choix = true;
-                }
-            }if(!choix){
-                if(prixFixe(static_cast<Ressource>(i))){
-                    prix +=1;
-                }else{
-                    prix += (c.getCoutRessources()[i]-ressources_prod[i])*(2+other.getRessourcesProduites()[i]);
-                }
+        if(coutRes[i]>ressources_prod[i]){
+            if(prixFixe(static_cast<Ressource>(i))){
+                prix +=1;
+            }else{
+                prix += (coutRes[i]-ressources_prod[i])*(2+other.getRessourcesProduites()[i]);
             }
         }
     }
     
     return prix;
 }
-
-
-
 
 void Joueur::afficher(std::ostream& f) const{
     f << "***********************************************\n";
@@ -333,28 +321,108 @@ void Joueur::afficher(std::ostream& f) const{
     f << "***********************************************\n";
 }
 
-/*
-int Joueur::choixEntier(int* tab) const{
-    switch (type){
+
+int Joueur::choixEntierIA(int* tab, int taille) const {
+    if (taille <= 0) {
+        throw WondersException("Erreur dans ChoixIA: La taille doit être positive.");
+    }
+
+    switch (type) {
         case humain:
             throw WondersException("Tentative de choix IA avec un joueur humain");
             break;
         case IA_aleatoire:
-            break;
+            // Générateur de nombres aléatoires
+            std::random_device rd;  // Génère une graine aléatoire
+            std::mt19937 gen(rd()); // Générateur Mersenne Twister
+            std::uniform_int_distribution<> dis(0, taille - 1); // Distribution uniforme entre 0 et taille-1
+
+            if (tab == nullptr) {
+                // tab est nullptr, on retourne un entier aléatoire entre 0 et taille - 1
+                return dis(gen);
+            } else {
+                // tab n'est pas nullptr, on retourne un élément aléatoire du tableau
+                int random_index = dis(gen); // Génère un indice aléatoire
+                return tab[random_index]; // Retourne l'élément du tableau à cet indice
+            }
     }
     
-    
+    throw WondersException("Erreur ChoixIA: Type joueur inconnu");
 }
- */
 
-bool Joueur::peutConstruire(const Carte& c)  {
-    for (int i = 0; i < NB_RESSOURCES; i++) {
-        if (ressources_prod[i] + ressources_non_prod[i] >= c.getCoutRessources()[i]) {
-            return true;
+void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]){
+    //initialisation à 0
+    for(int i=0 ;i<NB_RESSOURCES;i++) tab[i]=0;
+    int choix;
+    for (int i=0;i<nb_jetons;i++){
+        if (jetons[i]->getRessourcesGratuites() > 0){
+            if(type==humain){
+                int n= jetons[i]->getRessourcesGratuites();
+                cout << "Vous pouvez choisir " << n << " ressources gratuites. " << endl ;
+                int count = 0;
+                while(count<n){
+                    // afficher les options
+                    for (int k=0 ;k<NB_RESSOURCES;k++)
+                        cout << k+1 << ": "<< static_cast<Ressource>(k) << "      "  << endl;
+                    cout << "Choisir une ressource gratuite : " ;
+                    cin >> choix ;
+                    if(choix>NB_RESSOURCES || choix<1) cout << "Choix non valide " << endl ;
+                    else {
+                        tab[choix]++ ;
+                        count++ ;
+                    }
+                }
+            }else{
+                tab[choixEntierIA(nullptr,NB_RESSOURCES)]++;
+            }
         }
     }
-    if (solde >= c.getCoutPiece()) {
-        return true;
-    }
-    return false;
 }
+
+void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
+    int choix ;
+    int count;
+    int n ;
+    //initialisation à 0
+    for(int i=0 ;i<NB_RESSOURCES;i++) tab[i]=0;
+
+    // Possibilite de choisir une matiere premiere ou un produit manufacture pour
+    // chaque carte
+    if (ressources_non_prod[0] > 0){
+        n = ressources_non_prod[0];
+        if(type==humain){
+            count = 0;
+            while(count<n){
+                cout << "Choisissez une ressources produite par votre cite pour ce tour parmis les suivantes : \n";
+                cout << " 1. Bois   2. Argile    3. Pierre \n " ;
+                cout << " Choix : " << endl;
+                cin>> choix ;
+                if(choix<1 || choix>3) cout << "Choix non valide. \n" ;
+                else{
+                    count++ ;
+                    tab[choix-1]++ ;
+                }
+            }
+        }else{
+            for(int i=0;i<n;i++) tab[choixEntierIA(nullptr,3)]++;
+        }
+    }if (ressources_non_prod[3] > 0){
+        n = ressources_non_prod[3];
+        if(type==humain){
+            count = 0;
+            while(count<n){
+                cout << "Choisissez une ressources produite par votre cite pour ce tour parmis les suivantes : \n";
+                cout << " 1. Verre   2. Papyrus   \n " ;
+                cin>> choix ;
+                if(choix<1 || choix>2) cout << "Choix non valide. \n" ;
+                else{
+                    count++ ;
+                    tab[choix+2]++ ;
+                }
+            }
+        }else{
+            for(int i=0;i<n;i++) tab[choixEntierIA(nullptr,2)+2]++;
+        }
+    }
+}
+
