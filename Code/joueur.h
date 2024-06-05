@@ -64,8 +64,7 @@ public:
     void addPoints(int p) { points += p; }
     const int* getRessourcesProduites() const { return ressources_prod; }
     const Carte** getCartes() const { return cartes; }
-    
-    int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
+    bool peutConstruire(const Carte& c);
     
     //Affichage
     void afficher(std::ostream& f= cout) const;

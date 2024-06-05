@@ -310,6 +310,9 @@ int Joueur::prixFinal(const Carte& c, const Joueur& other) const{
     return prix;
 }
 
+
+
+
 void Joueur::afficher(std::ostream& f) const{
     f << "***********************************************\n";
     f << "***********************************************\n";
@@ -344,7 +347,7 @@ int Joueur::choixEntier(int* tab) const{
 }
  */
 
-bool Joueur::peutConstruire(const Carte& c) const {
+bool Joueur::peutConstruire(const Carte& c)  {
     for (int i = 0; i < NB_RESSOURCES; i++) {
         if (ressources_prod[i] + ressources_non_prod[i] >= c.getCoutRessources()[i]) {
             return true;

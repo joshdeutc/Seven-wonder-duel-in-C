@@ -148,12 +148,13 @@ void Partie::selection_action(Joueur &j_current){
                     //mettre a jour le plateau
                     platAge.destruction_carte_plateau_age1(choix1);
                 } 
+                else{cout<<"Vous ne disposez pas assez de ressources."<<endl;}
                 
             }
             if(age==2){
                 cout<<"choisissser un batiment a construire"<<endl;
                 int choix1;cin>>choix1;
-                // il faut vérifier avant si l'on a les ressources nécessaire
+
                 if(j_current.peutConstruire(*platAge.getCartes()[choix1])){
                     // construction de la carte
                     j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
@@ -169,7 +170,7 @@ void Partie::selection_action(Joueur &j_current){
                     }
                     //mettre a jour le plateau
                     platAge.destruction_carte_plateau_age2(choix1);
-                }
+                } else{cout<<"Vous ne disposez pas assez de ressources."<<endl;}
                 
             }
             if(age==3){
@@ -191,7 +192,7 @@ void Partie::selection_action(Joueur &j_current){
                     }
                     //mettre a jour le plateau
                     platAge.destruction_carte_plateau_age3(choix1);
-                }
+                } else{cout<<"Vous ne disposez pas assez de ressources."<<endl;}
                 
         
             }
@@ -202,44 +203,48 @@ void Partie::selection_action(Joueur &j_current){
             if(age==1){
                 cout<<"choisissser une merveille a construire"<<endl;
                 int choix1;cin>>choix1;
-                // il faut vérifier avant si l'on a les ressources nécessaire
+                if(j_current.peutConstruire(*platAge.getCartes()[choix1])) {
+                    // ( je ne sais pas si construire batiment le fais ** voir chloe**)
+                    j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
+                    // mis a jour du plateau militaire si besoin
+                    if(platAge.getCartes()[choix1]->getBoucliers()!=0){
+                        change_solde_militaire(platMilitaire, j_current,choix1);
+                    }
+                    //mettre a jour le plateau
+                    platAge.destruction_carte_plateau_age1(choix1);
+                } else{cout<<"Vous ne disposez pas assez de ressources."<<endl;}
 
-                // ( je ne sais pas si construire batiment le fais ** voir chloe**)
-                j_current.construireCarte(*platAge.getCartes()[choix1]);
-                // mis a jour du plateau militaire si besoin
-                if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
-                }
-                //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age1(choix1);
             }
             if(age==2){
                 cout<<"choisissser une merveille a construire"<<endl;
                 int choix1;cin>>choix1;
-                // il faut vérifier avant si l'on a les ressources nécessaire
+                if(j_current.peutConstruire(*platAge.getCartes()[choix1])){
+                    // ( il faut une méthode construire une merveille ** voir chloe**)
+                    j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
+                    // mis a jour du plateau militaire si besoin
+                    if(platAge.getCartes()[choix1]->getBoucliers()!=0){
+                        change_solde_militaire(platMilitaire, j_current,choix1);
+                    }
+                    //mettre a jour le plateau
+                    platAge.destruction_carte_plateau_age2(choix1);
+                } else{cout<<"Vous ne disposez pas assez de ressources."<<endl;}
 
-                // ( il faut une méthode construire une merveille ** voir chloe**)
-                j_current.construireCarte(*platAge.getCartes()[choix1]);
-                // mis a jour du plateau militaire si besoin
-                if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
-                }
-                //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age2(choix1);
+                
             }
             if(age==3){
                 cout<<"choisissser une merveille a construire"<<endl;
                 int choix1;cin>>choix1;
-                // il faut vérifier avant si l'on a les ressources nécessaire
+                if(j_current.peutConstruire(*platAge.getCartes()[choix1])){
+                    // ( il faut une méthode construire une merveille ** voir chloe**)
+                    j_current.construireCarte(*platAge.getCartes()[choix1], j_current);
+                    // mis a jour du plateau militaire si besoin
+                    if(platAge.getCartes()[choix1]->getBoucliers()!=0){
+                        change_solde_militaire(platMilitaire, j_current,choix1);
+                    }
+                    //mettre a jour le plateau
+                    platAge.destruction_carte_plateau_age3(choix1);
+                } else{cout<<"Vous ne disposez pas assez de ressources."<<endl;}
 
-                // ( il faut une méthode construire une merveille ** voir chloe**)
-                j_current.construireCarte(*platAge.getCartes()[choix1]);
-                // mis a jour du plateau militaire si besoin
-                if(platAge.getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(platMilitaire, j_current,choix1);
-                }
-                //mettre a jour le plateau
-                platAge.destruction_carte_plateau_age3(choix1);
             }
             break;
         case 3 :
