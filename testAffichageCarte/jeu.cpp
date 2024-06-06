@@ -7,6 +7,13 @@ Jeu* Jeu::instance = nullptr;
 Jeu::Jeu()
 {
     
+    const int nbCartesAge1 = 23;
+    const int nbCartesAge2 = 23;
+    const int nbCartesAge3 = 20;
+    const int nbCartesGuilde = 7; // Ajustez selon vos besoins
+    const int nbCartesMerveille = 12; // Ajustez selon vos besoins
+    const int nbJetonsProgres = 10;
+    
     tabCartesAge1 = new Batiment*[nbCartesAge1];
     tabCartesAge2 = new Batiment*[nbCartesAge2];
     tabCartesAge3 = new Batiment*[nbCartesAge3];
@@ -81,7 +88,7 @@ Jeu::Jeu()
 
     // SCIENTIFIQUE
     
-    prix[bois]=0; prix[pierre]=0; prix[argile] = 0; prix[verre] = 0; prix[papyrus] = 1;
+    prix[argile] = 0; prix[verre] = 0; prix[papyrus] = 1;
     tabCartesAge1[12] = new Scientifique("ATELIER", 0, prix, 1, A,1);
     prix[verre] = 1; prix[papyrus] = 0;
     tabCartesAge1[13] = new Scientifique("APOTHICAIRE", 0, prix, 1, roue,1);
@@ -198,66 +205,6 @@ Jeu::Jeu()
     prix[bois] = 0; prix[argile] = 1; prix[papyrus] = 1;
     tabCartesGuilde[6] = new Guilde("GUILDE DES TACTICIENS",0,prix,0,1,1,batimentMilitaire);
     
-    // MERVEILLES
-    
-    
-    
-    prix[pierre] = 1; prix[bois] = 2; prix[papyrus] = 0; prix[verre] = 0; prix[argile] = 1;
-    affecte[pierre] = false; affecte[bois] = false; affecte[argile] = false;
-    affecte[papyrus] = true; affecte[verre] = true;
-    tabCartesMerveille[0] = new Merveille("LA PIREE",0,prix, 2,0,0,0,false,true,false,false,aucuneCarte,true,affecte);
-    
-    prix[pierre] = 2; prix[bois] = 1; prix[verre] = 1; prix[argile]=0;
-    affecte[papyrus] = false; affecte[verre] = false;
-    tabCartesMerveille[1] = new Merveille("LE CIRCUS MAXIMUS",0,prix, 3,1,0,0,false,false,false,true,produitManufacture,false,affecte);
-    
-   
-    
-    prix[pierre] = 1; prix[verre] = 0; prix[papyrus] = 2;
-    affecte[bois] = true; affecte[pierre] = true; affecte[argile] = true;
-    tabCartesMerveille[2] = new Merveille("LE GRAND PHARE",0,prix, 4,0,0,0,false,false,false,false,aucuneCarte,true,affecte);
-
-    prix[verre] = 1; prix[papyrus] = 1; prix[pierre] = 1; prix[bois] = 1; prix[argile] = 0;
-    affecte[bois] = false; affecte[pierre] = false; affecte[argile] = false;
-    tabCartesMerveille[3] = new Merveille("LE TEMPLE D'ARTEMIS",0,prix, 0,0,12,0,false,true,false,false,aucuneCarte,false,affecte);
-    
-    prix[verre] = 0; prix[papyrus] = 1; prix[pierre] = 2; prix[bois] = 0; prix[argile] = 2;
-    tabCartesMerveille[4] = new Merveille("LA VIA APPIA",0,prix, 3,0,3,3,false,true,false,false,aucuneCarte,false,affecte);
-    
-    prix[verre] = 1; prix[papyrus] = 0; prix[pierre] = 0; prix[bois] = 0; prix[argile] = 3;
-    tabCartesMerveille[5] = new Merveille("LE COLOSSE",0,prix, 3,2,0,0,false,false,false,false,aucuneCarte,false,affecte);
-
-    prix[verre] = 1; prix[papyrus] = 1; prix[pierre] = 0; prix[bois] = 3; prix[argile] = 0;
-    tabCartesMerveille[6] = new Merveille("LA GRANDE BIBLIOTHEQUE",0,prix, 4,0,0,0,true,false,false,false,aucuneCarte,false,affecte);
-    
-    prix[verre] = 1; prix[papyrus] = 1; prix[pierre] = 0; prix[bois] = 2; prix[argile] = 0;
-    tabCartesMerveille[7] = new Merveille("LES JARDINS SUSPENDUS",0,prix, 3,0,6,0,false,true,false,false,aucuneCarte,false,affecte);
-
-    prix[verre] = 0; prix[papyrus] = 2; prix[pierre] = 1; prix[bois] = 1; prix[argile] = 1;
-    tabCartesMerveille[8] = new Merveille("LA STATUE DE ZEUS",0,prix, 3,1,0,0,false,false,false,true,matierePremiere,false,affecte);
-    
-    prix[verre] = 2; prix[papyrus] = 1; prix[pierre] = 0; prix[bois] = 0; prix[argile] = 2;
-    tabCartesMerveille[9] = new Merveille("LE MAUSOLEE",0,prix, 2,0,0,0,false,false,true,false,aucuneCarte,false,affecte);
-
-    prix[verre] = 0; prix[papyrus] = 1; prix[pierre] = 3; prix[bois] = 0; prix[argile] = 0;
-    tabCartesMerveille[10] = new Merveille("LES PYRAMIDES",0,prix, 9,0,0,0,false,false,false,false,aucuneCarte,false,affecte);
-
-    prix[verre] = 2; prix[papyrus] = 0; prix[pierre] = 1; prix[bois] = 0; prix[argile] = 1;
-    tabCartesMerveille[11] = new Merveille("LE SPHINX",0,prix,6,0,0,0,false,true,false,false,aucuneCarte,false,affecte);
-
-
-    // JETONS PROGRES
-    
-    tabJetonProgres[0] = new JetonProgres("AGRICULTURE",6,0,4,0,0,aucuneCarte,false,false,0,false,false,aucunSymbole);
-    tabJetonProgres[1] = new JetonProgres("ARCHITECTURE",0,0,0,0,2,merveille,false,false,0,false,false,aucunSymbole);
-    tabJetonProgres[2] = new JetonProgres("ECONOMIE",0,0,0,0,0,aucuneCarte,false,false,0,true,false,aucunSymbole);
-    tabJetonProgres[3] = new JetonProgres("LOI",0,0,0,0,0,aucuneCarte,false,false,0,false,false,balance);
-    tabJetonProgres[4] = new JetonProgres("MACONNERIE",0,0,0,0,2,batimentCivil,false,false,0,false,false,aucunSymbole);
-    tabJetonProgres[5] = new JetonProgres("MATHEMATIQUES",0,0,3,3,0,aucuneCarte,true,false,0,false,false,aucunSymbole);
-    tabJetonProgres[6] = new JetonProgres("PHILOSOPHIE",0,0,7,0,0,aucuneCarte,false,false,0,false,false,aucunSymbole);
-    tabJetonProgres[7] = new JetonProgres("STRATEGIE",0,0,0,0,0,batimentMilitaire,false,false,1,false,false,aucunSymbole);
-    tabJetonProgres[8] = new JetonProgres("THEOLOGIE",0,0,0,0,0,merveille,false,false,0,false,true,aucunSymbole);
-    tabJetonProgres[9] = new JetonProgres("URBANISME",6,4,0,0,0,aucuneCarte,false,true,0,false,false,aucunSymbole);
 
 }
 
@@ -284,45 +231,4 @@ Jeu* Jeu::getInstance(){
 void Jeu::freeInstance(){
     delete instance;
     instance = nullptr;
-}
-
-Carte* Jeu::rechercherCarte(string s) const {
-    Carte* c = nullptr;
-    int i=0;
-    while(c==nullptr && i<nbCartesAge1){
-        if (tabCartesAge1[i]->getNom()==s) c = tabCartesAge1[i];
-        else i++;
-    }
-    i=0;
-    while(c==nullptr && i<nbCartesAge2){
-        if (tabCartesAge2[i]->getNom()==s) c = tabCartesAge2[i];
-        else i++;
-    }
-    i=0;
-    while(c==nullptr && i<nbCartesAge3){
-        if (tabCartesAge3[i]->getNom()==s) c = tabCartesAge3[i];
-        else i++;
-    }
-    i=0;
-    while(c==nullptr && i<nbCartesGuilde){
-        if (tabCartesGuilde[i]->getNom()==s) c = tabCartesGuilde[i];
-        else i++;
-    }
-    i=0;
-    while(c==nullptr && i<nbCartesMerveille){
-        if (tabCartesMerveille[i]->getNom()==s) c = tabCartesMerveille[i];
-        else i++;
-    }
-    
-    return c;
-}
-
-JetonProgres* Jeu::rechercherJeton(string s) const {
-    int i=0;
-    JetonProgres* j = nullptr;
-    while(j==nullptr && i<nbJetonsProgres){
-        if (tabJetonProgres[i]->getNom()==s) j = tabJetonProgres[i];
-        else i++;
-    }
-    return j;
 }

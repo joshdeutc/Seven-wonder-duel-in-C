@@ -1,21 +1,21 @@
-//
-//  main.cpp
-//  TESTSevenWonders
-//
-//  Created by Chloé on 23/05/2024.
-//
 
-#include "carte.hpp"
+#include "carte_bat_merv.h"
+#include "jeu.h"
+#include "plateau.h"
 
-int main(int argc, const char * argv[]) {
-    
-    Matiere_Premiere exploitation("exploitation", 1, 0, 0, 0, 0, 0, 1, bois, 1);
-    bool ressources[NB_RESSOURCES] = {false,false,true,false,false};
-    Commerce depotpierre("Depot de Pierre", 3, 0, 0, 0, 0, 0, 1, 0, 0, true, false, ressources);
-    
-    exploitation.afficher();
-    cout << endl << endl;
-    depotpierre.afficher();
-    cout << endl;
-    return 0;
+int main() {
+    // lancement du jeu
+    Jeu *j = Jeu::getInstance();
+    PlateauAge platage = PlateauAge(3);
+    platage.accessibilite();
+    int choix;
+    do {
+        std::cout << "Fais ton choix: ";
+        std::cin >> choix;
+        if (choix != 22) {
+            platage.destruction_carte_plateau_age3(choix);
+        }
+        cout << "on a détruit la carte " << choix << endl;
+        platage.accessibilite();
+    } while (choix != 22);
 }

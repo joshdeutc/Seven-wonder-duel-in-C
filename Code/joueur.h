@@ -19,13 +19,17 @@ class Joueur{
     TypeJoueur type;
     string id;
     int points = 0;
-    int solde = 0;
+    int solde = 7;
     int ressources_prod[NB_RESSOURCES] = {0,0,0,0,0}; //Inutile de stocker la valeur nulle
     int ressources_non_prod[NB_RESSOURCES] = {0,0,0,0,0}; //Inutile de stocker la valeur nulle
     int symboles[NB_SYMB] = {0,0,0,0,0,0,0}; //On se servira de l'enum pour acceder aux symboles par leur nom
-    int nb_cartesMax = 10; //Taille du tableau de pointeurs vers batiments
     const Carte** cartes;
+    int nb_cartesMax = 10; //Taille du tableau de pointeurs vers les cartes construites
     int nb_cartes = 0;
+    //const Merveille* merveillesConstruites[7];
+    int nb_merveilles_construites = 0; //Taille du tableau de pointeurs vers les cartes non construites
+    const Merveille* merveillesNonConstruites[7];
+    int nb_merveilles_non_construites = 0;
     JetonProgres* jetons[NB_JETONS];
     int nb_jetons=0;
 public:
@@ -33,21 +37,50 @@ public:
     ~Joueur();
     int nbSymboles() const;
     bool doubleSymbole(SymboleScientifique s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
-    void ajouter_jeton(JetonProgres* jeton);
-    void action();
-    bool prix_fixe(Ressource r);
+    void ajouterJeton(JetonProgres* jeton);
+    
+    bool prixFixe(Ressource r) const;
     void defausser();
-    void ajouter_carte(const Carte& c);
-    void construire_carte(const Carte& c);
-    bool possede_chainage(string Nom_Chaine);
-    void construire_merveille();
-    int get_couleur(TypeCarte couleur1,TypeCarte couleur2);
-    void choisir_merveille();
+    // Ajouter la carte a la cite du joueur, en renseignant si on veut la construire ou non
+    void ajouterCarte(const Carte& c, bool construire = false);
+    void construireCarte(const Carte& c, const Joueur& other);
+    
+    void supprimerCarte(const Carte& c);
+    
+    bool possedeCarte(const Carte& c) const;
+    bool estConstruite(const Carte& c) const;
+    
+    bool possedeChainage(Chainage ch) const;
+    int prixFinal(const Carte& c, const Joueur& other, int ressources_gratuites_jeton[NB_RESSOURCES],
+                  int ressources_gratuites_cartes[NB_RESSOURCES]) const;
+    
+    void afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f=cout) const;
+    unsigned int nombreCartesDeCategorie(TypeCarte typeRecherche) const;
+    void afficherCartes(ostream& f = cout) const;
+    
+    int getNbCartes() const { return nb_cartes; }
+    int getNbJetons() const { return nb_jetons; }
+    int getSolde() const { return solde; }
+    void setSolde(int s) { solde = s; }
+    int getPoints() const { return points; }
+    void addPoints(int p) { points += p; }
+    const int* getRessourcesProduites() const { return ressources_prod; }
+    const int* getRessourcesNonProduites() const { return ressources_non_prod; }
+    const Carte** getCartes() const { return cartes; }
+    
+    int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
+    
+    //Affichage
+    void afficher(std::ostream& f= cout) const;
+    
+    //Stratégies d'IA
+    int choixEntierIA(int *tab, int taille) const;
+    
+    //Methodes de choix
+    void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
+    void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
 };
 
 
-
-
-
-
 #endif
+

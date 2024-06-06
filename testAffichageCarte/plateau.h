@@ -71,16 +71,16 @@ public:
 
 class PlateauJetonMilit
 {
-private: 
+private:
     bool jetonMilit1_j1 = false;
     bool jetonMilit2_j1 = false;
     bool jetonMilit1_j2 = false;
     bool jetonMilit2_j2 = false;
-    JetonProgres** JetProgres = nullptr;
+    JetonProgres** jetonprogres = nullptr;
 public:
     PlateauJetonMilit();
     ~PlateauJetonMilit();
-    JetonProgres **getJetonProgres() const { return JetProgres; }
+    JetonProgres **getJetonProgres() const { return jetonprogres; }
     bool getJetonMilit1_j1() const { return jetonMilit1_j1; }
     bool getJetonMilit2_j1() const { return jetonMilit2_j1; }
     bool getJetonMilit1_j2() const { return jetonMilit1_j2; }

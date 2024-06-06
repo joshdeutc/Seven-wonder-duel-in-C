@@ -74,21 +74,12 @@ protected:
     unsigned int cout_ressources[NB_RESSOURCES];
     TypeCarte type_carte;
 public:
-    Carte(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES])
-        : nom(n), cout_piece(cout_piece) {
+    Carte(const string& name, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES])
+        : nom(name), cout_piece(cout_piece) {
             for (unsigned int i = 0; i < NB_RESSOURCES; i++) {
                 cout_ressources[i] = cout_prod[i];
             }
         }
-    
-    
-     /*
-    int prix_final_j1 (const Joueur& j1,const Joueur& j2) const; // on met const pour
-                                                                    // que la méthode ne
-                                                                    // modifie pas les
-                                                                    // attributs
-    int prix_final_j2 (const Joueur& j1,const Joueur& j2) const; */
-
     string getNom() const { return nom; }
     unsigned int getCoutPiece() const { return cout_piece; }
     const unsigned int* getCoutRessources() const { return cout_ressources; }
@@ -128,7 +119,6 @@ public:
     virtual const unsigned int* getRessources() const {return nullptr;}
     virtual int getSoldeRetireAdversaire() const { return 0; }
     virtual bool getTirage() const {return false;}
-    virtual bool getConstruite() const {return false;}
     virtual bool getRejouer() const {return false;}
     virtual bool getPiocheDefausse() const {return false;}
     virtual bool getDefausseAdversaire() const {return false;}
@@ -139,6 +129,11 @@ public:
     virtual const Chainage getChainage2() const {return aucun;}
     virtual bool estChainee() const {return false;}
     virtual const int getAge() const {return 0;}
+    virtual void set_accessible(bool ac) {}
+    virtual void set_face_visible(bool fv) {}
+    virtual bool get_accessible() const {return false;}
+    virtual bool get_face_visible() const {return false;}
+
     
     //Affichage
     void afficher(std::ostream& f= cout) const;
@@ -156,6 +151,11 @@ public:
     const Chainage getChainage1() const override { return chainage1; }
     const Chainage getChainage2() const override { return chainage2; }
     bool estChainee() const override { return (chainage1 != aucun || chainage2!=aucun); }
+    void set_accessible(bool ac) override { accesible = ac; set_face_visible(true); }
+    void set_face_visible(bool fv) override { face_visible = fv; }
+    bool get_accessible() const override { return accesible; }
+    bool get_face_visible() const override { return face_visible; }
+
 
        /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      dans le constructeur mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
@@ -335,7 +335,7 @@ private:
     int solde_apporte;
     int solde_retire_adversaire;
     bool tirage; // Si true, alors l'effet de la merveille est de tirer une carte supplémentaire
-    bool construite = false;
+    int boucliers;
     bool rejouer; // Si true, alors on rejoue après avoir construit cette merveille
     bool pioche_defausse; // Si true, alors la merveille permet de piocher dans la défausse
     bool defausse_adversaire; // Si true, alors la merveille permet de défausser une carte à l'adversaire
@@ -347,12 +347,12 @@ public:
     int getSoldeApporte() const override { return solde_apporte; }
     int getSoldeRetireAdversaire() const override { return solde_retire_adversaire; }
     bool getTirage() const override { return tirage; }
-    bool getConstruite() const override { return construite; }
     bool getRejouer() const override { return rejouer; }
     bool getPiocheDefausse() const override { return pioche_defausse; }
     bool getDefausseAdversaire() const override { return defausse_adversaire; }
     bool engendreProduction() const override { return engendre_production; }
     TypeCarte getCarteDefausseAdversaire() const override { return carte_defausse_adversaire; }
+    int getBoucliers() const override { return boucliers; }
     /* Je suis pas sure que ces accesseurs soient necessaires
         int getNbBois() const{return ressources[bois];}
         int getNbArgile() const{return ressources[argile];}
@@ -360,12 +360,13 @@ public:
         int getNbVerre() const{return ressources[verre];}
         int getNbPapyrus() const{return ressources[papyrus];} */
     const bool* getRessourcesAffectees() const override { return ressources; }
+    
     Merveille(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
-              const int &p, const int &sa, const int &sra,
+              const int &p, const int &boucl, const int &sa, const int &sra,
               const bool &t, const bool &r, const bool &pd,
               const bool &da, const TypeCarte &cda,
               const bool &engendre_prod,const bool res[NB_RESSOURCES])
-        : Carte(n, cout_piece, cout_prod), points(p),
+        : Carte(n, cout_piece, cout_prod), points(p), boucliers(boucl),
           solde_apporte(sa), solde_retire_adversaire(sra), tirage(t), rejouer(r), pioche_defausse(pd),
           defausse_adversaire(da), carte_defausse_adversaire(cda), engendre_production(engendre_prod) {
         for (unsigned int i = 0; i < NB_RESSOURCES; i++) {
@@ -378,40 +379,53 @@ public:
 };
 
 
-class JetonProgres : public Carte {
+class JetonProgres{
 private:
-    const unsigned int solde_apporte;
+    const string nom;
+    const unsigned int solde_immediat;
+    const unsigned int solde_condition;
     const unsigned int points_immediats;
     const unsigned int points_condition;
     const unsigned int ressources_gratuites; // Si >0, le joueur choisira lesquelles a chaque tour
+    const bool condition_jeton;
     const TypeCarte carte_condition;
     const unsigned int boucliers_supplementaires;
+    const bool recup_argent_achats_adversaire;
     const bool effet_rejouer;
     const bool condition_chainage;
     SymboleScientifique symbole;
 public:
-    JetonProgres(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES],
-                 const unsigned int sld_immediat,const unsigned int pts_immediats,
-                 const unsigned int pts_condition,const unsigned int ressources,TypeCarte carte_cdt,
-                 bool cdt_chainage,int boucliers_supp,bool rejouer,SymboleScientifique symb) :
-                 Carte(n, cout_piece, cout_prod),
-                 solde_apporte(sld_immediat), points_immediats(pts_immediats), points_condition(pts_condition),
-                 ressources_gratuites(ressources), carte_condition(carte_cdt), boucliers_supplementaires(boucliers_supp),
-                 effet_rejouer(rejouer), condition_chainage(cdt_chainage), symbole(symb) {
-        type_carte = jetonProgres;
-    }
+    JetonProgres(const string& n,
+                 const unsigned int sld_immediat, const unsigned int sld_cdt,
+                 const unsigned int pts_immediats, const unsigned int pts_condition,
+                 const unsigned int ressources,
+                 TypeCarte carte_cdt, bool cdt_jeton,
+                 bool cdt_chainage,int boucliers_supp,bool solde_adv, bool rejouer,SymboleScientifique symb) :
+                nom(n),solde_immediat(sld_immediat), solde_condition(sld_cdt),
+                points_immediats(pts_immediats), points_condition(pts_condition),
+                 ressources_gratuites(ressources), carte_condition(carte_cdt), condition_jeton(cdt_jeton), boucliers_supplementaires(boucliers_supp),
+                 recup_argent_achats_adversaire(solde_adv),
+                 effet_rejouer(rejouer), condition_chainage(cdt_chainage), symbole(symb) {}
     
-    int getPoints() const override { return points_immediats; }
+    string getNom() const { return nom; }
+    int getPoints() const { return points_immediats; }
     int getPointsCondition() const { return points_condition; }
-    int getSoldeApporte() const override { return solde_apporte; }
+    int getSoldeImmediat() const { return solde_immediat; }
+    int getSoldeCondition() const {return solde_condition;}
     int getRessourcesGratuites() const { return ressources_gratuites; }
+    bool getConditionJeton() const { return condition_jeton ; }
     TypeCarte getTypeCarteCondition() const { return carte_condition; }
-    int getBoucliers() const override { return boucliers_supplementaires; }
+    int getBoucliersSupp() const { return boucliers_supplementaires; }
+    bool getRecupDepensesAdversaire() const {return recup_argent_achats_adversaire;}
+    
     bool getEffetRejouer() const { return effet_rejouer; }
     bool getCondChainage() const { return condition_chainage; }
-    SymboleScientifique getSymbole() const override { return symbole; }
+    SymboleScientifique getSymbole() const { return symbole; }
+    
+    void afficher(ostream& f=cout) const;
 
     ~JetonProgres() = default;
 };
+
 
 #endif
