@@ -35,6 +35,7 @@ class Joueur{
 public:
     Joueur(TypeJoueur type_joueur, string identifiant);
     ~Joueur();
+    string getId() const { return id; }
     int nbSymboles() const;
     bool doubleSymbole(SymboleScientifique s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
     void ajouterJeton(JetonProgres* jeton);
@@ -64,10 +65,12 @@ public:
     void setSolde(int s) { solde = s; }
     int getPoints() const { return points; }
     void addPoints(int p) { points += p; }
+    
     const int* getRessourcesProduites() const { return ressources_prod; }
     const int* getRessourcesNonProduites() const { return ressources_non_prod; }
     const Carte** getCartes() const { return cartes; }
-    
+    JetonProgres* const* getJetons() const { return jetons; }
+
     int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
     
     //Affichage

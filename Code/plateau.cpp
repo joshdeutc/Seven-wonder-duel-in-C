@@ -281,11 +281,11 @@ PlateauMerveille::~PlateauMerveille()
 // ***************** PARTIE PLATEAU JETON MILIT *****************//
 
 PlateauJetonMilit::PlateauJetonMilit() {
-    jetonProgres = new JetonProgres *[5];
+    JetProgres = new JetonProgres *[5];
     // Génération d'un tableau de 5 entiers distincts aléatoires
     std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
     for (int i = 0; i < 5; ++i) {
-        jetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
+        JetProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
     }
 //    JetonMilitaire **jetonsMilitaires = new JetonMilitaire *[4];
 //    for (unsigned int i = 0; i < 4; i++) {
