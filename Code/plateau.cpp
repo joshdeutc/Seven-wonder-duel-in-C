@@ -278,19 +278,20 @@ PlateauMerveille::~PlateauMerveille()
 
 // ****************************************************************//
 
-// ***************** PARTIE PLATEAU JETON MILIT *****************//
+// ***************** PARTIE PLATEAU JETON PROGRES *****************//
 
-PlateauJetonMilit::PlateauJetonMilit() {
-    jetonProgres = new JetonProgres *[5];
+PlateauJetonProgres::PlateauJetonProgres() {
+    jetonprogres = new JetonProgres *[5];
     // Génération d'un tableau de 5 entiers distincts aléatoires
     std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
     for (int i = 0; i < 5; ++i) {
-        jetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
+        jetonprogres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
     }
-//    JetonMilitaire **jetonsMilitaires = new JetonMilitaire *[4];
-//    for (unsigned int i = 0; i < 4; i++) {
-//        JetonsMilitaires[i] = Jeu::getInstance()->getTabJetonMilitaire()[i];
-//    }
+}
+
+PlateauJetonProgres::~PlateauJetonProgres() {
+    //On ne supprime pas les jetons eux-mêmes, ils seront supprimés quand l'instance Jeu sera supprimée.
+    delete[] jetonprogres;
 }
 
 // ******************** PARTIE ACTION JOUEUR ******************//

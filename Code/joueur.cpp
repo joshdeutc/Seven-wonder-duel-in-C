@@ -1,6 +1,6 @@
 #include "joueur.h"
 //#define NB_SYMB 6
-
+#define NB_TYPES_CARTES 8
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
 //Il a deux tableaux spécifiques pour les merveilles afin de différencier les merveilles
 //construites des merveilles seulement possédées mais non construites.

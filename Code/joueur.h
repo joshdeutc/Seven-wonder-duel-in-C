@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "carte_bat_merv.h"
+#include "wondersException.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ class Joueur{
 public:
     Joueur(TypeJoueur type_joueur, string identifiant);
     ~Joueur();
+    TypeJoueur getType() const { return type; }
     int nbSymboles() const;
     bool doubleSymbole(SymboleScientifique s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
     void ajouterJeton(JetonProgres* jeton);
@@ -65,6 +67,9 @@ public:
     void addPoints(int p) { points += p; }
     const int* getRessourcesProduites() const { return ressources_prod; }
     const Carte** getCartes() const { return cartes; }
+    bool operator==(const Joueur& other) const {
+        return id == other.id;
+    }
     //Affichage
     void afficher(std::ostream& f= cout) const;
 };

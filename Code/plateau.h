@@ -76,11 +76,10 @@ private:
     bool jetonMilit2_j1 = false;
     bool jetonMilit1_j2 = false;
     bool jetonMilit2_j2 = false;
-    JetonProgres** JetProgres = nullptr;
 public:
-    PlateauJetonMilit();
-    ~PlateauJetonMilit();
-    JetonProgres **getJetonProgres() const { return JetProgres; }
+    PlateauJetonMilit()=default;
+    ~PlateauJetonMilit()=default;
+
     bool getJetonMilit1_j1() const { return jetonMilit1_j1; }
     bool getJetonMilit2_j1() const { return jetonMilit2_j1; }
     bool getJetonMilit1_j2() const { return jetonMilit1_j2; }
@@ -90,5 +89,12 @@ public:
     void setJetonMilit1_j2(bool b) { jetonMilit1_j2 = b; }
     void setJetonMilit2_j2(bool b) { jetonMilit2_j2 = b; }
 };
-
+class PlateauJetonProgres{
+private:
+    JetonProgres** jetonprogres = nullptr;
+public:
+    JetonProgres **getJetonProgres() const { return jetonprogres; }
+    PlateauJetonProgres();
+    ~PlateauJetonProgres();
+};
 #endif /* PLATEAU_H */

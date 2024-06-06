@@ -18,5 +18,7 @@ add_executable(projet_lo21
         Code/jeu.h
         Code/partie.cpp
         Code/carte_bat_merv.cpp
+        Code/wondersException.cpp
+        Code/wondersException.cpp
 )
 add_subdirectory(testAffichageCarte)
