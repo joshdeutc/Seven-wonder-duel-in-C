@@ -278,7 +278,7 @@ PlateauMerveille::~PlateauMerveille()
 
 // ****************************************************************//
 
-// ***************** PARTIE PLATEAU JETON PROGRES *****************//
+// ***************** PARTIE PLATEAU JETON MILIT *****************//
 
 PlateauJetonProgres::PlateauJetonProgres() {
     jetonprogres = new JetonProgres *[5];

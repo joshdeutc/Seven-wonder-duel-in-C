@@ -71,7 +71,7 @@ public:
 
 class PlateauJetonMilit
 {
-private:
+private: 
     bool jetonMilit1_j1 = false;
     bool jetonMilit2_j1 = false;
     bool jetonMilit1_j2 = false;

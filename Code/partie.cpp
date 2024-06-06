@@ -15,8 +15,7 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-    if(tour == 1) tour = 2;
-    else tour = 1;
+    tour = (tour == 1) ? 2 : 1;
 }
 
 bool Partie::fin_age(){
@@ -63,17 +62,125 @@ void Partie::change_solde_militaire( PlateauJetonMilit &platmilit , bool current
     }
 }
 
-void Partie::victoire_civile(){
-    //Parcourir toutes les cartes ainsi que les merveilles construites du joueur, et conversion des pieces en points de pouvoir pour chaque joueur
-    //declare un gagnant et un perdant
-    unsigned int PtV1 = 0, PtV2 = 0;
-    PtV1 += joueurs[0]->getSolde()/3;
-    PtV1 += joueurs[1]->getSolde()/3;
 
-    vainqueur =  (PtV1 > PtV2) ? joueurs[0] : joueurs[1];
+void Partie::victoire_civile(){
+    // Mise a jour des points de victoire des deux joueurs
+
+    int nb1,nb2,nbMax;
+    int indice_other;
+    int pts0 = 0, pts1 = 0;
+
+    for(int j=0;j<2;j++){
+
+        indice_other = 1-j; // autre joueur
+
+        // Jetons Progres
+        for(int i=0;i<joueurs[j]->getNbJetons();i++){
+            if (joueurs[j]->getJetons()[i]->getPointsCondition()){
+                if (joueurs[j]->getJetons()[i]->getConditionJeton()){
+                    joueurs[j]->addPoints(joueurs[j]->getNbJetons()*joueurs[j]->getJetons()[i]->getPointsCondition());
+                }
+            }
+        }
+
+        // Cartes Guilde
+        for (int i=0; i<joueurs[j]->getNbCartes(); i++){
+            if (joueurs[j]->getCartes()[i]->getPointsParCarte()>0){
+                if(joueurs[j]->getCartes()[i]->getTypeCarteAffectee()!=aucuneCarte){
+                    if(joueurs[j]->getCartes()[i]->getDeuxiemeTypeCarteAffectee()!=aucuneCarte){
+                        nb1 = (joueurs[j]->nombreCartesDeCategorie(joueurs[j]->getCartes()[i]->getTypeCarteAffectee())
+                               +joueurs[j]->nombreCartesDeCategorie(joueurs[j]->getCartes()[i]->getDeuxiemeTypeCarteAffectee()));
+                        nb2 = (joueurs[indice_other]->nombreCartesDeCategorie(joueurs[indice_other]->getCartes()[i]->getTypeCarteAffectee())
+                               +joueurs[indice_other]->nombreCartesDeCategorie(joueurs[indice_other]->getCartes()[i]->getDeuxiemeTypeCarteAffectee()));
+                    }else{ // un seul type de carte est affecte
+                        nb1 = (joueurs[j]->nombreCartesDeCategorie(joueurs[j]->getCartes()[i]->getTypeCarteAffectee()));
+                        nb2 = (joueurs[indice_other]->nombreCartesDeCategorie(joueurs[indice_other]->getCartes()[i]->getTypeCarteAffectee()));
+                    }
+                }else{ // si aucune carte n'est affectee on compte les pieces
+                    nb1 = joueurs[j]->getSolde()/3;
+                    nb2 = joueurs[indice_other]->getSolde()/3;
+                }
+                joueurs[j]->addPoints(joueurs[j]->getCartes()[i]->getPointsParCarte()*max(nb1,nb2));
+            }
+        }
+
+        // Tresors de la cite
+        joueurs[j]->addPoints(joueurs[j]->getSolde()/3);
+
+    } // Fin de la mise a jour des points de victoire des joueurs
+
+    //Points de victoire militaire
+    if(solde_militaire<-5) joueurs[1]->addPoints(10);
+    else if (solde_militaire<-2) joueurs[1]->addPoints(5);
+    else if (solde_militaire<0) joueurs[1]->addPoints(2);
+    else if (solde_militaire>5) joueurs[0]->addPoints(10);
+    else if (solde_militaire>2) joueurs[0]->addPoints(5);
+    else if (solde_militaire>0) joueurs[0]->addPoints(2);
+
+    cout << " ##################################################################################" << endl;
+    cout << "                               FIN DE PARTIE     " << endl;
+    cout << "                            - victoire civile -     " << endl;
+    cout << " ##################################################################################" << endl << endl;
+
+    joueurs[0]->afficher();
+    cout << endl << endl;
+    joueurs[1]->afficher();
+    cout << endl << endl;
+
+    if(joueurs[0]->getPoints()>joueurs[1]->getPoints()){
+        vainqueur = joueurs[0];
+    }else if(joueurs[1]->getPoints()>joueurs[0]->getPoints()){
+        vainqueur = joueurs[1];
+    }else{ // Égalité
+        // Il faut compter les points de victoire des batiments civils
+        for(int i=0;i<joueurs[0]->getNbCartes(); i++){
+            if (joueurs[0]->getCartes()[i]->getType()==batimentCivil)
+                pts0+=joueurs[0]->getCartes()[i]->getPoints();
+        }
+        for(int i=0;i<joueurs[1]->getNbCartes(); i++){
+            if (joueurs[1]->getCartes()[i]->getType()==batimentCivil)
+                pts1+=joueurs[1]->getCartes()[i]->getPoints();
+        }
+        if(pts0>pts1){
+            vainqueur = joueurs[0];
+        }else if(pts1>pts0){
+            vainqueur = joueurs[0];
+        }
+    }
+    if(vainqueur!=nullptr){
+        cout << " Le vainqueur est " << vainqueur->getId() << " ! " << endl;
+    }else{
+        cout << " Egalite ! Les deux joueurs se partagent la victoire. \n";
+    }
 }
 
-void Partie::victoire_scientifique(Joueur j){
+
+
+void Partie::victoire_scientifique(Joueur& j){
+    unsigned int compteur = 0;
+
+    cout << " ##################################################################################" << endl;
+    cout << "                               FIN DE PARTIE     " << endl;
+    cout << "                         - victoire scientifique -     " << endl;
+    cout << " ##################################################################################" << endl << endl;
+
+    if(j.nbSymboles()>=6) vainqueur = &j;
+    if (vainqueur!=nullptr){
+        cout << endl << endl;
+        cout << " Le vainqueur est " << vainqueur->getId() << " ! " << endl << endl;
+    }
+}
+
+void Partie::victoire_militaire(){
+
+    cout << " ##################################################################################" << endl;
+    cout << "                               FIN DE PARTIE     " << endl;
+    cout << "                           - victoire militaire -     " << endl;
+    cout << " ##################################################################################" << endl << endl;
+    if(solde_militaire >=9) vainqueur = joueurs[0];
+    else if (solde_militaire <=-9) vainqueur = joueurs[1];
+    cout << endl << endl;
+    cout << " Le vainqueur est " << vainqueur->getId() << " ! " << endl << endl;
 }
 
 // ********************  Partie selection action ********************

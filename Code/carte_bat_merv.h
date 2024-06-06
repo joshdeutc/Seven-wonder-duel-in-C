@@ -74,13 +74,12 @@ protected:
     unsigned int cout_ressources[NB_RESSOURCES];
     TypeCarte type_carte;
 public:
-    Carte(const string& n, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES])
-        : nom(n), cout_piece(cout_piece) {
+    Carte(const string& name, const unsigned int &cout_piece, const unsigned int cout_prod[NB_RESSOURCES])
+        : nom(name), cout_piece(cout_piece) {
             for (unsigned int i = 0; i < NB_RESSOURCES; i++) {
                 cout_ressources[i] = cout_prod[i];
             }
         }
-
     string getNom() const { return nom; }
     unsigned int getCoutPiece() const { return cout_piece; }
     const unsigned int* getCoutRessources() const { return cout_ressources; }
@@ -383,36 +382,50 @@ public:
 class JetonProgres{
 private:
     const string nom;
-    const unsigned int solde_apporte;
+    const unsigned int solde_immediat;
+    const unsigned int solde_condition;
     const unsigned int points_immediats;
     const unsigned int points_condition;
     const unsigned int ressources_gratuites; // Si >0, le joueur choisira lesquelles a chaque tour
+    const bool condition_jeton;
     const TypeCarte carte_condition;
     const unsigned int boucliers_supplementaires;
+    const bool recup_argent_achats_adversaire;
     const bool effet_rejouer;
     const bool condition_chainage;
     SymboleScientifique symbole;
 public:
     JetonProgres(const string& n,
-                 const unsigned int sld_immediat,const unsigned int pts_immediats,
-                 const unsigned int pts_condition,const unsigned int ressources,TypeCarte carte_cdt,
-                 bool cdt_chainage,int boucliers_supp,bool rejouer,SymboleScientifique symb) :
-                 solde_apporte(sld_immediat), points_immediats(pts_immediats), points_condition(pts_condition),
-                 ressources_gratuites(ressources), carte_condition(carte_cdt), boucliers_supplementaires(boucliers_supp),
+                 const unsigned int sld_immediat, const unsigned int sld_cdt,
+                 const unsigned int pts_immediats, const unsigned int pts_condition,
+                 const unsigned int ressources,
+                 TypeCarte carte_cdt, bool cdt_jeton,
+                 bool cdt_chainage,int boucliers_supp,bool solde_adv, bool rejouer,SymboleScientifique symb) :
+                nom(n),solde_immediat(sld_immediat), solde_condition(sld_cdt),
+                points_immediats(pts_immediats), points_condition(pts_condition),
+                 ressources_gratuites(ressources), carte_condition(carte_cdt), condition_jeton(cdt_jeton), boucliers_supplementaires(boucliers_supp),
+                 recup_argent_achats_adversaire(solde_adv),
                  effet_rejouer(rejouer), condition_chainage(cdt_chainage), symbole(symb) {}
     
     string getNom() const { return nom; }
     int getPoints() const { return points_immediats; }
     int getPointsCondition() const { return points_condition; }
-    int getSoldeApporte() const { return solde_apporte; }
+    int getSoldeImmediat() const { return solde_immediat; }
+    int getSoldeCondition() const {return solde_condition;}
     int getRessourcesGratuites() const { return ressources_gratuites; }
+    bool getConditionJeton() const { return condition_jeton ; }
     TypeCarte getTypeCarteCondition() const { return carte_condition; }
-    int getBoucliers() const { return boucliers_supplementaires; }
+    int getBoucliersSupp() const { return boucliers_supplementaires; }
+    bool getRecupDepensesAdversaire() const {return recup_argent_achats_adversaire;}
+    
     bool getEffetRejouer() const { return effet_rejouer; }
     bool getCondChainage() const { return condition_chainage; }
     SymboleScientifique getSymbole() const { return symbole; }
+    
+    void afficher(ostream& f=cout) const;
 
     ~JetonProgres() = default;
 };
+
 
 #endif

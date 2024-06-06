@@ -2,7 +2,7 @@
 //#define NB_SYMB 6
 #define NB_TYPES_CARTES 8
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
-//Il a deux tableaux spécifiques pour les merveilles afin de différencier les merveilles
+//Il a un tableau spécifique pour les merveilles non construites afin de différencier les merveilles
 //construites des merveilles seulement possédées mais non construites.
 
 Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
@@ -13,7 +13,6 @@ Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     for(int i=0;i<nb_cartesMax;i++) cartes[i]=nullptr;
     for(int i=0;i<NB_JETONS;i++) jetons[i] = nullptr;
     for (int i=0; i<7; i++){
-        merveillesConstruites[i] = nullptr;
         merveillesNonConstruites[i] = nullptr;
     }
 }
@@ -46,7 +45,7 @@ bool Joueur::doubleSymbole(SymboleScientifique s){
 //Les autres effets seront gérés par d'autres classes au moment pertinent
 void Joueur::ajouterJeton(JetonProgres* jeton){
     points+=jeton->getPoints();
-    solde+=jeton->getSoldeApporte();
+    solde+=jeton->getSoldeImmediat();
     if(jeton->getSymbole()!=aucunSymbole) symboles[jeton->getSymbole()]=1;
     
     //ajout du jeton aux attributs du joueur
@@ -76,9 +75,9 @@ void Joueur::defausser(){
 void Joueur::ajouterCarte(const Carte& c, bool construire){
     //Recopier la maniere de faire du td4 pour le jeu SET! avec old_tab, new_tab et delete
     //modifie donc l'attribut batiments
-    if (c.getType()==merveille){
-        if(construire){
-            merveillesConstruites[nb_merveilles_construites++] = dynamic_cast<const Merveille*>(&c);
+    if(construire){
+        if (c.getType()==merveille){
+            nb_merveilles_construites++;
             // Supprimer la merveille du tableau des non construites si elle est dedans
             int i = 0;
             while (i < nb_merveilles_non_construites && merveillesNonConstruites[i]->getNom() != c.getNom()) i++;
@@ -90,11 +89,8 @@ void Joueur::ajouterCarte(const Carte& c, bool construire){
                 // Décrémenter le compteur et mettre le dernier élément à nullptr
                 merveillesNonConstruites[--nb_merveilles_non_construites] = nullptr;
             }
-
         }
-        else
-            merveillesNonConstruites[nb_merveilles_non_construites++] = dynamic_cast<const Merveille*>(&c);
-    }else{
+        //Ajouter au tableau de cartes
         if (nb_cartes == nb_cartesMax)
         {
             const Carte** newtab = new const Carte*[(nb_cartesMax + 1) * 2];
@@ -104,6 +100,8 @@ void Joueur::ajouterCarte(const Carte& c, bool construire){
         }
         cartes[nb_cartes++] = &c;
     }
+    else
+        merveillesNonConstruites[nb_merveilles_non_construites++] = dynamic_cast<const Merveille*>(&c);
 }
 
 // Partie s'occupe des boucliers
@@ -120,9 +118,6 @@ void Joueur::construireCarte(const Carte& c, const Joueur& other){
     // verification faite par la méthode action() avec prix_final
     //Actions générales, communes à toutes les cartes
     //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
-    
-    
-    solde -= prixFinal(c, other);
     
     if(c.getRessource()!=aucuneRessource){
         ressources_prod[c.getRessource()]+=c.getNb();
@@ -180,19 +175,12 @@ void Joueur::supprimerCarte(const Carte& c) {
         }
         
         // Suppression de la carte du tableau cartes ou merveilles du joueur
-        if (c.getType() == merveille) {
-            // Déplacer les éléments du tableau merveillesConstruites
-            for (int j = i; j < nb_merveilles_construites - 1; j++) {
-                merveillesConstruites[j] = merveillesConstruites[j + 1];
-            }
-            merveillesConstruites[--nb_merveilles_construites] = nullptr;
-        } else {
-            // Déplacer les éléments du tableau cartes
-            for (int j = i; j < nb_cartes - 1; j++) {
-                cartes[j] = cartes[j + 1];
-            }
-            cartes[--nb_cartes] = nullptr;
+        if (c.getType() == merveille) nb_merveilles_construites--;
+        // Déplacer les éléments du tableau cartes
+        for (int j = i; j < nb_cartes - 1; j++) {
+            cartes[j] = cartes[j + 1];
         }
+        cartes[--nb_cartes] = nullptr;
     } else {
         // Trouver l'index de la carte dans le tableau merveillesNonConstruites
         while (merveillesNonConstruites[i]->getNom() != c.getNom()) i++;
@@ -212,8 +200,6 @@ bool Joueur::possedeCarte(const Carte& c) const{
         if (cartes[i]->getNom()==c.getNom()) return true;
     for (int i=0;i<nb_merveilles_non_construites;i++)
         if (merveillesNonConstruites[i]->getNom()==c.getNom()) return true;
-    for (int i = 0; i<nb_merveilles_construites; i++)
-        if (merveillesConstruites[i]->getNom()==c.getNom()) return true;
     return false;
 }
 
@@ -240,8 +226,9 @@ void Joueur::afficherCartesDeCategorie(TypeCarte typeRecherche, ostream& f) cons
     if (typeRecherche==merveille){
         if(nb_merveilles_construites>0){
             f << " MERVEILLES CONSTRUITES : " << endl;
-            for (int i = 0; i < nb_merveilles_construites; ++i) {
-                merveillesConstruites[i]->afficher(f);
+            for (int i = 0; i < nb_cartes ; ++i) {
+                if (cartes[i]->getType()==merveille)
+                    cartes[i]->afficher(f);
             }
         }
         if(nb_merveilles_non_construites>0){
@@ -283,36 +270,30 @@ unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche) const {
     return nombre;
 }
 
-int Joueur::prixFinal(const Carte& c, const Joueur& other) const{
+int Joueur::prixFinal(const Carte& c, const Joueur& other, int ressources_gratuites_jeton[NB_RESSOURCES], 
+                      int ressources_gratuites_cartes[NB_RESSOURCES]) const{
     int prix = c.getCoutPiece();
-    
-    int choixGris = 0; //Nombre de produits manufacurés choisis en ressource non produite directement
-    int choixMarron = 0; //Nombre de matières premières choisies en ressource non produite directement
-    bool choix = false;
     
     // Condition de construction gratuite
     if(possedeChainage(c.getChainage1())||possedeChainage(c.getChainage2())) return 0;
     
+    // Copier le cout des ressources dans un autre tableau qu'on peut modifier et retirer les ressources gratuites
+    int coutRes[NB_RESSOURCES];
+    for (int i = 0; i<NB_RESSOURCES; i++){
+        coutRes[i]=c.getCoutRessources()[i];
+        coutRes[i] -= (ressources_gratuites_jeton[i] + ressources_gratuites_cartes[i]);
+        if (coutRes[i]<0) coutRes[i] = 0;
+    }
+    
+    
+    
     for (int i=0;i<NB_RESSOURCES;i++){
         // On vérifie si le joueur ne produit pas déjà les ressources nécessaires
-        if(c.getCoutRessources()[i]>ressources_prod[i]){
-            // Choix des ressources non produites directement
-            choix = false;
-            if(ressources_non_prod[i]>0){
-                if(i<3 && ressources_non_prod[i]>choixMarron){ // Matière première (marron)
-                    choixMarron++;
-                    choix = true;
-                }
-                else if(i<5 && ressources_non_prod[i]>choixGris){ // Produit manufacure (gris)
-                    choixGris++;
-                    choix = true;
-                }
-            }if(!choix){
-                if(prixFixe(static_cast<Ressource>(i))){
-                    prix +=1;
-                }else{
-                    prix += (c.getCoutRessources()[i]-ressources_prod[i])*(2+other.getRessourcesProduites()[i]);
-                }
+        if(coutRes[i]>ressources_prod[i]){
+            if(prixFixe(static_cast<Ressource>(i))){
+                prix +=1;
+            }else{
+                prix += (coutRes[i]-ressources_prod[i])*(2+other.getRessourcesProduites()[i]);
             }
         }
     }
@@ -338,5 +319,110 @@ void Joueur::afficher(std::ostream& f) const{
         cout << " - " << jetons[i]->getNom() << endl;
     f << "***********************************************\n";
     f << "***********************************************\n";
+}
+
+
+int Joueur::choixEntierIA(int* tab, int taille) const {
+    if (taille <= 0) {
+        throw WondersException("Erreur dans ChoixIA: La taille doit être positive.");
+    }
+
+    switch (type) {
+        case humain:
+            throw WondersException("Tentative de choix IA avec un joueur humain");
+            break;
+        case IA_aleatoire:
+            // Générateur de nombres aléatoires
+            std::random_device rd;  // Génère une graine aléatoire
+            std::mt19937 gen(rd()); // Générateur Mersenne Twister
+            std::uniform_int_distribution<> dis(0, taille - 1); // Distribution uniforme entre 0 et taille-1
+
+            if (tab == nullptr) {
+                // tab est nullptr, on retourne un entier aléatoire entre 0 et taille - 1
+                return dis(gen);
+            } else {
+                // tab n'est pas nullptr, on retourne un élément aléatoire du tableau
+                int random_index = dis(gen); // Génère un indice aléatoire
+                return tab[random_index]; // Retourne l'élément du tableau à cet indice
+            }
+    }
+    
+    throw WondersException("Erreur ChoixIA: Type joueur inconnu");
+}
+
+void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]){
+    //initialisation à 0
+    for(int i=0 ;i<NB_RESSOURCES;i++) tab[i]=0;
+    int choix;
+    for (int i=0;i<nb_jetons;i++){
+        if (jetons[i]->getRessourcesGratuites() > 0){
+            if(type==humain){
+                int n= jetons[i]->getRessourcesGratuites();
+                cout << "Vous pouvez choisir " << n << " ressources gratuites. " << endl ;
+                int count = 0;
+                while(count<n){
+                    // afficher les options
+                    for (int k=0 ;k<NB_RESSOURCES;k++)
+                        cout << k+1 << ": "<< static_cast<Ressource>(k) << "      "  << endl;
+                    cout << "Choisir une ressource gratuite : " ;
+                    cin >> choix ;
+                    if(choix>NB_RESSOURCES || choix<1) cout << "Choix non valide " << endl ;
+                    else {
+                        tab[choix]++ ;
+                        count++ ;
+                    }
+                }
+            }else{
+                tab[choixEntierIA(nullptr,NB_RESSOURCES)]++;
+            }
+        }
+    }
+}
+
+void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
+    int choix ;
+    int count;
+    int n ;
+    //initialisation à 0
+    for(int i=0 ;i<NB_RESSOURCES;i++) tab[i]=0;
+
+    // Possibilite de choisir une matiere premiere ou un produit manufacture pour
+    // chaque carte
+    if (ressources_non_prod[0] > 0){
+        n = ressources_non_prod[0];
+        if(type==humain){
+            count = 0;
+            while(count<n){
+                cout << "Choisissez une ressources produite par votre cite pour ce tour parmis les suivantes : \n";
+                cout << " 1. Bois   2. Argile    3. Pierre \n " ;
+                cout << " Choix : " << endl;
+                cin>> choix ;
+                if(choix<1 || choix>3) cout << "Choix non valide. \n" ;
+                else{
+                    count++ ;
+                    tab[choix-1]++ ;
+                }
+            }
+        }else{
+            for(int i=0;i<n;i++) tab[choixEntierIA(nullptr,3)]++;
+        }
+    }if (ressources_non_prod[3] > 0){
+        n = ressources_non_prod[3];
+        if(type==humain){
+            count = 0;
+            while(count<n){
+                cout << "Choisissez une ressources produite par votre cite pour ce tour parmis les suivantes : \n";
+                cout << " 1. Verre   2. Papyrus   \n " ;
+                cin>> choix ;
+                if(choix<1 || choix>2) cout << "Choix non valide. \n" ;
+                else{
+                    count++ ;
+                    tab[choix+2]++ ;
+                }
+            }
+        }else{
+            for(int i=0;i<n;i++) tab[choixEntierIA(nullptr,2)+2]++;
+        }
+    }
 }
 

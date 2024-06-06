@@ -12,7 +12,7 @@ private:
     signed int solde_militaire = 0;
     int age = 1; // {1,2,3}
     int merveille_construite = 0;
-    int tour = 1; // {0,1} : Au tour de joueur 0 ou 1
+    int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
     int nb_tour = 0;
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
@@ -29,8 +29,8 @@ public:
     void tour_suivant();
     bool fin_age();
     void choix_merveilles();
-    void victoire_militaire(Joueur j);
-    void victoire_scientifique(Joueur j);
+    void victoire_militaire();
+    void victoire_scientifique(Joueur& j);
     void change_solde_militaire( PlateauJetonMilit &platmilit , bool current,const int &choix);
     void victoire_civile();
     void addDefausse(Carte*carte);
