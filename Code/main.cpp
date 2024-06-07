@@ -3,15 +3,6 @@
 
 int main(int argc, char const *argv[])
 {
-//    // Lancement du jeu
-//    Jeu *j = Jeu::getInstance();
-//
-//    // Actions à réaliser pour le bon déroulement du jeu
-//
-//
-//    // Fermeture du jeu
-//    j->freeInstance();
-
     //Exemple d'utilisation de construireCarte et prixFinal avec les tableaux de choix
     Joueur j1(humain,"Chloe");
     Joueur j2(humain, "Quentin");

@@ -17,6 +17,7 @@ enum TypeJoueur{
 };
 
 class Joueur{
+private:
     TypeJoueur type;
     string id;
     int points = 0;
@@ -66,6 +67,7 @@ public:
     void setSolde(int s) { solde = s; }
     int getPoints() const { return points; }
     void addPoints(int p) { points += p; }
+    TypeJoueur getType()  {return type;}
 
     const int* getRessourcesProduites() const { return ressources_prod; }
     const int* getRessourcesNonProduites() const { return ressources_non_prod; }

@@ -45,7 +45,7 @@ public:
     PlateauAge(int Age);
     ~PlateauAge();
     Carte**getCartes() const { return cartes; }
-    void accessibilite();
+    void accessibilite(int *tab_possibilite);
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);
     bool deviens_accessible_age3(int &choix);

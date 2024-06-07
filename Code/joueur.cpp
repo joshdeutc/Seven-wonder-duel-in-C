@@ -322,7 +322,7 @@ void Joueur::afficher(std::ostream& f) const{
 }
 
 
-int Joueur::choixEntierIA(int* tab, int taille) const {
+/*int Joueur::choixEntierIA(int* tab, int taille) const {
     if (taille <= 0) {
         throw WondersException("Erreur dans ChoixIA: La taille doit être positive.");
     }
@@ -346,9 +346,9 @@ int Joueur::choixEntierIA(int* tab, int taille) const {
                 return tab[random_index]; // Retourne l'élément du tableau à cet indice
             }
     }
-    
+
     throw WondersException("Erreur ChoixIA: Type joueur inconnu");
-}
+}*/
 
 void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]){
     //initialisation à 0
@@ -372,8 +372,8 @@ void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]){
                         count++ ;
                     }
                 }
-            }else{
-                tab[choixEntierIA(nullptr,NB_RESSOURCES)]++;
+//            }else{
+//                tab[choixEntierIA(nullptr,NB_RESSOURCES)]++;
             }
         }
     }
@@ -403,9 +403,9 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
                     tab[choix-1]++ ;
                 }
             }
-        }else{
+        }/*else{
             for(int i=0;i<n;i++) tab[choixEntierIA(nullptr,3)]++;
-        }
+        }*/
     }if (ressources_non_prod[3] > 0){
         n = ressources_non_prod[3];
         if(type==humain){
@@ -420,9 +420,9 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
                     tab[choix+2]++ ;
                 }
             }
-        }else{
+        }/*else{
             for(int i=0;i<n;i++) tab[choixEntierIA(nullptr,2)+2]++;
-        }
+        }*/
     }
 }
 

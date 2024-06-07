@@ -548,12 +548,13 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
     return false;
 }
 
-void PlateauAge::accessibilite(){
+void PlateauAge::accessibilite(int *tab_possibilite){
     for(int i=0;i<20;i++){
         if(cartes[i]){
             if(getCartes()[i]->get_accessible() == true){
                 cout<<"carte numero : "<<i<<"\n"<<endl;
                 getCartes()[i]->afficher(cout);
+                tab_possibilite[i]=i;
                 cout<<"\n";
             }
         }
