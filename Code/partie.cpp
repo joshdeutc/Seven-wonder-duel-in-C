@@ -305,11 +305,7 @@ void Partie::selection_action(Joueur &j_current){
             //defausser une carte
             cout<<"choisissser une carte a defausser"<<endl;
             cin>>choix1;
-<<<<<<< HEAD
             platAge->choix_correct(choix1);
-=======
-            platAge.choix_correct(choix1);
->>>>>>> 6df151dc7a0b2800a6f3949f2e316cfd4c9b3fb5
             // defausser
             addDefausse(platAge->getCartes()[choix1]);
             // augmenter le solde du joueur
