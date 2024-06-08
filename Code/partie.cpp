@@ -370,8 +370,9 @@ void Partie::choix_merveilles(){
             }
             break;
         default: // IA
-            choix = joueurs[0]->choixEntierIA(nullptr,3) +1 ;
+            choix = joueurs[1]->choixEntierIA(nullptr,3) +1 ;
     }
+    cout << "choix IA : "<<choix << endl;
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
     platMerveille->retirerCarte(1,choix-1);
     
@@ -390,7 +391,7 @@ void Partie::choix_merveilles(){
             }
             break;
         default: // IA
-            choix = joueurs[0]->choixEntierIA(nullptr,3) +1 ;
+            choix = joueurs[1]->choixEntierIA(nullptr,2) +1 ;
     }
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
     platMerveille->retirerCarte(1,choix-1);
@@ -457,7 +458,7 @@ void Partie::choix_merveilles(){
             }
             break;
         default: // IA
-            choix = joueurs[0]->choixEntierIA(nullptr,3) +1 ;
+            choix = joueurs[0]->choixEntierIA(nullptr,2) +1 ;
     }
     joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
     platMerveille->retirerCarte(2,choix-1);
