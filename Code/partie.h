@@ -13,7 +13,6 @@ private:
     int age = 1; // {1,2,3}
     int merveille_construite = 0;
     int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
-    int tab_possibilite[20];// il ne peut avoir plus de 10 carte disponible
     int nb_tour = 0;
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
@@ -40,7 +39,6 @@ public:
     void selection_action(Joueur &j_current);
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
-    void choix_correct(int & choix);
 
 };
 

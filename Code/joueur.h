@@ -4,6 +4,7 @@
 #include <string>
 #include "carte_bat_merv.h"
 #include "wondersException.h"
+#include <random>
 
 using namespace std;
 
