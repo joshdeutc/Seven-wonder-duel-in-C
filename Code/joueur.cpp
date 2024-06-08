@@ -426,3 +426,15 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
     }
 }
 
+const Carte* Joueur::recherche_carte(string &s) {
+    const Carte *c = nullptr;
+    string c1=cartes[0]->getNom();
+    cout<<c1<<endl;
+    for(int i = 0; i < getNbCartes(); i++) {
+        c1=cartes[i]->getNom();
+        if (c1 == s) {
+            c = cartes[i];
+        }
+    }
+    return c;
+}

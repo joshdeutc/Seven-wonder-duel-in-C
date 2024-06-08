@@ -5,9 +5,27 @@ int main(int argc, char const *argv[])
 {
     // ******************* PARTIE TEST JOSHUA ******************* //
     int tab_ressourcesgratuites_jetons[NB_RESSOURCES];
+    Joueur j1(humain,"joshua");
     Joueur j2(humain, "Quentin");
-    PlateauAge platage = PlateauAge(3);
-    platage.accessibilite();
+    Partie p(humain,humain,"joshua","quentin");
+
+    const Carte* merv=Jeu::getInstance()->rechercherCarte("LA PIREE");
+    j1.construireCarte(*merv,j2);
+    // le joueur 1 commence
+
+    Joueur* j_current = &j1;
+
+    // boucle de jeu
+    while(!p.getVainqueur()) {
+        p.selection_action(*j_current);
+        if(p.get_tour()==0) {
+            p.tour_suivant();
+        }
+        else if(p.get_tour()==1) {
+            p.tour_suivant();
+        }
+        j_current=p.autre_joueur();
+    }
 
 
 

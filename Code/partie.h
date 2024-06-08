@@ -6,13 +6,17 @@
 #include "jeu.h"
 #include "joueur.h"
 #include "carte_bat_merv.h"
+
+using namespace std;
+
+
 class Partie
 {
 private:
-    signed int solde_militaire = 0;
+    signed int solde_militaire = 8;
     int age = 1; // {1,2,3}
     int merveille_construite = 0;
-    int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
+    int tour = 0; // {1,0} : Au tour de joueur 1 ou 2
     int nb_tour = 0;
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
@@ -39,7 +43,9 @@ public:
     void selection_action(Joueur &j_current);
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
-
+    void afficherSoldeMilitaire();
+    Joueur* getVainqueur() const { return vainqueur; }
+    int get_tour() const { return tour; }
 };
 
 #endif
