@@ -13,16 +13,15 @@ private:
     int age = 1; // {1,2,3}
     int merveille_construite = 0;
     int tour = 1; // {1,2} : Au tour de joueur 1 ou 2
-    int tab_possibilite[20];// il ne peut avoir plus de 10 carte disponible
     int nb_tour = 0;
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
 
     Jeu* jeu;
-    PlateauAge platAge;
-    PlateauJetonMilit platMilitaire;
-    PlateauMerveille platMerveille;
-    PlateauJetonProgres platProgres;
+    PlateauAge* platAge;
+    PlateauJetonMilit* platMilitaire;
+    PlateauMerveille* platMerveille;
+    PlateauJetonProgres* platProgres;
     Joueur* joueurs[2];
 public:
     Partie(const TypeJoueur &typJ1,const TypeJoueur &typJ2,string id1,string id2);
@@ -32,7 +31,7 @@ public:
     void choix_merveilles();
     void victoire_militaire();
     void victoire_scientifique(Joueur& j);
-    void change_solde_militaire( PlateauJetonMilit &platmilit , bool current,const int &choix);
+    void change_solde_militaire(bool current,const int &choix);
     void victoire_civile();
     void addDefausse(Carte*carte);
     const vector<Carte*>& getDefausses() const { return defausses; }
@@ -40,7 +39,6 @@ public:
     void selection_action(Joueur &j_current);
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
-    void choix_correct(int & choix);
 
 };
 
