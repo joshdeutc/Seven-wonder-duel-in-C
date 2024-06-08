@@ -257,24 +257,94 @@ PlateauAge::~PlateauAge()
 
 PlateauMerveille::PlateauMerveille()
 {
-    Merveille** cartesPremierPhase = new Merveille*[4];
-    Merveille** cartesDeuxiemePhase = new Merveille*[4];
+    cartesPremierePhase = new Merveille*[4];
+    cartesDeuxiemePhase = new Merveille*[4];
+    taille1 = taille2 = 4;
 
     // Génération d'un tableau de 8 entiers distincts aléatoires
-    std::vector<int> intVect = generateRandomDistinctIntegers(8, 0, 7);
+    std::vector<int> intVect = generateRandomDistinctIntegers(8, 0, 11);
     for (int i = 0; i < 4; ++i) {
-        cartesPremierPhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i]];
+        cartesPremierePhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i]];
         cartesDeuxiemePhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i + 4]];
     }
 
 }
 
+void PlateauMerveille::retirerCarte(int phase, int indice) {
+    switch (phase) {
+        case 1: {
+            if (indice < 0 || indice >= taille1) {
+                // Gérer l'indice hors limites
+                return;
+            }
+            taille1--;
+            Merveille** new_tab = new Merveille*[taille1];
+            for (int i = 0, j = 0; i <= taille1; i++) {
+                if (i != indice) {
+                    new_tab[j++] = cartesPremierePhase[i];
+                }
+            }
+            delete[] cartesPremierePhase;
+            cartesPremierePhase = new_tab;
+            break;
+        }case 2: {
+            if (indice < 0 || indice >= taille2) {
+                // Gérer l'indice hors limites
+                return;
+            }
+            taille2--;
+            Merveille** new_tab2 = new Merveille*[taille2];
+            for (int i = 0, j = 0; i <= taille2; i++) {
+                if (i != indice) {
+                    new_tab2[j++] = cartesDeuxiemePhase[i];
+                }
+            }
+            delete[] cartesDeuxiemePhase;
+            cartesDeuxiemePhase = new_tab2;
+            break;
+        }
+    }
+}
+
+
 PlateauMerveille::~PlateauMerveille()
 {
     //On ne supprime pas les cartes elles mêmes, elles seront supprimees quand l'instance Jeu sera supprimée.
-    delete[] cartesPremierPhase;
+    delete[] cartesPremierePhase;
     delete[] cartesDeuxiemePhase;
 }
+
+void PlateauMerveille::afficher(int phase, ostream& f) const {
+    switch (phase){
+        case 1:
+            for (int i=0; i<taille1; i++){
+                cout << "Merveille " << i+1 << ": \n";
+                cartesPremierePhase[i]->afficher();
+            }
+            break;
+        case 2:
+            for (int i=0; i<taille2; i++){
+                cout << "Merveille " << i+1 << ": \n";
+                cartesDeuxiemePhase[i]->afficher();
+            }
+            break;
+        default:
+            throw WondersException("Erreur Affichage Plateaux Merveilles: il n'y a que deux phases");
+    }
+}
+
+Merveille** PlateauMerveille::getMerveilles(int phase) const{
+    switch (phase){
+        case 1:
+            return cartesPremierePhase;
+            break;
+        case 2:
+            return cartesDeuxiemePhase;
+            break;
+    }
+    throw WondersException("Erreur Affichage Plateaux Merveilles: il n'y a que deux phases");
+}
+
 
 // ****************************************************************//
 

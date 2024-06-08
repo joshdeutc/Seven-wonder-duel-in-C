@@ -20,6 +20,7 @@ private:
     int nb_tour = 0;
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
+    bool match_nul = false;
 
     Jeu* jeu;
     PlateauAge* platAge;
@@ -43,9 +44,12 @@ public:
     void selection_action(Joueur &j_current);
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
+
+    Joueur* const* getJoueurs() const { return joueurs; }
     void afficherSoldeMilitaire();
     Joueur* getVainqueur() const { return vainqueur; }
     int get_tour() const { return tour; }
 };
+
 
 #endif

@@ -35,14 +35,27 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-    tour = (tour == 0) ? 1 : 0;
+    tour = (tour == 1) ? 2 : 1;
 }
 
 bool Partie::fin_age(){
     if(platAge->getCartes() == nullptr){//Si il ne reste plus de carte sur le plateau
-        if (age == 1){ age = 2; return true;}
-        else if(age == 2){ age = 3; return true;}
-        else {victoire_civile(); return true;}//age 3 finit, vict civile
+        if (age == 1){
+            age = 2;
+            delete platAge;
+            platAge = new PlateauAge(2);
+            return true;
+        }
+        else if(age == 2){
+            age = 3;
+            delete platAge;
+            platAge = new PlateauAge(3);
+            return true;
+        }
+        else {
+            victoire_civile();
+            return true;
+        }//age 3 finit, vict civile
     }
     else return false;
 }
@@ -175,6 +188,7 @@ void Partie::victoire_civile(){
         cout << " Le vainqueur est " << vainqueur->getId() << " ! " << endl;
     }else{
         cout << " Egalite ! Les deux joueurs se partagent la victoire. \n";
+        match_nul = true;
     }
 }
 
@@ -365,6 +379,139 @@ void Partie::choix_merveilles(){
     cout << "           CHOIX DES MERVEILLES : PHASE 1 \n";
     cout << "#######################################################\n";
     // platMerveille->afficher(1);
+    platMerveille->afficher(1);
+    int choix;
+
+    cout << endl << "Choix du joueur " << joueurs[0]->getId() << endl;
+
+    switch (joueurs[0]->getType()){
+        case humain:
+            cout << "Choix (entrer numero de la carte voulue) : ";
+            cin >> choix;
+            while(choix<1 || choix>4){
+                cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
+                cin>> choix;
+            }
+            break;
+        default: // IA
+            choix = joueurs[0]->choixEntierIA(nullptr,4) +1 ;
+    }
+    joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
+    platMerveille->retirerCarte(1,choix-1);
+
+    cout << endl;
+    platMerveille->afficher(1);
+    cout << endl << "Choix du joueur " << joueurs[1]->getId() << endl;
+
+
+
+    switch (joueurs[1]->getType()){
+        case humain:
+            cout << "Choix (entrer numero de la carte voulue) : ";
+            cin >> choix;
+            while(choix<1 || choix>3){
+                cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
+                cin>> choix;
+            }
+            break;
+        default: // IA
+            choix = joueurs[1]->choixEntierIA(nullptr,3) +1 ;
+    }
+    cout << "choix IA : "<<choix << endl;
+    joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
+    platMerveille->retirerCarte(1,choix-1);
+
+    cout << endl;
+    platMerveille->afficher(1);
+    cout << endl << "Choix du joueur " << joueurs[1]->getId() << endl;
+
+
+    switch (joueurs[1]->getType()){
+        case humain:
+            cout << "Choix (entrer numero de la carte voulue) : ";
+            cin >> choix;
+            while(choix<1 || choix>2){
+                cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
+                cin>> choix;
+            }
+            break;
+        default: // IA
+            choix = joueurs[1]->choixEntierIA(nullptr,2) +1 ;
+    }
+    joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
+    platMerveille->retirerCarte(1,choix-1);
+
+    cout << "Le joueur " << joueurs[0]->getId() << " prend la derniere merveille. \n" << endl;
+
+    joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(1)[0])); //il ne reste plus qu'une carte
+
+    cout << "#######################################################\n";
+    cout << "           CHOIX DES MERVEILLES : PHASE 2 \n";
+    cout << "#######################################################\n";
+
+    platMerveille->afficher(2);
+
+    cout << endl << "Choix du joueur " << joueurs[1]->getId() << endl;
+
+    switch (joueurs[1]->getType()){
+        case humain:
+            cout << "Choix (entrer numero de la carte voulue) : ";
+            cin >> choix;
+            while(choix<1 || choix>4){
+                cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
+                cin>> choix;
+            }
+            break;
+        default: // IA
+            choix = joueurs[1]->choixEntierIA(nullptr,4) +1 ;
+    }
+    joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
+    platMerveille->retirerCarte(2,choix-1);
+
+    cout << endl;
+    platMerveille->afficher(2);
+    cout << endl << "Choix du joueur " << joueurs[0]->getId() << endl;
+
+
+    switch (joueurs[0]->getType()){
+        case humain:
+            cout << "Choix (entrer numero de la carte voulue) : ";
+            cin >> choix;
+            while(choix<1 || choix>3){
+                cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
+                cin>> choix;
+            }
+            break;
+        default: // IA
+            choix = joueurs[0]->choixEntierIA(nullptr,3) +1 ;
+    }
+    joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
+    platMerveille->retirerCarte(2,choix-1);
+
+    cout << endl;
+    platMerveille->afficher(2);
+    cout << endl << "Choix du joueur " << joueurs[0]->getId() << endl;
+
+
+    switch (joueurs[0]->getType()){
+        case humain:
+            cout << "Choix (entrer numero de la carte voulue) : ";
+            cin >> choix;
+            while(choix<1 || choix>2){
+                cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
+                cin>> choix;
+            }
+            break;
+        default: // IA
+            choix = joueurs[0]->choixEntierIA(nullptr,2) +1 ;
+    }
+    joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
+    platMerveille->retirerCarte(2,choix-1);
+
+    cout << "Le joueur " << joueurs[1]->getId() << " prend la derniere merveille. \n" << endl;
+
+    joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(2)[0])); //il ne reste plus qu'une carte
+
 }
 
 /*void victoire_militaire(Joueur j){

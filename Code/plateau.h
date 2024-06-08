@@ -65,16 +65,23 @@ public:
 class PlateauMerveille
 {
 private:
-    Merveille** cartesPremierPhase = nullptr;
+    Merveille** cartesPremierePhase = nullptr;
     Merveille** cartesDeuxiemePhase = nullptr;
+    int taille1;
+    int taille2;
 public:
     PlateauMerveille();
     ~PlateauMerveille();
+    void afficher(int phase, ostream& f=cout) const;
+    Merveille** getMerveilles(int phase) const;
+    void retirerCarte(int phase,int indice);
 };
+
+
 
 class PlateauJetonMilit
 {
-private: 
+private:
     bool jetonMilit1_j1 = false;
     bool jetonMilit2_j1 = false;
     bool jetonMilit1_j2 = false;
@@ -100,4 +107,5 @@ public:
     PlateauJetonProgres();
     ~PlateauJetonProgres();
 };
+
 #endif /* PLATEAU_H */

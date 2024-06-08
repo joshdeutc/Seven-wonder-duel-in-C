@@ -346,7 +346,7 @@ int Joueur::choixEntierIA(int* tab, int taille) const {
                 return tab[random_index]; // Retourne l'élément du tableau à cet indice
             }
     }
-
+    
     throw WondersException("Erreur ChoixIA: Type joueur inconnu");
 }
 
