@@ -3,7 +3,41 @@
 
 int main(int argc, char const *argv[])
 {
-    //Exemple d'utilisation de construireCarte et prixFinal avec les tableaux de choix
+    // ******************* PARTIE TEST JOSHUA ******************* //
+    int tab_ressourcesgratuites_jetons[NB_RESSOURCES];
+    Joueur j2(humain, "Quentin");
+    PlateauAge platage = PlateauAge(3);
+    platage.accessibilite();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*//Exemple d'utilisation de construireCarte et prixFinal avec les tableaux de choix
     Joueur j1(humain,"Chloe");
     Joueur j2(humain, "Quentin");
 
@@ -36,9 +70,7 @@ int main(int argc, char const *argv[])
     j2.choixRessourcesGratuitesCartes(tabcc);
 
     int prix = j2.prixFinal(*Jeu::getInstance()->rechercherCarte("ÉTUDE"),j1,tabcj,tabcc);
-    cout << "Prix final de Étude pour joueur 2 : " << prix << endl;
+    cout << "Prix final de Étude pour joueur 2 : " << prix << endl;*/
 
-    //modif
-    // modif nadji
     return 0;
 }

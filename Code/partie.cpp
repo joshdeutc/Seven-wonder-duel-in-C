@@ -220,7 +220,11 @@ Joueur* Partie::autre_joueur(){
 
 
 void Partie::selection_action(Joueur &j_current){
+<<<<<<< HEAD
     platAge->accessibilite();
+=======
+    platAge.accessibilite();
+>>>>>>> 6df151dc7a0b2800a6f3949f2e316cfd4c9b3fb5
     cout<<"Choisissez une action :"<<endl;
     cout<<"1. Construire un batiment"<<endl;
     cout<<"2. Construire une merveille"<<endl;
@@ -234,7 +238,11 @@ void Partie::selection_action(Joueur &j_current){
             //construire un batiment
             cout<<"choisissser un batiment a construire"<<endl;
             cin>>choix1;
+<<<<<<< HEAD
             platAge->choix_correct(choix1);
+=======
+            platAge.choix_correct(choix1);
+>>>>>>> 6df151dc7a0b2800a6f3949f2e316cfd4c9b3fb5
             // il faut vérifier avant si l'on a les ressources nécessaire
 
             // construction de la carte
@@ -267,7 +275,11 @@ void Partie::selection_action(Joueur &j_current){
             //construire une merveille
             cout<<"choisissser une merveille a construire"<<endl;
             cin>>choix1;
+<<<<<<< HEAD
             platAge->choix_correct(choix1);
+=======
+            platAge.choix_correct(choix1);
+>>>>>>> 6df151dc7a0b2800a6f3949f2e316cfd4c9b3fb5
             // il faut vérifier avant si l'on a les ressources nécessaire
 
             // ( je ne sais pas si construire batiment le fais ** voir chloe**)
@@ -293,7 +305,11 @@ void Partie::selection_action(Joueur &j_current){
             //defausser une carte
             cout<<"choisissser une carte a defausser"<<endl;
             cin>>choix1;
+<<<<<<< HEAD
             platAge->choix_correct(choix1);
+=======
+            platAge.choix_correct(choix1);
+>>>>>>> 6df151dc7a0b2800a6f3949f2e316cfd4c9b3fb5
             // defausser
             addDefausse(platAge->getCartes()[choix1]);
             // augmenter le solde du joueur

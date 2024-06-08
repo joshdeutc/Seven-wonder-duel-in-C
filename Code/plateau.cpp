@@ -547,8 +547,10 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
     }
     return false;
 }
+// ***************** PARTIE ACCCESSIBLITE ************** //
 
-void PlateauAge::accessibilite(int *tab_possibilite){
+
+void PlateauAge::accessibilite(){
     for(int i=0;i<20;i++){
         if(cartes[i]){
             if(getCartes()[i]->get_accessible() == true){
@@ -557,7 +559,14 @@ void PlateauAge::accessibilite(int *tab_possibilite){
                 tab_possibilite[i]=i;
                 cout<<"\n";
             }
-        }
+        }else tab_possibilite[i]=0;
+    }
+}
+
+void PlateauAge::choix_correct(int &choix) {
+    while(!tab_possibilite[choix]) {
+        cout<<"choix incorrect, refaire le choix svp :\n";
+        cin>>choix;
     }
 }
 void PlateauAge::destruction_carte_plateau_age1(int &choix) {
