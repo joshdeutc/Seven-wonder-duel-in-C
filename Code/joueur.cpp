@@ -426,15 +426,22 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
     }
 }
 
-const Carte* Joueur::recherche_carte(string &s) {
+const Carte* Joueur::recherche_carte(string s) const{
     const Carte *c = nullptr;
-    string c1=cartes[0]->getNom();
-    cout<<c1<<endl;
-    for(int i = 0; i < getNbCartes(); i++) {
-        c1=cartes[i]->getNom();
-        if (c1 == s) {
-            c = cartes[i];
-        }
+    int i=0;
+    while(i<nb_cartes && c==nullptr) {
+        if(cartes[i]->getNom()==s) c=cartes[i];
+        i++;
     }
     return c;
+}
+
+void Joueur::afficherMerveillesNonConstruites() const {
+    for(int i = 0; i < nb_merveilles_non_construites; i++) {
+        if(merveillesNonConstruites[i] != nullptr) {
+            std::cout << "Merveille non construite " << (i+1) << ":\n";
+            merveillesNonConstruites[i]->afficher();
+            std::cout << "\n";
+        }
+    }
 }

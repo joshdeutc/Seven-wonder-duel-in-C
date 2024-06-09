@@ -7,6 +7,7 @@
 #include <random>
 #include <set>
 #include <ctime>
+#include <algorithm>
 
 /**
  * Génère un tableau d'entiers aléatoires distincts dans une plage donnée.

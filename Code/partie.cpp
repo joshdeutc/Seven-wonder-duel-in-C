@@ -309,7 +309,8 @@ void Partie::selection_action(Joueur &j_current){
         // il faut vérifier avant si l'on a les ressources nécessaire
 
         //affichage des merveilles et choix des merveilles
-        j_current.afficherCartesDeCategorie(merveille,cout);
+        j_current.afficherMerveillesNonConstruites();
+
         cout<<"choisissser une merveille a construire"<<endl;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::getline(std::cin, nom_merveille);

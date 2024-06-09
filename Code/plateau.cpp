@@ -1,5 +1,5 @@
 #include "plateau.h"
-
+#include "wondersException.h"
 // *************** PARTIE CONSTRUCTEUR AGE ****************** //
 
 
