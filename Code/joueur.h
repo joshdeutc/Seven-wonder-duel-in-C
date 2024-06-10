@@ -5,17 +5,19 @@
 #include "carte_bat_merv.h"
 #include "wondersException.h"
 #include <random>
+#define NB_IA 1
 
 using namespace std;
-
-#define NB_SYMB 7
-#define NB_JETONS 10
 
 
 enum TypeJoueur{
     humain,
     IA_aleatoire
 };
+
+ostream& operator<<(ostream& f, TypeJoueur j);
+void afficher_types_IA();
+
 
 class Joueur{
 private:
@@ -90,10 +92,10 @@ public:
     void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
     void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
 
-    const Carte* recherche_carte(string s) const;
+    const Carte* recherche_carte(const string& s) const;
     void afficherMerveillesNonConstruites() const;
+    
 };
-
 
 #endif
 

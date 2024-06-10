@@ -1,4 +1,6 @@
 #include "partie.h"
+
+
 void Partie::afficherSoldeMilitaire() {
     std::string axe = "---------------------"; // 21 caractères, représentant -9 à 9
     std::string labels = "-9        0        9"; // Les étiquettes pour l'axe
@@ -14,13 +16,11 @@ void Partie::afficherSoldeMilitaire() {
     std::cout << axe << std::endl;
 }
 
-Partie::Partie(const TypeJoueur &typJ1,const TypeJoueur &typJ2,string id1,string id2){
+Partie::Partie(){
     platAge = new PlateauAge(1);
     platMerveille = new PlateauMerveille();
     platProgres = new PlateauJetonProgres();
     platMilitaire = new PlateauJetonMilit();
-    joueurs[0] = new Joueur(typJ1,id1);
-    joueurs[1] = new Joueur(typJ2,id2);
 }
 
 Partie::~Partie() {
@@ -309,7 +309,6 @@ void Partie::selection_action(Joueur &j_current){
         // il faut vérifier avant si l'on a les ressources nécessaire
 
         //affichage des merveilles et choix des merveilles
-        j_current.afficherMerveillesNonConstruites();
 
         cout<<"choisissser une merveille a construire"<<endl;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -515,6 +514,68 @@ void Partie::choix_merveilles(){
 
 }
 
-/*void victoire_militaire(Joueur j){
+void Partie::initJoueurs(){
+    int type, IA;
+    string nom1,nom2;
+    
+    do{
+        cout<<"Choissisez le type de partie : 0 pour humain vs humain, 1 pour IA vs humain, 2 pour IA vs IA : ";
+        cin>>type;
+    }while (type!=0&&type!=1&&type!=3);
+    
+    if(type==0) {
+        cout<<"Entrez le nom du premier joueur (sans espaces) : ";
+        cin>>nom1;
+        joueurs[0] = new Joueur(humain,nom1);
+        do{
+            cout << "Entrez le nom du deuxieme joueur (sans espaces) : ";
+            cin>>nom2;
+        }while(nom2==nom1);
+        joueurs[1] = new Joueur(humain,nom2);
+    }
+    else if(type==1) {
+        cout<<"Entrez le nom du joueur humain (sans espaces) : ";
+        cin>>nom1;
+        joueurs[0] = new Joueur(humain,nom1);
+        
+        do{
+            afficher_types_IA();
+            cout << "Choisissez le type d'IA souhaité: ";
+            cin >> IA;
+        }while(IA<0 || IA>NB_IA);
+        joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA");
+    }else if (type==3){
+        do{
+            afficher_types_IA();
+            cout << "Choisissez le type d'IA 1 souhaité: ";
+            cin >> IA;
+        }while(IA<0 || IA>NB_IA);
+        joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 1");
+        do{
+            afficher_types_IA();
+            cout << "Choisissez le type d'IA 2 souhaité: ";
+            cin >> IA;
+        }while(IA<0 || IA>NB_IA);
+        joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
+    }
+    
+}
 
-}*/
+void Partie::jouer(){
+    // démarrage du Jeu //
+    Jeu* j = Jeu::getInstance();
+    // choix des types de joueurs
+    
+    initJoueurs();
+
+    choix_merveilles();
+            
+    tour = 0;
+
+    // boucle de jeu
+    while(!vainqueur && !match_nul) {
+        selection_action(*joueurs[tour]);
+        tour_suivant();
+        fin_age();
+    }
+}
