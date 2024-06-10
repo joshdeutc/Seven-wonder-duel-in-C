@@ -1,6 +1,6 @@
 #include "joueur.h"
 //#define NB_SYMB 6
-
+#define NB_TYPES_CARTES 8
 //Dans cette partie on considère que le Joueur a un seul tableau de pointeurs Batiment**
 //Il a un tableau spécifique pour les merveilles non construites afin de différencier les merveilles
 //construites des merveilles seulement possédées mais non construites.
@@ -426,3 +426,22 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
     }
 }
 
+const Carte* Joueur::recherche_carte(string s) const{
+    const Carte *c = nullptr;
+    int i=0;
+    while(i<nb_merveilles_non_construites && c==nullptr) {
+        if(merveillesNonConstruites[i]->getNom()==s) c=merveillesNonConstruites[i];
+        i++;
+    }
+    return c;
+}
+
+void Joueur::afficherMerveillesNonConstruites() const {
+    for(int i = 0; i < nb_merveilles_non_construites; i++) {
+        if(merveillesNonConstruites[i] != nullptr) {
+            std::cout << "Merveille non construite " << (i+1) << ":\n";
+            merveillesNonConstruites[i]->afficher();
+            std::cout << "\n";
+        }
+    }
+}

@@ -17,8 +17,4 @@ add_executable(testAffichageCarte
         utils.cpp
         utils.h
         main.cpp
-        partie.h
-        partie.cpp
-        joueur.h
-        joueur.cpp
         )

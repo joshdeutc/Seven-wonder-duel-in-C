@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include "carte_bat_merv.h"
+#include "wondersException.h"
+#include <random>
 
 using namespace std;
 
@@ -16,6 +18,7 @@ enum TypeJoueur{
 };
 
 class Joueur{
+private:
     TypeJoueur type;
     string id;
     int points = 0;
@@ -35,10 +38,11 @@ class Joueur{
 public:
     Joueur(TypeJoueur type_joueur, string identifiant);
     ~Joueur();
+    string getId() const { return id; }
     int nbSymboles() const;
     bool doubleSymbole(SymboleScientifique s); // Vaut-il mieux mettre la carte en argument ou son symbole direct?
     void ajouterJeton(JetonProgres* jeton);
-    
+
     bool prixFixe(Ressource r) const;
     void defausser();
     // Ajouter la carte a la cite du joueur, en renseignant si on veut la construire ou non
@@ -64,21 +68,30 @@ public:
     void setSolde(int s) { solde = s; }
     int getPoints() const { return points; }
     void addPoints(int p) { points += p; }
+    TypeJoueur getType()  {return type;}
+
     const int* getRessourcesProduites() const { return ressources_prod; }
     const int* getRessourcesNonProduites() const { return ressources_non_prod; }
     const Carte** getCartes() const { return cartes; }
-    
+    JetonProgres* const* getJetons() const { return jetons; }
+
     int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
-    
+
+    bool operator==(const Joueur& other) const {
+        return id == other.id;
+    }
     //Affichage
     void afficher(std::ostream& f= cout) const;
-    
+
     //Stratégies d'IA
     int choixEntierIA(int *tab, int taille) const;
-    
+
     //Methodes de choix
     void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
     void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
+
+    const Carte* recherche_carte(string s) const;
+    void afficherMerveillesNonConstruites() const;
 };
 
 

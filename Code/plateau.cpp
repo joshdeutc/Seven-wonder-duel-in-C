@@ -1,5 +1,5 @@
 #include "plateau.h"
-
+#include "wondersException.h"
 // *************** PARTIE CONSTRUCTEUR AGE ****************** //
 
 
@@ -257,40 +257,111 @@ PlateauAge::~PlateauAge()
 
 PlateauMerveille::PlateauMerveille()
 {
-    Merveille** cartesPremierPhase = new Merveille*[4];
-    Merveille** cartesDeuxiemePhase = new Merveille*[4];
+    cartesPremierePhase = new Merveille*[4];
+    cartesDeuxiemePhase = new Merveille*[4];
+    taille1 = taille2 = 4;
 
     // Génération d'un tableau de 8 entiers distincts aléatoires
-    std::vector<int> intVect = generateRandomDistinctIntegers(8, 0, 7);
+    std::vector<int> intVect = generateRandomDistinctIntegers(8, 0, 11);
     for (int i = 0; i < 4; ++i) {
-        cartesPremierPhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i]];
+        cartesPremierePhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i]];
         cartesDeuxiemePhase[i] = Jeu::getInstance()->getTabCartesMerveille()[intVect[i + 4]];
     }
 
 }
 
+void PlateauMerveille::retirerCarte(int phase, int indice) {
+    switch (phase) {
+        case 1: {
+            if (indice < 0 || indice >= taille1) {
+                // Gérer l'indice hors limites
+                return;
+            }
+            taille1--;
+            Merveille** new_tab = new Merveille*[taille1];
+            for (int i = 0, j = 0; i <= taille1; i++) {
+                if (i != indice) {
+                    new_tab[j++] = cartesPremierePhase[i];
+                }
+            }
+            delete[] cartesPremierePhase;
+            cartesPremierePhase = new_tab;
+            break;
+        }case 2: {
+            if (indice < 0 || indice >= taille2) {
+                // Gérer l'indice hors limites
+                return;
+            }
+            taille2--;
+            Merveille** new_tab2 = new Merveille*[taille2];
+            for (int i = 0, j = 0; i <= taille2; i++) {
+                if (i != indice) {
+                    new_tab2[j++] = cartesDeuxiemePhase[i];
+                }
+            }
+            delete[] cartesDeuxiemePhase;
+            cartesDeuxiemePhase = new_tab2;
+            break;
+        }
+    }
+}
+
+
 PlateauMerveille::~PlateauMerveille()
 {
     //On ne supprime pas les cartes elles mêmes, elles seront supprimees quand l'instance Jeu sera supprimée.
-    delete[] cartesPremierPhase;
+    delete[] cartesPremierePhase;
     delete[] cartesDeuxiemePhase;
 }
+
+void PlateauMerveille::afficher(int phase, ostream& f) const {
+    switch (phase){
+        case 1:
+            for (int i=0; i<taille1; i++){
+                cout << "Merveille " << i+1 << ": \n";
+                cartesPremierePhase[i]->afficher();
+            }
+            break;
+        case 2:
+            for (int i=0; i<taille2; i++){
+                cout << "Merveille " << i+1 << ": \n";
+                cartesDeuxiemePhase[i]->afficher();
+            }
+            break;
+        default:
+            throw WondersException("Erreur Affichage Plateaux Merveilles: il n'y a que deux phases");
+    }
+}
+
+Merveille** PlateauMerveille::getMerveilles(int phase) const{
+    switch (phase){
+        case 1:
+            return cartesPremierePhase;
+            break;
+        case 2:
+            return cartesDeuxiemePhase;
+            break;
+    }
+    throw WondersException("Erreur Affichage Plateaux Merveilles: il n'y a que deux phases");
+}
+
 
 // ****************************************************************//
 
 // ***************** PARTIE PLATEAU JETON MILIT *****************//
 
-PlateauJetonMilit::PlateauJetonMilit() {
-    jetonProgres = new JetonProgres *[5];
+PlateauJetonProgres::PlateauJetonProgres() {
+    jetonprogres = new JetonProgres *[5];
     // Génération d'un tableau de 5 entiers distincts aléatoires
     std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
     for (int i = 0; i < 5; ++i) {
-        jetonProgres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
+        jetonprogres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
     }
-//    JetonMilitaire **jetonsMilitaires = new JetonMilitaire *[4];
-//    for (unsigned int i = 0; i < 4; i++) {
-//        JetonsMilitaires[i] = Jeu::getInstance()->getTabJetonMilitaire()[i];
-//    }
+}
+
+PlateauJetonProgres::~PlateauJetonProgres() {
+    //On ne supprime pas les jetons eux-mêmes, ils seront supprimés quand l'instance Jeu sera supprimée.
+    delete[] jetonprogres;
 }
 
 // ******************** PARTIE ACTION JOUEUR ******************//
@@ -546,6 +617,8 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
     }
     return false;
 }
+// ***************** PARTIE ACCCESSIBLITE ************** //
+
 
 void PlateauAge::accessibilite(){
     for(int i=0;i<20;i++){
@@ -553,18 +626,24 @@ void PlateauAge::accessibilite(){
             if(getCartes()[i]->get_accessible() == true){
                 cout<<"carte numero : "<<i<<"\n"<<endl;
                 getCartes()[i]->afficher(cout);
+                tab_possibilite[i]=i+1;
                 cout<<"\n";
             }
-        }
+        }else tab_possibilite[i]=0;
+    }
+}
+
+void PlateauAge::choix_correct(int &choix) {
+    while(!tab_possibilite[choix]) {
+        cout<<"choix incorrect, refaire le choix svp :\n";
+        cin>>choix;
     }
 }
 void PlateauAge::destruction_carte_plateau_age1(int &choix) {
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age1(choix);
-    cout<<"on est sortis  de deviens_accessible_age1\n";
     // on détruit la carte
     cartes[choix] = nullptr;
-    cout<<"on est sortis  de destruction_carte_plateau_age1\n";
 }
 
 void PlateauAge::destruction_carte_plateau_age2(int &choix) {

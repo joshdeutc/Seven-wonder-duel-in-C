@@ -7,6 +7,7 @@
 #include <random>
 #include <set>
 #include <ctime>
+#include <algorithm>
 
 /**
  * Génère un tableau d'entiers aléatoires distincts dans une plage donnée.
@@ -18,24 +19,21 @@
  * @exemple generateRandomDistinctIntegers(1, 10, 5) peut renvoyer {3, 1, 5, 9, 7}.
  */
 std::vector<int> generateRandomDistinctIntegers(int size, int min, int max) {
-
-
     // Initialisation du générateur de nombres aléatoires
     std::random_device rd;
     std::mt19937 gen(rd());
     
-    // Création d'un ensemble pour stocker les entiers distincts
-    std::set<int> distinctIntegers;
-    
-    // Génération d'entiers aléatoires distincts jusqu'à ce que la taille désirée soit atteinte
-    while (distinctIntegers.size() < size) {
-        std::uniform_int_distribution<int> dis(min, max);
-        distinctIntegers.insert(dis(gen));
+    // Génération d'une liste d'entiers dans la plage spécifiée
+    std::vector<int> numbers;
+    for (int i = min; i <= max; ++i) {
+        numbers.push_back(i);
     }
-    
-    // Conversion de l'ensemble en un vecteur
-    std::vector<int> result(distinctIntegers.begin(), distinctIntegers.end());
-    return result;
+
+    // Mélange des entiers pour obtenir une séquence aléatoire
+    std::shuffle(numbers.begin(), numbers.end(), gen);
+
+    // Sélection des premiers 'size' éléments
+    return std::vector<int>(numbers.begin(), numbers.begin() + size);
 }
 
 #endif
