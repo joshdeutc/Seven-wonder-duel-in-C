@@ -34,6 +34,12 @@ private:
 public:
     static Jeu* getInstance();
     static void freeInstance();
+    int getNbCartesAge1() const { return nbCartesAge1; }
+    int getNbCartesAge2() const { return nbCartesAge2; }
+    int getNbCartesAge3() const { return nbCartesAge3; }
+    int getNbCartesGuilde() const { return nbCartesGuilde; }
+    int getNbCartesMerveille() const { return nbCartesMerveille; }
+    int getNbJetonsProgres() const { return nbJetonsProgres; }
     Batiment** getTabCartesAge1() const { return tabCartesAge1; }
     Batiment** getTabCartesAge2() const { return tabCartesAge2; }
     Batiment** getTabCartesAge3() const { return tabCartesAge3; }
