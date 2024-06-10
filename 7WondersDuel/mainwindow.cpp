@@ -2,19 +2,31 @@
 #include "ui_mainwindow.h"
 #include "a_propos.h"
 #include "ui_a_propos.h"
+#include "jeu.h"
+#include "batimentwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , jeu(Jeu::getInstance())
 {
     ui->setupUi(this);
     this->setFixedSize(1280,720);
     ui->stackedWidget->setCurrentIndex(0);
+
+    // Initialisation des cartes
+    Batiment** tabAge1 = jeu->getTabCartesAge1();
+    BatimentWidget tabWidgetAge1[jeu->getNbCartesAge1()];
+    for (int i = 0; i < jeu->getNbCartesAge1(); ++i) {
+        tabWidgetAge1[i] = new BatimentWidget(nullptr, tabAge1[i]);
+    }
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    Jeu::freeInstance();
 }
 
 void MainWindow::on_pushButton_JvsJ_clicked()

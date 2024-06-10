@@ -10,18 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     a_propos.cpp \
-    cartewidget.cpp \
+    batimentwidget.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     a_propos.h \
-    cartewidget.h \
+    batimentwidget.h \
+    carte_bat_merv.h \
+    jeu.h \
     mainwindow.h
 
 FORMS += \
     a_propos.ui \
-    cartewidget.ui \
+    batimentwidget.ui \
     mainwindow.ui
 
 # Default rules for deployment.
