@@ -44,13 +44,13 @@ Jeu::Jeu()
     tabCartesAge1[7] = new Produit_Manufacture("PRESSE", 1, prix_aucun, 1, papyrus, 1);
     
     tabCartesAge2[3] = new Produit_Manufacture("SOUFFLERIE", 0, prix_aucun, 2, verre, 1);
-    tabCartesAge2[4] = new Produit_Manufacture("SÉCHOIR", 0, prix_aucun, 2, papyrus, 1);
+    tabCartesAge2[4] = new Produit_Manufacture("SECHOIR", 0, prix_aucun, 2, papyrus, 1);
     
     // MILITAIRE
     
     tabCartesAge1[8] = new Militaire("TOUR DE GARDE", 0, prix_aucun, 1, 1);
     prix[bois]=1;
-    tabCartesAge1[9] = new Militaire("ÉCURIES", 0, prix, 1, 1,fer);
+    tabCartesAge1[9] = new Militaire("ECURIES", 0, prix, 1, 1,fer);
     prix[bois]=0; prix[argile] = 1;
     tabCartesAge1[10] = new Militaire("CASERNE", 0, prix, 1, 1,epee);
     prix[argile] = 0;
@@ -68,11 +68,11 @@ Jeu::Jeu()
     
     prix[argile]=3; prix[bois]=2;
     tabCartesAge3[0] = new Militaire("ARSENAL", 0, prix, 3, 3);
-    tabCartesAge3[1] = new Militaire("PRÉTOIRE", 8, prix_aucun, 3, 3);
+    tabCartesAge3[1] = new Militaire("PRETOIRE", 8, prix_aucun, 3, 3);
     prix[pierre]=2; prix[argile]=1; prix[papyrus] = 1; prix[verre] = 0;
     tabCartesAge3[2] = new Militaire("FORTIFICATIONS", 0, prix, 3, 2,tour);
     prix[pierre]=0; prix[argile]=0; prix[papyrus] = 0; prix[verre] = 1; prix[bois]=3;
-    tabCartesAge3[3] = new Militaire("ATELIER DE SIÈGE", 0, prix, 3, 2,cible);
+    tabCartesAge3[3] = new Militaire("ATELIER DE SIEGE", 0, prix, 3, 2,cible);
     prix[pierre]=2; prix[argile]=2; prix[verre] = 0; prix[argile] = 2;
     tabCartesAge3[4] = new Militaire("CIRQUE", 0, prix, 3, 2,casque);
 
@@ -89,20 +89,20 @@ Jeu::Jeu()
     tabCartesAge1[15] = new Scientifique("OFFICINE", 2, prix_aucun, 1, bol,0,engrenage);
     
     prix[bois] = 1; prix[pierre] = 1;
-    tabCartesAge2[10] = new Scientifique("BIBLIOTHÈQUE", 0, prix, 2, plume,2,livre);
+    tabCartesAge2[10] = new Scientifique("BIBLIOTHEQUE", 0, prix, 2, plume,2,livre);
     prix[bois]=0; prix[verre]=0; prix[argile]=2;
     tabCartesAge2[11] = new Scientifique("DISPENSAIRE", 0, prix, 2, bol,2,engrenage);
     prix[argile]=0;prix[pierre]=0;prix[bois]=1;prix[papyrus]=3;
-    tabCartesAge2[12] = new Scientifique("ÉCOLE", 0, prix, 2, roue,1,harpe);
+    tabCartesAge2[12] = new Scientifique("ECOLE", 0, prix, 2, roue,1,harpe);
     prix[papyrus]=0; prix[verre]=2;
     tabCartesAge2[13] = new Scientifique("LABORATOIRE", 0, prix, 2, A,1,lampe);
     
     prix[pierre]=1;
-    tabCartesAge3[5] = new Scientifique("ACADÉMIE", 0, prix, 3, horloge,3);
+    tabCartesAge3[5] = new Scientifique("ACADEMIE", 0, prix, 3, horloge,3);
     prix[bois]=2; prix[verre]=1; prix[papyrus] = 1; prix[pierre] = 0;
-    tabCartesAge3[6] = new Scientifique("ÉTUDE", 0, prix, 3, horloge,3);
+    tabCartesAge3[6] = new Scientifique("ETUDE", 0, prix, 3, horloge,3);
     prix[bois] = 0; prix[argile] = 1;
-    tabCartesAge3[7] = new Scientifique("UNIVERSITÉ", 0, prix, 3, globe,2,harpe);
+    tabCartesAge3[7] = new Scientifique("UNIVERSITE", 0, prix, 3, globe,2,harpe);
     prix[argile] = 0; prix[verre] = 0; prix[papyrus] = 2; prix[pierre] = 1;
     tabCartesAge3[8] = new Scientifique("OBSERVATOIRE", 0, prix, 3, globe,2,lampe);
     
@@ -115,11 +115,11 @@ Jeu::Jeu()
     }
     
     affecte[pierre]=true;
-    tabCartesAge1[16] = new Commerce("DÉPÔT DE PIERRE", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    tabCartesAge1[16] = new Commerce("DEPOT DE PIERRE", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[pierre]=false; affecte[argile] = true;
-    tabCartesAge1[17] = new Commerce("DÉPÔT D'ARGILE'", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    tabCartesAge1[17] = new Commerce("DEPOT D'ARGILE'", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[argile]=false; affecte[bois]=true;
-    tabCartesAge1[18] = new Commerce("DÉPÔT DE BOIS", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    tabCartesAge1[18] = new Commerce("DEPOT DE BOIS", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[bois]=false;
     tabCartesAge1[19] = new Commerce("TAVERNE", 0, prix_aucun, 1, 0,4,false,false,affecte,0,aucuneCarte,vase);
     
@@ -146,12 +146,12 @@ Jeu::Jeu()
     prix[pierre] = 0; prix[argile] = 2;
     tabCartesAge3[12] = new Commerce("PHARE", 0, prix, 3, 3,0,false,false,affecte,1,batimentCommerce,vase);
     prix[pierre] = 1; prix[argile] = 1; prix[verre] = 0; prix[bois] = 1;
-    tabCartesAge3[13] = new Commerce("ARÈNE", 0, prix, 3, 3,0,false,false,affecte,2,merveille,tonneau);
+    tabCartesAge3[13] = new Commerce("ARENE", 0, prix, 3, 3,0,false,false,affecte,2,merveille,tonneau);
 
     
     //CIVIL
  
-    tabCartesAge1[20] = new Civil("THÉÂTRE", 0, prix_aucun, 1, 3,masque);
+    tabCartesAge1[20] = new Civil("THEATRE", 0, prix_aucun, 1, 3,masque);
     tabCartesAge1[21] = new Civil("AUTEL", 0, prix_aucun, 1, 3,lune);
     prix[bois] = 0; prix[argile] = 0;
     tabCartesAge1[22] = new Civil("BAINS", 0, prix, 1, 3,goutte);
@@ -172,23 +172,23 @@ Jeu::Jeu()
     prix[argile] = 0; prix[verre] = 0; prix[pierre] = 3; prix[bois] = 2;
     tabCartesAge3[15] = new Civil("HOTEL DE VILLE", 0, prix, 3, 7);
     prix[bois] = 0; prix[pierre] = 2; prix[verre] = 1;
-    tabCartesAge3[16] = new Civil("OBÉLISQUE", 0, prix, 3, 5);
+    tabCartesAge3[16] = new Civil("OBELISQUE", 0, prix, 3, 5);
     prix[argile] = 2; prix[bois] = 2; prix[verre] = 0; prix[pierre] = 0;
     tabCartesAge3[17] = new Civil("JARDINS", 0, prix, 3, 6,poutre);
     prix[argile] = 1; prix[bois] = 1; prix[papyrus] = 2;
-    tabCartesAge3[18] = new Civil("PANTHÉON", 0, prix, 3, 6,soleil);
+    tabCartesAge3[18] = new Civil("PANTHEON", 0, prix, 3, 6,soleil);
     prix[argile] = 2; prix[bois] = 0; prix[papyrus] = 1; prix[pierre] = 1;
-    tabCartesAge3[19] = new Civil("SÉNAT", 0, prix, 3, 5,temple);
+    tabCartesAge3[19] = new Civil("SENAT", 0, prix, 3, 5,temple);
     
     
     //GUILDE
     
     prix[pierre] = 0; prix[argile] = 1; prix[bois] = 1; prix[verre] = 1;
-    tabCartesGuilde[0] = new Guilde("GUILDE DES COMMERÇANTS", 0, prix, 0, 1,1,batimentCommerce);
+    tabCartesGuilde[0] = new Guilde("GUILDE DES COMMERCANTS", 0, prix, 0, 1,1,batimentCommerce);
     prix[bois] = 0; prix[pierre] = 1;
     tabCartesGuilde[1] = new Guilde("GUILDE DES ARMATEURS",0,prix,0,1,1,matierePremiere,produitManufacture);
     prix[bois] = 1; prix[pierre] = 2; prix[papyrus] = 0;
-    tabCartesGuilde[2] = new Guilde("GUILDE DES BÂTISSEURS",0,prix,0,2,0,merveille);
+    tabCartesGuilde[2] = new Guilde("GUILDE DES BATISSEURS",0,prix,0,2,0,merveille);
     prix[bois] = 2; prix[pierre] = 0; prix[papyrus] = 1; prix[verre] = 0;
     tabCartesGuilde[3] = new Guilde("GUILDE DES MAGISTRATS",0,prix,0,1,1,batimentCivil);
     prix[argile] = 2; prix[papyrus] = 0;
@@ -199,8 +199,6 @@ Jeu::Jeu()
     tabCartesGuilde[6] = new Guilde("GUILDE DES TACTICIENS",0,prix,0,1,1,batimentMilitaire);
     
     // MERVEILLES
-    
-    
     
     prix[pierre] = 1; prix[bois] = 2; prix[papyrus] = 0; prix[verre] = 0; prix[argile] = 1;
     affecte[pierre] = false; affecte[bois] = false; affecte[argile] = false;
@@ -244,8 +242,8 @@ Jeu::Jeu()
 
     prix[verre] = 2; prix[papyrus] = 0; prix[pierre] = 1; prix[bois] = 0; prix[argile] = 1;
     tabCartesMerveille[11] = new Merveille("LE SPHINX",0,prix,6,0,0,0,false,true,false,false,aucuneCarte,false,affecte);
-
-
+    
+    
     // JETONS PROGRES
     
     tabJetonProgres[0] = new JetonProgres("AGRICULTURE",6,0,4,0,0,aucuneCarte,false,false,0,false,false,aucunSymbole);
