@@ -16,10 +16,29 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initialisation des cartes
     Batiment** tabAge1 = jeu->getTabCartesAge1();
-    BatimentWidget tabWidgetAge1[jeu->getNbCartesAge1()];
+    BatimentWidget* tabWidgetAge1[jeu->getNbCartesAge1()];
     for (int i = 0; i < jeu->getNbCartesAge1(); ++i) {
         tabWidgetAge1[i] = new BatimentWidget(nullptr, tabAge1[i]);
     }
+
+    Batiment** tabAge2 = jeu->getTabCartesAge2();
+    BatimentWidget* tabWidgetAge2[jeu->getNbCartesAge2()];
+    for (int i = 0; i < jeu->getNbCartesAge2(); ++i) {
+        tabWidgetAge2[i] = new BatimentWidget(nullptr, tabAge2[i]);
+    }
+
+    Batiment** tabAge3 = jeu->getTabCartesAge3();
+    BatimentWidget* tabWidgetAge3[jeu->getNbCartesAge3()];
+    for (int i = 0; i < jeu->getNbCartesAge3(); ++i) {
+        tabWidgetAge3[i] = new BatimentWidget(nullptr, tabAge3[i]);
+    }
+
+    Guilde** tabGuilde = jeu->getTabCartesGuilde();
+    BatimentWidget* tabWidgetGuilde[jeu->getNbCartesGuilde()];
+    for (int i = 0; i < jeu->getNbCartesGuilde(); ++i) {
+        tabWidgetGuilde[i] = new BatimentWidget(nullptr, tabGuilde[i]);
+    }
+
 
 }
 
