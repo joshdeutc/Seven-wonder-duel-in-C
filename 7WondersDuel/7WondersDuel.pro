@@ -10,15 +10,18 @@ CONFIG += c++17
 
 SOURCES += \
     a_propos.cpp \
+    cartewidget.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     a_propos.h \
+    cartewidget.h \
     mainwindow.h
 
 FORMS += \
     a_propos.ui \
+    cartewidget.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -28,3 +31,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resource.qrc
+
+DISTFILES +=

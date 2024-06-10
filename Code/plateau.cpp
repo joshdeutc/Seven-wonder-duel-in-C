@@ -1,5 +1,5 @@
 #include "plateau.h"
-
+#include "wondersException.h"
 // *************** PARTIE CONSTRUCTEUR AGE ****************** //
 
 
@@ -626,7 +626,7 @@ void PlateauAge::accessibilite(){
             if(getCartes()[i]->get_accessible() == true){
                 cout<<"carte numero : "<<i<<"\n"<<endl;
                 getCartes()[i]->afficher(cout);
-                tab_possibilite[i]=i;
+                tab_possibilite[i]=i+1;
                 cout<<"\n";
             }
         }else tab_possibilite[i]=0;
@@ -642,10 +642,8 @@ void PlateauAge::choix_correct(int &choix) {
 void PlateauAge::destruction_carte_plateau_age1(int &choix) {
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age1(choix);
-    cout<<"on est sortis  de deviens_accessible_age1\n";
     // on détruit la carte
     cartes[choix] = nullptr;
-    cout<<"on est sortis  de destruction_carte_plateau_age1\n";
 }
 
 void PlateauAge::destruction_carte_plateau_age2(int &choix) {

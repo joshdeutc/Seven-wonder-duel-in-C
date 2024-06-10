@@ -89,6 +89,9 @@ public:
     //Methodes de choix
     void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
     void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
+
+    const Carte* recherche_carte(string s) const;
+    void afficherMerveillesNonConstruites() const;
 };
 
 
