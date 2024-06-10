@@ -13,7 +13,7 @@ using namespace std;
 class Partie
 {
 private:
-    signed int solde_militaire = 8;
+    signed int solde_militaire = 0;
     int age = 1; // {1,2,3}
     int merveille_construite = 0;
     int tour = 0; // {1,0} : Au tour de joueur 1 ou 2
@@ -21,14 +21,15 @@ private:
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
     bool match_nul = false;
-
+    static int tab_ressourcesgratuites_jeton[NB_RESSOURCES];
+    static int tab_ressourcesgratuites_cartes[NB_RESSOURCES];
     Jeu* jeu;
     PlateauAge* platAge;
     PlateauJetonMilit* platMilitaire;
     PlateauMerveille* platMerveille;
     PlateauJetonProgres* platProgres;
     Joueur* joueurs[2] = {nullptr,nullptr};
-    
+
     static int free_res_jetons[NB_RESSOURCES];
     static int free_res_cartes[NB_RESSOURCES];
 public:
@@ -52,7 +53,7 @@ public:
     void afficherSoldeMilitaire();
     Joueur* getVainqueur() const { return vainqueur; }
     int get_tour() const { return tour; }
-    
+
     void initJoueurs();
     void jouer();
 };

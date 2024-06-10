@@ -639,6 +639,7 @@ void PlateauAge::choix_correct(int &choix) {
         cin>>choix;
     }
 }
+
 void PlateauAge::destruction_carte_plateau_age1(int &choix) {
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age1(choix);

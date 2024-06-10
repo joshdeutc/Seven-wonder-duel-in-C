@@ -4,6 +4,9 @@
 #include <string>
 using namespace std;
 constexpr int NB_RESSOURCES = 5;
+#define NB_SYMB 8
+#define NB_TYPES_CARTES 8
+#define NB_JETONS 10
 
 enum Ressource {
     bois,
