@@ -27,9 +27,12 @@ private:
     PlateauJetonMilit* platMilitaire;
     PlateauMerveille* platMerveille;
     PlateauJetonProgres* platProgres;
-    Joueur* joueurs[2];
+    Joueur* joueurs[2] = {nullptr,nullptr};
+    
+    static int free_res_jetons[NB_RESSOURCES];
+    static int free_res_cartes[NB_RESSOURCES];
 public:
-    Partie(const TypeJoueur &typJ1,const TypeJoueur &typJ2,string id1,string id2);
+    Partie();
     ~Partie();
     void tour_suivant();
     bool fin_age();
@@ -49,7 +52,11 @@ public:
     void afficherSoldeMilitaire();
     Joueur* getVainqueur() const { return vainqueur; }
     int get_tour() const { return tour; }
+    
+    void initJoueurs();
+    void jouer();
 };
+
 
 
 #endif
