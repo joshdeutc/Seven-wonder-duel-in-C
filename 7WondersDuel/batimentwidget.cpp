@@ -1,14 +1,11 @@
-#include "cartewidget.h"
-#include "ui_cartewidget.h"
+#include "batimentwidget.h"
+#include "ui_batimentwidget.h"
 
-CarteWidget::CarteWidget(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::CarteWidget)
-{
-    ui->setupUi(this);
-}
+BatimentWidget::BatimentWidget(QWidget* parent, const Carte* c){
+    ptrCarte = c;
+};
 
-CarteWidget::~CarteWidget()
+BatimentWidget::~BatimentWidget()
 {
     delete ui;
 }

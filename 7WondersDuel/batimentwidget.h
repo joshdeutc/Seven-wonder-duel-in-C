@@ -1,25 +1,31 @@
-#ifndef CARTEWIDGET_H
-#define CARTEWIDGET_H
+#ifndef BATIMENTWIDGET_H
+#define BATIMENTWIDGET_H
 
 #include <QWidget>
 #include <QLabel>
 #include <QPixmap>
-#include "carte_bat_merv.h" // Votre fichier existant
+#include <string>
+
+#include "jeu.h"
+#include "carte_bat_merv.h"
+
+using namespace std;
 
 namespace Ui {
-class CarteWidget;
+class BatimentWidget;
 }
 
-class CarteWidget : public QWidget
+class BatimentWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit CarteWidget(QWidget *parent = nullptr);
-    ~CarteWidget();
+    BatimentWidget(QWidget *parent = nullptr, const Carte* c = nullptr);
+    ~BatimentWidget();
 
 private:
-    Ui::CarteWidget *ui;
+    Ui::BatimentWidget *ui;
+    Carte* ptrCarte;
 };
 
-#endif // CARTEWIDGET_H
+#endif // BATIMENTWIDGET_H
