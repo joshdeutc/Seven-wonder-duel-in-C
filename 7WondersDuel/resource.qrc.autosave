@@ -2,7 +2,5 @@
     <qresource prefix="/resources">
         <file>images/7WondersDuelLogo.png</file>
         <file>formes/cercle.png</file>
-        <file>formes/rectangleMerv.png</file>
-        <file>formes/rectangleBat.png</file>
     </qresource>
 </RCC>
