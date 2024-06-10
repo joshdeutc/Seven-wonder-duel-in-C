@@ -77,5 +77,15 @@
         <file>batiments/Age_3/PRETOIRE.png</file>
         <file>batiments/Age_3/SENAT.png</file>
         <file>batiments/Age_3/UNIVERSITE.png</file>
+        <file>jetons/AGRICULTURE.png</file>
+        <file>jetons/ARCHITECTURE.png</file>
+        <file>jetons/ECONOMIE.png</file>
+        <file>jetons/LOI.png</file>
+        <file>jetons/MACONNERIE.png</file>
+        <file>jetons/MATHEMATIQUES.png</file>
+        <file>jetons/PHILOSOPHIE.png</file>
+        <file>jetons/STRATEGIE.png</file>
+        <file>jetons/THEOLOGIE.png</file>
+        <file>jetons/URBANISME.png</file>
     </qresource>
 </RCC>

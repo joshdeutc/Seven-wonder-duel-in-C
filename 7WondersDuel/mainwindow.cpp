@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     BatimentWidget* tabWidgetAge1[jeu->getNbCartesAge1()];
     for (int i = 0; i < jeu->getNbCartesAge1(); ++i) {
         tabWidgetAge1[i] = new BatimentWidget(nullptr, tabAge1[i]);
+        tabWidgetAge1[i]->getImageLabel()
     }
 
     Batiment** tabAge2 = jeu->getTabCartesAge2();

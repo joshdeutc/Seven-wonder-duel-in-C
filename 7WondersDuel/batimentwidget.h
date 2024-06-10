@@ -20,12 +20,16 @@ class BatimentWidget : public QWidget
     Q_OBJECT
 
 public:
-    BatimentWidget(QWidget *parent = nullptr, const Carte* c = nullptr);
+    explicit BatimentWidget(Batiment* b = nullptr);
     ~BatimentWidget();
+    Batiment* getPtrBatiment(){return ptrBatiment;}
+    QLabel* getImageLabel(){return imageLabel;};
+    void setPixmap(int a);
 
 private:
     Ui::BatimentWidget *ui;
-    Carte* ptrCarte;
+    Batiment* ptrBatiment;
+    QLabel* imageLabel;
 };
 
 #endif // BATIMENTWIDGET_H

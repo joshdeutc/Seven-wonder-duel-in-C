@@ -11,20 +11,26 @@ CONFIG += c++17
 SOURCES += \
     a_propos.cpp \
     batimentwidget.cpp \
+    jetonprogreswidget.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    merveillewidget.cpp
 
 HEADERS += \
     a_propos.h \
     batimentwidget.h \
     carte_bat_merv.h \
+    jetonprogreswidget.h \
     jeu.h \
-    mainwindow.h
+    mainwindow.h \
+    merveillewidget.h
 
 FORMS += \
     a_propos.ui \
     batimentwidget.ui \
-    mainwindow.ui
+    jetonprogreswidget.ui \
+    mainwindow.ui \
+    merveillewidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
