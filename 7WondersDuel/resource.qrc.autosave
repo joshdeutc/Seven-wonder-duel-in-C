@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/resources">
-        <file>images/7WondersDuelLogo.png</file>
-        <file>formes/cercle.png</file>
-    </qresource>
-</RCC>

@@ -62,9 +62,9 @@ Jeu::Jeu()
     tabCartesAge2[6] = new Militaire("HARAS", 0, prix, 2, 1,fer);
     tabCartesAge2[7] = new Militaire("BARAQUEMENTS", 3, prix_aucun, 2, 1,epee);
     prix[pierre]=1; prix[argile] = 0; prix[papyrus] = 1;
-    tabCartesAge2[8] = new Militaire("CHAMP_DE_TIR", 0, prix, 2, 2,cible);
+    tabCartesAge2[8] = new Militaire("CHAMPS_DE_TIR", 0, prix, 2, 2,cible);
     prix[pierre]=0; prix[argile] = 2; prix[bois] = 0; prix[verre]=1; prix[papyrus] = 0;
-    tabCartesAge2[9] = new Militaire("PLACE D'ARMES", 0, prix, 2, 2,casque);
+    tabCartesAge2[9] = new Militaire("PLACE_D'ARMES", 0, prix, 2, 2,casque);
     
     prix[argile]=3; prix[bois]=2;
     tabCartesAge3[0] = new Militaire("ARSENAL", 0, prix, 3, 3);
@@ -117,7 +117,7 @@ Jeu::Jeu()
     affecte[pierre]=true;
     tabCartesAge1[16] = new Commerce("DEPOT_DE_PIERRE", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[pierre]=false; affecte[argile] = true;
-    tabCartesAge1[17] = new Commerce("DEPOT_D'ARGILE'", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
+    tabCartesAge1[17] = new Commerce("DEPOT_D'ARGILE", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[argile]=false; affecte[bois]=true;
     tabCartesAge1[18] = new Commerce("DEPOT_DE_BOIS", 3, prix_aucun, 1, 0,0,true,false,affecte,0,aucuneCarte);
     affecte[bois]=false;
