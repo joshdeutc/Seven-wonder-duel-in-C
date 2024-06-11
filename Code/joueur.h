@@ -76,8 +76,12 @@ public:
     const int* getRessourcesNonProduites() const { return ressources_non_prod; }
     const Carte** getCartes() const { return cartes; }
     JetonProgres* const* getJetons() const { return jetons; }
-
+    const Merveille* const* getMerveillesNonConstruites() const {
+        return merveillesNonConstruites;
+    }
     int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
+    int getNbMerveillesNonConstruites() const {return nb_merveilles_non_construites;}
+
 
     bool operator==(const Joueur& other) const {
         return id == other.id;
@@ -96,6 +100,7 @@ public:
     void afficherMerveillesNonConstruites() const;
     
 };
+
 
 #endif
 

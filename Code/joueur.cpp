@@ -6,6 +6,7 @@
 //construites des merveilles seulement possédées mais non construites.
 
 
+
 Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     type = type_joueur;
     id = identifiant;

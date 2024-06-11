@@ -39,12 +39,17 @@ public:
     void choix_merveilles();
     void victoire_militaire();
     void victoire_scientifique(Joueur& j);
-    void change_solde_militaire(bool current,const int &choix);
+    void change_solde_militaire(bool current,int nb_boucliers);
     void victoire_civile();
     void addDefausse(Carte*carte);
     const vector<Carte*>& getDefausses() const { return defausses; }
+    
     // pour faire une action avec un joueur
-    void selection_action(Joueur &j_current);
+    void selection_action();
+    bool construire_batiment();
+    bool construire_merveille();
+    bool defausser();
+    
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
 
@@ -56,6 +61,7 @@ public:
     void initJoueurs();
     void jouer();
 };
+
 
 
 
