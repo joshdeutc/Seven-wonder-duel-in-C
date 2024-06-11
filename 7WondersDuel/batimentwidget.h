@@ -1,13 +1,11 @@
 #ifndef BATIMENTWIDGET_H
 #define BATIMENTWIDGET_H
 
-#include <QWidget>
-#include <QLabel>
-#include <QPixmap>
-#include <string>
-
 #include "jeu.h"
 #include "carte_bat_merv.h"
+
+#include <QWidget>
+#include <QLabel>
 
 using namespace std;
 
@@ -22,8 +20,8 @@ class BatimentWidget : public QWidget
 public:
     explicit BatimentWidget(Batiment* b = nullptr);
     ~BatimentWidget();
-    Batiment* getPtrBatiment(){return ptrBatiment;}
-    QLabel* getImageLabel(){return imageLabel;};
+    Batiment* getPtrBatiment() {return ptrBatiment;}
+    QLabel* getImageLabel() {return imageLabel;}
     void setPixmap(int a);
 
 private:

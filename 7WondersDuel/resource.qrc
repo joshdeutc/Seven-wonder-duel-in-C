@@ -87,5 +87,17 @@
         <file>jetons/STRATEGIE.png</file>
         <file>jetons/THEOLOGIE.png</file>
         <file>jetons/URBANISME.png</file>
+        <file>merveilles/LA_GRANDE_BIBLIOTHEQUE.png</file>
+        <file>merveilles/LA_PIREE.png</file>
+        <file>merveilles/LA_STATUE_DE_ZEUS.jpg</file>
+        <file>merveilles/LA_VIA_APPIA.png</file>
+        <file>merveilles/LE_CIRCUS_MAXIMUS.png</file>
+        <file>merveilles/LE_COLOSSE.png</file>
+        <file>merveilles/LE_GRAND_PHARE.png</file>
+        <file>merveilles/LE_MAUSOLEE.png</file>
+        <file>merveilles/LE_SPHINX.png</file>
+        <file>merveilles/LE_TEMPLE_D'ARTEMIS.png</file>
+        <file>merveilles/LES_JARDINS_SUSPENDUS.png</file>
+        <file>merveilles/LES_PYRAMIDES.jpg</file>
     </qresource>
 </RCC>

@@ -4,6 +4,8 @@
 #include "ui_a_propos.h"
 #include "jeu.h"
 #include "batimentwidget.h"
+#include "jetonprogreswidget.h"
+#include "merveillewidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,32 +16,43 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(1280,720);
     ui->stackedWidget->setCurrentIndex(0);
 
-    // Initialisation des cartes
+    // Initialisation des cartes -------------------------------------
     Batiment** tabAge1 = jeu->getTabCartesAge1();
     BatimentWidget* tabWidgetAge1[jeu->getNbCartesAge1()];
     for (int i = 0; i < jeu->getNbCartesAge1(); ++i) {
-        tabWidgetAge1[i] = new BatimentWidget(nullptr, tabAge1[i]);
-        tabWidgetAge1[i]->getImageLabel()
+        tabWidgetAge1[i] = new BatimentWidget(tabAge1[i]);
+        tabWidgetAge1[i]->getImageLabel();
     }
 
     Batiment** tabAge2 = jeu->getTabCartesAge2();
     BatimentWidget* tabWidgetAge2[jeu->getNbCartesAge2()];
     for (int i = 0; i < jeu->getNbCartesAge2(); ++i) {
-        tabWidgetAge2[i] = new BatimentWidget(nullptr, tabAge2[i]);
+        tabWidgetAge2[i] = new BatimentWidget(tabAge2[i]);
     }
 
     Batiment** tabAge3 = jeu->getTabCartesAge3();
     BatimentWidget* tabWidgetAge3[jeu->getNbCartesAge3()];
     for (int i = 0; i < jeu->getNbCartesAge3(); ++i) {
-        tabWidgetAge3[i] = new BatimentWidget(nullptr, tabAge3[i]);
+        tabWidgetAge3[i] = new BatimentWidget(tabAge3[i]);
     }
 
     Guilde** tabGuilde = jeu->getTabCartesGuilde();
     BatimentWidget* tabWidgetGuilde[jeu->getNbCartesGuilde()];
     for (int i = 0; i < jeu->getNbCartesGuilde(); ++i) {
-        tabWidgetGuilde[i] = new BatimentWidget(nullptr, tabGuilde[i]);
+        tabWidgetGuilde[i] = new BatimentWidget(tabGuilde[i]);
     }
 
+    JetonProgres** tabJetonProgres = jeu->getTabJetonProgres();
+    JetonProgresWidget* tabWidgetJetonProgres[jeu->getNbJetonsProgres()];
+    for (int i = 0; i < jeu->getNbJetonsProgres(); ++i) {
+        tabWidgetJetonProgres[i] = new JetonProgresWidget(tabJetonProgres[i]);
+    }
+
+    Merveille** tabMerveille = jeu->getTabCartesMerveille();
+    MerveilleWidget* tabWidgetMerveille[jeu->getNbCartesMerveille()];
+    for (int i = 0; i < jeu->getNbCartesMerveille(); ++i) {
+        tabWidgetMerveille[i] = new MerveilleWidget(tabMerveille[i]);
+    }
 
 }
 
