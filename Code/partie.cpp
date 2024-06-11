@@ -615,12 +615,12 @@ void Partie::choix_merveilles(){
 void Partie::initJoueurs(){
     int type, IA;
     string nom1,nom2;
-    
+
     do{
         cout<<"Choissisez le type de partie : 0 pour humain vs humain, 1 pour IA vs humain, 2 pour IA vs IA : ";
         cin>>type;
     }while (type!=0&&type!=1&&type!=3);
-    
+
     if(type==0) {
         cout<<"Entrez le nom du premier joueur (sans espaces) : ";
         cin>>nom1;
@@ -635,7 +635,7 @@ void Partie::initJoueurs(){
         cout<<"Entrez le nom du joueur humain (sans espaces) : ";
         cin>>nom1;
         joueurs[0] = new Joueur(humain,nom1);
-        
+
         do{
             afficher_types_IA();
             cout << "Choisissez le type d'IA souhaité: ";
@@ -656,18 +656,18 @@ void Partie::initJoueurs(){
         }while(IA<0 || IA>NB_IA);
         joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
     }
-    
+
 }
 
 void Partie::jouer(){
     // démarrage du Jeu //
     Jeu* j = Jeu::getInstance();
     // choix des types de joueurs
-    
+
     initJoueurs();
 
     choix_merveilles();
-            
+
     tour = 0;
 
     // boucle de jeu
