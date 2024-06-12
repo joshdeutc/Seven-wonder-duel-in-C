@@ -21,8 +21,6 @@ private:
     vector<Carte*> defausses;
     Joueur* vainqueur = nullptr;
     bool match_nul = false;
-    static int tab_ressourcesgratuites_jeton[NB_RESSOURCES];
-    static int tab_ressourcesgratuites_cartes[NB_RESSOURCES];
     Jeu* jeu;
     PlateauAge* platAge;
     PlateauJetonMilit* platMilitaire;
@@ -30,8 +28,8 @@ private:
     PlateauJetonProgres* platProgres;
     Joueur* joueurs[2] = {nullptr,nullptr};
 
-    static int free_res_jetons[NB_RESSOURCES];
-    static int free_res_cartes[NB_RESSOURCES];
+    int free_res_jetons[NB_RESSOURCES];
+    int free_res_cartes[NB_RESSOURCES];
 public:
     Partie();
     ~Partie();

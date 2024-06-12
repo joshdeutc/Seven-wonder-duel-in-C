@@ -427,7 +427,6 @@ bool PlateauAge::deviens_accessible_age1(int &choix){
         return false;
     }
     if(getCartes()[choix] == etage[0]){
-        cout<<"test\n";
         pere1=choix+etage.size();
         if(getCartes()[choix+1]==nullptr){
             getCartes()[pere1]->set_accessible(true);

@@ -3,7 +3,7 @@
 
 void Partie::afficherSoldeMilitaire() {
     std::string axe = "---------------------"; // 21 caractères, représentant -9 à 9
-    std::string labels = "-9        0        9"; // Les étiquettes pour l'axe
+    std::string labels = "-9          0         9"; // Les étiquettes pour l'axe
 
     int position = solde_militaire + 10; // Déplace le solde de -9 à 9 pour être entre 1 et 21
 
@@ -21,6 +21,10 @@ Partie::Partie(){
     platMerveille = new PlateauMerveille();
     platProgres = new PlateauJetonProgres();
     platMilitaire = new PlateauJetonMilit();
+    for (int i = 0; i < NB_RESSOURCES; ++i) {
+        free_res_cartes[i] = 0;
+        free_res_jetons[i] = 0;
+    }
 }
 
 Partie::~Partie() {
@@ -35,7 +39,7 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-    tour = (tour == 1) ? 2 : 1;
+    tour = (tour == 0) ? 1 : 0;
 }
 
 bool Partie::fin_age(){
@@ -244,8 +248,8 @@ void Partie::addDefausse(Carte*carte) {
 }
 
 Joueur* Partie::autre_joueur(){
-    if(tour == 1) return joueurs[1];
-    else return joueurs[0];
+    if(tour == 1) return joueurs[0];
+    else return joueurs[1];
 }
 
 
@@ -256,15 +260,12 @@ Joueur* Partie::autre_joueur(){
 // et prendre un autre choix d'action.
 void Partie::selection_action(){
     // initialisationd des variables locales
-    const Carte* merv;
-    int choix1;
     int choix;
     bool done = false;
     string nom_merveille;
-    platAge->accessibilite();
-    cout<<"test"<<endl;
+    autre_joueur()->afficher();
     joueurs[tour]->afficher();
-    
+    platAge->accessibilite();
     while (!done){
         switch (joueurs[tour]->getType()){
             case humain:
@@ -282,6 +283,7 @@ void Partie::selection_action(){
                 // Il faut verifier si il est possible pour le joueur de construire quoi que ce soit (les options 1 et 2 sont
                 // peut-etre indisponibles)
                 choix = joueurs[tour]->choixEntierIA(nullptr,3) + 1;
+                break;
         }
         switch (choix){
             case 1:
@@ -292,6 +294,7 @@ void Partie::selection_action(){
                 break;
             case 3:
                 done = defausser();
+                break;
         }
     }
     afficherSoldeMilitaire();
@@ -335,7 +338,7 @@ bool Partie::construire_batiment(){
             cin >> bat;
             platAge->choix_correct(bat);
             break;
-        default:
+        case IA_aleatoire:
             bat = joueurs[0]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
     }
     
@@ -415,20 +418,22 @@ bool Partie::construire_merveille(){
     // Choix de la merveille a construire
     switch (joueurs[tour]->getType()){
         case humain:
-            joueurs[0]->afficher();
             do{
                 cout << "Choisissez une de vos merveilles non construites en tapant au clavier son nom exact: ";
                 getline(cin, nom_merv);
-                for (int i=0; i<joueurs[0]->getNbMerveillesNonConstruites(); i++)
-                    if (joueurs[0]->getMerveillesNonConstruites()[i]->getNom()==nom_merv)
-                        merv = joueurs[0]->getMerveillesNonConstruites()[i];
+                for (int i=0; i<joueurs[tour]->getNbMerveillesNonConstruites(); i++)
+                    if (joueurs[tour]->getMerveillesNonConstruites()[i]->getNom()==nom_merv) {
+                        merv = joueurs[tour]->getMerveillesNonConstruites()[i];
+                    }
                 if(merv==nullptr) cout << "Le nom entre n'est pas dans les merveilles non construites." << endl;
             }while(merv==nullptr);
-        default: // IA
+            break;
+        default :
+            cout<<"test"<<endl;
             nom_merv = joueurs[0]->getMerveillesNonConstruites()[joueurs[0]->choixEntierIA(nullptr,joueurs[0]->getNbMerveillesNonConstruites())]->getNom();
+            merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
     }
-    merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
-    
+
     joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons);
     joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
     
@@ -671,7 +676,7 @@ void Partie::jouer(){
     tour = 0;
 
     // boucle de jeu
-    while(!vainqueur && !match_nul) {
+    while(vainqueur==nullptr || match_nul==false) {
         selection_action();
         tour_suivant();
         fin_age();
