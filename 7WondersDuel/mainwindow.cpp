@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(1280,720);
     ui->stackedWidget->setCurrentIndex(0);
 
-    // Initialisation des cartes -------------------------------------
+    /*----------------- Initialisation des cartes -------------------*/
     Batiment** tabAge1 = jeu->getTabCartesAge1();
     BatimentWidget* tabWidgetAge1[jeu->getNbCartesAge1()];
     for (int i = 0; i < jeu->getNbCartesAge1(); ++i) {
@@ -54,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent)
         tabWidgetMerveille[i] = new MerveilleWidget(tabMerveille[i]);
     }
 
+
+
 }
 
 MainWindow::~MainWindow()
@@ -65,18 +67,27 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_JvsJ_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    ui->comboBox_Cartes->addItem("Cartes du Plateau");
+    ui->comboBox_Cartes->addItem("Cartes accessibles");
+    ui->comboBox_Cartes->addItem("Cartes visibles & non accessibles");
     // Actions à définir pour créer deux instances Joueurs
 }
 
 void MainWindow::on_pushButton_JvsIA_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    ui->comboBox_Cartes->addItem("Cartes du Plateau");
+    ui->comboBox_Cartes->addItem("Cartes accessibles");
+    ui->comboBox_Cartes->addItem("Cartes visibles & non accessibles");
     // Actions à définir pour créer une instance Joueur et une autre IA
 }
 
 void MainWindow::on_pushButton_IAvsIA_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    ui->comboBox_Cartes->addItem("Cartes du Plateau");
+    ui->comboBox_Cartes->addItem("Cartes accessibles");
+    ui->comboBox_Cartes->addItem("Cartes visibles & non accessibles");
     // Actions à définir pour créer deux instances IA
 }
 
