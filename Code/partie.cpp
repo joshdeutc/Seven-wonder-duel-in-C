@@ -60,14 +60,14 @@ bool Partie::fin_age(){
     else return false;
 }
 
-void Partie::change_solde_militaire(bool current,const int &choix){
+void Partie::change_solde_militaire(bool current,int nb_boucliers){
     int j;
     if(current) {
         j = tour;
     }else j = 1-tour;
 
-    if (j==0) solde_militaire += platAge->getCartes()[choix]->getBoucliers();
-    if(j ==1) solde_militaire -= platAge->getCartes()[choix]->getBoucliers();
+    if (j==0) solde_militaire += nb_boucliers;
+    if(j ==1) solde_militaire -= nb_boucliers;
 
     if(!platMilitaire->getJetonMilit1_j1()) {
         if (solde_militaire >= 3 && solde_militaire <= 5) {
@@ -250,139 +250,227 @@ Joueur* Partie::autre_joueur(){
 
 
 
-void Partie::selection_action(Joueur &j_current){
+
+// Il faut trouver un moyen de gerer le fait que construire est peut etre impossible pour un joueur,
+// s'il a choisi de construire mais qu'il n'a pas les fonds suffisants, il faut qu'il puisse sortir
+// et prendre un autre choix d'action.
+void Partie::selection_action(){
     // initialisationd des variables locales
     const Carte* merv;
     int choix1;
     int choix;
+    bool done = false;
     string nom_merveille;
     platAge->accessibilite();
     cout<<"test"<<endl;
-    j_current.afficher();
-    cout<<"Choisissez une action :"<<endl;
-    cout<<"1. Construire un batiment"<<endl;
-    cout<<"2. Construire une merveille"<<endl;
-    cout<<"3. Defausser une carte"<<endl;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cin>>choix;
-
-    // ici l'utilisateur voit la liste des batiments avec leur numéro respectif
-    switch (choix) {
-        case 1:
-            //construire un batiment
-                cout<<"choisissser un batiment a construire"<<endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                cin>>choix1;
-            // verification que le choix est correct
-                platAge->choix_correct(choix1);
-            /*il faut vérifier avant si l'on a les ressources nécessaire
-
-                while(j_current.prixFinal(*(platAge->getCartes()[choix1]),*autre_joueur(),
-                                    tab_ressourcesgratuites_jeton,tab_ressourcesgratuites_cartes)>j_current.getSolde()){
-                    cout<<"vous n'avez pas assez de ressources pour construire cette carte"<<endl;
-                    cout<<"choisissser un batiment a construire"<<endl;
-                    cin>>choix1;
-                }*/
-
-            // construction de la carte
-                j_current.construireCarte(*(platAge->getCartes()[choix1]),*autre_joueur());
-                //verification que la carte scientifique n'implique pas un jeton
-                if(platAge->getCartes()[choix1]->getType()==batimentScientifique){
-                    if(j_current.doubleSymbole(platAge->getCartes()[choix1]->getSymbole())){
-                        choix_jeton(j_current);
-                    }
-                }
-                // mis a jour du plateau militaire si besoin
-                if(platAge->getCartes()[choix1]->getBoucliers()!=0){
-                    change_solde_militaire(true,choix1);
-                }
-                if(age==1){
-                    //mettre a jour le plateau
-                    platAge->destruction_carte_plateau_age1(choix1);
-                }
-                if(age==2){
-                    //mettre a jour le plateau
-                    platAge->destruction_carte_plateau_age2(choix1);
-                }
-                if(age==3){
-                    //mettre a jour le plateau
-                    platAge->destruction_carte_plateau_age3(choix1);
-                }
+    joueurs[tour]->afficher();
+    
+    while (!done){
+        switch (joueurs[tour]->getType()){
+            case humain:
+                do{
+                    cout<<"Choisissez une action :"<<endl;
+                    cout<<"1. Construire un batiment"<<endl;
+                    cout<<"2. Construire une merveille"<<endl;
+                    cout<<"3. Defausser une carte"<<endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cin>>choix;
+                }while (choix<0||choix>3);
                 break;
-
-        case 2:
-            //construire une merveille
-            cout<<"choisissser le batiment qui permet"
-                          " de construire la merveille"<<endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            cin>>choix1;
-            platAge->choix_correct(choix1);
-
-            merv=j_current.recherche_carte();
-            // il faut vérifier avant si l'on a les ressources nécessaire
-                /*
-                while(j_current.prixFinal(*(merv),*autre_joueur(),
-                                          tab_ressourcesgratuites_jeton,tab_ressourcesgratuites_cartes)>j_current.getSolde()){
-                    cout<<"vous n'avez pas assez de ressources pour construire cette merveille"<<endl;
-                    cout<<"choisissser une merveille a construire"<<endl;
-                    cin>>choix1;
-                }*/
-
-            // construction de la merveille
-
-            j_current.construireCarte(*merv,*autre_joueur());
-            // verification que la merveille puisse rejouer ou non
-            if(merv->getRejouer()==true) {
-                tour_suivant();
-            }
-            // mis a jour du plateau militaire si besoin
-            if(merv->getBoucliers()!=0){
-                change_solde_militaire(true,choix1);
-            }
-            if(age==1){
-                //mettre a jour le plateau
-                platAge->destruction_carte_plateau_age1(choix1);
-            }
-            if(age==2){
-                //mettre a jour le plateau
-                platAge->destruction_carte_plateau_age2(choix1);
-            }
-            if(age==3) {
-                //mettre a jour le plateau
-                platAge->destruction_carte_plateau_age3(choix1);
-            }
-            break;
-        case 3 :
-            //defausser une carte
-            cout<<"choisissser une carte a defausser"<<endl;
-            cin>>choix1;
-
-            platAge->choix_correct(choix1);
-
-
-            // defausser
-            addDefausse(platAge->getCartes()[choix1]);
-            // augmenter le solde du joueur
-            j_current.defausser();
-            if(age==1){
-                //mettre a jour le plateau
-                platAge->destruction_carte_plateau_age1(choix1);
-            }
-            if(age==2){
-                //mettre a jour le plateau
-                platAge->destruction_carte_plateau_age2(choix1);
-            }
-            if(age==3){
-                //mettre a jour le plateau
-                platAge->destruction_carte_plateau_age3(choix1);
-            }
-            break;
+            default: // IA
+                // Il faut verifier si il est possible pour le joueur de construire quoi que ce soit (les options 1 et 2 sont
+                // peut-etre indisponibles)
+                choix = joueurs[tour]->choixEntierIA(nullptr,3) + 1;
+        }
+        switch (choix){
+            case 1:
+                done = construire_batiment();
+                break;
+            case 2:
+                done = construire_merveille();
+                break;
+            case 3:
+                done = defausser();
+        }
     }
     afficherSoldeMilitaire();
 }
+
+bool Partie::defausser(){
+    int choix;
+    cout<<"Choisisssez le numero d'une carte a defausser : "<<endl;
+    cin>>choix;
+
+    platAge->choix_correct(choix);
+
+    // defausser
+    addDefausse(platAge->getCartes()[choix]);
+    // augmenter le solde du joueur
+    joueurs[tour]->defausser();
+    if(age==1){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age1(choix);
+    }
+    if(age==2){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age2(choix);
+    }
+    if(age==3){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age3(choix);
+    }
+    return true;
+}
+
+// Renvoie vrai si l'utilisateur a bien choisi de construire la carte, faux s'il veut revenir au menu
+bool Partie::construire_batiment(){
+    int bat;
+    bool construction;
+    string confirmation;
+    
+    switch(joueurs[tour]->getType()){
+        case humain:
+            cout << "Choisisssez le numero d'un des batiments accessibles : " << endl;
+            cin >> bat;
+            platAge->choix_correct(bat);
+            break;
+        default:
+            bat = joueurs[0]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
+    }
+    
+    for(int i=0; i<NB_RESSOURCES;i++){
+        free_res_jetons[i] = 0;
+        free_res_cartes[i] = 0;
+    }
+    
+    joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons);
+    joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
+    
+    if((joueurs[tour]->prixFinal(*(platAge->getCartes()[bat]),*autre_joueur(),free_res_jetons,free_res_cartes) > joueurs[tour]->getSolde())){
+        if(joueurs[tour]->getType()==humain)
+            cout<< "Vous n'avez pas assez de ressources pour construire cette carte." <<endl;
+        return false;
+    } else {
+        if(joueurs[tour]->getType()==humain){
+            cout << "Prix du batiment : " << joueurs[tour]->prixFinal(*(platAge->getCartes()[bat]),*autre_joueur(),free_res_jetons,free_res_cartes) << endl;
+            do{
+                cout << "Souhaitez vous construire le batiment ? O/N : ";
+                cin>>confirmation;
+            }while (confirmation!="O" && confirmation!="N");
+            if (confirmation=="N") return false;
+        }
+    }
+            
+    // Verifications a faire avant de construire la carte
+    if(joueurs[tour]->doubleSymbole(platAge->getCartes()[bat]->getSymbole())){
+        choix_jeton(*joueurs[tour]);
+    }
+
+    // Construction de la carte
+    joueurs[tour]->construireCarte(*(platAge->getCartes()[bat]),*autre_joueur());
+
+    // mis a jour du plateau militaire si besoin
+    if(platAge->getCartes()[bat]->getBoucliers()!=0){
+        change_solde_militaire(true,platAge->getCartes()[bat]->getBoucliers());
+    }
+    if(age==1){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age1(bat);
+    }
+    if(age==2){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age2(bat);
+    }
+    if(age==3){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age3(bat);
+    }
+    return true;
+}
+
+bool Partie::construire_merveille(){
+    int bat;
+    const Merveille* merv = nullptr;
+    bool construction;
+    string nom_merv;
+    string confirmation;
+    
+    // Choix du batiment servant a construire la merveille
+    switch(joueurs[tour]->getType()){
+        case humain:
+            cout << "Choisisssez le numero d'un des batiments accessibles pour le placer sous la merveille : " << endl;
+            cin >> bat;
+            platAge->choix_correct(bat);
+            break;
+        default:
+            bat = joueurs[0]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
+    }
+    
+    for(int i=0; i<NB_RESSOURCES;i++){
+        free_res_jetons[i] = 0;
+        free_res_cartes[i] = 0;
+    }
+    
+    // Choix de la merveille a construire
+    switch (joueurs[tour]->getType()){
+        case humain:
+            joueurs[0]->afficher();
+            do{
+                cout << "Choisissez une de vos merveilles non construites en tapant au clavier son nom exact: ";
+                getline(cin, nom_merv);
+                for (int i=0; i<joueurs[0]->getNbMerveillesNonConstruites(); i++)
+                    if (joueurs[0]->getMerveillesNonConstruites()[i]->getNom()==nom_merv)
+                        merv = joueurs[0]->getMerveillesNonConstruites()[i];
+                if(merv==nullptr) cout << "Le nom entre n'est pas dans les merveilles non construites." << endl;
+            }while(merv==nullptr);
+        default: // IA
+            nom_merv = joueurs[0]->getMerveillesNonConstruites()[joueurs[0]->choixEntierIA(nullptr,joueurs[0]->getNbMerveillesNonConstruites())]->getNom();
+    }
+    merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
+    
+    joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons);
+    joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
+    
+    if((joueurs[tour]->prixFinal(*merv,*autre_joueur(),free_res_jetons,free_res_cartes) > joueurs[tour]->getSolde())){
+        if(joueurs[tour]->getType()==humain)
+            cout<< "Vous n'avez pas assez de ressources pour construire cette carte." <<endl;
+        return false;
+    } else {
+        if(joueurs[tour]->getType()==humain){
+            cout << "Prix de la merveille : " << joueurs[tour]->prixFinal(*merv,*autre_joueur(),free_res_jetons,free_res_cartes) << endl;
+            do{
+                cout << "Souhaitez vous construire cette merveille ? O/N : ";
+                cin>>confirmation;
+            }while (confirmation!="O" && confirmation!="N");
+            if (confirmation=="N") return false;
+        }
+    }
+
+    joueurs[0]->construireCarte(*merv,*autre_joueur());
+    // verification que la merveille puisse rejouer ou non
+    if(merv->getRejouer()==true) {
+        tour_suivant();
+    }
+    // mis a jour du plateau militaire si besoin
+    if(merv->getBoucliers()!=0){
+        change_solde_militaire(true,merv->getBoucliers());
+    }
+    if(age==1){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age1(bat);
+    }
+    if(age==2){
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age2(bat);
+    }
+    if(age==3) {
+        //mettre a jour le plateau
+        platAge->destruction_carte_plateau_age3(bat);
+    }
+    return true;
+}
+
 
 void Partie::choix_merveilles(){
     cout << "#######################################################\n";
@@ -584,7 +672,7 @@ void Partie::jouer(){
 
     // boucle de jeu
     while(!vainqueur && !match_nul) {
-        selection_action(*joueurs[tour]);
+        selection_action();
         tour_suivant();
         fin_age();
     }
