@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QPushButton>
 
 #include "carte_bat_merv.h"
 
@@ -11,7 +12,7 @@ namespace Ui {
 class MerveilleWidget;
 }
 
-class MerveilleWidget : public QWidget
+class MerveilleWidget : public QPushButton
 {
     Q_OBJECT
 
@@ -20,12 +21,19 @@ public:
     ~MerveilleWidget();
     Merveille* getPtrMerveille() {return ptrMerveille;}
     QLabel* getImageLabel() {return imageLabel;}
-    void setPixmap();
+    QLabel* getEmplacementLabel() {return emplacementLabel;}
+    void setEmplacementLabel(QLabel* e);
+    void setImage();
 
 private:
     Ui::MerveilleWidget *ui;
     Merveille* ptrMerveille;
     QLabel* imageLabel;
+    QLabel* emplacementLabel = nullptr;
+
+signals:
+    void selected(MerveilleWidget*);
+
 };
 
 #endif // MERVEILLEWIDGET_H

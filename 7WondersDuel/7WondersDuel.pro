@@ -12,6 +12,7 @@ SOURCES += \
     a_propos.cpp \
     batimentwidget.cpp \
     jetonprogreswidget.cpp \
+    joueur.cpp \
     main.cpp \
     mainwindow.cpp \
     merveillewidget.cpp
@@ -22,6 +23,7 @@ HEADERS += \
     carte_bat_merv.h \
     jetonprogreswidget.h \
     jeu.h \
+    joueur.h \
     mainwindow.h \
     merveillewidget.h
 

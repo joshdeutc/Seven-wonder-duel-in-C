@@ -358,7 +358,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG">
+     <widget class="QLabel" name="label_bat_J1_1">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -377,7 +377,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_G">
+     <widget class="QLabel" name="label_bat_J1_2">
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -396,7 +396,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_D">
+     <widget class="QLabel" name="label_bat_J1_3">
       <property name="geometry">
        <rect>
         <x>170</x>
@@ -415,7 +415,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED">
+     <widget class="QLabel" name="label_bat_J1_4">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -434,7 +434,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_D">
+     <widget class="QLabel" name="label_bat_J2_2">
       <property name="geometry">
        <rect>
         <x>1110</x>
@@ -453,7 +453,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG">
+     <widget class="QLabel" name="label_bat_J2_4">
       <property name="geometry">
        <rect>
         <x>950</x>
@@ -472,7 +472,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_ED">
+     <widget class="QLabel" name="label_bat_J2_1">
       <property name="geometry">
        <rect>
         <x>1190</x>
@@ -491,7 +491,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_G">
+     <widget class="QLabel" name="label_bat_J2_3">
       <property name="geometry">
        <rect>
         <x>1030</x>
@@ -510,19 +510,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QStackedWidget" name="stackedWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>380</x>
-        <y>160</y>
-        <width>541</width>
-        <height>391</height>
-       </rect>
-      </property>
-      <widget class="QWidget" name="layout_age_1"/>
-      <widget class="QWidget" name="page_4"/>
-     </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_8">
+     <widget class="QLabel" name="label_merveille_J1_1">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -541,7 +529,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED_2">
+     <widget class="QLabel" name="label_bat_J1_5">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -560,7 +548,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED_3">
+     <widget class="QLabel" name="label_bat_J1_6">
       <property name="geometry">
        <rect>
         <x>410</x>
@@ -579,7 +567,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED_4">
+     <widget class="QLabel" name="label_bat_J1_7">
       <property name="geometry">
        <rect>
         <x>490</x>
@@ -598,7 +586,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG_2">
+     <widget class="QLabel" name="label_bat_J2_5">
       <property name="geometry">
        <rect>
         <x>870</x>
@@ -617,7 +605,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG_3">
+     <widget class="QLabel" name="label_bat_J2_6">
       <property name="geometry">
        <rect>
         <x>790</x>
@@ -636,7 +624,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG_4">
+     <widget class="QLabel" name="label_bat_J2_7">
       <property name="geometry">
        <rect>
         <x>710</x>
@@ -655,7 +643,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_9">
+     <widget class="QLabel" name="label_merveille_J1_3">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -674,7 +662,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_10">
+     <widget class="QLabel" name="label_merveille_J1_2">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -693,7 +681,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_11">
+     <widget class="QLabel" name="label_merveille_J1_4">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -712,7 +700,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_12">
+     <widget class="QLabel" name="label_merveille_J2_3">
       <property name="geometry">
        <rect>
         <x>1160</x>
@@ -731,7 +719,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_13">
+     <widget class="QLabel" name="label_merveille_J2_1">
       <property name="geometry">
        <rect>
         <x>1160</x>
@@ -750,7 +738,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_14">
+     <widget class="QLabel" name="label_merveille_J2_2">
       <property name="geometry">
        <rect>
         <x>960</x>
@@ -769,7 +757,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_15">
+     <widget class="QLabel" name="label_merveille_J2_4">
       <property name="geometry">
        <rect>
         <x>960</x>
@@ -787,8 +775,1344 @@
       <property name="scaledContents">
        <bool>true</bool>
       </property>
+     </widget>
+     <widget class="QStackedWidget" name="stackedWidget_Plateau_Age">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>160</y>
+        <width>541</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="page_choix_merveille_1">
+       <widget class="QLabel" name="label_choix_merveille1_3">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>110</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_choix_merveille1_2">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>190</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_choix_merveille1_1">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>110</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_choix_merveille1_4">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>190</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_choix_merveille_2">
+       <widget class="QLabel" name="label_choix_merveille2_1">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>190</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_choix_merveille2_2">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>110</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_choix_merveille2_3">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>110</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_choix_merveille2_4">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>190</y>
+          <width>100</width>
+          <height>75</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_age1">
+       <widget class="QLabel" name="label_age1_0">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>270</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age_11">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>270</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_2">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>270</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_3">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>270</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_4">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>270</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_5">
+        <property name="geometry">
+         <rect>
+          <x>430</x>
+          <y>270</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_6">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>210</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_7">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>210</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_8">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>210</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_9">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>210</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_10">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>210</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_14">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>160</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_13">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>160</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_12">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>160</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_11">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>160</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_15">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>110</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_16">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>110</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_17">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>110</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_18">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>60</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age1_19">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>60</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <zorder>label_age1_19</zorder>
+       <zorder>label_age1_18</zorder>
+       <zorder>label_age1_15</zorder>
+       <zorder>label_age1_16</zorder>
+       <zorder>label_age1_17</zorder>
+       <zorder>label_age1_12</zorder>
+       <zorder>label_age1_14</zorder>
+       <zorder>label_age1_13</zorder>
+       <zorder>label_age1_11</zorder>
+       <zorder>label_age1_6</zorder>
+       <zorder>label_age1_7</zorder>
+       <zorder>label_age1_8</zorder>
+       <zorder>label_age1_9</zorder>
+       <zorder>label_age1_10</zorder>
+       <zorder>label_age1_5</zorder>
+       <zorder>label_age_11</zorder>
+       <zorder>label_age1_2</zorder>
+       <zorder>label_age1_3</zorder>
+       <zorder>label_age1_4</zorder>
+       <zorder>label_age1_0</zorder>
+      </widget>
+      <widget class="QWidget" name="page_age2">
+       <widget class="QLabel" name="label_age2_15">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>20</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_18">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>20</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_14">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_16">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>20</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_17">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>20</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_19">
+        <property name="geometry">
+         <rect>
+          <x>430</x>
+          <y>20</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_11">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>70</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_12">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>70</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_13">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>70</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_9">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>70</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_10">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>70</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_6">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>120</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_7">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>120</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_8">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>120</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_5">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>120</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_3">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>170</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_2">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>170</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_4">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>170</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_1">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>220</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age2_0">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>220</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_age3">
+       <widget class="QLabel" name="label_age3_19">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>0</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_18">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>0</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_15">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>50</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_16">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>50</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_17">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>50</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_11">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>100</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_12">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>100</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_13">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>100</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_14">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>100</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_9">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>140</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_10">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>140</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_8">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>190</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_5">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>190</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_7">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>190</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_6">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>190</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_4">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>230</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_2">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>230</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_3">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>230</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_0">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>280</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_age3_1">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>280</y>
+          <width>75</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_defausse"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -856,22 +2180,6 @@
     <hint type="destinationlabel">
      <x>399</x>
      <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_Quitter</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>685</x>
-     <y>582</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>359</y>
     </hint>
    </hints>
   </connection>

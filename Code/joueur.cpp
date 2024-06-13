@@ -428,22 +428,18 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
     }
 }
 
-const Carte* Joueur::recherche_carte() const{
+const Carte* Joueur::recherche_carte(string &nom) const{
     const Carte *c = nullptr;
     int i=0;
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while(c==nullptr){
         cout<<"entrer le nom de la merveille que vous cherchez : "<<endl;
-        string s;
-        getline(cin,s);
         while(i<nb_merveilles_non_construites && c==nullptr) {
-            if(merveillesNonConstruites[i]->getNom()==s) c=merveillesNonConstruites[i];
+            if(merveillesNonConstruites[i]->getNom()== nom ) c=merveillesNonConstruites[i];
             i++;
         }
         i = 0;
         while(i<nb_cartes && c ==nullptr){
-            if(cartes[i]->getNom()==s) c = cartes[i];
+            if(cartes[i]->getNom()==nom ) c = cartes[i];
             i++;
         }
     }
