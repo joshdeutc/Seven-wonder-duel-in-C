@@ -112,7 +112,6 @@ PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visibl
             for(int i=0;i<2;i++){
                 cartes[i]->set_face_visible(true);
                 etage1.push_back(cartes[i]);
-                cout<<"taille de etage1 ="<<etage1.size()<<endl;
             }
             for(int i=2;i<5;i++){
                 cartes[i]->set_face_visible(false);
@@ -636,6 +635,16 @@ void PlateauAge::accessibilite(){
     cout << endl;
 }
 
+bool PlateauAge::verif_plus_de_cartes(){
+    for(int i=0;i<20;i++){
+        if(cartes[i]){
+            if(getCartes()[i]->get_accessible() == true){
+                return false;
+            }
+        }
+    }
+    return true;
+}
 bool in(int* tab, int taille, int elt){
     for (int i=0;i<taille;i++){
         if (tab[i]==elt) return true;

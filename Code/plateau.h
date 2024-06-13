@@ -63,6 +63,7 @@ public:
     void destruction_carte_plateau_age2(int &choix);
     void destruction_carte_plateau_age3(int &choix);
     void choix_correct(int &choix);
+    bool verif_plus_de_cartes();
 };
 
 

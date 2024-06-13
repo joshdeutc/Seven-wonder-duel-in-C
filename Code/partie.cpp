@@ -2,7 +2,7 @@
 
 void Partie::afficherSoldeMilitaire() {
     std::string axe = "---------------------"; // 21 caractères, représentant -9 à 9
-    std::string labels = "-9          0         9"; // Les étiquettes pour l'axe
+    std::string labels = "-9             0              9"; // Les étiquettes pour l'axe
 
     int position = solde_militaire + 10; // Déplace le solde de -9 à 9 pour être entre 1 et 21
 
@@ -38,26 +38,51 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-<<<<<<< HEAD
     if (tour==1) tour = 0;
     else tour = 1;
-=======
-    tour = (tour == 0) ? 1 : 0;
->>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
 }
 
+void Partie::changement_joueur() {
+    int choix=2;
+    if( joueurs[tour]->getType()==humain ){
+        while(choix!=0 && choix!=1) {
+            cout << "Choissisez qui commence la partie" << endl;
+            cout << "0. Vous" << endl;
+            cout << "1. L'autre joueur" << endl;
+            cin>>choix;
+        }
+    }
+    else{
+        choix = joueurs[tour]->choixEntierIA(nullptr,2);
+    }
+    if(choix==1) {
+        tour_suivant();
+    }
+}
+
+
 bool Partie::fin_age(){
-    if(platAge->getCartes() == nullptr){//Si il ne reste plus de carte sur le plateau
+    if(platAge->verif_plus_de_cartes()){//Si il ne reste plus de carte sur le plateau
         if (age == 1){
             age = 2;
             delete platAge;
             platAge = new PlateauAge(2);
+            changement_joueur();
+            cout << " ##################################################################################" << endl;
+            cout << "                 PASSAGE A L'AGE 2     " << endl;
+            cout << "                            -  -     " << endl;
+            cout << " ##################################################################################" << endl << endl;
             return true;
         }
         else if(age == 2){
             age = 3;
             delete platAge;
             platAge = new PlateauAge(3);
+            changement_joueur();
+            cout << " ##################################################################################" << endl;
+            cout << "                 PASSAGE A L'AGE 3     " << endl;
+            cout << "                            -  -     " << endl;
+            cout << " ##################################################################################" << endl << endl;
             return true;
         }
         else {
@@ -292,16 +317,25 @@ void Partie::selection_action(){
                 do{
                     cout<<"Choisissez une action :"<<endl;
                     cout<<"1. Construire un batiment"<<endl;
-                    cout<<"2. Construire une merveille"<<endl;
-                    cout<<"3. Defausser une carte"<<endl;
+                    cout<<"2. Defausser une carte"<<endl;
+                    if(joueurs[tour]->getNbMerveillesConstruites()+
+                    autre_joueur()->getNbMerveillesConstruites()<7 &&
+                    joueurs[tour]->getNbMerveillesNonConstruites()>0){
+                        cout << "3. Construire une merveille" << endl;
+                        choix_max = 3;
+                    }else choix_max = 2;
                     cout << "Choix : " ;
                     cin>>choix;
-                }while (choix<0||choix>3);
+                }while (choix<0||choix>choix_max);
                 break;
             default: // IA
                 // Il faut verifier si il est possible pour le joueur de construire quoi que ce soit (les options 1 et 2 sont
                 // peut-etre indisponibles)
-                choix = joueurs[tour]->choixEntierIA(nullptr,3) + 1;
+                if(joueurs[tour]->getNbMerveillesConstruites()+
+                   autre_joueur()->getNbMerveillesConstruites()<7&&
+                   joueurs[tour]->getNbMerveillesNonConstruites()>0) {
+                    choix = joueurs[tour]->choixEntierIA(nullptr,3) + 1;
+                } else choix = joueurs[tour]->choixEntierIA(nullptr,3);
                 break;
         }
         switch (choix){
@@ -309,11 +343,12 @@ void Partie::selection_action(){
                 done = construire_batiment();
                 break;
             case 2:
-                done = construire_merveille();
-                break;
-            case 3:
                 done = defausser();
                 break;
+            case 3:
+                done = construire_merveille();
+                break;
+
         }
     }
     afficherSoldeMilitaire();
@@ -404,7 +439,7 @@ bool Partie::construire_batiment(){
 
     // Construction de la carte
     joueurs[tour]->construireCarte(*(platAge->getCartes()[bat]),*autre_joueur());
-
+    cout<<"LA CARTE"<<platAge->getCartes()[bat]->getNom()<<" A ETE CONSTRUITE"<<endl;
     // mis a jour du plateau militaire si besoin
     if(platAge->getCartes()[bat]->getBoucliers()!=0){
         change_solde_militaire(true,platAge->getCartes()[bat]->getBoucliers());
@@ -463,7 +498,7 @@ bool Partie::construire_merveille(){
             }while(merv==nullptr);
             break;
         default :
-            cout<<"test"<<endl;
+            cout<<"test pour savoir si il trouve la carte"<<endl;
             nom_merv = joueurs[tour]->getMerveillesNonConstruites()[joueurs[tour]->choixEntierIA(nullptr,joueurs[tour]->getNbMerveillesNonConstruites())]->getNom();
             merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
     }
@@ -485,8 +520,10 @@ bool Partie::construire_merveille(){
             if (confirmation=="N") return false;
         }
     }
-
+    cout<<"test pour savoir lorsqu'il choisis plusieurs la même merveille"<<endl;
     joueurs[tour]->construireCarte(*merv,*autre_joueur());
+    cout<<"LA CARTE"<<merv->getNom()<<" A ETE CONSTRUITE"<<endl;
+
     // verification que la merveille puisse rejouer ou non
     if(merv->getRejouer()==true) {
         tour_suivant();
@@ -689,7 +726,7 @@ void Partie::initJoueurs(){
     do{
         cout<<"Choissisez le type de partie : 0 pour humain vs humain, 1 pour IA vs humain, 2 pour IA vs IA : ";
         cin>>type;
-    }while (type!=0&&type!=1&&type!=3);
+    }while (type!=0&&type!=1&&type!=2);
 
     if(type==0) {
         cout<<"Entrez le nom du premier joueur (sans espaces) : ";
@@ -712,7 +749,7 @@ void Partie::initJoueurs(){
             cin >> IA;
         }while(IA<1||IA>NB_IA);
         joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA");
-    }else if (type==3){
+    }else if (type==2){
         do{
             afficher_types_IA();
             cout << "Choisissez le type d'IA 1 souhaité: ";
@@ -724,7 +761,7 @@ void Partie::initJoueurs(){
             cout << "Choisissez le type d'IA 2 souhaité: ";
             cin >> IA;
         }while(IA<0 || IA>NB_IA);
-        joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
+        joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
     }
 
 }
@@ -739,33 +776,15 @@ void Partie::jouer(){
     tour = 0;
 
     // boucle de jeu
-    while(vainqueur==nullptr || match_nul==false) {
+    while(vainqueur==nullptr && match_nul==false) {
         selection_action();
-        tour_suivant();
-        fin_age();
+        if(!fin_age()) tour_suivant();
+        pressAnyKeyToContinue();
     }
 }
 
+
 void pressAnyKeyToContinue() {
-    /*
-    cout << endl ;
-    std::cout << "Appuyez n'importe où pour continuer...";
-    
-    // Désactiver l'affichage de la saisie
-    termios oldt, newt;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    
-    // Lire un caractère
-    char ch;
-    std::cin >> std::noskipws >> ch;
-    
-    // Réactiver l'affichage de la saisie
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    
-    cout<<endl << endl;
-     */
-    return;
+    cout << "Appuyez sur une touche pour continuer...";
+    cin.get();
 }

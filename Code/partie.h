@@ -30,6 +30,7 @@ private:
 
     int free_res_jetons[NB_RESSOURCES];
     int free_res_cartes[NB_RESSOURCES];
+    int choix_max=0;
 public:
     Partie();
     ~Partie();
@@ -59,9 +60,11 @@ public:
 
     void initJoueurs();
     void jouer();
+
+    void changement_joueur();
 };
 
-
+void pressAnyKeyToContinue();
 
 
 #endif
