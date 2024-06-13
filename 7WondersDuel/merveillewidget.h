@@ -32,7 +32,7 @@ private:
     QLabel* emplacementLabel = nullptr;
 
 signals:
-    void clicked();
+    void selected(MerveilleWidget*);
 
 };
 

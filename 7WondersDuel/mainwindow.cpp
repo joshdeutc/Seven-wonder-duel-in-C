@@ -20,6 +20,16 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(1280,720);
     ui->stackedWidget->setCurrentIndex(0);
 
+    emplacementsMerveillesJ1[0] = ui->label_merveille_J1_1;
+    emplacementsMerveillesJ1[1] = ui->label_merveille_J1_2;
+    emplacementsMerveillesJ1[2] = ui->label_merveille_J1_3;
+    emplacementsMerveillesJ1[3] = ui->label_merveille_J1_4;
+
+    emplacementsMerveillesJ2[0] = ui->label_merveille_J2_1;
+    emplacementsMerveillesJ2[1] = ui->label_merveille_J2_2;
+    emplacementsMerveillesJ2[2] = ui->label_merveille_J2_3;
+    emplacementsMerveillesJ2[3] = ui->label_merveille_J2_4;
+
 }
 
 MainWindow::~MainWindow()
@@ -61,8 +71,6 @@ void MainWindow::on_action_propos_triggered()
 void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     ui->stackedWidget->setCurrentIndex(1);
     Partie p(tj1, tj2, "Joueur1", "Joueur2");
-    // joueur[0] = Joueur 1
-    // joueur[1] = Joueur 2
 
     /*----------------- Initialisation des cartes -------------------*/
     Batiment** tabAge1 = jeu->getTabCartesAge1();
@@ -114,7 +122,12 @@ void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     tabWidgetMerveille[6]->setEmplacementLabel(ui->label_choix_merveille2_3);
     tabWidgetMerveille[7]->setEmplacementLabel(ui->label_choix_merveille2_4);
 
-    // Les joueurs doivent choisir les merveilles
+    /*---------------------------------------------------------------*/
+
+
+    /*------------------ Choix des merveilles ----------------------*/
+
+    setupMerveilleSelection();
 
 }
 
@@ -129,11 +142,25 @@ void MainWindow::handleMerveilleSelection(MerveilleWidget* merveille) {
         return;
     }
 
-    // Ajouter la merveille au joueur courant
+    // Ajout de la merveille au joueur courant et mise à jour de l'emplacement
     if (joueurQuiChoisit == 1) {
-        // Ajouter la merveille au joueur 1
+
+        // Ajout dans les données du joueur
+        p->getJoueurs()[0]->ajouterCarte(*(merveille->getPtrMerveille()));
+
+        // Déplacement de la merveille à l'écran
+        merveille->setEmplacementLabel(emplacementsMerveillesJ1[indexMerveilleJ1]);
+
+        indexMerveilleJ1++;
     } else {
-        // Ajouter la merveille au joueur 2
+
+        // Ajout dans les données du joueur
+        p->getJoueurs()[1]->ajouterCarte(*(merveille->getPtrMerveille()));
+
+        // Déplacement de la merveille à l'écran
+        merveille->setEmplacementLabel(emplacementsMerveillesJ1[indexMerveilleJ2]);
+
+        indexMerveilleJ1++;
     }
 
     // Mettre à jour le nombre de merveilles restantes et la logique du tour
@@ -146,11 +173,15 @@ void MainWindow::handleMerveilleSelection(MerveilleWidget* merveille) {
         nombreDeMerveilleAChosirPourJoueurCourant = (nbMerveillesRestantes == 4) ? 2 : 1; // On chosit 2 merveilles si le nombre de merveille restante vaut 7 ou 3
     }
 
-    // Masquer ou désactiver la merveille sélectionnée
-    merveille->hide();
-
     // Passer à la page suivante du StackedWidget si toutes les merveilles de la page actuelle sont choisies
     if (nbMerveillesRestantes == 4) {
         ui->stackedWidget_Plateau_Age->setCurrentIndex(1);
     }
+
+    // On fait apparaitre le plateau âge 1 une fois toutes les merveilles sélectionnées
+    if (nbMerveillesRestantes == 0) {
+        ui->stackedWidget_Plateau_Age->setCurrentIndex(2);
+    }
+
+
 }

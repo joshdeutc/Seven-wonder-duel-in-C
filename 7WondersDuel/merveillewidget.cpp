@@ -7,6 +7,10 @@ MerveilleWidget::MerveilleWidget(Merveille* m)
     ui->setupUi(this);
     ptrMerveille = m;
     imageLabel = new QLabel(this);
+
+    connect(this, &QPushButton::clicked, this, [this]() {
+        emit selected(this);
+    });
 }
 
 MerveilleWidget::~MerveilleWidget()

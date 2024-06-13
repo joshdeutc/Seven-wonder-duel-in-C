@@ -49,7 +49,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="../../../../../../../7WondersDuel/resource.qrc">:/resources/images/7WondersDuelLogo.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/images/7WondersDuelLogo.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -276,7 +276,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/cercle.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/cercle.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -295,7 +295,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/cercle.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/cercle.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -314,7 +314,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/cercle.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/cercle.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -333,7 +333,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/cercle.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/cercle.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -352,13 +352,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/cercle.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/cercle.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG">
+     <widget class="QLabel" name="label_bat_J1_1">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -371,13 +371,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_G">
+     <widget class="QLabel" name="label_bat_J1_2">
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -390,13 +390,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_D">
+     <widget class="QLabel" name="label_bat_J1_3">
       <property name="geometry">
        <rect>
         <x>170</x>
@@ -409,13 +409,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED">
+     <widget class="QLabel" name="label_bat_J1_4">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -428,13 +428,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_D">
+     <widget class="QLabel" name="label_bat_J2_2">
       <property name="geometry">
        <rect>
         <x>1110</x>
@@ -447,13 +447,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG">
+     <widget class="QLabel" name="label_bat_J2_4">
       <property name="geometry">
        <rect>
         <x>950</x>
@@ -466,13 +466,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_ED">
+     <widget class="QLabel" name="label_bat_J2_1">
       <property name="geometry">
        <rect>
         <x>1190</x>
@@ -485,13 +485,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_G">
+     <widget class="QLabel" name="label_bat_J2_3">
       <property name="geometry">
        <rect>
         <x>1030</x>
@@ -504,13 +504,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_8">
+     <widget class="QLabel" name="label_merveille_J1_1">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -523,13 +523,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED_2">
+     <widget class="QLabel" name="label_bat_J1_5">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -542,13 +542,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED_3">
+     <widget class="QLabel" name="label_bat_J1_6">
       <property name="geometry">
        <rect>
         <x>410</x>
@@ -561,13 +561,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_ED_4">
+     <widget class="QLabel" name="label_bat_J1_7">
       <property name="geometry">
        <rect>
         <x>490</x>
@@ -580,13 +580,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG_2">
+     <widget class="QLabel" name="label_bat_J2_5">
       <property name="geometry">
        <rect>
         <x>870</x>
@@ -599,13 +599,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG_3">
+     <widget class="QLabel" name="label_bat_J2_6">
       <property name="geometry">
        <rect>
         <x>790</x>
@@ -618,13 +618,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J2_EG_4">
+     <widget class="QLabel" name="label_bat_J2_7">
       <property name="geometry">
        <rect>
         <x>710</x>
@@ -637,13 +637,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleMerv.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleMerv.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_9">
+     <widget class="QLabel" name="label_merveille_J1_3">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -656,13 +656,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_10">
+     <widget class="QLabel" name="label_merveille_J1_2">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -675,13 +675,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_11">
+     <widget class="QLabel" name="label_merveille_J1_4">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -694,13 +694,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_12">
+     <widget class="QLabel" name="label_merveille_J2_3">
       <property name="geometry">
        <rect>
         <x>1160</x>
@@ -713,13 +713,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_13">
+     <widget class="QLabel" name="label_merveille_J2_1">
       <property name="geometry">
        <rect>
         <x>1160</x>
@@ -732,13 +732,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_14">
+     <widget class="QLabel" name="label_merveille_J2_2">
       <property name="geometry">
        <rect>
         <x>960</x>
@@ -751,13 +751,13 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_merveille_J1_EG_15">
+     <widget class="QLabel" name="label_merveille_J2_4">
       <property name="geometry">
        <rect>
         <x>960</x>
@@ -770,7 +770,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+       <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -779,7 +779,7 @@
      <widget class="QStackedWidget" name="stackedWidget_Plateau_Age">
       <property name="geometry">
        <rect>
-        <x>380</x>
+        <x>370</x>
         <y>160</y>
         <width>541</width>
         <height>391</height>
@@ -802,7 +802,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -821,7 +821,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -840,7 +840,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -859,7 +859,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -880,7 +880,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -899,7 +899,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -918,7 +918,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -937,7 +937,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectangleBat.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectangleBat.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -958,7 +958,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -977,7 +977,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -996,7 +996,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1015,7 +1015,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1034,7 +1034,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1053,7 +1053,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1072,7 +1072,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1091,7 +1091,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1110,7 +1110,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1129,7 +1129,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1148,7 +1148,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1167,7 +1167,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1186,7 +1186,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1205,7 +1205,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1224,7 +1224,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1243,7 +1243,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1262,7 +1262,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1281,7 +1281,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1300,7 +1300,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1319,7 +1319,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1340,7 +1340,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1359,7 +1359,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1378,7 +1378,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1397,7 +1397,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1416,7 +1416,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1435,7 +1435,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1454,7 +1454,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1473,7 +1473,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1492,7 +1492,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1511,7 +1511,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1530,7 +1530,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1549,7 +1549,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1568,7 +1568,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1587,7 +1587,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1606,7 +1606,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1625,7 +1625,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1644,7 +1644,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1663,7 +1663,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1682,7 +1682,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1701,7 +1701,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1722,7 +1722,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1741,7 +1741,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1760,7 +1760,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1779,7 +1779,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1798,7 +1798,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1817,7 +1817,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1836,7 +1836,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1855,7 +1855,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1874,7 +1874,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1893,7 +1893,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1912,7 +1912,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1931,7 +1931,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1950,7 +1950,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1969,7 +1969,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1988,7 +1988,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2007,7 +2007,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2026,7 +2026,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2045,7 +2045,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2064,7 +2064,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2083,23 +2083,13 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/resources/formes/rectanglePlateauAge.png</pixmap>
+         <pixmap resource="resource.qrc">:/resources/formes/rectanglePlateauAge.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
         </property>
        </widget>
       </widget>
-     </widget>
-     <widget class="QWidget" name="widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>50</y>
-        <width>120</width>
-        <height>80</height>
-       </rect>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_defausse"/>
@@ -2153,7 +2143,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionQuitter_l_application</sender>
