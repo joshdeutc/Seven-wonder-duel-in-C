@@ -22,12 +22,15 @@ public:
     ~BatimentWidget();
     Batiment* getPtrBatiment() {return ptrBatiment;}
     QLabel* getImageLabel() {return imageLabel;}
+    QLabel* getEmplacementLabel() {return emplacementLabel;}
+    void setEmplacementLabel(QLabel* e) {emplacementLabel = e;}
     void setPixmap(int a);
 
 private:
     Ui::BatimentWidget *ui;
     Batiment* ptrBatiment;
     QLabel* imageLabel;
+    QLabel* emplacementLabel = nullptr;
 };
 
 #endif // BATIMENTWIDGET_H

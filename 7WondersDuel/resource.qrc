@@ -99,5 +99,6 @@
         <file>merveilles/LE_TEMPLE_D'ARTEMIS.png</file>
         <file>merveilles/LES_JARDINS_SUSPENDUS.png</file>
         <file>merveilles/LES_PYRAMIDES.jpg</file>
+        <file>formes/rectanglePlateauAge.png</file>
     </qresource>
 </RCC>
