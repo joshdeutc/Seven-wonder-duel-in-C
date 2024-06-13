@@ -7,6 +7,7 @@
 #include "jeu.h"
 #include "joueur.h"
 #include "merveillewidget.h"
+#include "partie.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -43,13 +44,20 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Jeu* jeu;
+    Jeu* jeu = nullptr;
+    Partie* p = nullptr;
 
     // Paramètres et méthodes internes pour le choix des merveilles
     size_t nbMerveillesRestantes;
     size_t joueurQuiChoisit;
     size_t nombreDeMerveilleAChosirPourJoueurCourant;
     void setupMerveilleSelection();
+
+    // Paramètres et méthodes internes pour les emplacements de merveilles
+    QLabel* emplacementsMerveillesJ1[4];
+    QLabel* emplacementsMerveillesJ2[4];
+    int indexMerveilleJ1 = 0;
+    int indexMerveilleJ2 = 0;
 
 };
 #endif // MAINWINDOW_H
