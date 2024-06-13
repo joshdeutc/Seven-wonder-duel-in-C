@@ -49,12 +49,6 @@ public:
     void afficherSoldeMilitaire();
     Joueur* getVainqueur() const { return vainqueur; }
     int get_tour() const { return tour; }
-
-    Jeu* getJeu() const { return jeu; }
-    PlateauAge* getPlatAge() const { return platAge; }
-    PlateauJetonMilit* getPlatMilitaire() const { return platMilitaire; }
-    PlateauMerveille* getPlatMerveille() const { return platMerveille; }
-    PlateauJetonProgres* getPlatProgres() const { return platProgres; }
 };
 
 

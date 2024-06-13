@@ -2,7 +2,6 @@
 #define CARTE_BATIMENT_MERVEILLE_H
 #include <iostream>
 #include <string>
-
 using namespace std;
 constexpr int NB_RESSOURCES = 5;
 
@@ -147,7 +146,6 @@ protected:
     bool accesible = false;
     Chainage chainage1 = aucun;
     Chainage chainage2 = aucun;
-    Ui::BatimentWidget* ptrBatWidget = nullptr;
 public:
     const int getAge() const override {return age;}
     const Chainage getChainage1() const override { return chainage1; }
@@ -157,8 +155,7 @@ public:
     void set_face_visible(bool fv) override { face_visible = fv; }
     bool get_accessible() const override { return accesible; }
     bool get_face_visible() const override { return face_visible; }
-    Ui::BatimentWidget* getPtrBatWidget() {return ptrBatWidget;}
-    void setPtrBatWidget(Ui::BatimentWidget* w) {ptrBatWidget = w; w->}
+
 
        /* Il y avait initialement les arguments face_visible(f), accessible(ac), st(s), chainage(c)
      dans le constructeur mais ils ne sont pas initialisés à la construction du batiment. ils sont initialisés par plateau.
