@@ -122,7 +122,12 @@ void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     tabWidgetMerveille[6]->setEmplacementLabel(ui->label_choix_merveille2_3);
     tabWidgetMerveille[7]->setEmplacementLabel(ui->label_choix_merveille2_4);
 
-    // Les joueurs doivent choisir les merveilles
+    /*---------------------------------------------------------------*/
+
+
+    /*------------------ Choix des merveilles ----------------------*/
+
+    setupMerveilleSelection();
 
 }
 
@@ -177,4 +182,6 @@ void MainWindow::handleMerveilleSelection(MerveilleWidget* merveille) {
     if (nbMerveillesRestantes == 0) {
         ui->stackedWidget_Plateau_Age->setCurrentIndex(2);
     }
+
+
 }
