@@ -267,7 +267,6 @@ void Partie::selection_action(){
     int choix;
     bool done = false;
     string nom_merveille;
-<<<<<<< HEAD
     
     cout << endl << endl;
     cout << "#################################################################\n";
@@ -287,11 +286,6 @@ void Partie::selection_action(){
     
     cout << endl<< "C'est le tour du joueur " << joueurs[tour]->getId() << endl << endl;
     
-=======
-    autre_joueur()->afficher();
-    joueurs[tour]->afficher();
-    platAge->accessibilite();
->>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
     while (!done){
         switch (joueurs[tour]->getType()){
             case humain:
@@ -375,11 +369,7 @@ bool Partie::construire_batiment(){
             platAge->choix_correct(bat);
             break;
         case IA_aleatoire:
-<<<<<<< HEAD
             bat = joueurs[tour]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
-=======
-            bat = joueurs[0]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
->>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
     }
     
     for(int i=0; i<NB_RESSOURCES;i++){
@@ -474,11 +464,7 @@ bool Partie::construire_merveille(){
             break;
         default :
             cout<<"test"<<endl;
-<<<<<<< HEAD
             nom_merv = joueurs[tour]->getMerveillesNonConstruites()[joueurs[tour]->choixEntierIA(nullptr,joueurs[tour]->getNbMerveillesNonConstruites())]->getNom();
-=======
-            nom_merv = joueurs[0]->getMerveillesNonConstruites()[joueurs[0]->choixEntierIA(nullptr,joueurs[0]->getNbMerveillesNonConstruites())]->getNom();
->>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
             merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
     }
 
