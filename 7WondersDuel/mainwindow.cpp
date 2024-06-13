@@ -108,6 +108,7 @@ void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     MerveilleWidget* tabWidgetMerveille[jeu->getNbCartesMerveille()];
     for (int i = 0; i < jeu->getNbCartesMerveille(); ++i) {
         tabWidgetMerveille[i] = new MerveilleWidget(tabMerveille[i]);
+        connect(tabWidgetMerveille[i], &MerveilleWidget::selected, this, &MainWindow::handleMerveilleSelection);
     }
 
     ui->stackedWidget_Plateau_Age->setCurrentIndex(0);
@@ -125,9 +126,31 @@ void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     /*---------------------------------------------------------------*/
 
 
-    /*------------------ Choix des merveilles ----------------------*/
+    /*------------------- Choix des merveilles ----------------------*/
 
     setupMerveilleSelection();
+
+    /*-------------------------- Age 1 ----------------------------*/
+
+    PlateauAge* plateauAge = p.getPlatAge();
+
+    int choix;
+
+    choix = 1;
+    vector<Carte*> etage1Age1Choix1 = plateauAge->trouver_etage_age1(choix);
+
+
+    choix = 2;
+    vector<Carte*> etage1Age1Choix2 = plateauAge->trouver_etage_age1(choix);
+    choix = 3;
+    vector<Carte*> etage1Age1Choix3 = plateauAge->trouver_etage_age1(choix);
+    choix = 4;
+    vector<Carte*> etage1Age1Choix4 = plateauAge->trouver_etage_age1(choix);
+    choix = 5;
+    vector<Carte*> etage1Age1Choix5 = plateauAge->trouver_etage_age1(choix);
+
+    etage1Age1Choix1[0];
+
 
 }
 
