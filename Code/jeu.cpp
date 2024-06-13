@@ -263,6 +263,13 @@ Jeu::Jeu()
 
 Jeu::~Jeu()
 {
+    for(int i=0;i<nbCartesAge1;i++) delete tabCartesAge1[i];
+    for(int i=0;i<nbCartesAge2;i++) delete tabCartesAge2[i];
+    for(int i=0;i<nbCartesAge3;i++) delete tabCartesAge3[i];
+    for(int i=0;i<nbCartesGuilde;i++) delete tabCartesGuilde[i];
+    for(int i=0;i<nbCartesMerveille;i++) delete tabCartesMerveille[i];
+    for(int i=0;i<nbJetonsProgres;i++) delete tabJetonProgres[i];
+
     delete[] tabCartesAge1;
     delete[] tabCartesAge2;
     delete[] tabCartesAge3;
