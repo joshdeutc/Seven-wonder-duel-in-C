@@ -324,7 +324,7 @@ public:
            const TypeCarte &tc_affectee,
            const TypeCarte &tc_affectee_2=aucuneCarte)
         : Batiment(n, cout_piece, cout_prod, age),
-          points_par_carte(pts), piece_par_carte(piece), 
+          points_par_carte(pts), piece_par_carte(piece),
           type_carte_affectee_1(tc_affectee), type_carte_affectee_2(tc_affectee_2){
         type_carte = guilde;
     }
@@ -429,6 +429,7 @@ public:
 
     ~JetonProgres() = default;
 };
+
 
 
 #endif

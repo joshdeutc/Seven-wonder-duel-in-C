@@ -30,7 +30,6 @@ private:
 
     int free_res_jetons[NB_RESSOURCES];
     int free_res_cartes[NB_RESSOURCES];
-    int choix_max=0;
 public:
     Partie();
     ~Partie();
@@ -50,6 +49,9 @@ public:
     bool construire_merveille();
     bool defausser();
     
+    void pioche_defausse();
+    void defausse_adversaire(TypeCarte type);
+
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
 
@@ -60,6 +62,7 @@ public:
 
     void initJoueurs();
     void jouer();
+};
 
     void changement_joueur();
 };

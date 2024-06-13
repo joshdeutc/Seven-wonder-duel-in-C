@@ -7,8 +7,6 @@
 #include "jeu.h"
 #include "joueur.h"
 #include "merveillewidget.h"
-#include "batimentwidget.h"
-#include "jetonprogreswidget.h"
 #include "partie.h"
 
 QT_BEGIN_NAMESPACE
@@ -48,13 +46,6 @@ private:
     Ui::MainWindow *ui;
     Jeu* jeu = nullptr;
     Partie* p = nullptr;
-
-    // Cartes
-    BatimentWidget* tabWidgetAge1[jeu->getNbCartesAge1()];
-    BatimentWidget* tabWidgetAge2[jeu->getNbCartesAge2()];
-    BatimentWidget* tabWidgetGuilde[jeu->getNbCartesGuilde()];
-    JetonProgresWidget* tabWidgetJetonProgres[jeu->getNbJetonsProgres()];
-    MerveilleWidget* tabWidgetMerveille[jeu->getNbCartesMerveille()];
 
     // Paramètres et méthodes internes pour le choix des merveilles
     size_t nbMerveillesRestantes;

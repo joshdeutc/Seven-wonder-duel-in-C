@@ -11,24 +11,6 @@ using namespace std;
 
 #include "carte_bat_merv.h"
 
-//class Plateau
-//{
-//private:
-//    //
-//public:
-//    Plateau(/* args */);
-//    ~Plateau();
-//    friend class Jeu;
-//};
-//
-//Plateau::Plateau(/* args */)
-//{
-//}
-//
-//Plateau::~Plateau()
-//{
-//}
-
 class PlateauAge
 {
 private:
@@ -113,5 +95,6 @@ public:
     PlateauJetonProgres();
     ~PlateauJetonProgres();
 };
+
 
 #endif /* PLATEAU_H */
