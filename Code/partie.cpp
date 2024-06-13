@@ -1,6 +1,5 @@
 #include "partie.h"
 
-
 void Partie::afficherSoldeMilitaire() {
     std::string axe = "---------------------"; // 21 caractères, représentant -9 à 9
     std::string labels = "-9          0         9"; // Les étiquettes pour l'axe
@@ -39,7 +38,12 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
+<<<<<<< HEAD
+    if (tour==1) tour = 0;
+    else tour = 1;
+=======
     tour = (tour == 0) ? 1 : 0;
+>>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
 }
 
 bool Partie::fin_age(){
@@ -263,9 +267,25 @@ void Partie::selection_action(){
     int choix;
     bool done = false;
     string nom_merveille;
+    
+    cout << endl << endl;
+    cout << "#################################################################\n";
+    cout << "                   AFFICHAGE DE L'ETAT DU JEU \n";
+    cout << "#################################################################\n";
+    cout << endl << endl;
+    
     autre_joueur()->afficher();
+    
+    cout << endl;
+    
     joueurs[tour]->afficher();
+    
+    cout << endl;
+    
     platAge->accessibilite();
+    
+    cout << endl<< "C'est le tour du joueur " << joueurs[tour]->getId() << endl << endl;
+    
     while (!done){
         switch (joueurs[tour]->getType()){
             case humain:
@@ -274,8 +294,7 @@ void Partie::selection_action(){
                     cout<<"1. Construire un batiment"<<endl;
                     cout<<"2. Construire une merveille"<<endl;
                     cout<<"3. Defausser une carte"<<endl;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Choix : " ;
                     cin>>choix;
                 }while (choix<0||choix>3);
                 break;
@@ -302,8 +321,18 @@ void Partie::selection_action(){
 
 bool Partie::defausser(){
     int choix;
-    cout<<"Choisisssez le numero d'une carte a defausser : "<<endl;
-    cin>>choix;
+    
+    cout << "DEFAUSSE" << endl;
+    
+    switch(joueurs[tour]->getType()){
+        case humain:
+            cout << "Choisisssez le numero d'un des batiments accessibles a defausser : " ;
+            cin >> choix;
+            platAge->choix_correct(choix);
+            break;
+        case IA_aleatoire:
+            choix = joueurs[tour]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
+    }
 
     platAge->choix_correct(choix);
 
@@ -329,23 +358,26 @@ bool Partie::defausser(){
 // Renvoie vrai si l'utilisateur a bien choisi de construire la carte, faux s'il veut revenir au menu
 bool Partie::construire_batiment(){
     int bat;
-    bool construction;
     string confirmation;
+    
+    cout << "CONSTRUIRE BATIMENT" << endl;
     
     switch(joueurs[tour]->getType()){
         case humain:
-            cout << "Choisisssez le numero d'un des batiments accessibles : " << endl;
+            cout << "Choisisssez le numero d'un des batiments accessibles : " ;
             cin >> bat;
             platAge->choix_correct(bat);
             break;
         case IA_aleatoire:
-            bat = joueurs[0]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
+            bat = joueurs[tour]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
     }
     
     for(int i=0; i<NB_RESSOURCES;i++){
         free_res_jetons[i] = 0;
         free_res_cartes[i] = 0;
     }
+    
+    cout << " CHOIX RESSOURCES " << endl;
     
     joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons);
     joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
@@ -399,15 +431,17 @@ bool Partie::construire_merveille(){
     string nom_merv;
     string confirmation;
     
+    cout << "CONSTRUIRE MERVEILLE" << endl;
+    
     // Choix du batiment servant a construire la merveille
     switch(joueurs[tour]->getType()){
         case humain:
-            cout << "Choisisssez le numero d'un des batiments accessibles pour le placer sous la merveille : " << endl;
+            cout << "Choisisssez le numero d'un des batiments accessibles pour le placer sous la merveille : " ;
             cin >> bat;
             platAge->choix_correct(bat);
             break;
         default:
-            bat = joueurs[0]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
+            bat = joueurs[tour]->choixEntierIA(platAge->getTabPossibilites(),platAge->getNbPossibilites());
     }
     
     for(int i=0; i<NB_RESSOURCES;i++){
@@ -430,7 +464,7 @@ bool Partie::construire_merveille(){
             break;
         default :
             cout<<"test"<<endl;
-            nom_merv = joueurs[0]->getMerveillesNonConstruites()[joueurs[0]->choixEntierIA(nullptr,joueurs[0]->getNbMerveillesNonConstruites())]->getNom();
+            nom_merv = joueurs[tour]->getMerveillesNonConstruites()[joueurs[tour]->choixEntierIA(nullptr,joueurs[tour]->getNbMerveillesNonConstruites())]->getNom();
             merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
     }
 
@@ -452,7 +486,7 @@ bool Partie::construire_merveille(){
         }
     }
 
-    joueurs[0]->construireCarte(*merv,*autre_joueur());
+    joueurs[tour]->construireCarte(*merv,*autre_joueur());
     // verification que la merveille puisse rejouer ou non
     if(merv->getRejouer()==true) {
         tour_suivant();
@@ -478,6 +512,7 @@ bool Partie::construire_merveille(){
 
 
 void Partie::choix_merveilles(){
+    cout << endl << endl;
     cout << "#######################################################\n";
     cout << "           CHOIX DES MERVEILLES : PHASE 1 \n";
     cout << "#######################################################\n";
@@ -499,8 +534,12 @@ void Partie::choix_merveilles(){
         default: // IA
             choix = joueurs[0]->choixEntierIA(nullptr,4) +1 ;
     }
+    
+    cout << endl << joueurs[0]->getId() << " a choisi la merveille " << platMerveille->getMerveilles(1)[choix-1]->getNom() << endl;
     joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
     platMerveille->retirerCarte(1,choix-1);
+    
+    pressAnyKeyToContinue();
 
     cout << endl;
     platMerveille->afficher(1);
@@ -520,9 +559,13 @@ void Partie::choix_merveilles(){
         default: // IA
             choix = joueurs[1]->choixEntierIA(nullptr,3) +1 ;
     }
-    cout << "choix IA : "<<choix << endl;
+    cout << endl << "Le joueur " << joueurs[1]->getId() << " a choisi la merveille " << platMerveille->getMerveilles(1)[choix-1]->getNom() << endl;
+
+    
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
     platMerveille->retirerCarte(1,choix-1);
+    
+    pressAnyKeyToContinue();
 
     cout << endl;
     platMerveille->afficher(1);
@@ -541,12 +584,17 @@ void Partie::choix_merveilles(){
         default: // IA
             choix = joueurs[1]->choixEntierIA(nullptr,2) +1 ;
     }
+    
+    cout << endl << "Le joueur " << joueurs[1]->getId() << " a choisi la merveille " << platMerveille->getMerveilles(1)[choix-1]->getNom() << endl;
+
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(1)[choix-1]));
     platMerveille->retirerCarte(1,choix-1);
 
-    cout << "Le joueur " << joueurs[0]->getId() << " prend la derniere merveille. \n" << endl;
+    cout << endl << "Le joueur " << joueurs[0]->getId() << " prend la derniere merveille : " << platMerveille->getMerveilles(1)[0]->getNom() << endl;
 
     joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(1)[0])); //il ne reste plus qu'une carte
+    
+    pressAnyKeyToContinue();
 
     cout << "#######################################################\n";
     cout << "           CHOIX DES MERVEILLES : PHASE 2 \n";
@@ -568,8 +616,14 @@ void Partie::choix_merveilles(){
         default: // IA
             choix = joueurs[1]->choixEntierIA(nullptr,4) +1 ;
     }
+    
+    cout << endl << joueurs[1]->getId() << " a choisi la merveille " << platMerveille->getMerveilles(2)[choix-1]->getNom() << endl;
+
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
     platMerveille->retirerCarte(2,choix-1);
+    
+    
+    pressAnyKeyToContinue();
 
     cout << endl;
     platMerveille->afficher(2);
@@ -588,9 +642,15 @@ void Partie::choix_merveilles(){
         default: // IA
             choix = joueurs[0]->choixEntierIA(nullptr,3) +1 ;
     }
+    
+    cout << endl << joueurs[0]->getId() << " a choisi la merveille " << platMerveille->getMerveilles(2)[choix-1]->getNom() << endl;
+
     joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
     platMerveille->retirerCarte(2,choix-1);
-
+    
+    
+    pressAnyKeyToContinue();
+    
     cout << endl;
     platMerveille->afficher(2);
     cout << endl << "Choix du joueur " << joueurs[0]->getId() << endl;
@@ -608,12 +668,17 @@ void Partie::choix_merveilles(){
         default: // IA
             choix = joueurs[0]->choixEntierIA(nullptr,2) +1 ;
     }
+    
+    cout << endl << joueurs[0]->getId() << " a choisi la merveille " << platMerveille->getMerveilles(2)[choix-1]->getNom() << endl;
+
     joueurs[0]->ajouterCarte(*(platMerveille->getMerveilles(2)[choix-1]));
     platMerveille->retirerCarte(2,choix-1);
 
-    cout << "Le joueur " << joueurs[1]->getId() << " prend la derniere merveille. \n" << endl;
+    cout << endl << "Le joueur " << joueurs[1]->getId() << " prend la derniere merveille : " << platMerveille->getMerveilles(2)[0]->getNom() << endl;
 
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(2)[0])); //il ne reste plus qu'une carte
+    
+    pressAnyKeyToContinue();
 
 }
 
@@ -645,7 +710,7 @@ void Partie::initJoueurs(){
             afficher_types_IA();
             cout << "Choisissez le type d'IA souhaité: ";
             cin >> IA;
-        }while(IA<0 || IA>NB_IA);
+        }while(IA<1||IA>NB_IA);
         joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA");
     }else if (type==3){
         do{
@@ -665,8 +730,6 @@ void Partie::initJoueurs(){
 }
 
 void Partie::jouer(){
-    // démarrage du Jeu //
-    Jeu* j = Jeu::getInstance();
     // choix des types de joueurs
 
     initJoueurs();
@@ -681,4 +744,28 @@ void Partie::jouer(){
         tour_suivant();
         fin_age();
     }
+}
+
+void pressAnyKeyToContinue() {
+    /*
+    cout << endl ;
+    std::cout << "Appuyez n'importe où pour continuer...";
+    
+    // Désactiver l'affichage de la saisie
+    termios oldt, newt;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    
+    // Lire un caractère
+    char ch;
+    std::cin >> std::noskipws >> ch;
+    
+    // Réactiver l'affichage de la saisie
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    
+    cout<<endl << endl;
+     */
+    return;
 }
