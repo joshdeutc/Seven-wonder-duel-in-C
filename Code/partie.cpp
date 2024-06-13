@@ -38,12 +38,8 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-<<<<<<< HEAD
     if (tour==1) tour = 0;
     else tour = 1;
-=======
-    tour = (tour == 0) ? 1 : 0;
->>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
 }
 
 bool Partie::fin_age(){
@@ -247,7 +243,7 @@ void Partie::choix_jeton(Joueur &j) {
     }
 }
 
-void Partie::addDefausse(Carte*carte) {
+void Partie::addDefausse(Carte* carte) {
     defausses.push_back(carte);
 }
 
@@ -256,14 +252,73 @@ Joueur* Partie::autre_joueur(){
     else return joueurs[1];
 }
 
+void Partie::defausse_adversaire(TypeCarte type){
+    string nom;
+    bool valide = true;
+    Carte* c = nullptr;
+    int n, choix, i=0, k=0;
+    
+    if (type == aucuneCarte) throw WondersException("Erreur: defausse adversaire sans type de carte a defausser");
+    
+    switch(joueurs[tour]->getType()){
+        case humain:
+            if (autre_joueur()->nombreCartesDeCategorie(type)==0){
+                cout << "Votre adversaire ne possede pas de cartes de type " << type << " vous ne pouvez donc pas en defausser. \n";
+                return;
+            }
+            cout << "Vous pouvez choisir une carte " << type << " de votre adversaire et la defausser. \n";
+            
+            cout << endl << "Cite de votre adversaire : " << endl << endl;
+            autre_joueur()->afficher();
+            
+            cout << "Entrez le nom exact de la carte que vous souhaitez defausser : ";
+            getline(cin,nom);
+            if (autre_joueur()->recherche_carte(nom)==nullptr)
+                valide = false;
+            else if (autre_joueur()->recherche_carte(nom)->getType()!=type)
+                valide = false;
+            while(!valide){
+                valide = true;
+                cout << "Cette carte n'est pas dans la cite de votre adversaire \n";
+                cout << "Entrez le nom exact de la carte que vous souhaitez defausser : ";
+                getline(cin,nom);
+                if (autre_joueur()->recherche_carte(nom)==nullptr)
+                    valide = false;
+                else if (autre_joueur()->recherche_carte(nom)->getType()!=type)
+                    valide = false;
+            }
+            
+            c = const_cast<Carte*>(autre_joueur()->recherche_carte(nom));
+            autre_joueur()->supprimerCarte(*c);
+            addDefausse(c);
+            
+            break;
+        default: // IA
+            n = autre_joueur()->nombreCartesDeCategorie(type);
+            if (n==0){
+                cout << "L'adversaire ne possede pas de cartes de type " << type << " le joueur ne peut donc pas en defausser. \n";
+                return;
+            }
+            choix = joueurs[tour]->choixEntierIA(nullptr,n);
+            
+            // Parcours des cartes
+            while(i!=choix && k<autre_joueur()->getNbCartes()){
+                if (autre_joueur()->getCartes()[k]->getType() == type)
+                    i++;
+                if(i!=choix) k++;
+            }
+            
+            c = const_cast<Carte*>(autre_joueur()->getCartes()[k]);
+            autre_joueur()->supprimerCarte(*c);
+            addDefausse(c);
+            
+            break;
+    }
+}
 
 
 
-// Il faut trouver un moyen de gerer le fait que construire est peut etre impossible pour un joueur,
-// s'il a choisi de construire mais qu'il n'a pas les fonds suffisants, il faut qu'il puisse sortir
-// et prendre un autre choix d'action.
 void Partie::selection_action(){
-    // initialisationd des variables locales
     int choix;
     bool done = false;
     string nom_merveille;
@@ -292,8 +347,8 @@ void Partie::selection_action(){
                 do{
                     cout<<"Choisissez une action :"<<endl;
                     cout<<"1. Construire un batiment"<<endl;
-                    cout<<"2. Construire une merveille"<<endl;
-                    cout<<"3. Defausser une carte"<<endl;
+                    cout<<"2. Defausser une carte"<<endl;
+                    cout<<"3. Construire une merveille"<<endl;
                     cout << "Choix : " ;
                     cin>>choix;
                 }while (choix<0||choix>3);
@@ -309,10 +364,10 @@ void Partie::selection_action(){
                 done = construire_batiment();
                 break;
             case 2:
-                done = construire_merveille();
+                done = defausser();
                 break;
             case 3:
-                done = defausser();
+                done = construire_merveille();
                 break;
         }
     }
@@ -357,7 +412,7 @@ bool Partie::defausser(){
 
 // Renvoie vrai si l'utilisateur a bien choisi de construire la carte, faux s'il veut revenir au menu
 bool Partie::construire_batiment(){
-    int bat;
+    int bat, prix;
     string confirmation;
     
     cout << "CONSTRUIRE BATIMENT" << endl;
@@ -379,16 +434,18 @@ bool Partie::construire_batiment(){
     
     cout << " CHOIX RESSOURCES " << endl;
     
-    joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons);
+    joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons,platAge->getCartes()[bat]->getType());
     joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
     
-    if((joueurs[tour]->prixFinal(*(platAge->getCartes()[bat]),*autre_joueur(),free_res_jetons,free_res_cartes) > joueurs[tour]->getSolde())){
+    prix = joueurs[tour]->prixFinal(*(platAge->getCartes()[bat]),*autre_joueur(),free_res_jetons,free_res_cartes);
+    
+    if(prix > joueurs[tour]->getSolde()){
         if(joueurs[tour]->getType()==humain)
             cout<< "Vous n'avez pas assez de ressources pour construire cette carte." <<endl;
         return false;
     } else {
         if(joueurs[tour]->getType()==humain){
-            cout << "Prix du batiment : " << joueurs[tour]->prixFinal(*(platAge->getCartes()[bat]),*autre_joueur(),free_res_jetons,free_res_cartes) << endl;
+            cout << "Prix du batiment : " << prix << endl;
             do{
                 cout << "Souhaitez vous construire le batiment ? O/N : ";
                 cin>>confirmation;
@@ -396,19 +453,37 @@ bool Partie::construire_batiment(){
             if (confirmation=="N") return false;
         }
     }
+    
+    Carte* c = platAge->getCartes()[bat];
             
     // Verifications a faire avant de construire la carte
-    if(joueurs[tour]->doubleSymbole(platAge->getCartes()[bat]->getSymbole())){
+    if(joueurs[tour]->doubleSymbole(c->getSymbole())){
         choix_jeton(*joueurs[tour]);
     }
 
     // Construction de la carte
-    joueurs[tour]->construireCarte(*(platAge->getCartes()[bat]),*autre_joueur());
+    joueurs[tour]->construireCarte(*c,*autre_joueur(),prix);
 
     // mis a jour du plateau militaire si besoin
-    if(platAge->getCartes()[bat]->getBoucliers()!=0){
-        change_solde_militaire(true,platAge->getCartes()[bat]->getBoucliers());
+    if(c->getBoucliers()!=0){
+        change_solde_militaire(true,c->getBoucliers());
     }
+    // test victoire scientifique
+    if (joueurs[tour]->nbSymboles()>=6){
+        victoire_scientifique(*joueurs[tour]);
+        return true;
+    }
+    if (c->getSoldeRetireAdversaire()>0){
+        autre_joueur()->setSolde(max(0,autre_joueur()->getSolde()-c->getSoldeRetireAdversaire()));
+    }
+    if(c->getPiocheDefausse()){
+        pioche_defausse();
+    }
+    if(c->getDefausseAdversaire()){
+        defausse_adversaire(c->getTypeCarteAffectee());
+    }
+    
+    
     if(age==1){
         //mettre a jour le plateau
         platAge->destruction_carte_plateau_age1(bat);
@@ -425,9 +500,8 @@ bool Partie::construire_batiment(){
 }
 
 bool Partie::construire_merveille(){
-    int bat;
+    int bat, prix;
     const Merveille* merv = nullptr;
-    bool construction;
     string nom_merv;
     string confirmation;
     
@@ -468,16 +542,18 @@ bool Partie::construire_merveille(){
             merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
     }
 
-    joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons);
+    joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons, merv->getType());
     joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
     
-    if((joueurs[tour]->prixFinal(*merv,*autre_joueur(),free_res_jetons,free_res_cartes) > joueurs[tour]->getSolde())){
+    prix = joueurs[tour]->prixFinal(*merv,*autre_joueur(),free_res_jetons,free_res_cartes);
+    
+    if(prix > joueurs[tour]->getSolde()){
         if(joueurs[tour]->getType()==humain)
             cout<< "Vous n'avez pas assez de ressources pour construire cette carte." <<endl;
         return false;
     } else {
         if(joueurs[tour]->getType()==humain){
-            cout << "Prix de la merveille : " << joueurs[tour]->prixFinal(*merv,*autre_joueur(),free_res_jetons,free_res_cartes) << endl;
+            cout << "Prix de la merveille : " << prix << endl;
             do{
                 cout << "Souhaitez vous construire cette merveille ? O/N : ";
                 cin>>confirmation;
@@ -485,16 +561,36 @@ bool Partie::construire_merveille(){
             if (confirmation=="N") return false;
         }
     }
+    
+    if(joueurs[tour]->doubleSymbole(merv->getSymbole())){
+        choix_jeton(*joueurs[tour]);
+    }
 
-    joueurs[tour]->construireCarte(*merv,*autre_joueur());
+    joueurs[tour]->construireCarte(*merv,*autre_joueur(),prix);
+    
     // verification que la merveille puisse rejouer ou non
-    if(merv->getRejouer()==true) {
+    if(merv->getRejouer()) {
         tour_suivant();
     }
     // mis a jour du plateau militaire si besoin
     if(merv->getBoucliers()!=0){
         change_solde_militaire(true,merv->getBoucliers());
     }
+    // test victoire scientifique
+    if (joueurs[tour]->nbSymboles()>=6){
+        victoire_scientifique(*joueurs[tour]);
+        return true;
+    }
+    if (merv->getSoldeRetireAdversaire()>0){
+        autre_joueur()->setSolde(max(0,autre_joueur()->getSolde()-merv->getSoldeRetireAdversaire()));
+    }
+    if(merv->getPiocheDefausse()){
+        pioche_defausse();
+    }
+    if(merv->getDefausseAdversaire()){
+        defausse_adversaire(merv->getTypeCarteAffectee());
+    }
+    
     if(age==1){
         //mettre a jour le plateau
         platAge->destruction_carte_plateau_age1(bat);
@@ -724,7 +820,7 @@ void Partie::initJoueurs(){
             cout << "Choisissez le type d'IA 2 souhaité: ";
             cin >> IA;
         }while(IA<0 || IA>NB_IA);
-        joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
+        joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
     }
 
 }
@@ -747,25 +843,8 @@ void Partie::jouer(){
 }
 
 void pressAnyKeyToContinue() {
-    /*
-    cout << endl ;
-    std::cout << "Appuyez n'importe où pour continuer...";
+    string s;
     
-    // Désactiver l'affichage de la saisie
-    termios oldt, newt;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    
-    // Lire un caractère
-    char ch;
-    std::cin >> std::noskipws >> ch;
-    
-    // Réactiver l'affichage de la saisie
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    
-    cout<<endl << endl;
-     */
-    return;
+    cout << "Entrez quelque chose pour continuer : ";
+    cin>> s;
 }

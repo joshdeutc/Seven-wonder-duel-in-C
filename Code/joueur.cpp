@@ -115,11 +115,15 @@ void Joueur::ajouterCarte(const Carte& c, bool construire){
 // Partie s'occupe de savoir si le joueur pioche dans la défausse (c.getPiocheDefausse())
 // Partie s'occupe de savoir si le joueur défausse une carte de son adversaire (c.getDefausseAdversaire())
 // Partie s'occupe également d'ajouter en fin de partie (méthode victoire civile) les choses à condition CiteMax (getPointsParCarte())
-void Joueur::construireCarte(const Carte& c, const Joueur& other){
+void Joueur::construireCarte(const Carte& c, const Joueur& other, const int& prix){
     //Si cette methode est appelee, les conditions pour que le joueur construise ce batiment sont reunies,
     // verification faite par la méthode action() avec prix_final
     //Actions générales, communes à toutes les cartes
     //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
+    
+    if(prix>solde) throw WondersException("Erreur : tentative de construire une carte dont le prix est superieur au solde");
+    
+    solde-=prix;
     
     if(c.getRessource()!=aucuneRessource){
         ressources_prod[c.getRessource()]+=c.getNb();
@@ -352,12 +356,13 @@ int Joueur::choixEntierIA(int* tab, int taille) const {
     throw WondersException("Erreur ChoixIA: Type joueur inconnu");
 }
 
-void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]){
+// s'applique seulement aux merveilles
+void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES], TypeCarte typecarte){
     //initialisation à 0
     for(int i=0 ;i<NB_RESSOURCES;i++) tab[i]=0;
     int choix;
     for (int i=0;i<nb_jetons;i++){
-        if (jetons[i]->getRessourcesGratuites() > 0){
+        if (jetons[i]->getRessourcesGratuites() > 0 && jetons[i]->getTypeCarteCondition()==typecarte){
             if(type==humain){
                 int n= jetons[i]->getRessourcesGratuites();
                 cout << "Vous pouvez choisir " << n << " ressources gratuites. " << endl ;
