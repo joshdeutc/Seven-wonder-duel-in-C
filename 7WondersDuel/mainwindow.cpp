@@ -30,6 +30,16 @@ MainWindow::MainWindow(QWidget *parent)
     emplacementsMerveillesJ2[2] = ui->label_merveille_J2_3;
     emplacementsMerveillesJ2[3] = ui->label_merveille_J2_4;
 
+    emplacementsMerveillesJ1[0] = ui->label_merveille_J1_1;
+    emplacementsMerveillesJ1[1] = ui->label_merveille_J1_2;
+    emplacementsMerveillesJ1[2] = ui->label_merveille_J1_3;
+    emplacementsMerveillesJ1[3] = ui->label_merveille_J1_4;
+
+    emplacementsMerveillesJ2[0] = ui->label_merveille_J2_1;
+    emplacementsMerveillesJ2[1] = ui->label_merveille_J2_2;
+    emplacementsMerveillesJ2[2] = ui->label_merveille_J2_3;
+    emplacementsMerveillesJ2[3] = ui->label_merveille_J2_4;
+
 }
 
 MainWindow::~MainWindow()
@@ -125,9 +135,12 @@ void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     /*---------------------------------------------------------------*/
 
 
-    /*------------------ Choix des merveilles ----------------------*/
+    /*------------------- Choix des merveilles ----------------------*/
 
     setupMerveilleSelection();
+
+    /*-------------------------- Age 1 ------------------------------*/
+
 
 }
 
