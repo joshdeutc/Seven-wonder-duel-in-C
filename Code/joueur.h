@@ -96,7 +96,7 @@ public:
     void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
     void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
 
-    const Carte* recherche_carte() const;
+    const Carte* recherche_carte(string & nom) const;
     void afficherMerveillesNonConstruites() const;
     
 };
