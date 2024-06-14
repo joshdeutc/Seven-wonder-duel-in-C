@@ -30,16 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     emplacementsMerveillesJ2[2] = ui->label_merveille_J2_3;
     emplacementsMerveillesJ2[3] = ui->label_merveille_J2_4;
 
-    emplacementsMerveillesJ1[0] = ui->label_merveille_J1_1;
-    emplacementsMerveillesJ1[1] = ui->label_merveille_J1_2;
-    emplacementsMerveillesJ1[2] = ui->label_merveille_J1_3;
-    emplacementsMerveillesJ1[3] = ui->label_merveille_J1_4;
-
-    emplacementsMerveillesJ2[0] = ui->label_merveille_J2_1;
-    emplacementsMerveillesJ2[1] = ui->label_merveille_J2_2;
-    emplacementsMerveillesJ2[2] = ui->label_merveille_J2_3;
-    emplacementsMerveillesJ2[3] = ui->label_merveille_J2_4;
-
 }
 
 MainWindow::~MainWindow()
@@ -80,67 +70,70 @@ void MainWindow::on_action_propos_triggered()
 
 void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     ui->stackedWidget->setCurrentIndex(1);
-    Partie p(tj1, tj2, "Joueur1", "Joueur2");
+    Partie p;
 
     /*----------------- Initialisation des cartes -------------------*/
-    Batiment** tabAge1 = jeu->getTabCartesAge1();
-    BatimentWidget* tabWidgetAge1[jeu->getNbCartesAge1()];
-    for (int i = 0; i < jeu->getNbCartesAge1(); ++i) {
-        tabWidgetAge1[i] = new BatimentWidget(tabAge1[i]);
-        tabWidgetAge1[i]->getImageLabel();
-    }
+    // Batiment** tabAge1 = jeu->getTabCartesAge1();
+    // BatimentWidget* tabWidgetAge1[nbCartesAge1];
+    // for (int i = 0; i < nbCartesAge1; ++i) {
+    //     tabWidgetAge1[i] = new BatimentWidget(tabAge1[i]);
+    //     tabWidgetAge1[i]->getImageLabel();
+    // }
 
-    Batiment** tabAge2 = jeu->getTabCartesAge2();
-    BatimentWidget* tabWidgetAge2[jeu->getNbCartesAge2()];
-    for (int i = 0; i < jeu->getNbCartesAge2(); ++i) {
-        tabWidgetAge2[i] = new BatimentWidget(tabAge2[i]);
-    }
+    // Batiment** tabAge2 = jeu->getTabCartesAge2();
+    // BatimentWidget* tabWidgetAge2[nbCartesAge2];
+    // for (int i = 0; i < nbCartesAge2; ++i) {
+    //     tabWidgetAge2[i] = new BatimentWidget(tabAge2[i]);
+    // }
 
-    Batiment** tabAge3 = jeu->getTabCartesAge3();
-    BatimentWidget* tabWidgetAge3[jeu->getNbCartesAge3()];
-    for (int i = 0; i < jeu->getNbCartesAge3(); ++i) {
-        tabWidgetAge3[i] = new BatimentWidget(tabAge3[i]);
-    }
+    // Batiment** tabAge3 = jeu->getTabCartesAge3();
+    // BatimentWidget* tabWidgetAge3[nbCartesAge3];
+    // for (int i = 0; i < nbCartesAge3; ++i) {
+    //     tabWidgetAge3[i] = new BatimentWidget(tabAge3[i]);
+    // }
 
-    Guilde** tabGuilde = jeu->getTabCartesGuilde();
-    BatimentWidget* tabWidgetGuilde[jeu->getNbCartesGuilde()];
-    for (int i = 0; i < jeu->getNbCartesGuilde(); ++i) {
-        tabWidgetGuilde[i] = new BatimentWidget(tabGuilde[i]);
-    }
+    // Guilde** tabGuilde = jeu->getTabCartesGuilde();
+    // BatimentWidget* tabWidgetGuilde[nbCartesGuilde];
+    // for (int i = 0; i < nbCartesGuilde; ++i) {
+    //     tabWidgetGuilde[i] = new BatimentWidget(tabGuilde[i]);
+    // }
 
-    JetonProgres** tabJetonProgres = jeu->getTabJetonProgres();
-    JetonProgresWidget* tabWidgetJetonProgres[jeu->getNbJetonsProgres()];
-    for (int i = 0; i < jeu->getNbJetonsProgres(); ++i) {
-        tabWidgetJetonProgres[i] = new JetonProgresWidget(tabJetonProgres[i]);
-    }
+    // JetonProgres** tabJetonProgres = jeu->getTabJetonProgres();
+    // JetonProgresWidget* tabWidgetJetonProgres[nbJetonsProgres];
+    // for (int i = 0; i < nbJetonsProgres; ++i) {
+    //     tabWidgetJetonProgres[i] = new JetonProgresWidget(tabJetonProgres[i]);
+    // }
 
     Merveille** tabMerveille = jeu->getTabCartesMerveille();
-    MerveilleWidget* tabWidgetMerveille[jeu->getNbCartesMerveille()];
-    for (int i = 0; i < jeu->getNbCartesMerveille(); ++i) {
+    MerveilleWidget* tabWidgetMerveille[nbCartesMerveille];
+    for (int i = 0; i < nbCartesMerveille; ++i) {
         tabWidgetMerveille[i] = new MerveilleWidget(tabMerveille[i]);
+        tabWidgetMerveille[i]->setImage();
     }
+
+
+
+    // On place les merveilles dans le plateau des choix
+    // tabWidgetMerveille[0]->setEmplacementLabel(ui->label_choix_merveille1_1);
+    tabWidgetMerveille[1]->setEmplacementLabel(ui->label_choix_merveille1_2);
+    // tabWidgetMerveille[2]->setEmplacementLabel(ui->label_choix_merveille1_3);
+    // tabWidgetMerveille[3]->setEmplacementLabel(ui->label_choix_merveille1_4);
+    // tabWidgetMerveille[4]->setEmplacementLabel(ui->label_choix_merveille2_1);
+    // tabWidgetMerveille[5]->setEmplacementLabel(ui->label_choix_merveille2_2);
+    // tabWidgetMerveille[6]->setEmplacementLabel(ui->label_choix_merveille2_3);
+    // tabWidgetMerveille[7]->setEmplacementLabel(ui->label_choix_merveille2_4);
+
+    ui->stackedWidget_Plateau_Age->addWidget(tabWidgetMerveille[1]);
 
     ui->stackedWidget_Plateau_Age->setCurrentIndex(0);
 
-    // On place les merveilles dans le plateau des choix
-    tabWidgetMerveille[0]->setEmplacementLabel(ui->label_choix_merveille1_1);
-    tabWidgetMerveille[1]->setEmplacementLabel(ui->label_choix_merveille1_2);
-    tabWidgetMerveille[2]->setEmplacementLabel(ui->label_choix_merveille1_3);
-    tabWidgetMerveille[3]->setEmplacementLabel(ui->label_choix_merveille1_4);
-    tabWidgetMerveille[4]->setEmplacementLabel(ui->label_choix_merveille2_1);
-    tabWidgetMerveille[5]->setEmplacementLabel(ui->label_choix_merveille2_2);
-    tabWidgetMerveille[6]->setEmplacementLabel(ui->label_choix_merveille2_3);
-    tabWidgetMerveille[7]->setEmplacementLabel(ui->label_choix_merveille2_4);
 
     /*---------------------------------------------------------------*/
 
 
-    /*------------------- Choix des merveilles ----------------------*/
+    /*------------------ Choix des merveilles ----------------------*/
 
-    setupMerveilleSelection();
-
-    /*-------------------------- Age 1 ------------------------------*/
-
+    // setupMerveilleSelection();
 
 }
 
@@ -183,7 +176,7 @@ void MainWindow::handleMerveilleSelection(MerveilleWidget* merveille) {
     // Si le joueur courant a fini de choisir, passe à l'autre joueur
     if (nombreDeMerveilleAChosirPourJoueurCourant == 0) {
         joueurQuiChoisit = (joueurQuiChoisit == 1) ? 2 : 1;
-        nombreDeMerveilleAChosirPourJoueurCourant = (nbMerveillesRestantes == 4) ? 2 : 1; // On chosit 2 merveilles si le nombre de merveille restante vaut 7 ou 3
+        nombreDeMerveilleAChosirPourJoueurCourant = (nbMerveillesRestantes % 4 == 3) ? 2 : 1; // On chosit 2 merveilles si le nombre de merveille restante vaut 7 ou 3
     }
 
     // Passer à la page suivante du StackedWidget si toutes les merveilles de la page actuelle sont choisies
@@ -195,6 +188,4 @@ void MainWindow::handleMerveilleSelection(MerveilleWidget* merveille) {
     if (nbMerveillesRestantes == 0) {
         ui->stackedWidget_Plateau_Age->setCurrentIndex(2);
     }
-
-
 }

@@ -8,6 +8,8 @@ MerveilleWidget::MerveilleWidget(Merveille* m)
     ptrMerveille = m;
     imageLabel = new QLabel(this);
 
+    this->setFixedSize(100, 75);
+
     connect(this, &QPushButton::clicked, this, [this]() {
         emit selected(this);
     });
@@ -41,13 +43,11 @@ void MerveilleWidget::setImage(){
 
 void MerveilleWidget::setEmplacementLabel(QLabel* e) {
     emplacementLabel = e;
-    if (emplacementLabel && imageLabel) {
+    if (emplacementLabel) {
 
-        emplacementLabel->setFixedSize(imageLabel->size());
+        QPoint emplacementLabelPos = emplacementLabel->mapToParent(QPoint(0, 0));
 
-        QPoint imageLabelPos = imageLabel->mapToParent(QPoint(0, 0));
-
-        emplacementLabel->move(imageLabelPos);
+        this->move(emplacementLabelPos);
 
         emplacementLabel->raise(); // Pour que le widget implicite soit bien affiché au-dessus de l'emplacement
     }

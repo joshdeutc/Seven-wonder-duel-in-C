@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
@@ -24,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -2164,18 +2167,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_JvsJ</sender>
+   <sender>pushButton_Quitter</sender>
    <signal>clicked()</signal>
-   <receiver>stackedWidget</receiver>
-   <slot>update()</slot>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>659</x>
-     <y>380</y>
+     <y>582</y>
     </hint>
     <hint type="destinationlabel">
-     <x>635</x>
-     <y>366</y>
+     <x>639</x>
+     <y>359</y>
     </hint>
    </hints>
   </connection>

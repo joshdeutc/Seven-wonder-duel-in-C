@@ -71,6 +71,7 @@ public:
     int getPoints() const { return points; }
     void addPoints(int p) { points += p; }
     TypeJoueur getType()  {return type;}
+    void setType(TypeJoueur t) {type = t;}
 
     const int* getRessourcesProduites() const { return ressources_prod; }
     const int* getRessourcesNonProduites() const { return ressources_non_prod; }
