@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 enum TypeJoueur{
     humain,
     IA_aleatoire
@@ -49,7 +48,7 @@ public:
     void defausser();
     // Ajouter la carte a la cite du joueur, en renseignant si on veut la construire ou non
     void ajouterCarte(const Carte& c, bool construire = false);
-    void construireCarte(const Carte& c, const Joueur& other);
+    void construireCarte(const Carte& c, const Joueur& other, const int& prix);
     
     void supprimerCarte(const Carte& c);
     
@@ -94,7 +93,7 @@ public:
     int choixEntierIA(int *tab, int taille) const;
 
     //Methodes de choix
-    void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
+    void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES], TypeCarte typecarte);
     void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
 
     const Carte* recherche_carte(string & nom) const;

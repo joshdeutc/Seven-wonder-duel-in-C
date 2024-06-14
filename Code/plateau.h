@@ -11,24 +11,6 @@ using namespace std;
 
 #include "carte_bat_merv.h"
 
-//class Plateau
-//{
-//private:
-//    //
-//public:
-//    Plateau(/* args */);
-//    ~Plateau();
-//    friend class Jeu;
-//};
-//
-//Plateau::Plateau(/* args */)
-//{
-//}
-//
-//Plateau::~Plateau()
-//{
-//}
-
 class PlateauAge
 {
 private:
@@ -63,6 +45,7 @@ public:
     void destruction_carte_plateau_age2(int &choix);
     void destruction_carte_plateau_age3(int &choix);
     void choix_correct(int &choix);
+    bool verif_plus_de_cartes();
 };
 
 
@@ -112,5 +95,6 @@ public:
     PlateauJetonProgres();
     ~PlateauJetonProgres();
 };
+
 
 #endif /* PLATEAU_H */

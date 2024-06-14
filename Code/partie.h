@@ -49,6 +49,9 @@ public:
     bool construire_merveille();
     bool defausser();
     
+    void pioche_defausse();
+    void defausse_adversaire(TypeCarte type);
+
     void choix_jeton(Joueur &j);
     Joueur* autre_joueur();
 
