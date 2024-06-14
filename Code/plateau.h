@@ -87,13 +87,23 @@ public:
     void setJetonMilit1_j2(bool b) { jetonMilit1_j2 = b; }
     void setJetonMilit2_j2(bool b) { jetonMilit2_j2 = b; }
 };
-class PlateauJetonProgres{
+
+class PlateauJetonProgres {
 private:
     JetonProgres** jetonprogres = nullptr;
+    JetonProgres** jetonprogres_horsjeu = nullptr; // Servira à la pioche d'un jeton hors jeu
+    int taille = 0; // Attribut pour stocker la taille actuelle du plateau
+    int taille_horsjeu = 3; // Taille du tableau des jetons hors jeu
 public:
     JetonProgres **getJetonProgres() const { return jetonprogres; }
+    JetonProgres **getJetonProgresHorsJeu() const { return jetonprogres_horsjeu; }
+    int getTaille() const { return taille; } // Méthode pour obtenir la taille actuelle
+    int getTailleHorsJeu() const { return taille_horsjeu; } // Méthode pour obtenir la taille actuelle
     PlateauJetonProgres();
     ~PlateauJetonProgres();
+    void supprimerJeton(int position); // Méthode pour supprimer un jeton
+    void afficherJetons() const;
+    void afficherJetonsHorsJeu() const;
 };
 
 

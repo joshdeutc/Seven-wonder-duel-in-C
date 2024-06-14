@@ -40,7 +40,7 @@ bool Joueur::doubleSymbole(SymboleScientifique s){
         if (cartes[i]->getType() == batimentScientifique)
             if (cartes[i]->getSymbole()== s)
                 nb++;
-    return nb>1;
+    return nb>=1;
 }
 
 //Cette méthode se charge d'effectuer les effets immédiats d'un jeton progrès.
@@ -122,6 +122,14 @@ void Joueur::construireCarte(const Carte& c, const Joueur& other, const int& pri
     //Faire toutes les actions spécifiques aux différentes spécificités des cartes:
     
     if(prix>solde) throw WondersException("Erreur : tentative de construire une carte dont le prix est superieur au solde");
+    
+    // Condition de construction gratuite par chainage
+    if(possedeChainage(c.getChainage1())||possedeChainage(c.getChainage2())){
+        for(int i=0; i<nb_jetons; i++){
+            if(jetons[i]->getCondChainage())
+                solde+=4;
+        }
+    }
     
     solde-=prix;
     
@@ -400,7 +408,7 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
         if(type==humain){
             count = 0;
             while(count<n){
-                cout << "Choisissez une ressources produite par votre cite pour ce tour parmis les suivantes : \n";
+                cout << "Choisissez une ressources produite par votre cite pour ce tour parmis les suivantes : ";
                 cout << " 1. Bois   2. Argile    3. Pierre \n " ;
                 cout << " Choix : " << endl;
                 cin>> choix ;
