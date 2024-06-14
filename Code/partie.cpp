@@ -349,10 +349,10 @@ void Partie::defausse_adversaire(TypeCarte type){
 
 void Partie::selection_action(){
     // initialisationd des variables locales
-    int choix;
+    int choix,choix_max;
     bool done = false;
     string nom_merveille;
-    
+
     cout << endl << endl;
     cout << "#################################################################\n";
     cout << "                   AFFICHAGE DE L'ETAT DU JEU \n";
