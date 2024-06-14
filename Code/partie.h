@@ -59,12 +59,12 @@ public:
     void afficherSoldeMilitaire();
     Joueur* getVainqueur() const { return vainqueur; }
     int get_tour() const { return tour; }
-
     void initJoueurs();
     void jouer();
-};
 
-    void changement_joueur();
+    void setPlayerTypes(TypeJoueur tj1, TypeJoueur tj2) {
+        joueurs[0]->setType(tj1);
+        joueurs[1]->setType(tj2);}
 };
 
 void pressAnyKeyToContinue();

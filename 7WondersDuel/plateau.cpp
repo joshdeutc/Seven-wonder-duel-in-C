@@ -2,7 +2,6 @@
 #include "wondersException.h"
 // *************** PARTIE CONSTRUCTEUR AGE ****************** //
 
-
 PlateauAge::PlateauAge(int Age) // Il faut initialiser les attributs face_visible, face_cache etc des Carte
 //s en fonction de l'age
 {
@@ -428,7 +427,6 @@ bool PlateauAge::deviens_accessible_age1(int &choix){
         return false;
     }
     if(getCartes()[choix] == etage[0]){
-        cout<<"test\n";
         pere1=choix+etage.size();
         if(getCartes()[choix+1]==nullptr){
             getCartes()[pere1]->set_accessible(true);
@@ -621,24 +619,38 @@ bool PlateauAge::deviens_accessible_age3(int &choix){
 
 
 void PlateauAge::accessibilite(){
+    nb_possibilites = 0;
+    cout << endl <<  "Les cartes accessibles sont: " << endl << endl;
     for(int i=0;i<20;i++){
         if(cartes[i]){
             if(getCartes()[i]->get_accessible() == true){
                 cout<<"carte numero : "<<i<<"\n"<<endl;
                 getCartes()[i]->afficher(cout);
-                tab_possibilite[i]=i+1;
+                tab_possibilite[nb_possibilites]=i;
                 cout<<"\n";
+                nb_possibilites++;
             }
-        }else tab_possibilite[i]=0;
+        }
     }
+    for (int i = nb_possibilites; i<20; i++) tab_possibilite[i] = -1;
+    cout << endl;
+}
+
+bool in(int* tab, int taille, int elt){
+    for (int i=0;i<taille;i++){
+        if (tab[i]==elt) return true;
+    }
+    return false;
 }
 
 void PlateauAge::choix_correct(int &choix) {
-    while(!tab_possibilite[choix]) {
-        cout<<"choix incorrect, refaire le choix svp :\n";
+    while(! in(tab_possibilite,nb_possibilites,choix)) {
+        cout<<"Choix non correct. \n";
+        cout << "Veuillez entrer un numero parmis ceux des batiments accessibles : ";
         cin>>choix;
     }
 }
+
 void PlateauAge::destruction_carte_plateau_age1(int &choix) {
     // on mets a jour le tableau des cartes
     this->deviens_accessible_age1(choix);

@@ -11,11 +11,17 @@ CONFIG += c++17
 SOURCES += \
     a_propos.cpp \
     batimentwidget.cpp \
+    carte_bat_merv.cpp \
     jetonprogreswidget.cpp \
+    jeu.cpp \
     joueur.cpp \
     main.cpp \
     mainwindow.cpp \
-    merveillewidget.cpp
+    merveillewidget.cpp \
+    partie.cpp \
+    plateau.cpp \
+    utils.cpp \
+    wondersException.cpp
 
 HEADERS += \
     a_propos.h \
@@ -25,7 +31,11 @@ HEADERS += \
     jeu.h \
     joueur.h \
     mainwindow.h \
-    merveillewidget.h
+    merveillewidget.h \
+    partie.h \
+    plateau.h \
+    utils.h \
+    wondersException.h
 
 FORMS += \
     a_propos.ui \

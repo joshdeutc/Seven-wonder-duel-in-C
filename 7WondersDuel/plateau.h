@@ -42,11 +42,16 @@ private:
     vector<Carte*> etage6;
     vector<Carte*> etage7;
     int tab_possibilite[20];
+    int nb_possibilites = 0;
 
 public:
     PlateauAge(int Age);
     ~PlateauAge();
+    
     Carte**getCartes() const { return cartes; }
+    int* getTabPossibilites() { return tab_possibilite; }
+    int getNbPossibilites() { return nb_possibilites; }
+    
     void accessibilite();
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);

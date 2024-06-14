@@ -42,6 +42,7 @@ ostream& operator<<(ostream& f, TypeCarte type) {
         case batimentCommerce: f << "Bâtiment Commercial"; break;
         case batimentMilitaire: f << "Bâtiment Militaire"; break;
         case guilde: f << "Guilde"; break;
+        case jetonProgres: f << "Jeton de Progrès"; break;
         default: f << "unknown"; break;
     }
     return f;

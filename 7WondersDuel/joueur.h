@@ -5,17 +5,19 @@
 #include "carte_bat_merv.h"
 #include "wondersException.h"
 #include <random>
+#define NB_IA 1
 
 using namespace std;
-
-#define NB_SYMB 7
-#define NB_JETONS 10
 
 
 enum TypeJoueur{
     humain,
     IA_aleatoire
 };
+
+ostream& operator<<(ostream& f, TypeJoueur j);
+void afficher_types_IA();
+
 
 class Joueur{
 private:
@@ -69,13 +71,18 @@ public:
     int getPoints() const { return points; }
     void addPoints(int p) { points += p; }
     TypeJoueur getType()  {return type;}
+    void setType(TypeJoueur t) {type = t;}
 
     const int* getRessourcesProduites() const { return ressources_prod; }
     const int* getRessourcesNonProduites() const { return ressources_non_prod; }
     const Carte** getCartes() const { return cartes; }
     JetonProgres* const* getJetons() const { return jetons; }
-
+    const Merveille* const* getMerveillesNonConstruites() const {
+        return merveillesNonConstruites;
+    }
     int getNbMerveillesConstruites() const {return nb_merveilles_construites;}
+    int getNbMerveillesNonConstruites() const {return nb_merveilles_non_construites;}
+
 
     bool operator==(const Joueur& other) const {
         return id == other.id;
@@ -90,8 +97,9 @@ public:
     void choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES]);
     void choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]);
 
-    const Carte* recherche_carte(string s) const;
+    const Carte* recherche_carte(string & nom) const;
     void afficherMerveillesNonConstruites() const;
+    
 };
 
 

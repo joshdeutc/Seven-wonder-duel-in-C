@@ -5,6 +5,8 @@
 //Il a un tableau spécifique pour les merveilles non construites afin de différencier les merveilles
 //construites des merveilles seulement possédées mais non construites.
 
+
+
 Joueur::Joueur(TypeJoueur type_joueur, string identifiant){
     type = type_joueur;
     id = identifiant;
@@ -270,7 +272,7 @@ unsigned int Joueur::nombreCartesDeCategorie(TypeCarte typeRecherche) const {
     return nombre;
 }
 
-int Joueur::prixFinal(const Carte& c, const Joueur& other, int ressources_gratuites_jeton[NB_RESSOURCES], 
+int Joueur::prixFinal(const Carte& c, const Joueur& other, int ressources_gratuites_jeton[NB_RESSOURCES],
                       int ressources_gratuites_cartes[NB_RESSOURCES]) const{
     int prix = c.getCoutPiece();
     
@@ -426,22 +428,36 @@ void Joueur::choixRessourcesGratuitesCartes(int tab[NB_RESSOURCES]){
     }
 }
 
-const Carte* Joueur::recherche_carte(string s) const{
+const Carte* Joueur::recherche_carte(string &nom) const{
     const Carte *c = nullptr;
     int i=0;
-    while(i<nb_merveilles_non_construites && c==nullptr) {
-        if(merveillesNonConstruites[i]->getNom()==s) c=merveillesNonConstruites[i];
-        i++;
+    while(c==nullptr){
+        cout<<"entrer le nom de la merveille que vous cherchez : "<<endl;
+        while(i<nb_merveilles_non_construites && c==nullptr) {
+            if(merveillesNonConstruites[i]->getNom()== nom ) c=merveillesNonConstruites[i];
+            i++;
+        }
+        i = 0;
+        while(i<nb_cartes && c ==nullptr){
+            if(cartes[i]->getNom()==nom ) c = cartes[i];
+            i++;
+        }
     }
+    cout<<"La carte "<<c->getNom()<<" a ete trouvee."<<endl;
     return c;
 }
 
-void Joueur::afficherMerveillesNonConstruites() const {
-    for(int i = 0; i < nb_merveilles_non_construites; i++) {
-        if(merveillesNonConstruites[i] != nullptr) {
-            std::cout << "Merveille non construite " << (i+1) << ":\n";
-            merveillesNonConstruites[i]->afficher();
-            std::cout << "\n";
-        }
+ostream& operator<<(ostream& f, TypeJoueur j) {
+    switch (j) {
+        case humain: f << "Joueur"; break;
+        case IA_aleatoire: f << "IA aleatoire"; break;
+    }
+    return f;
+}
+
+void afficher_types_IA() {
+    std::cout << "Liste des types d'IA :" << std::endl;
+    for (int i = 1; i < NB_IA + 1 ; ++i) {
+        cout << i << ". " << static_cast<TypeJoueur>(i) << endl;
     }
 }
