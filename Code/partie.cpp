@@ -38,12 +38,7 @@ Partie::~Partie() {
 }
 
 void Partie::tour_suivant(){
-<<<<<<< HEAD
-    if (tour==1) tour = 0;
-    else tour = 1;
-=======
     tour = (tour == 0) ? 1 : 0;
->>>>>>> f1c0c1b372228ab13618570849a60106aecb957e
 }
 
 bool Partie::fin_age(){
@@ -747,25 +742,7 @@ void Partie::jouer(){
 }
 
 void pressAnyKeyToContinue() {
-    /*
-    cout << endl ;
-    std::cout << "Appuyez n'importe où pour continuer...";
-    
-    // Désactiver l'affichage de la saisie
-    termios oldt, newt;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    
-    // Lire un caractère
-    char ch;
-    std::cin >> std::noskipws >> ch;
-    
-    // Réactiver l'affichage de la saisie
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    
-    cout<<endl << endl;
-     */
-    return;
+    string temp;
+    cout << "Press Enter to continue...";
+    cin >> temp;
 }
