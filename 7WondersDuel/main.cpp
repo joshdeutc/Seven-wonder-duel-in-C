@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    Jeu* jeu = Jeu::getInstance();
+    Jeu::getInstance();
 
     w.show();
     return a.exec();

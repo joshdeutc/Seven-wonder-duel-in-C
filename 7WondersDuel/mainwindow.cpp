@@ -70,60 +70,60 @@ void MainWindow::on_action_propos_triggered()
 
 void MainWindow::lancerPartie(TypeJoueur tj1, TypeJoueur tj2){
     ui->stackedWidget->setCurrentIndex(1);
-    Partie p;
+    // Partie p;
 
-    /*----------------- Initialisation des cartes -------------------*/
-    // Batiment** tabAge1 = jeu->getTabCartesAge1();
-    // BatimentWidget* tabWidgetAge1[nbCartesAge1];
-    // for (int i = 0; i < nbCartesAge1; ++i) {
-    //     tabWidgetAge1[i] = new BatimentWidget(tabAge1[i]);
-    //     tabWidgetAge1[i]->getImageLabel();
+    // /*----------------- Initialisation des cartes -------------------*/
+    // // Batiment** tabAge1 = jeu->getTabCartesAge1();
+    // // BatimentWidget* tabWidgetAge1[nbCartesAge1];
+    // // for (int i = 0; i < nbCartesAge1; ++i) {
+    // //     tabWidgetAge1[i] = new BatimentWidget(tabAge1[i]);
+    // //     tabWidgetAge1[i]->getImageLabel();
+    // // }
+
+    // // Batiment** tabAge2 = jeu->getTabCartesAge2();
+    // // BatimentWidget* tabWidgetAge2[nbCartesAge2];
+    // // for (int i = 0; i < nbCartesAge2; ++i) {
+    // //     tabWidgetAge2[i] = new BatimentWidget(tabAge2[i]);
+    // // }
+
+    // // Batiment** tabAge3 = jeu->getTabCartesAge3();
+    // // BatimentWidget* tabWidgetAge3[nbCartesAge3];
+    // // for (int i = 0; i < nbCartesAge3; ++i) {
+    // //     tabWidgetAge3[i] = new BatimentWidget(tabAge3[i]);
+    // // }
+
+    // // Guilde** tabGuilde = jeu->getTabCartesGuilde();
+    // // BatimentWidget* tabWidgetGuilde[nbCartesGuilde];
+    // // for (int i = 0; i < nbCartesGuilde; ++i) {
+    // //     tabWidgetGuilde[i] = new BatimentWidget(tabGuilde[i]);
+    // // }
+
+    // // JetonProgres** tabJetonProgres = jeu->getTabJetonProgres();
+    // // JetonProgresWidget* tabWidgetJetonProgres[nbJetonsProgres];
+    // // for (int i = 0; i < nbJetonsProgres; ++i) {
+    // //     tabWidgetJetonProgres[i] = new JetonProgresWidget(tabJetonProgres[i]);
+    // // }
+
+    // Merveille** tabMerveille = jeu->getTabCartesMerveille();
+    // MerveilleWidget* tabWidgetMerveille[nbCartesMerveille];
+    // for (int i = 0; i < nbCartesMerveille; ++i) {
+    //     tabWidgetMerveille[i] = new MerveilleWidget(tabMerveille[i]);
+    //     tabWidgetMerveille[i]->setImage();
     // }
 
-    // Batiment** tabAge2 = jeu->getTabCartesAge2();
-    // BatimentWidget* tabWidgetAge2[nbCartesAge2];
-    // for (int i = 0; i < nbCartesAge2; ++i) {
-    //     tabWidgetAge2[i] = new BatimentWidget(tabAge2[i]);
-    // }
-
-    // Batiment** tabAge3 = jeu->getTabCartesAge3();
-    // BatimentWidget* tabWidgetAge3[nbCartesAge3];
-    // for (int i = 0; i < nbCartesAge3; ++i) {
-    //     tabWidgetAge3[i] = new BatimentWidget(tabAge3[i]);
-    // }
-
-    // Guilde** tabGuilde = jeu->getTabCartesGuilde();
-    // BatimentWidget* tabWidgetGuilde[nbCartesGuilde];
-    // for (int i = 0; i < nbCartesGuilde; ++i) {
-    //     tabWidgetGuilde[i] = new BatimentWidget(tabGuilde[i]);
-    // }
-
-    // JetonProgres** tabJetonProgres = jeu->getTabJetonProgres();
-    // JetonProgresWidget* tabWidgetJetonProgres[nbJetonsProgres];
-    // for (int i = 0; i < nbJetonsProgres; ++i) {
-    //     tabWidgetJetonProgres[i] = new JetonProgresWidget(tabJetonProgres[i]);
-    // }
-
-    Merveille** tabMerveille = jeu->getTabCartesMerveille();
-    MerveilleWidget* tabWidgetMerveille[nbCartesMerveille];
-    for (int i = 0; i < nbCartesMerveille; ++i) {
-        tabWidgetMerveille[i] = new MerveilleWidget(tabMerveille[i]);
-        tabWidgetMerveille[i]->setImage();
-    }
 
 
+    // // On place les merveilles dans le plateau des choix
+    // // tabWidgetMerveille[0]->setEmplacementLabel(ui->label_choix_merveille1_1);
+    // tabWidgetMerveille[1]->setEmplacementLabel(ui->label_choix_merveille1_2);
+    // // tabWidgetMerveille[2]->setEmplacementLabel(ui->label_choix_merveille1_3);
+    // // tabWidgetMerveille[3]->setEmplacementLabel(ui->label_choix_merveille1_4);
+    // // tabWidgetMerveille[4]->setEmplacementLabel(ui->label_choix_merveille2_1);
+    // // tabWidgetMerveille[5]->setEmplacementLabel(ui->label_choix_merveille2_2);
+    // // tabWidgetMerveille[6]->setEmplacementLabel(ui->label_choix_merveille2_3);
+    // // tabWidgetMerveille[7]->setEmplacementLabel(ui->label_choix_merveille2_4);
 
-    // On place les merveilles dans le plateau des choix
-    // tabWidgetMerveille[0]->setEmplacementLabel(ui->label_choix_merveille1_1);
-    tabWidgetMerveille[1]->setEmplacementLabel(ui->label_choix_merveille1_2);
-    // tabWidgetMerveille[2]->setEmplacementLabel(ui->label_choix_merveille1_3);
-    // tabWidgetMerveille[3]->setEmplacementLabel(ui->label_choix_merveille1_4);
-    // tabWidgetMerveille[4]->setEmplacementLabel(ui->label_choix_merveille2_1);
-    // tabWidgetMerveille[5]->setEmplacementLabel(ui->label_choix_merveille2_2);
-    // tabWidgetMerveille[6]->setEmplacementLabel(ui->label_choix_merveille2_3);
-    // tabWidgetMerveille[7]->setEmplacementLabel(ui->label_choix_merveille2_4);
-
-    ui->stackedWidget_Plateau_Age->addWidget(tabWidgetMerveille[1]);
+    // ui->stackedWidget_Plateau_Age->addWidget(tabWidgetMerveille[1]);
 
     ui->stackedWidget_Plateau_Age->setCurrentIndex(0);
 
