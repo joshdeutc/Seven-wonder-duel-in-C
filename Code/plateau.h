@@ -29,11 +29,11 @@ private:
 public:
     PlateauAge(int Age);
     ~PlateauAge();
-    
+
     Carte**getCartes() const { return cartes; }
     int* getTabPossibilites() { return tab_possibilite; }
     int getNbPossibilites() { return nb_possibilites; }
-    
+
     void accessibilite();
     bool deviens_accessible_age1(int &choix);
     bool deviens_accessible_age2(int &choix);
