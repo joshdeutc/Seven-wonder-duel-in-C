@@ -518,7 +518,7 @@ bool Partie::defausser(){
 
 // Renvoie vrai si l'utilisateur a bien choisi de construire la carte, faux s'il veut revenir au menu
 bool Partie::construire_batiment(){
-    int bat, prix, bcl;
+    int bat, prix, bcl, depenses_ressources;
     string confirmation;
 
     cout << "CONSTRUIRE BATIMENT" << endl;
@@ -591,6 +591,16 @@ bool Partie::construire_batiment(){
     if(c->getDefausseAdversaire()){
         defausse_adversaire(c->getTypeCarteAffectee());
     }
+    
+    // Changement du solde de l'adversaire s'il possede le jeton Economie
+    for(int i=0; i<autre_joueur()->getNbJetons();i++){
+        if(autre_joueur()->getJetons()[i]->getRecupDepensesAdversaire()){
+            depenses_ressources = prix - c->getCoutPiece();
+            if(depenses_ressources>0){
+                autre_joueur()->setSolde(autre_joueur()->getSolde()+depenses_ressources);
+            }
+        }
+    }
 
     if(age==1){
         //mettre a jour le plateau
@@ -608,7 +618,7 @@ bool Partie::construire_batiment(){
 }
 
 bool Partie::construire_merveille(){
-    int bat, prix;
+    int bat, prix, depenses_ressources;
     const Merveille* merv = nullptr;
     string nom_merv;
     string confirmation;
@@ -708,6 +718,16 @@ bool Partie::construire_merveille(){
     }
     if(merv->getTirage()){
         pioche_jeton_hors_jeu(*joueurs[tour]);
+    }
+    
+    // Changement du solde de l'adversaire s'il possede le jeton Economie
+    for(int i=0; i<autre_joueur()->getNbJetons();i++){
+        if(autre_joueur()->getJetons()[i]->getRecupDepensesAdversaire()){
+            depenses_ressources = prix - merv->getCoutPiece();
+            if(depenses_ressources>0){
+                autre_joueur()->setSolde(autre_joueur()->getSolde()+depenses_ressources);
+            }
+        }
     }
 
     if(age==1){
