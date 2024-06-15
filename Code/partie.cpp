@@ -1,14 +1,15 @@
 #include "partie.h"
 
 void Partie::afficherSoldeMilitaire() {
-    std::string axe = "---------------------"; // 21 caractères, représentant -9 à 9
-    std::string labels = "-9             0              9"; // Les étiquettes pour l'axe
+cout<<" \n\n*********** PLATEAU MILITAIRE ***********"<<endl;
+    std::string axe(20, '-'); // 19 caractères, représentant -9 à 9
+    std::string labels = "-9    -5     0     5     9"; // Les étiquettes pour l'axe
 
-    int position = solde_militaire + 10; // Déplace le solde de -9 à 9 pour être entre 1 et 21
+    int position = solde_militaire + 10; // Déplace le solde de -9 à 9 pour être entre 0 et 19{
 
     // Vérifiez que la position est dans les limites de l'axe
     if (position >= 0 && position < axe.length()) {
-        axe[position] = '|'; // Marque la position actuelle du solde militaire
+        axe[position] = 'X'; // Marque la position actuelle du solde militaire avec un 'X'
     }
 
     std::cout << labels << std::endl;
@@ -493,8 +494,6 @@ bool Partie::construire_batiment(){
         free_res_cartes[i] = 0;
     }
 
-    cout << " CHOIX RESSOURCES " << endl;
-
     joueurs[tour]->choixRessourcesGratuitesJeton(free_res_jetons,platAge->getCartes()[bat]->getType());
     joueurs[tour]->choixRessourcesGratuitesCartes(free_res_cartes);
 
@@ -525,7 +524,7 @@ bool Partie::construire_batiment(){
     // Construction de la carte
     joueurs[tour]->construireCarte(*c,*autre_joueur(),prix);
 
-    cout<<"LA CARTE"<<platAge->getCartes()[bat]->getNom()<<" A ETE CONSTRUITE"<<endl;
+    cout<<"LA CARTE "<<platAge->getCartes()[bat]->getNom()<<" A ETE CONSTRUITE"<<endl;
     // mis a jour du plateau militaire si besoin
     if(c->getBoucliers()!=0){
         bcl = c->getBoucliers();
@@ -602,7 +601,6 @@ bool Partie::construire_merveille(){
             }while(merv==nullptr);
             break;
         default :
-            cout<<"test pour savoir si il trouve la carte"<<endl;
             nom_merv = joueurs[tour]->getMerveillesNonConstruites()[joueurs[tour]->choixEntierIA(nullptr,joueurs[tour]->getNbMerveillesNonConstruites())]->getNom();
             merv = dynamic_cast<const Merveille*>(joueurs[tour]->recherche_carte(nom_merv));
     }
@@ -930,28 +928,33 @@ void Partie::pioche_defausse() {
     bool ok = false;
     int tab_verif[defausses.size()];
     int nb_verif=0;
-    for(int i=0;i<defausses.size();i++){
-        cout<<"carte numero : "<<i<<"\n"<<endl;
-        defausses[i]->afficher();
-        tab_verif[nb_verif]=i;
-        cout<<"\n";
-        nb_verif++;
-    }
-    for(int i=nb_verif;i<defausses.size();i++) tab_verif[i]=-1;
-    if(joueurs[tour]->getType()==humain){
-        while(!ok) {
-            cout << "choisissez une carte a recuperer" << endl;
-            int choix;
-            cin >> choix;
-            if (choix >= 0 && choix < nb_verif) {
-                ok = true;
-                joueurs[tour]->construireCarte(*defausses[choix], *autre_joueur(), 0);
-                defausses.erase(defausses.begin() + choix);
-            }
+    if(defausses.size()==0){
+        cout<<"Il n'y a pas de carte a recuperer"<<endl;
+        return;
+    }else {
+        for (int i = 0; i < defausses.size(); i++) {
+            cout << "carte numero : " << i << "\n" << endl;
+            defausses[i]->afficher();
+            tab_verif[nb_verif] = i;
+            cout << "\n";
+            nb_verif++;
         }
-    } else{
-        int choix = joueurs[tour]->choixEntierIA(tab_verif,nb_verif+1);
-        joueurs[tour]->construireCarte(*defausses[choix], *autre_joueur(), 0);
-        defausses.erase(defausses.begin() + choix);
+        for (int i = nb_verif; i < defausses.size(); i++) tab_verif[i] = -1;
+        if (joueurs[tour]->getType() == humain) {
+            while (!ok) {
+                cout << "choisissez une carte a recuperer" << endl;
+                int choix;
+                cin >> choix;
+                if (choix >= 0 && choix < nb_verif) {
+                    ok = true;
+                    joueurs[tour]->construireCarte(*defausses[choix], *autre_joueur(), 0);
+                    defausses.erase(defausses.begin() + choix);
+                }
+            }
+        } else {
+            int choix = joueurs[tour]->choixEntierIA(tab_verif, nb_verif + 1);
+            joueurs[tour]->construireCarte(*defausses[choix], *autre_joueur(), 0);
+            defausses.erase(defausses.begin() + choix);
+        }
     }
 }
