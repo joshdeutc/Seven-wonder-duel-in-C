@@ -26,7 +26,7 @@ Joueur::~Joueur(){
 int Joueur::nbSymboles() const{
     int nb=0;
     for(int i=1; i<(NB_SYMB) ; i++){
-        if (symboles[i]>1) nb++;
+        if (symboles[i]>=1) nb++;
     }
     return nb;
 }
