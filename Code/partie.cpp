@@ -762,7 +762,7 @@ void Partie::choix_merveilles(){
         case humain:
             cout << "Choix (entrer numero de la carte voulue) : ";
             cin >> choix;
-            while(choix<1 || choix>3){
+            while(choix<1||choix>3){
                 cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
                 cin>> choix;
             }
@@ -787,7 +787,7 @@ void Partie::choix_merveilles(){
         case humain:
             cout << "Choix (entrer numero de la carte voulue) : ";
             cin >> choix;
-            while(choix<1 || choix>2){
+            while(choix<1||choix>2){
                 cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
                 cin>> choix;
             }
@@ -823,7 +823,7 @@ void Partie::choix_merveilles(){
         case humain:
             cout << "Choix (entrer numero de la carte voulue) : ";
             cin >> choix;
-            while(choix<1 || choix>4){
+            while(choix<1||choix>4){
                 cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
                 cin>> choix;
             }
@@ -851,7 +851,7 @@ void Partie::choix_merveilles(){
         case humain:
             cout << "Choix (entrer numero de la carte voulue) : ";
             cin >> choix;
-            while(choix<1 || choix>3){
+            while(choix<1||choix>3){
                 cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
                 cin>> choix;
             }
@@ -879,7 +879,7 @@ void Partie::choix_merveilles(){
         case humain:
             cout << "Choix (entrer numero de la carte voulue) : ";
             cin >> choix;
-            while(choix<1 || choix>2){
+            while(choix<1||choix>2){
                 cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
                 cin>> choix;
             }
@@ -939,13 +939,13 @@ void Partie::initJoueurs(){
             afficher_types_IA();
             cout << "Choisissez le type d'IA 1 souhaité: ";
             cin >> IA;
-        }while(IA<0 || IA>NB_IA);
+        }while(IA<0||IA>NB_IA);
         joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 1");
         do{
             afficher_types_IA();
             cout << "Choisissez le type d'IA 2 souhaité: ";
             cin >> IA;
-        }while(IA<0 || IA>NB_IA);
+        }while(IA<0||IA>NB_IA);
         joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
     }
 
