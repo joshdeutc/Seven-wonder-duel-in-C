@@ -381,9 +381,9 @@ void Joueur::choixRessourcesGratuitesJeton(int tab[NB_RESSOURCES], TypeCarte typ
                         cout << k+1 << ": "<< static_cast<Ressource>(k) << "      "  << endl;
                     cout << "Choisir une ressource gratuite : " ;
                     cin >> choix ;
-                    if(choix>NB_RESSOURCES || choix<1) cout << "Choix non valide " << endl ;
+                    if(choix>NB_RESSOURCES||choix<1) cout << "Choix non valide " << endl ;
                     else {
-                        tab[choix]++ ;
+                        tab[choix-1]++ ;
                         count++ ;
                     }
                 }

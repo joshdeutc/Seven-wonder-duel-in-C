@@ -321,6 +321,10 @@ void Partie::pioche_jeton_hors_jeu(Joueur &j) {
     switch (j.getType()) {
         case TypeJoueur::humain:
             do{
+                cout << endl << endl << " Vous pouvez choisir un jeton progres parmi ceux de la boite ! " << endl;
+                pressAnyKeyToContinue();
+                cout << endl << "Voici les jetons qui sont en jeu : " << endl << endl;
+                platProgres->afficherJetonsHorsJeu();
                 cout<<"Choisissez un jeton (par son numero) : "<<endl;
                 cin>>choix;
             }while(choix<1||choix>platProgres->getTailleHorsJeu());
@@ -569,7 +573,7 @@ bool Partie::construire_batiment(){
     if(c->getBoucliers()!=0){
         bcl = c->getBoucliers();
         for(int i=0;i<joueurs[tour]->getNbJetons();i++){
-            if (joueurs[tour]->getJetons()[i]->getBoucliersSupp()>0) c+= joueurs[tour]->getJetons()[i]->getBoucliersSupp();
+            if (joueurs[tour]->getJetons()[i]->getBoucliersSupp()>0) bcl+= joueurs[tour]->getJetons()[i]->getBoucliersSupp();
         }
         change_solde_militaire(true,c->getBoucliers());
     }
@@ -960,14 +964,14 @@ void Partie::jouer(){
 
     tour = 0;
     
-    pressAnyKeyToContinue();
-    
     cout << endl << endl;
     cout << "Voici les jetons mis en jeu: " << endl << endl;
     
+    pressAnyKeyToContinue();
+    
     platProgres->afficherJetons();
     
-    cout << endl;
+    pressAnyKeyToContinue();
 
     // boucle de jeu
     while(vainqueur==nullptr && match_nul==false) {
@@ -979,14 +983,22 @@ void Partie::jouer(){
 }
 
 void pressAnyKeyToContinue() {
-    cout << "Appuyez sur une touche pour continuer...";
-    cin.get();
+    string s;
+    cout << endl;
+    cout << "Entrez 'c' pour continuer... ";
+    cin >> s;
+    cout << " " << endl;
 }
 
 void Partie::pioche_defausse() {
     bool ok = false;
     int tab_verif[defausses.size()];
     int nb_verif=0;
+    
+    cout << endl << "Le joueur a la possibilite de construire gratuitement une carte de la defausse. " << endl << endl;
+    
+    pressAnyKeyToContinue();
+    
     if(defausses.size()==0){
         cout<<"Il n'y a pas de carte a recuperer"<<endl;
         return;
@@ -1001,7 +1013,7 @@ void Partie::pioche_defausse() {
         for (int i = nb_verif; i < defausses.size(); i++) tab_verif[i] = -1;
         if (joueurs[tour]->getType() == humain) {
             while (!ok) {
-                cout << "choisissez une carte a recuperer" << endl;
+                cout << "Choisissez le numero d'une carte a recuperer : ";
                 int choix;
                 cin >> choix;
                 if (choix >= 0 && choix < nb_verif) {
