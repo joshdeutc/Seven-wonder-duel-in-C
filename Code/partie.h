@@ -66,9 +66,6 @@ public:
     void changement_joueur();
 };
 
-
-
-
 void pressAnyKeyToContinue();
 
 

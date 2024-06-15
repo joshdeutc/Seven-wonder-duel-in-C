@@ -42,20 +42,33 @@ void Partie::tour_suivant(){
     else tour = 1;
 }
 
+// Dans la methode jouer(), tour_suivant va etre appele apres cette methode.
+// Donc pour garder le meme joueur on fait tour_suivant() ici, pour changer on ne fait rien
 void Partie::changement_joueur() {
     int choix=2;
-    if( joueurs[tour]->getType()==humain ){
+    Joueur* j_choix;
+    
+    // Cas 1 : Un des joueurs est mene militairement
+    if(solde_militaire>0) j_choix = joueurs[1]; // le joueur 1 est mene militairement si solde positif
+    else if(solde_militaire<0) j_choix = joueurs[0]; // le joueur 0 est mene militairement si solde negatif
+    
+    // Cas 2 : Aucun des joueurs est mene militairement
+    else j_choix = joueurs[tour];
+    
+    
+    if( j_choix->getType()==humain ){
         while(choix!=0 && choix!=1) {
-            cout << "Choissisez qui commence la partie" << endl;
+            cout << "Choissisez qui commence l'age suivant'" << endl;
             cout << "0. Vous" << endl;
             cout << "1. L'autre joueur" << endl;
+            cout << "Votre choix: ";
             cin>>choix;
         }
     }
     else{
-        choix = joueurs[tour]->choixEntierIA(nullptr,2);
+        choix = j_choix->choixEntierIA(nullptr,2);
     }
-    if(choix==1) {
+    if(choix==0) {
         tour_suivant();
     }
 }
@@ -72,6 +85,15 @@ bool Partie::fin_age(){
             cout << "                 PASSAGE A L'AGE 2     " << endl;
             cout << "                            -  -     " << endl;
             cout << " ##################################################################################" << endl << endl;
+            
+            cout << endl;
+            pressAnyKeyToContinue();
+            cout << endl;
+            
+            cout << " Voici les jetons mis en jeu (rappel) : " << endl;
+            platProgres->afficherJetons();
+            cout << endl << endl;
+            
             return true;
         }
         else if(age == 2){
@@ -83,6 +105,15 @@ bool Partie::fin_age(){
             cout << "                 PASSAGE A L'AGE 3     " << endl;
             cout << "                            -  -     " << endl;
             cout << " ##################################################################################" << endl << endl;
+            
+            cout << endl;
+            pressAnyKeyToContinue();
+            cout << endl;
+            
+            cout << " Voici les jetons mis en jeu (rappel) : " << endl;
+            platProgres->afficherJetons();
+            cout << endl << endl;
+            
             return true;
         }
         else {
@@ -258,21 +289,30 @@ void Partie::victoire_militaire(){
 
 void Partie::choix_jeton(Joueur &j) {
     int choix;
+    string nom;
     switch (j.getType()) {
         case TypeJoueur::humain:
+            cout << endl << endl << " Vous pouvez choisir un jeton progres ! " << endl;
+            pressAnyKeyToContinue();
+            cout << endl << "Voici les jetons qui sont en jeu : " << endl << endl;
+            platProgres->afficherJetons();
+            cout << endl;
             do{
-                cout<<"Choisissez un jeton (par son numero) : "<<endl;
+                cout<<"Choisissez un jeton (par son numero) : ";
                 cin>>choix;
             }while(choix<1||choix>platProgres->getTaille());
+            nom = platProgres->getJetonProgres()[choix-1]->getNom();
             j.ajouterJeton(platProgres->getJetonProgres()[choix-1]);
             platProgres->supprimerJeton(choix-1);
             break;
         case TypeJoueur::IA_aleatoire:
             choix = j.choixEntierIA(nullptr,platProgres->getTaille());
+            nom = platProgres->getJetonProgres()[choix-1]->getNom();
             j.ajouterJeton(platProgres->getJetonProgres()[choix]);
             platProgres->supprimerJeton(choix);
             break;
     }
+    cout << endl << "Le joueur " << j.getId() << " a choisi le jeton progres " << nom << endl << endl;
 }
 
 void Partie::pioche_jeton_hors_jeu(Joueur &j) {
@@ -774,6 +814,10 @@ void Partie::choix_merveilles(){
     cout << "#######################################################\n";
 
     platMerveille->afficher(2);
+    
+    cout << endl;
+    pressAnyKeyToContinue();
+    cout << endl;
 
     cout << endl << "Choix du joueur " << joueurs[1]->getId() << endl;
 
@@ -796,7 +840,9 @@ void Partie::choix_merveilles(){
     platMerveille->retirerCarte(2,choix-1);
 
 
+    cout << endl;
     pressAnyKeyToContinue();
+    cout << endl;
 
     cout << endl;
     platMerveille->afficher(2);
@@ -822,7 +868,9 @@ void Partie::choix_merveilles(){
     platMerveille->retirerCarte(2,choix-1);
 
 
+    cout << endl;
     pressAnyKeyToContinue();
+    cout << endl;
 
     cout << endl;
     platMerveille->afficher(2);
@@ -851,7 +899,9 @@ void Partie::choix_merveilles(){
 
     joueurs[1]->ajouterCarte(*(platMerveille->getMerveilles(2)[0])); //il ne reste plus qu'une carte
 
+    cout << endl;
     pressAnyKeyToContinue();
+    cout << endl;
 
 }
 
@@ -911,12 +961,21 @@ void Partie::jouer(){
     choix_merveilles();
 
     tour = 0;
+    
+    pressAnyKeyToContinue();
+    
+    cout << endl << endl;
+    cout << "Voici les jetons mis en jeu: " << endl << endl;
+    
+    platProgres->afficherJetons();
+    
+    cout << endl;
 
     // boucle de jeu
     while(vainqueur==nullptr && match_nul==false) {
         selection_action();
-        tour_suivant();
         fin_age();
+        tour_suivant();
         pressAnyKeyToContinue();
     }
 }
