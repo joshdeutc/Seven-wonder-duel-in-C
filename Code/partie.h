@@ -53,6 +53,7 @@ public:
     void defausse_adversaire(TypeCarte type);
 
     void choix_jeton(Joueur &j);
+    void pioche_jeton_hors_jeu(Joueur &j);
     Joueur* autre_joueur();
 
     Joueur* const* getJoueurs() const { return joueurs; }

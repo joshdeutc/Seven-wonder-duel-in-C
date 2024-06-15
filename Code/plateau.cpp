@@ -349,18 +349,71 @@ Merveille** PlateauMerveille::getMerveilles(int phase) const{
 // ***************** PARTIE PLATEAU JETON MILIT *****************//
 
 PlateauJetonProgres::PlateauJetonProgres() {
-    jetonprogres = new JetonProgres *[5];
-    // Génération d'un tableau de 5 entiers distincts aléatoires
-    std::vector<int> intVect = generateRandomDistinctIntegers(5, 0, 4);
-    for (int i = 0; i < 5; ++i) {
+    taille = 5;
+    jetonprogres = new JetonProgres *[taille];
+    jetonprogres_horsjeu = new JetonProgres *[taille_horsjeu];
+
+    // Génération d'un tableau de 8 entiers distincts aléatoires (5 pour jetonprogres et 3 pour jetonprogres_horsjeu)
+    std::vector<int> intVect = generateRandomDistinctIntegers(taille + taille_horsjeu, 0, 9);
+    
+    // Remplissage de jetonprogres avec les 5 premiers jetons aléatoires
+    for (int i = 0; i < taille; ++i) {
         jetonprogres[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[i]];
+    }
+
+    // Remplissage de jetonprogres_horsjeu avec les 3 jetons suivants
+    for (int i = 0; i < taille_horsjeu; ++i) {
+        jetonprogres_horsjeu[i] = Jeu::getInstance()->getTabJetonProgres()[intVect[taille + i]];
     }
 }
 
 PlateauJetonProgres::~PlateauJetonProgres() {
-    //On ne supprime pas les jetons eux-mêmes, ils seront supprimés quand l'instance Jeu sera supprimée.
+    // On ne supprime pas les jetons eux-mêmes, ils seront supprimés quand l'instance Jeu sera supprimée.
     delete[] jetonprogres;
+    delete[] jetonprogres_horsjeu;
 }
+
+
+void PlateauJetonProgres::supprimerJeton(int position) {
+    if (position < 0||position >= taille) {
+        throw std::out_of_range("Position invalide");
+    }
+
+    // Créer un nouveau tableau avec une taille réduite
+    JetonProgres** nouveauJetonProgres = new JetonProgres*[taille - 1];
+
+    // Copier les éléments sauf celui à la position spécifiée
+    for (int i = 0, j = 0; i < taille; ++i) {
+        if (i != position) {
+            nouveauJetonProgres[j++] = jetonprogres[i];
+        }
+    }
+
+    // Supprimer l'ancien tableau
+    delete[] jetonprogres;
+
+    // Mettre à jour le pointeur et la taille
+    jetonprogres = nouveauJetonProgres;
+    taille--;
+}
+
+void PlateauJetonProgres::afficherJetons() const {
+    for (int i = 0; i < taille; ++i) {
+        std::cout << "Jeton " << (i + 1) << ": ";
+        jetonprogres[i]->afficher();
+        std::cout << std::endl;
+    }
+}
+
+void PlateauJetonProgres::afficherJetonsHorsJeu() const {
+    for (int i = 0; i < taille_horsjeu; ++i) {
+        std::cout << "Jeton hors jeu " << (i + 1) << ": ";
+        jetonprogres_horsjeu[i]->afficher();
+        std::cout << std::endl;
+    }
+}
+
+
 
 // ******************** PARTIE ACTION JOUEUR ******************//
 

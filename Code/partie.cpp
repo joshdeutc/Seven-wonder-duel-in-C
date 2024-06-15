@@ -104,25 +104,25 @@ void Partie::change_solde_militaire(bool current,int nb_boucliers){
 
     if(!platMilitaire->getJetonMilit1_j1()) {
         if (solde_militaire >= 3 && solde_militaire <= 5) {
-            joueurs[1]->setSolde(-2);
+            joueurs[1]->setSolde(max(0,joueurs[1]->getSolde()-2));
             platMilitaire->setJetonMilit1_j1(true);
         }
     }
     if(!platMilitaire->getJetonMilit1_j2()) {
         if (solde_militaire <= -3 && solde_militaire >= -5) {
-            joueurs[0]->setSolde(-2);
+            joueurs[0]->setSolde(max(0,joueurs[0]->getSolde()-2));
             platMilitaire->setJetonMilit1_j2(true);
         }
     }
     if(!platMilitaire->getJetonMilit2_j1()) {
         if (solde_militaire >= 6 && solde_militaire <= 8) {
-            joueurs[1]->setSolde(-5);
+            joueurs[1]->setSolde(max(0,joueurs[1]->getSolde()-5));
             platMilitaire->setJetonMilit2_j1(true);
         }
     }
     if(!platMilitaire->getJetonMilit2_j2()) {
         if (solde_militaire <= -6 && solde_militaire >= -8) {
-            joueurs[0]->setSolde(-5);
+            joueurs[0]->setSolde(max(0,joueurs[0]->getSolde()-5));
             platMilitaire->setJetonMilit2_j2(true);
         }
     }
@@ -260,14 +260,35 @@ void Partie::choix_jeton(Joueur &j) {
     int choix;
     switch (j.getType()) {
         case TypeJoueur::humain:
-            cout<<"choisissez un jeton"<<endl;
-            cin>>choix;
-            j.ajouterJeton(platProgres->getJetonProgres()[choix]);
+            do{
+                cout<<"Choisissez un jeton (par son numero) : "<<endl;
+                cin>>choix;
+            }while(choix<1||choix>platProgres->getTaille());
+            j.ajouterJeton(platProgres->getJetonProgres()[choix-1]);
+            platProgres->supprimerJeton(choix-1);
             break;
         case TypeJoueur::IA_aleatoire:
-            cout<<"choisissez un jeton"<<endl;
-            cin>>choix;
+            choix = j.choixEntierIA(nullptr,platProgres->getTaille());
             j.ajouterJeton(platProgres->getJetonProgres()[choix]);
+            platProgres->supprimerJeton(choix);
+            break;
+    }
+}
+
+void Partie::pioche_jeton_hors_jeu(Joueur &j) {
+    int choix;
+    switch (j.getType()) {
+        case TypeJoueur::humain:
+            do{
+                cout<<"Choisissez un jeton (par son numero) : "<<endl;
+                cin>>choix;
+            }while(choix<1||choix>platProgres->getTailleHorsJeu());
+            j.ajouterJeton(platProgres->getJetonProgresHorsJeu()[choix-1]);
+            break;
+        case TypeJoueur::IA_aleatoire:
+            choix = j.choixEntierIA(nullptr,platProgres->getTailleHorsJeu());
+            j.ajouterJeton(platProgres->getJetonProgresHorsJeu()[choix]);
+            platProgres->supprimerJeton(choix);
             break;
     }
 }
@@ -365,8 +386,6 @@ void Partie::selection_action(){
 
     joueurs[tour]->afficher();
 
-
-
     cout << endl;
 
     platAge->accessibilite();
@@ -410,6 +429,7 @@ void Partie::selection_action(){
             case 3:
                 done = construire_merveille();
                 break;
+
         }
     }
     afficherSoldeMilitaire();
@@ -453,7 +473,7 @@ bool Partie::defausser(){
 
 // Renvoie vrai si l'utilisateur a bien choisi de construire la carte, faux s'il veut revenir au menu
 bool Partie::construire_batiment(){
-    int bat, prix;
+    int bat, prix, bcl;
     string confirmation;
 
     cout << "CONSTRUIRE BATIMENT" << endl;
@@ -508,6 +528,10 @@ bool Partie::construire_batiment(){
     cout<<"LA CARTE"<<platAge->getCartes()[bat]->getNom()<<" A ETE CONSTRUITE"<<endl;
     // mis a jour du plateau militaire si besoin
     if(c->getBoucliers()!=0){
+        bcl = c->getBoucliers();
+        for(int i=0;i<joueurs[tour]->getNbJetons();i++){
+            if (joueurs[tour]->getJetons()[i]->getBoucliersSupp()>0) c+= joueurs[tour]->getJetons()[i]->getBoucliersSupp();
+        }
         change_solde_militaire(true,c->getBoucliers());
     }
     // test victoire scientifique
@@ -616,6 +640,12 @@ bool Partie::construire_merveille(){
     if(merv->getRejouer()) {
         tour_suivant();
     }
+    for(int i=0;i<joueurs[tour]->getNbJetons();i++){
+        if(joueurs[tour]->getJetons()[i]->getEffetRejouer() && !merv->getRejouer()){
+            tour_suivant();
+            break;
+        }
+    }
     // mis a jour du plateau militaire si besoin
     if(merv->getBoucliers()!=0){
         change_solde_militaire(true,merv->getBoucliers());
@@ -633,6 +663,9 @@ bool Partie::construire_merveille(){
     }
     if(merv->getDefausseAdversaire()){
         defausse_adversaire(merv->getCarteDefausseAdversaire());
+    }
+    if(merv->getTirage()){
+        pioche_jeton_hors_jeu(*joueurs[tour]);
     }
 
     if(age==1){
@@ -822,6 +855,7 @@ void Partie::choix_merveilles(){
 
 }
 
+
 void Partie::initJoueurs(){
     int type, IA;
     string nom1,nom2;
@@ -866,6 +900,7 @@ void Partie::initJoueurs(){
         }while(IA<0 || IA>NB_IA);
         joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
     }
+
 }
 
 void Partie::jouer(){
