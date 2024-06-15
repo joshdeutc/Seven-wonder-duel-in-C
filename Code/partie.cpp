@@ -737,7 +737,7 @@ void Partie::choix_merveilles(){
         case humain:
             cout << "Choix (entrer numero de la carte voulue) : ";
             cin >> choix;
-            while(choix<1 || choix>4){
+            while(choix<1||choix>4){
                 cout << "Choix non valide. Veuillez entrer le numero de la carte voulue: ";
                 cin>> choix;
             }
