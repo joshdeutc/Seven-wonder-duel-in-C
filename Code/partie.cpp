@@ -349,7 +349,7 @@ void Partie::defausse_adversaire(TypeCarte type){
 
 void Partie::selection_action(){
     // initialisationd des variables locales
-    int choix;
+    int choix,choix_max;
     bool done = false;
     string nom_merveille;
 
@@ -364,6 +364,8 @@ void Partie::selection_action(){
     cout << endl;
 
     joueurs[tour]->afficher();
+
+
 
     cout << endl;
 
@@ -408,7 +410,6 @@ void Partie::selection_action(){
             case 3:
                 done = construire_merveille();
                 break;
-
         }
     }
     afficherSoldeMilitaire();
@@ -602,8 +603,8 @@ bool Partie::construire_merveille(){
         }
     }
     cout<<"test pour savoir lorsqu'il choisis plusieurs la même merveille"<<endl;
-    joueurs[tour]->construireCarte(*merv,*autre_joueur());
-    cout<<"LA CARTE"<<merv->getNom()<<" A ETE CONSTRUITE"<<endl;
+    joueurs[tour]->construireCarte(*merv,*autre_joueur(),prix);
+    cout<<"LA CARTE "<<merv->getNom()<<" A ETE CONSTRUITE"<<endl;
 
 
     if(joueurs[tour]->doubleSymbole(merv->getSymbole())){
@@ -631,7 +632,7 @@ bool Partie::construire_merveille(){
         pioche_defausse();
     }
     if(merv->getDefausseAdversaire()){
-        defausse_adversaire(merv->getTypeCarteAffectee());
+        defausse_adversaire(merv->getCarteDefausseAdversaire());
     }
 
     if(age==1){
@@ -828,7 +829,7 @@ void Partie::initJoueurs(){
     do{
         cout<<"Choissisez le type de partie : 0 pour humain vs humain, 1 pour IA vs humain, 2 pour IA vs IA : ";
         cin>>type;
-    }while (type!=0&&type!=1&&type!=3);
+    }while (type!=0&&type!=1&&type!=2);
 
     if(type==0) {
         cout<<"Entrez le nom du premier joueur (sans espaces) : ";
@@ -851,7 +852,7 @@ void Partie::initJoueurs(){
             cin >> IA;
         }while(IA<1||IA>NB_IA);
         joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA");
-    }else if (type==3){
+    }else if (type==2){
         do{
             afficher_types_IA();
             cout << "Choisissez le type d'IA 1 souhaité: ";
@@ -863,9 +864,8 @@ void Partie::initJoueurs(){
             cout << "Choisissez le type d'IA 2 souhaité: ";
             cin >> IA;
         }while(IA<0 || IA>NB_IA);
-        joueurs[0] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
+        joueurs[1] = new Joueur(static_cast<TypeJoueur>(IA),"IA 2");
     }
-
 }
 
 void Partie::jouer(){
@@ -878,14 +878,45 @@ void Partie::jouer(){
     tour = 0;
 
     // boucle de jeu
-    while(vainqueur==nullptr || match_nul==false) {
+    while(vainqueur==nullptr && match_nul==false) {
         selection_action();
         tour_suivant();
         fin_age();
+        pressAnyKeyToContinue();
     }
 }
 
 void pressAnyKeyToContinue() {
     cout << "Appuyez sur une touche pour continuer...";
     cin.get();
+}
+
+void Partie::pioche_defausse() {
+    bool ok = false;
+    int tab_verif[defausses.size()];
+    int nb_verif=0;
+    for(int i=0;i<defausses.size();i++){
+        cout<<"carte numero : "<<i<<"\n"<<endl;
+        defausses[i]->afficher();
+        tab_verif[nb_verif]=i;
+        cout<<"\n";
+        nb_verif++;
+    }
+    for(int i=nb_verif;i<defausses.size();i++) tab_verif[i]=-1;
+    if(joueurs[tour]->getType()==humain){
+        while(!ok) {
+            cout << "choisissez une carte a recuperer" << endl;
+            int choix;
+            cin >> choix;
+            if (choix >= 0 && choix < nb_verif) {
+                ok = true;
+                joueurs[tour]->construireCarte(*defausses[choix], *autre_joueur(), 0);
+                defausses.erase(defausses.begin() + choix);
+            }
+        }
+    } else{
+        int choix = joueurs[tour]->choixEntierIA(tab_verif,nb_verif+1);
+        joueurs[tour]->construireCarte(*defausses[choix], *autre_joueur(), 0);
+        defausses.erase(defausses.begin() + choix);
+    }
 }
