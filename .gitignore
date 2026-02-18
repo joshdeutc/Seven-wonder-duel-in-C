@@ -1,1 +1,28 @@
-.vscode/settings.json
+# IDE
+.vscode/
+.vs/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+
+# Build artifacts
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# Qt
+moc_*
+ui_*.h
+qrc_*.cpp
+*.pro.user
+*.pro.user.*
+*.stash
+
+# OS
+Thumbs.db
+.DS_Store

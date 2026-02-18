@@ -3,22 +3,21 @@ project(projet_lo21)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(Code)
+include_directories(console)
 
 add_executable(projet_lo21
-        Code/joueur.cpp
-        Code/joueur.h
-        Code/main.cpp
-        Code/partie.h
-        Code/plateau.cpp
-        Code/plateau.h
-        Code/utils.cpp
-        Code/carte_bat_merv.h
-        Code/jeu.cpp
-        Code/jeu.h
-        Code/partie.cpp
-        Code/carte_bat_merv.cpp
-        Code/wondersException.cpp
-        Code/wondersException.cpp
+        console/joueur.cpp
+        console/joueur.h
+        console/main.cpp
+        console/partie.h
+        console/plateau.cpp
+        console/plateau.h
+        console/utils.cpp
+        console/carte_bat_merv.h
+        console/jeu.cpp
+        console/jeu.h
+        console/partie.cpp
+        console/carte_bat_merv.cpp
+        console/wondersException.cpp
 )
 add_subdirectory(testAffichageCarte)
