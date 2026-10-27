@@ -26,3 +26,6 @@ qrc_*.cpp
 # OS
 Thumbs.db
 .DS_Store
+
+.idea/
+tmpclaude*
